@@ -1,4 +1,6 @@
-# Booking Platform Application
+# Reservio
+
+A booking platform superapp
 
 ---
 # Team

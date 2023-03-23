@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        logo: 'Alegreya Sans SC'
+      },
       colors: {
         oliveGreen: "#3D550C",
         limeGreen: "#81B622",

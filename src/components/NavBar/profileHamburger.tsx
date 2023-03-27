@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 
 interface IHamburgerMenuChildProps {
   children: JSX.Element | JSX.Element[] | string;
@@ -23,14 +24,24 @@ const HamburgerMenuChild: React.FC<IHamburgerMenuChildProps> = (
 
 interface IHamburgerMenuProps {
   show: boolean;
+  setShow: Dispatch<SetStateAction<boolean>>;
 }
 const NavBarHamburgerMenu: React.FC<IHamburgerMenuProps> = (
   props: IHamburgerMenuProps
 ) => {
+  useEffect(() => {
+    const handleClick = (e: any) => {
+      props.setShow(false);
+    };
+    document.addEventListener("click", handleClick);
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  });
   return (
     <div
       className={`absolute ${props.show ? "flex" : "hidden"} flex-col top-12 
-        rounded-xl shadow-[0_0px_20px_-5px_rgba(0,0,0,0.2)]
+        rounded-xl shadow-[0_0px_20px_0px_rgba(0,0,0,0.2)]
         w-40 gap-3 
         left-1/2 transform -translate-x-1/2
         bg-white
@@ -79,7 +90,7 @@ export default function ProfileHamBurger() {
         width={size}
         alt="Profile Hamburger"
       />
-      <NavBarHamburgerMenu show={show} />
+      <NavBarHamburgerMenu show={show} setShow={setShow} />
     </div>
   );
 }

@@ -43,12 +43,12 @@ const Carousel = () => {
 
   const timerRef = useRef<HTMLButtonElement | null>(null);
   const handleNextSlide = () => {
-    let newSlide = currentSlide === images.length - 1 ? 0 : currentSlide + 1;
+    let newSlide = currentSlide === services.length - 1 ? 0 : currentSlide + 1;
     setCurrentSlide(newSlide);
   };
 
   const handlePrevSlide = () => {
-    let newSlide = currentSlide === 0 ? images.length - 1 : currentSlide - 1;
+    let newSlide = currentSlide === 0 ? services.length - 1 : currentSlide - 1;
     setCurrentSlide(newSlide);
   };
 
@@ -60,7 +60,7 @@ const Carousel = () => {
     let timer: ReturnType<typeof setTimeout> = setTimeout(() => {
       if (auto) {
         let newSlide =
-          currentSlide === images.length - 1 ? 0 : currentSlide + 1;
+          currentSlide === services.length - 1 ? 0 : currentSlide + 1;
         setCurrentSlide(newSlide);
       }
     }, 5000);
@@ -93,7 +93,7 @@ const Carousel = () => {
         </span>
       </button>
       <div className="w-4/5 flex overflow-hidden relative m-auto">
-        {images.map((image, index) => {
+        {services.map((image, index) => {
           if (index === currentSlide) {
             return (
               <div key={image.id}>
@@ -129,7 +129,7 @@ const Carousel = () => {
       </button>
 
       <div className="relative flex justify-center p-2">
-        {images.map((_, index) => {
+        {services.map((_, index) => {
           return (
             <div
               className={
@@ -149,17 +149,7 @@ const Carousel = () => {
   );
 };
 
-interface ICarouselProps {
-  id?: number;
-  name?: string;
-  place?: string;
-  time?: string;
-  description?: string;
-  price: number;
-  image: string;
-}
-
-const CarouselProps = (props: { carousel: ICarouselProps }) => {
+const CarouselProps = (props: { carousel: IService }) => {
   return (
     <div className="flex">
       <Image

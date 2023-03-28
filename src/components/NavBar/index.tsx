@@ -1,4 +1,4 @@
-import Logo from "../logo";
+import Logo from "./logo";
 import SearchBar from "./searchBar";
 import ProfileHamBurger from "./profileHamburger";
 

@@ -5,7 +5,7 @@ export default function Logo() {
     <Link
       href={"/"}
       id="logo-wrapper"
-      className="flex flex-col items-center cursor-pointer"
+      className="flex flex-col cursor-pointer text-center"
     >
       <p className="font-logo font-semibold text-5xl italic text-midGreen">
         Reservio

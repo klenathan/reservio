@@ -6,7 +6,7 @@ import { services } from "@/data/service";
 
 const TopDealList = () => {
   return (
-    <div className="grid grid-cols-3 place-items-center">
+    <div className="grid grid-cols-4 place-items-center">
       {services.map((service, index) => {
         return <TopDeal key={service.id} service={service} />;
       })}
@@ -27,7 +27,7 @@ const TopDeal = (props: { service: IService }) => {
           fill
           style={{ objectFit: "fill", borderRadius: "0.375rem" }}
         />
-        <figcaption className="absolute text-lg text-white bottom-0 italic pl-2">
+        <figcaption className="absolute text-lg text-white bottom-0 italic px-2">
           <p>Discount: {(props.service.discount as number) * 100}%</p>
           <p>Location: {props.service.place}</p>
         </figcaption>

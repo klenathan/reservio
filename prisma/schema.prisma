@@ -27,7 +27,8 @@ model User {
 }
 
 model Vendor {
-  username String    @id
+  id       String    @id @default(cuid())
+  username String    @unique
   userId   String    @unique
   user     User      @relation(fields: [userId], references: [id])
   products Product[]

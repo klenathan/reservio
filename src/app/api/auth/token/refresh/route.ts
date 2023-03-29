@@ -3,7 +3,6 @@ import { sign, verify, VerifyErrors } from "jsonwebtoken";
 import getRequestBody from "@/utils/getRequestBody";
 import generateTokenPair from "@/utils/generateTokenPair";
 import CustomError from "@/Errors/CustomError";
-import prisma from "@/app/api/prisma/prisma";
 
 export async function POST(req: NextRequest) {
   try {

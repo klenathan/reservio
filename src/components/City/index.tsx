@@ -54,16 +54,22 @@ const SearchableDropdown: React.FC<ISearchableDropdown> = (props) => {
     optionsOpen: `
     block border border-black
     box-border overflow-y-auto absolute
-    max-h-72 w-full relative
+    max-h-72 w-full relative rounded-b-md
     `,
-    option: `box-border cursor-pointer block hover:bg-red-100`,
+    option: `box-border cursor-pointer block hover:bg-red-100 p-1`,
     optionSelected: `bg-gray-100`,
   };
   return (
     <div>
-      <div className="flex">
+      <div
+        className={`${
+          isOpen
+            ? "flex border-x border-t border-black rounded-t-md"
+            : "flex border border-black rounded-md"
+        }`}
+      >
         <input
-          className="outline-none leading-normal text-base p-1 border-y border-l border-black cursor-default w-full"
+          className="outline-none leading-normal text-base p-1 cursor-default w-full rounded-md"
           ref={inputRef}
           type="text"
           value={getDisplayValue()}
@@ -84,15 +90,8 @@ const SearchableDropdown: React.FC<ISearchableDropdown> = (props) => {
             isOpen
               ? {
                   transform: "rotate(180deg)",
-                  borderTop: "black 1px solid",
-                  borderBottom: "black 1px solid",
-                  borderLeft: "black 1px solid",
                 }
-              : {
-                  borderTop: "black 1px solid",
-                  borderBottom: "black 1px solid",
-                  borderRight: "black 1px solid",
-                }
+              : {}
           }
         />
       </div>

@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   try {
     let inputData: Prisma.UserCreateInput = await getRequestBody(req);
 
-    if (!inputData.username || !inputData.password) {
+    if (!inputData.username || !inputData.password || !inputData.email) {
       throw new CustomError(
         "INVALID_INPUT",
         "Please include all fields: username, password",
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
       firstName: inputData.firstName || "",
       lastName: inputData.lastName || "",
       password: await hashPassword(inputData.password),
-      email: inputData.email || "",
+      email: inputData.email,
       phoneNo: inputData.phoneNo || "",
       avatar: "blank_for_now",
     };
@@ -48,6 +48,26 @@ export async function POST(req: NextRequest) {
         );
       })
       .catch((e: Prisma.PrismaClientKnownRequestError) => {
+        if (e.code == "P2002") {
+          if (e.meta) {
+            if ((e.meta["target"] as Array<string>).includes("email")) {
+              throw new CustomError(
+                "DUPLICATE_EMAIL",
+                `Email ${inputData.email} is already registered`,
+                422
+              );
+            } else if (
+              (e.meta["target"] as Array<string>).includes("username")
+            ) {
+              throw new CustomError(
+                "DUPLICATE_USERNAME",
+                `Username ${inputData.username} already exist`,
+                422
+              );
+            }
+          }
+        }
+
         throw new CustomError(e.code || e.name, e.message, 422);
       })
       .catch((e) => {

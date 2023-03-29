@@ -13,8 +13,6 @@ interface ILoginData {
 
 export async function POST(req: NextRequest) {
   try {
-    //// Ensure JWT Secrete key exist
-
     ///////////////////// Process login data /////////////////////
     let data: ILoginData = await getRequestBody(req);
 

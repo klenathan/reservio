@@ -18,8 +18,9 @@ const Button: React.FC<IButtonProps> = (props: IButtonProps) => {
         rounded-lg
         font-semibold
         hover:bg-limeGreen hover:bg-opacity-20
+        bg-blue
         `,
-    filled: `transition ${size}
+    filled: `transition ${size} bg-red
     bg-gradient-to-tr from-midGreen to-limeGreen
     rounded-lg 
     font-semibold text-white

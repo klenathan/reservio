@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
         data: processedData,
       })
       .then((r) => {
-        const { password: _, ...returnData } = r;
+        const { id: id, password: pw, ...returnData } = r;
 
         const [accessToken, refreshToken] = generateTokenPair(returnData);
 

@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sign, verify, VerifyErrors } from "jsonwebtoken";
+import getRequestBody from "@/utils/getRequestBody";
+import generateTokenPair from "@/utils/generateTokenPair";
+import CustomError from "@/Errors/CustomError";
+import prisma from "@/app/api/prisma/prisma";
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,55 +16,34 @@ export async function POST(req: NextRequest) {
         { status: 500 }
       );
     }
-    const jwt_secrete = process.env.JWT_SECRETE;
-    const jwtRefreshToken = process.env.JWT_REFRESH_TOKEN_SECRETE;
 
-    let reqBody = await req.json();
+    let reqBody = await getRequestBody(req);
     let refreshtoken = reqBody.refreshToken;
 
     if (!refreshtoken) {
-      return NextResponse.json(
-        {
-          error: "INVALID_TOKEN",
-          message: "Please include refreshToken field",
-        },
-        { status: 400 }
+      throw new CustomError(
+        "INVALID_TOKEN",
+        "Please include refreshToken field",
+        422
       );
     }
 
-    
-
-    return verify(
+    const userData: any = verify(
       refreshtoken,
       process.env.JWT_REFRESH_TOKEN_SECRETE,
       (error: VerifyErrors | null, decoded: any) => {
         if (error) {
-          return NextResponse.json(
-            { error: "FAILED_JWT_VERIFY", message: error.message },
-            { status: 401 }
-          );
+          throw new CustomError("FAILED_JWT_VERIFY", error.message, 401);
         }
-        const accessToken = sign(
-          {
-            /// Expire in 7 days
-            exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 7,
-            username: decoded.username,
-          },
-          jwt_secrete
-        );
-
-        const newRefreshToken = sign(
-          {
-            username: decoded.username,
-          },
-          jwtRefreshToken
-        );
-
-        return NextResponse.json(
-          { accessToken: accessToken, refreshtoken: newRefreshToken },
-          { status: 200 }
-        );
+        return decoded.user;
       }
+    );
+
+    const [accessToken, newRefreshToken] = generateTokenPair(userData);
+
+    return NextResponse.json(
+      { accessToken: accessToken, refreshtoken: newRefreshToken },
+      { status: 200 }
     );
   } catch (error: any) {
     return NextResponse.json(

@@ -13,10 +13,10 @@ type VendorStatus = {
 
 interface INewVendorProps {
   username: string;
-  userId: string;
+  userId?: string;
   status: "PENDING" | "BANNED" | "ACCEPTED";
   desc: string;
-  user: string;
+  user?: any
 }
 
 export default async function requestNewVendor(
@@ -24,7 +24,7 @@ export default async function requestNewVendor(
 ): Promise<NextResponse> {
   let requestData: INewVendorProps = await getRequestBody(req);
 
-  let data: Prisma.VendorCreateInput = {
+  let data: INewVendorProps = {
     username: requestData.username,
     status: "PENDING",
     desc: requestData.desc || "",

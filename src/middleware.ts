@@ -4,7 +4,9 @@ import * as jose from "jose";
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  if (pathname.startsWith("/_next")) return NextResponse.next();
+  if (pathname.startsWith("/_next") || pathname.startsWith("favicon.ico")) {
+    return NextResponse.next();
+  }
 
   if (pathname.startsWith("/api")) {
     let removedStart = pathname.substring(4);

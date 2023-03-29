@@ -5,7 +5,7 @@ export interface IService {
   time?: string;
   store?: string;
   price?: number;
-  image: string;
+  image?: string;
   discount?: number;
   description?: string;
 }

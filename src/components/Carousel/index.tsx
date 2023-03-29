@@ -120,7 +120,7 @@ const CarouselProps = (props: { carousel: IService }) => {
   return (
     <div className="flex">
       <Image
-        src={props.carousel.image}
+        src={props.carousel.image!}
         className="m-10 animate-fadeIn "
         alt="..."
         height={50}

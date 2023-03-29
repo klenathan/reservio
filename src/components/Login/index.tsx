@@ -11,13 +11,15 @@ const LoginForm = () => {
     const {register, handleSubmit} = useForm<IFromInput>()
     const onSubmit: SubmitHandler<IFromInput> = async data => {
         const formData = new FormData();
-        formData.append("username", data.username[0]);
-        formData.append("password", data.password[0]);
+        formData.append("username", data.username as string);
+        formData.append("password", data.password as string);
+
         const res = await fetch("http://localhost:3000/api/auth/login", {
             method: "POST",
             body: formData,
         }).then((res) => res.json());
-        alert(JSON.stringify(`${res.message}, status: ${res.status}`));
+        console.table(res)
+        localStorage.setItem("accessToken", res.accessToken)
     }
     return (
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-[90vh]">
@@ -50,7 +52,8 @@ const LoginForm = () => {
                                 Password
                             </label>
                             <input
-                                {...register("password", {required: true})}
+                                type={'password'}
+                                {...register("password", {required: true })}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                             />
                         </div>

@@ -1,15 +1,20 @@
 import CustomError from "@/Errors/CustomError";
 import UnauthenticatedError from "@/Errors/UnauthenticateError";
 import getRequestBody from "@/utils/getRequestBody";
-import { Prisma, VendorStatus } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../prisma/prisma";
+
+type VendorStatus = {
+  PENDING: "PENDING",
+  BANNED: "BANNED",
+  ACCEPTED: "ACCEPTED"
+}
 
 interface INewVendorProps {
   username: string;
   userId: string;
-  status: VendorStatus;
-
+  status: "PENDING" | "BANNED" | "ACCEPTED";
   desc: string;
   user: string;
 }

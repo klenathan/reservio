@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import * as jose from "jose";
+import { PageConfig } from "next";
+
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -14,7 +16,6 @@ export async function middleware(req: NextRequest) {
       return verifyAPIToken(req);
     }
   }
-  // console.log("middlware triggered", pathname);
 
   return NextResponse.next();
 }
@@ -23,7 +24,7 @@ async function verifyAPIToken(req: NextRequest) {
   if (!process.env.JWT_SECRETE) {
     return NextResponse.json(
       {
-        error: "Other err occurs",
+        error: "Other error occurs",
         message: "Please include JWT Secrete key into ENV config file",
       },
       { status: 500 }

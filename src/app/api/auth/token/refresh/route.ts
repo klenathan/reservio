@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sign, verify, VerifyErrors } from "jsonwebtoken";
+import getRequestBody from "@/utils/getRequestBody";
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,7 +16,7 @@ export async function POST(req: NextRequest) {
     const jwt_secrete = process.env.JWT_SECRETE;
     const jwtRefreshToken = process.env.JWT_REFRESH_TOKEN_SECRETE;
 
-    let reqBody = await req.json();
+    let reqBody = await getRequestBody(req);
     let refreshtoken = reqBody.refreshToken;
 
     if (!refreshtoken) {

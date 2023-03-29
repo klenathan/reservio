@@ -1,34 +1,27 @@
 import { NextRequest, NextResponse } from "next/server";
 import { hashPassword, comparePassword } from "../password";
 import prisma from "../../prisma/prisma";
-import { sign, verify } from "jsonwebtoken";
-import { User } from "@prisma/client";
 import UnauthenticatedError from "@/Errors/UnauthenticateError";
 import CustomError from "@/Errors/CustomError";
+import getRequestBody from "@/utils/getRequestBody";
+import generateTokenPair from "@/utils/generateTokenPair";
 
-const generateTokenPair = () => {};
-
-type UserWithoutPassword = Omit<User, "password">;
+interface ILoginData {
+  username: string;
+  password: string;
+}
 
 export async function POST(req: NextRequest) {
   try {
     //// Ensure JWT Secrete key exist
-    if (!process.env.JWT_SECRETE || !process.env.JWT_REFRESH_TOKEN_SECRETE) {
-      return NextResponse.json({
-        error: "Other err occurs",
-        message: "Please include JWT Secrete key into ENV config file",
-      });
-    }
-
-    let jwt_secrete = process.env.JWT_SECRETE || "";
-    let jwtRefreshTokenSecrete = process.env.JWT_REFRESH_TOKEN_SECRETE || "";
 
     ///////////////////// Process login data /////////////////////
-    let data: { username: string; password: string } = await req.json();
+    let data: ILoginData = await getRequestBody(req);
+
     if (!data?.password) {
       throw new CustomError(
         "INVALID_PASSWORD",
-        "Cannot find password on request's header",
+        "Cannot find password on request's form",
         401
       );
     }
@@ -55,21 +48,7 @@ export async function POST(req: NextRequest) {
       });
 
     ///////////////////// Generate access token /////////////////////
-    const accessToken = sign(
-      {
-        /// Expire in 7 days
-        exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 1,
-        user: userData,
-      },
-      jwt_secrete
-    );
-
-    const refreshToken = sign(
-      {
-        user: userData,
-      },
-      jwtRefreshTokenSecrete
-    );
+    const [accessToken, refreshToken] = generateTokenPair(userData);
 
     if (!accessToken) {
       throw new CustomError("JWT_SIGNING_ERR", "Error upon signing JWT", 500);
@@ -94,7 +73,7 @@ export async function POST(req: NextRequest) {
       );
     }
     return NextResponse.json(
-      { error: "Other err occurs", code: error.name, message: error.message },
+      { error: "Login error occurs", code: error.name, message: error.message },
       { status: 500 }
     );
   }

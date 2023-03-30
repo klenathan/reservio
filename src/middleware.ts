@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import * as jose from "jose";
 import { PageConfig } from "next";
 
-
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
@@ -46,7 +45,6 @@ async function verifyAPIToken(req: NextRequest) {
     token,
     new TextEncoder().encode(process.env.JWT_SECRETE)
   );
-
   if (!validToken) {
     return NextResponse.json(
       {
@@ -55,4 +53,6 @@ async function verifyAPIToken(req: NextRequest) {
       { status: 401 }
     );
   }
+
+  return NextResponse.next();
 }

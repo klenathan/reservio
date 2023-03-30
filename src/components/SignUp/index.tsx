@@ -2,16 +2,20 @@
 import Link from "next/link";
 import Button from "../Button";
 import {SubmitHandler, useForm} from "react-hook-form";
+import {useRef} from "react";
 
 interface SignUpForm {
     username: String;
     email: String;
     password: String;
+    re_password: String;
     phone: String;
 }
 
 const SignUpForm = () => {
-    const {register, handleSubmit} = useForm<SignUpForm>()
+    const {register, handleSubmit, formState: {errors}, watch} = useForm<SignUpForm>()
+    const password = useRef({})
+    password.current = watch("password", "")
     const onSubmit: SubmitHandler<SignUpForm> = async data => {
         const formData = new FormData();
         formData.append("username", data.username as string);
@@ -19,21 +23,23 @@ const SignUpForm = () => {
         formData.append("password", data.password as string);
         formData.append("phone", data.phone as string);
 
-        const res = await fetch("http://localhost:3000/api/auth/login", {
-            method: "POST",
-            body: formData,
-        }).then((res) => res.json());
-        console.table(res)
-        localStorage.setItem("accessToken", res.accessToken)
+        console.log(formData.values())
+
+        // const res = await fetch("http://localhost:3000/api/auth/login", {
+        //     method: "POST",
+        //     body: formData,
+        // }).then((res) => res.json());
+        // console.table(res)
+        // localStorage.setItem("accessToken", res.accessToken)
     }
     return (
-        <div className="bg-white shadow rounded  lg:w-1/3  md:w-1/2 w-full leading-3 p-10 mt-3">
+        <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full leading-3 p-10 mt-3">
             <h1 className="focus:outline-none text-2xl font-extrabold leading-6 text-oliveGreen uppercase text-center ">
                 Sign up to Reservio
             </h1>
             <form
-                className="space-y-4 md:space-y-6"
-                action="#"
+                onSubmit={handleSubmit(onSubmit)}
+                className="space-y-3 md:space-y-6 mt-2 md:mt-1"
             >
                 <div>
                     <label
@@ -43,11 +49,17 @@ const SignUpForm = () => {
                         Username
                     </label>
                     <input
-                        {...register("username", {required: true})}
+                        {...register("username", {required: "Username is required"})}
                         className={"bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"}
                         // className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                         placeholder="e.g. Reservio"
                     />
+                    {/*Display error*/}
+                    {errors.username &&
+                        <p className="errorMsg p-4 mb-4 text-sm text-red-800">
+                            {errors.username.message}
+                        </p>
+                    }
                 </div>
 
                 <div>
@@ -58,11 +70,19 @@ const SignUpForm = () => {
                         Email
                     </label>
                     <input
-                        {...register("email", {required: true})}
+                        {...register("email", {required: "Email is required"})}
+                        type={"email"}
                         className={"bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"}
                         // className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                         placeholder="e.g. reservio@gmail.com"
                     />
+                    {/*Display error*/}
+                    {errors.email &&
+                        <p className="errorMsg p-4 mb-4 text-sm text-red-800">
+                            {errors.email.message}
+                        </p>
+                    }
+
                 </div>
                 <div>
                     <label
@@ -72,12 +92,48 @@ const SignUpForm = () => {
                         Password
                     </label>
                     <input
-                        {...register("password", {required: true})}
+                        type={"password"}
+                        {...register("password", {
+                            required: "Password is required",
+                            pattern: {
+                                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+                                message: "Password mus be minimum eight characters, at least one uppercase letter, one lowercase letter and one number"
+                            }
+                        })}
                         placeholder="e.g. reservio2023"
                         className={"bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"}
                         // className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                        required={true}
                     />
+                    {errors.password &&
+                        <p className="errorMsg p-4 mb-4 text-sm text-red-800">
+                            {errors.password.message}
+                        </p>
+                    }
+
+                </div>
+                <div>
+                    <label
+                        htmlFor="password"
+                        className="block mb-2 font-medium text-gray-900"
+                    >
+                        Retype password
+                    </label>
+                    <input
+                        type={"password"}
+                        {...register("re_password", {
+                            validate: value =>
+                                value === password.current || "The passwords do not match"
+                        })}
+                        placeholder="e.g. reservio2023"
+                        className={"bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"}
+
+                        // className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                    />
+                    {errors.re_password &&
+                        <p className="errorMsg p-4 mb-4 text-sm text-red-800">
+                            {errors.re_password.message}
+                        </p>
+                    }
                 </div>
 
                 <div>
@@ -88,14 +144,17 @@ const SignUpForm = () => {
                         Phone
                     </label>
                     <input
-                        type="phone"
-                        name="phone"
-                        id="phone"
+                        type={"phone"}
+                        {...register("phone", {required: "Phone is required"})}
                         placeholder="e.g. 0987654321"
                         className={"bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"}
                         // className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                        required={true}
                     />
+                    {errors.phone &&
+                        <p className="errorMsg p-4 mb-4 text-sm text-red-800">
+                            {errors.phone.message}
+                        </p>
+                    }
                 </div>
 
                 <div className="text-center">
@@ -105,7 +164,7 @@ const SignUpForm = () => {
                             console.log("Clicked");
                         }}
                     >
-                        Sign in
+                        Sign up
                     </Button>
                 </div>
 
@@ -131,5 +190,4 @@ const SignUpForm = () => {
 
     );
 };
-
 export default SignUpForm;

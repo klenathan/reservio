@@ -23,14 +23,10 @@ const SignUpForm = () => {
         formData.append("password", data.password as string);
         formData.append("phone", data.phone as string);
 
-        console.log(formData.values())
-
-        // const res = await fetch("http://localhost:3000/api/auth/login", {
-        //     method: "POST",
-        //     body: formData,
-        // }).then((res) => res.json());
-        // console.table(res)
-        // localStorage.setItem("accessToken", res.accessToken)
+        const res = await fetch("http://localhost:3000/api/auth/signup", {
+            method: "POST",
+            body: formData,
+        }).then((res) => res.json());
     }
     return (
         <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full leading-3 p-10 mt-3">
@@ -56,7 +52,7 @@ const SignUpForm = () => {
                     />
                     {/*Display error*/}
                     {errors.username &&
-                        <p className="errorMsg p-4 mb-4 text-sm text-red-800">
+                        <p className="errorMsg text-sm text-red-800">
                             {errors.username.message}
                         </p>
                     }
@@ -78,7 +74,7 @@ const SignUpForm = () => {
                     />
                     {/*Display error*/}
                     {errors.email &&
-                        <p className="errorMsg p-4 mb-4 text-sm text-red-800">
+                        <p className="errorMsg text-sm text-red-800">
                             {errors.email.message}
                         </p>
                     }
@@ -105,7 +101,7 @@ const SignUpForm = () => {
                         // className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                     />
                     {errors.password &&
-                        <p className="errorMsg p-4 mb-4 text-sm text-red-800">
+                        <p className="errorMsg text-sm text-red-800">
                             {errors.password.message}
                         </p>
                     }
@@ -130,7 +126,7 @@ const SignUpForm = () => {
                         // className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                     />
                     {errors.re_password &&
-                        <p className="errorMsg p-4 mb-4 text-sm text-red-800">
+                        <p className="errorMsg text-sm text-red-800">
                             {errors.re_password.message}
                         </p>
                     }
@@ -151,20 +147,15 @@ const SignUpForm = () => {
                         // className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                     />
                     {errors.phone &&
-                        <p className="errorMsg p-4 mb-4 text-sm text-red-800">
+                        <p className="errorMsg text-sm text-red-800">
                             {errors.phone.message}
                         </p>
                     }
                 </div>
 
                 <div className="text-center">
-                    <Button
-                        btnStyle="filled"
-                        onClick={() => {
-                            console.log("Clicked");
-                        }}
-                    >
-                        Sign up
+                    <Button btnStyle={"filled"}>
+                        Signup
                     </Button>
                 </div>
 

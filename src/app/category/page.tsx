@@ -10,7 +10,7 @@ import { cities } from "@/data/city";
 import Price from "@/components/Price";
 import Calendar from "@/components/Calendar";
 
-export default function Home() {
+export default function Category() {
   const [value, setValue] = useState<string>("");
 
   return (

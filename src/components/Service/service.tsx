@@ -10,7 +10,7 @@ const Service = (props: { service: IService }) => {
     >
       <div className="relative w-full h-[15rem] bg-slate-200 rounded-t-md">
         <Image
-          src={props.service.image}
+          src={props.service.image!}
           alt="..."
           fill
           style={{ objectFit: "fill", borderRadius: "0.375rem 0.375rem 0 0" }}

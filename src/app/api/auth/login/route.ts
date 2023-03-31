@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
             `Wrong password of user ${data.username}`
           );
         }
-        const { password: _, ...returnData } = r;
+        const { id: id, password: pw, ...returnData } = r;
         return returnData;
       });
 

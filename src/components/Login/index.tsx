@@ -45,7 +45,7 @@ const LoginForm = () => {
                         Username or email
                     </label>
                     <input
-                        {...register("username", {required: true})}
+                        {...register("username", {required: "Username is required"})}
                         // className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                         className={"bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"}
                     />
@@ -64,7 +64,7 @@ const LoginForm = () => {
                     </label>
                     <input
                         type={'password'}
-                        {...register("password", {required: "Username is required"})}
+                        {...register("password", {required: "Password is required"})}
                         // className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                         className={"bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"}
                     />

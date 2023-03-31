@@ -1,6 +1,8 @@
 "use client";
 import Button from "../Button";
 import {useForm, SubmitHandler} from "react-hook-form";
+import axios from "axios";
+import {useRouter} from "next/navigation";
 
 interface IFromInput {
     username: String;
@@ -9,35 +11,22 @@ interface IFromInput {
 
 const LoginForm = () => {
     const {register, handleSubmit, setError, formState: {errors}} = useForm<IFromInput>()
+    const {push} = useRouter();
     const onSubmit: SubmitHandler<IFromInput> = async data => {
         const formData = new FormData();
         formData.append("username", data.username as string);
         formData.append("password", data.password as string);
 
-        const res = await fetch("http://localhost:3000/api/auth/login", {
-            method: "POST",
-            body: formData,
+        const res = await axios.post(
+            `https://06ufwajgc6.execute-api.ap-southeast-1.amazonaws.com/auth/login`, formData
+        ).then((res) => {
+            localStorage.setItem("Token", JSON.stringify(res.data))
+            push("/")
+        }).catch(e => {
+            console.log(e.response)
+            setError("root.serverError", {type: e.status, message: e.response.data.message})
         })
-
-        const returnData = await res.json()
-        console.log(res.status)
-        if(res.status > 200){
-                setError("root.serverError", {type: String(res.status), message: returnData.message})
-        }
-
-        //     (res) => {
-        //     if (res.status > 200) {
-        //     }
-        // })
-
-
-        //     .then((res) => res.json())
-        // console.log(res.status)
-
-        // console.table(res)
-        // localStorage.setItem("Token", JSON.stringify(res))
     }
-
 
     return (
         <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
@@ -60,6 +49,11 @@ const LoginForm = () => {
                         // className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                         className={"bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"}
                     />
+                    {errors.username &&
+                        <p className="errorMsg text-sm text-red-800">
+                            {errors.username.message}
+                        </p>
+                    }
                 </div>
                 <div>
                     <label
@@ -73,7 +67,6 @@ const LoginForm = () => {
                         {...register("password", {required: "Username is required"})}
                         // className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                         className={"bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"}
-
                     />
                     {errors.root?.serverError &&
                         <p className="errorMsg text-sm text-red-800">

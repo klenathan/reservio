@@ -6,25 +6,25 @@ import { services } from "@/data/service";
 
 const TopDealList = () => {
   return (
-    <div className="grid grid-cols-4 place-items-center">
-      {services.map((service, index) => {
-        return <TopDeal key={service.id} service={service} />;
-      })}
+    <div className="overflow-x-auto whitespace-no-wrap">
+      <div className="inline-flex">
+        {services.map((service) => {
+          return <TopDeal key={service.id} service={service} />;
+        })}
+      </div>
     </div>
   );
 };
 
 const TopDeal = (props: { service: IService }) => {
   return (
-    <Link
-      href="#"
-      className="flex flex-col justify-center w-2/3 border border-black rounded-md my-8"
-    >
-      <div className="relative w-full h-[15rem]">
+    <Link href="#" className="border border-black rounded-md m-8 relative w-64">
+      <div className="w-full bg-gray-200 mr-4 h-full">
         <Image
-          src={props.service.image!}
-          alt="..."
-          fill
+          src={props.service.image[0]}
+          alt={props.service.name}
+          width={500}
+          height={500}
           style={{ objectFit: "fill", borderRadius: "0.375rem" }}
         />
         <figcaption className="absolute text-lg text-white bottom-0 italic px-2">

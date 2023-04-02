@@ -44,7 +44,7 @@ const NavBarHamburgerMenu: React.FC<IHamburgerMenuProps> = (
         rounded-xl shadow-[0_0px_20px_0px_rgba(0,0,0,0.2)]
         w-40 gap-3 
         left-1/2 transform -translate-x-1/2
-        bg-white
+        bg-white z-10
     `}
     >
       <HamburgerMenuChild href="/login">Login</HamburgerMenuChild>

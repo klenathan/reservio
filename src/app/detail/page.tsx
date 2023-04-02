@@ -1,10 +1,8 @@
 "use client";
-import { Inter } from "next/font/google";
 import NavBar from "@/components/NavBar";
 import Head from "next/head";
 import DetailPage from "@/components/Detail";
-
-const inter = Inter({ subsets: ["latin"] });
+import { services } from "@/data/service";
 
 export default function Detail() {
   return (
@@ -13,7 +11,7 @@ export default function Detail() {
         <title>Reservio</title>
       </Head>
       <NavBar />
-      <DetailPage />
+      <DetailPage service={services[0]} />
     </div>
   );
 }

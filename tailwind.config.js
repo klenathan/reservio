@@ -21,7 +21,8 @@ module.exports = {
             },
             backgroundImage: {
                 'authenticate': "url('/assets/background_authenticate.svg')"
-            }
+            },
+
         },
     },
     plugins: [],

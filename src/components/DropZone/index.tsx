@@ -1,6 +1,6 @@
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import {useDropzone} from "react-dropzone";
-import Image from "next/image";
+import Picture from "../Picture";
 
 const DropZone = () => {
     const [files, setFiles] = useState<(File & { preview: string })[]>([]);
@@ -17,15 +17,21 @@ const DropZone = () => {
         }
     })
 
-    const thumbs = files.map(file => (
-        <div key={file.name}>
-            <div>
-                <Image src={file.preview} alt={"filePreview"} width={200} height={200} onLoad={() => {
-                    URL.revokeObjectURL(file.preview)
-                }}/>
-            </div>
-        </div>
-    ))
+    const thumbs = files.map(file => {
+            return (
+                <div key={file.name}>
+                    <Picture
+                        src={file.preview}
+                        event={
+                            () => {
+                                URL.revokeObjectURL(file.preview)
+                            }
+                        }
+                    />
+                </div>
+            )
+        }
+    )
 
     useEffect(() => {
         return () => {
@@ -33,16 +39,23 @@ const DropZone = () => {
         }
     }, [])
     return (
-        <section className="container">
+        <section className="container h-fit w-80 mx-auto hover:bg-gray-100">
             <div {...getRootProps({className: 'dropzone'})}>
                 <input {...getInputProps()} />
-                <p>Drag  drop some files here, or click to select files</p>
+                <div className={"relative w-36 h-36 mx-auto"}>
+                    {thumbs.length === 0 ? (
+                            <div className={"flex flex-col h-auto"}>
+                                <Picture src={"/assets/sbcf-default-avatar.png"}/>
+                            </div>
+                        ) :
+                        (<div>{thumbs}</div>
+                        )
+                    }
+                </div>
             </div>
-            <aside >
-                {thumbs}
-            </aside>
         </section>
-    );
+    )
+        ;
 }
 
 export default DropZone;

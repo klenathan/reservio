@@ -17,7 +17,13 @@ const Logo: React.FC<ILogoStyle> = (props: ILogoStyle) => {
       >
         Reservio
       </p>
-      <p className="text-base italic text-white-500">Reserve it? Reservio</p>
+      <p
+        className={`text-base italic ${
+          props.logoStyle == "green" ? "text-back" : "text-white"
+        }`}
+      >
+        Reserve it? Reservio
+      </p>
     </Link>
   );
 };

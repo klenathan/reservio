@@ -12,7 +12,7 @@ const NavBar: React.FC<INavBarProps> = (props: INavBarProps) => {
       className="grid grid-cols-3 place-items-center h-[5rem] 
     shadow-md"
     >
-      <Logo />
+      <Logo logoStyle="green" />
       <SearchBar />
       <ProfileHamBurger />
     </div>

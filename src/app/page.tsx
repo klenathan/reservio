@@ -6,6 +6,7 @@ import CategoryList from "@/components/Category";
 import Carousel from "@/components/Carousel";
 import ServiceList from "@/components/Service";
 import TopDealList from "@/components/Service/topDeal";
+import * as jose from "jose";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 export interface IMap {
   latitude: number;
   longitude: number;
-  address: string;
 }
 
 const Map: React.FC<IMap> = (props: IMap) => {

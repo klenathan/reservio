@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import "leaflet/dist/leaflet.css";
-import Map from "./map";
+import dynamic from "next/dynamic";
+const Map = dynamic(() => import("./map"), { ssr: false });
 
 const Geocoder = () => {
   const [address, setAddress] = useState("");
@@ -45,9 +46,7 @@ const Geocoder = () => {
         />
         <button type="submit">Submit</button>
       </form>
-      {lat !== null && lng !== null && (
-        <Map latitude={lat} longitude={lng} address={address} />
-      )}
+      {lat !== null && lng !== null && <Map latitude={lat} longitude={lng} />}
     </div>
   );
 };

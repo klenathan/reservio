@@ -9,8 +9,11 @@ export const services = [
     discount: 0.5,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere lorem sit amet quam posuere tempor. Sed dui felis, dignissim ac ante quis, faucibus ullamcorper enim. Nulla tincidunt rhoncus erat, vel cursus odio consequat eget. Ut interdum semper ipsum eu gravida. Duis risus nulla, interdum id elit nec, auctor semper metus. Maecenas lacinia, erat ut ultrices iaculis, libero velit condimentum tellus, sit amet ultrices diam ex eget tortor. In quis lacinia risus, eget porta erat. Quisque vestibulum tincidunt neque, id luctus ante. Praesent lacinia arcu sit amet facilisis mollis. Mauris cursus ut quam eu sodales.",
-    image:
+    image: [
       "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png",
+    ],
   },
   {
     id: 2,
@@ -22,8 +25,10 @@ export const services = [
     discount: 0.5,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere lorem sit amet quam posuere tempor. Sed dui felis, dignissim ac ante quis, faucibus ullamcorper enim. Nulla tincidunt rhoncus erat, vel cursus odio consequat eget. Ut interdum semper ipsum eu gravida. Duis risus nulla, interdum id elit nec, auctor semper metus. Maecenas lacinia, erat ut ultrices iaculis, libero velit condimentum tellus, sit amet ultrices diam ex eget tortor. In quis lacinia risus, eget porta erat. Quisque vestibulum tincidunt neque, id luctus ante. Praesent lacinia arcu sit amet facilisis mollis. Mauris cursus ut quam eu sodales.",
-    image:
+    image: [
       "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png",
+    ],
   },
   {
     id: 3,
@@ -35,8 +40,9 @@ export const services = [
     discount: 0.5,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere lorem sit amet quam posuere tempor. Sed dui felis, dignissim ac ante quis, faucibus ullamcorper enim. Nulla tincidunt rhoncus erat, vel cursus odio consequat eget. Ut interdum semper ipsum eu gravida. Duis risus nulla, interdum id elit nec, auctor semper metus. Maecenas lacinia, erat ut ultrices iaculis, libero velit condimentum tellus, sit amet ultrices diam ex eget tortor. In quis lacinia risus, eget porta erat. Quisque vestibulum tincidunt neque, id luctus ante. Praesent lacinia arcu sit amet facilisis mollis. Mauris cursus ut quam eu sodales.",
-    image:
+    image: [
       "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png",
+    ],
   },
   {
     id: 4,
@@ -48,8 +54,9 @@ export const services = [
     discount: 0.5,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere lorem sit amet quam posuere tempor. Sed dui felis, dignissim ac ante quis, faucibus ullamcorper enim. Nulla tincidunt rhoncus erat, vel cursus odio consequat eget. Ut interdum semper ipsum eu gravida. Duis risus nulla, interdum id elit nec, auctor semper metus. Maecenas lacinia, erat ut ultrices iaculis, libero velit condimentum tellus, sit amet ultrices diam ex eget tortor. In quis lacinia risus, eget porta erat. Quisque vestibulum tincidunt neque, id luctus ante. Praesent lacinia arcu sit amet facilisis mollis. Mauris cursus ut quam eu sodales.",
-    image:
+    image: [
       "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png",
+    ],
   },
   {
     id: 5,
@@ -61,8 +68,9 @@ export const services = [
     discount: 0.5,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere lorem sit amet quam posuere tempor. Sed dui felis, dignissim ac ante quis, faucibus ullamcorper enim. Nulla tincidunt rhoncus erat, vel cursus odio consequat eget. Ut interdum semper ipsum eu gravida. Duis risus nulla, interdum id elit nec, auctor semper metus. Maecenas lacinia, erat ut ultrices iaculis, libero velit condimentum tellus, sit amet ultrices diam ex eget tortor. In quis lacinia risus, eget porta erat. Quisque vestibulum tincidunt neque, id luctus ante. Praesent lacinia arcu sit amet facilisis mollis. Mauris cursus ut quam eu sodales.",
-    image:
+    image: [
       "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png",
+    ],
   },
   {
     id: 6,
@@ -74,7 +82,8 @@ export const services = [
     discount: 0.5,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere lorem sit amet quam posuere tempor. Sed dui felis, dignissim ac ante quis, faucibus ullamcorper enim. Nulla tincidunt rhoncus erat, vel cursus odio consequat eget. Ut interdum semper ipsum eu gravida. Duis risus nulla, interdum id elit nec, auctor semper metus. Maecenas lacinia, erat ut ultrices iaculis, libero velit condimentum tellus, sit amet ultrices diam ex eget tortor. In quis lacinia risus, eget porta erat. Quisque vestibulum tincidunt neque, id luctus ante. Praesent lacinia arcu sit amet facilisis mollis. Mauris cursus ut quam eu sodales.",
-    image:
+    image: [
       "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png",
+    ],
   },
 ];

@@ -21,7 +21,7 @@ const Carousel = () => {
 
   useEffect(() => {
     if (timerRef.current) {
-      clearTimeout(timerRef.current as any);
+      clearTimeout(timerRef.current as unknown as number);
     }
 
     let timer: ReturnType<typeof setTimeout> = setTimeout(() => {
@@ -120,7 +120,7 @@ const CarouselProps = (props: { carousel: IService }) => {
   return (
     <div className="flex">
       <Image
-        src={props.carousel.image!}
+        src={props.carousel.image[0] as unknown as string}
         className="m-10 animate-fadeIn "
         alt="..."
         height={50}
@@ -134,7 +134,7 @@ const CarouselProps = (props: { carousel: IService }) => {
         <div>{props.carousel.time}</div>
         <p className="my-3">{props.carousel.description}</p>
         <div className="text-midGreen font-semibol my-3 text-2xl">
-          {props.carousel.price} VND
+          {props.carousel.price?.toLocaleString()} VND
         </div>
         <Button
           btnStyle="filled"

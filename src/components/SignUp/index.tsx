@@ -3,6 +3,7 @@ import Link from "next/link";
 import Button from "../Button";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {useRef, useState, useEffect} from "react";
+import axios from "axios";
 
 interface SignUpForm {
     username: String;
@@ -11,6 +12,7 @@ interface SignUpForm {
     re_password: String;
     phone: String;
     avatar?: FileList
+
 }
 
 const SignUpForm = () => {
@@ -18,8 +20,13 @@ const SignUpForm = () => {
     const [preview, setPreview] = useState<string>();
 
     useEffect(() => {
-        if (watch().file?.length) {
-            updatePreview(watch().file[0]);
+        let watchAvatar = watch().avatar
+        if (!watchAvatar) {
+            console.log("non-ava")
+        } else {
+            if (watchAvatar[0]) {
+                updatePreview(watchAvatar[0]);
+            }
         }
     }, [watch]);
 
@@ -40,20 +47,22 @@ const SignUpForm = () => {
         formData.append("email", data.email as string);
         formData.append("password", data.password as string);
         formData.append("phone", data.phone as string);
-        formData.append("avatar", data.avatar)
+        if (data.avatar != undefined) {
+            formData.append("avatar", data.avatar[0]);
+        }
 
         for (const value of formData.values()) {
             console.log(value);
         }
 
-        // const res = await axios.post(
-        //     `https://06ufwajgc6.execute-api.ap-southeast-1.amazonaws.com/auth/signup`, formData
-        // ).then((res) => {
-        //     // localStorage.setItem("Token", JSON.stringify(res.data))
-        //     console.log(res)
-        // }).catch(e => {
-        //     console.log(e.response)
-        // })
+        const res = await axios.post(
+            `https://06ufwajgc6.execute-api.ap-southeast-1.amazonaws.com/auth/signup`, formData
+        ).then((res) => {
+            // localStorage.setItem("Token", JSON.stringify(res.data))
+            console.log(res)
+        }).catch(e => {
+            console.log(e.response)
+        })
     }
     return (
         <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full leading-3 p-10 mt-3">
@@ -189,7 +198,10 @@ const SignUpForm = () => {
                     <input
                         type={"file"}
                         {...register("avatar")}
-                        onChange={(e) => updatePreview(e.target.files[0])}
+                        onChange={(e) => {
+                            // @ts-ignore
+                            updatePreview(e.target.files[0] as Blob)
+                        }}
                     />
                     {preview && <img src={preview}/>}
                 </div>

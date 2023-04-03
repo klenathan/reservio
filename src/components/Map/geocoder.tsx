@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import "leaflet/dist/leaflet.css";
 import Map from "./map";
 

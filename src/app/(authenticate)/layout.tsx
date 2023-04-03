@@ -10,7 +10,7 @@ export default function AuthenticateLayout({
       className="min-h-screen md:h-screen bg-authenticate bg-oliveGreen flex flex-col 
                     items-center justify-center"
     >
-      <Logo />
+      <Logo logoStyle="white" />
       {children}
     </section>
   );

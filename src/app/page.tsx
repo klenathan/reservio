@@ -24,7 +24,7 @@ export default function Home() {
         <Carousel />
       </div>
 
-      <div className="flex items-center flex-col max-w-7xl mx-auto overflow-auto">
+      <div className="max-w-7xl mx-auto">
         <h1 className="w-full text-3xl text-oliveGreen font-bold">
           Top deal of the day
         </h1>

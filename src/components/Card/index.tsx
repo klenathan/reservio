@@ -6,18 +6,18 @@ const Service = (props: { service: IService }) => {
   return (
     <Link
       href="#"
-      className="flex flex-col  justify-center w-full shadow-xl rounded-md my-8  "
+      className="flex flex-col justify-center w-full shadow-xl rounded-md my-8  "
     >
       <div className="relative w-full h-[15rem] bg-slate-200 rounded-t-md">
         <Image
           src={props.service.image[0]}
           alt="..."
           fill
-          style={{ objectFit: "fill", borderRadius: "0.375rem 0.375rem 0 0" }}
+          className="rounded-md"
         />
       </div>
       <div className="m-5">
-        <h1 className="text-xl text-ellipsis overflow-hidden h-16 w-[95%] text-black font-bold">
+        <h1 className="text-xl text-black font-bold truncate">
           {props.service.name}
         </h1>
         <div>{props.service.category}</div>

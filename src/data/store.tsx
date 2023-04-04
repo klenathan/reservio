@@ -11,6 +11,8 @@ export const StoreData = [
     socialMedia: {
       facebook: "https://www.facebook.com/",
       instagram: "https://www.instagram.com/",
+      youtube: "https://www.youtube.com/",
+      tiktok: "https://www.tiktok.com/",
     },
     rating: 4.5,
     review: 1000,

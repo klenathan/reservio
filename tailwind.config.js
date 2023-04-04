@@ -10,10 +10,8 @@ module.exports = {
   ],
   theme: {
     extend: {
-      //   
-        
       fontFamily: {
-        logo: "Alegreya Sans SC",
+        logo: 'Alegreya Sans SC'
       },
       colors: {
         oliveGreen: "#3D550C",
@@ -22,9 +20,10 @@ module.exports = {
         midGreen: "#59981A",
       },
       backgroundImage: {
-        authenticate: "url('/assets/background_authenticate.svg')",
+        'authenticate': "url('/assets/background_authenticate.svg')"
       },
+
     },
   },
-  plugins: [],
-};
+}
+

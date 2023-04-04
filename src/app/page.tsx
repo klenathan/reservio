@@ -6,7 +6,6 @@ import CategoryList from "@/components/Category";
 import Carousel from "@/components/Carousel";
 import ServiceList from "@/components/Service";
 import TopDealList from "@/components/Service/topDeal";
-import * as jose from "jose";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +17,7 @@ export default function Home() {
       </Head>
       <NavBar />
 
-      <CategoryList image="/assets/profile.svg" />
+      <CategoryList />
 
       <div className="w-screen flex justify-center">
         <Carousel />

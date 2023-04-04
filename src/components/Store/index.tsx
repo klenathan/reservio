@@ -26,14 +26,16 @@ interface IStore {
 const Store = (props: { store: IStore }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 md:border md:border-black md:m-8 md:rounded-md">
-      <div className="flex flex-col items-center justify-center md:p-8 p-2">
-        <Image
-          src={props.store.image}
-          alt={props.store.name}
-          width={150}
-          height={150}
-          className="rounded-full"
-        />
+      <div className="flex flex-col items-center justify-center md:p-4 p-2">
+        <div className="relative h-32 w-32">
+          <Image
+            src={props.store.image}
+            alt={props.store.name}
+            fill
+            className="rounded-full"
+          />
+        </div>
+
         <div>{props.store.name}</div>
         <div>@{props.store.vendor}</div>
       </div>
@@ -80,7 +82,7 @@ const Store = (props: { store: IStore }) => {
           )}
         </div>
       </div>
-      <div className="md:p-8 p-2">
+      <div className="lg:p-8 p-2">
         <div className="flex">
           <div className="flex items-center font-bold">
             <AiFillStar /> {""} {props.store.rating} / 5.0

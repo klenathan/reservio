@@ -1,13 +1,14 @@
 "use client";
 import Link from "next/link";
 import Button from "../Button";
-import {SubmitHandler, useForm} from "react-hook-form";
+import {Controller, SubmitHandler, useForm} from "react-hook-form";
 import {useRef, useState} from "react";
 import axios from "axios";
 import DropZone from "components/DropZone";
 import Input from "components/Input";
 import {useRouter} from "next/navigation";
-import BubbleWrap from "../Bubble/usernameBubble";
+import UsernameBubble from "../Bubble/usernameBubble";
+import PasswordBubbleWrap from "components/Bubble/passwordBubble";
 
 interface SignUpForm {
     username: String;
@@ -15,7 +16,7 @@ interface SignUpForm {
     password: String;
     re_password: String;
     phone: String;
-    avatar?: FileList;
+    avatar?: File[];
 }
 
 const SignUpForm = () => {
@@ -33,13 +34,24 @@ const SignUpForm = () => {
         noConsecutiveSpecialChars: false,
         noStartEndSpecialChars: false
     });
-    const [inputFocused, setInputFocused] = useState(false);
+
+    const [passwordState, setPasswordState] = useState({
+        hasLength: false,
+        hasLowercase: false,
+        hasUppercase: false,
+        hasDigit: false,
+    });
+
+    const [inputFocused, setInputFocused] = useState({
+        username: false,
+        password: false
+    });
 
 
     const {push} = useRouter();
 
 
-    const password = useRef({});
+    const password = useRef<String>();
     const username = useRef<String>()
     const email = useRef<String>()
 
@@ -59,8 +71,21 @@ const SignUpForm = () => {
         }
     };
 
+    function handlePasswordChange() {
+        const newPassword = password.current;
+        if (typeof newPassword === "string") {
+            setPasswordState({
+                hasLength: newPassword.length >= 8,
+                hasLowercase: /[a-z]/.test(newPassword),
+                hasUppercase: /[A-Z]/.test(newPassword),
+                hasDigit: /\d/.test(newPassword),
+            });
+        }
+    }
+
 
     const onSubmit: SubmitHandler<SignUpForm> = async (data) => {
+        console.log(data)
         const formData = new FormData();
 
         formData.append("username", data.username as string);
@@ -127,10 +152,10 @@ const SignUpForm = () => {
                                     }
                                 }}
                                 onChange={handleUsernameChange}
-                                onFocus={() => setInputFocused(true)}
-                                onBlur={() => setInputFocused(false)}
+                                onFocus={() => setInputFocused({username: true, password: false})}
+                                onBlur={() => setInputFocused({username: false, password: false})}
                             />
-                            {inputFocused && <BubbleWrap {...usernameValidation}/>}
+                            {inputFocused.username && <UsernameBubble {...usernameValidation}/>}
                         </div>
 
 
@@ -150,21 +175,28 @@ const SignUpForm = () => {
                             placeholder={"e.g. reservio@reservio.com"}
                             errors={errors.email}
                         />
-                        <Input
-                            name={"password"}
-                            label={"Password"}
-                            type={"password"}
-                            control={control}
-                            rules={{
-                                required: "Password is required",
-                                pattern: {
-                                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-                                    message:
-                                        "Password mus be minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
-                                }
-                            }}
-                            errors={errors.password}
-                        />
+                        <div className={"relative"}>
+                            <Input
+                                name={"password"}
+                                label={"Password"}
+                                type={"password"}
+                                control={control}
+                                rules={{
+                                    required: "Password is required",
+                                    pattern: {
+                                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+                                        message:
+                                            "Password mus be minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
+                                    }
+                                }}
+                                errors={errors.password}
+                                onChange={handlePasswordChange}
+                                onFocus={() => setInputFocused({username: false, password: true})}
+                                onBlur={() => setInputFocused({username: false, password: false})}
+                            />
+                            {inputFocused.password && <PasswordBubbleWrap {...passwordState}/>}
+                        </div>
+
                         <Input
                             name={"re_password"}
                             type={"password"}
@@ -203,7 +235,18 @@ const SignUpForm = () => {
                             Choose your avatar
                         </label>
                         <p className={"py-2"}>Drag an image here or upload a file</p>
-                        <DropZone/>
+                        <Controller
+                            name={"avatar"}
+                            control={control}
+                            defaultValue={[]}
+                            render={({field: {onChange}}) => (
+                                <DropZone
+                                    multiple={false}
+                                    onChange={(files) => onChange(files[0])}
+                                />
+                            )}
+
+                        />
                         <div className={"w-full mt-4 space-y-3"}>
                             <h2 className={"font-bold"}>
                                 @{username.current ? username.current : "Reservio"}

@@ -1,14 +1,14 @@
 import React from 'react';
 
-interface BubbleWrapProps {
+interface usernameBubbleProps {
     length: boolean;
     noConsecutiveSpecialChars: boolean;
     noStartEndSpecialChars: boolean;
 }
 
-const BubbleWrap: React.FC<BubbleWrapProps> = (props: BubbleWrapProps) => {
+const UsernameBubble: React.FC<usernameBubbleProps> = (props: usernameBubbleProps) => {
     return (
-        <div className="absolute top-full left-0 rounded-lg shadow-lg p-4 w-full bg-gray-100">
+        <div className="absolute z-10 top-full left-0 rounded-lg shadow-lg p-4 w-full bg-gray-100">
             <h2 className={"text-sm md:text-base font-bold italic"}>Username requirement</h2>
             <ul className="list-disc list-inside leading-7">
                 <li className={`${props.length ? 'text-green-500' : 'text-red-500'} text-sm md:text-base`}>
@@ -25,4 +25,4 @@ const BubbleWrap: React.FC<BubbleWrapProps> = (props: BubbleWrapProps) => {
     );
 };
 
-export default BubbleWrap;
+export default UsernameBubble;

@@ -2,21 +2,27 @@ import {useEffect, useState} from "react";
 import {useDropzone} from "react-dropzone";
 import Picture from "../Picture";
 
-const DropZone = () => {
+
+interface IDropZone {
+    multiple: boolean;
+    onChange: (files: File[]) => void;
+}
+
+const DropZone = (props: IDropZone, {...rest}) => {
     const [files, setFiles] = useState<(File & { preview: string })[]>([]);
     const {getRootProps, getInputProps} = useDropzone({
         accept: {
             'image/png': [],
             'image/jpeg': [],
         },
-        multiple: false,
+        multiple: props.multiple,
         onDrop: acceptedFiles => {
             setFiles(acceptedFiles.map(file => Object.assign(file, {
                 preview: URL.createObjectURL(file)
             })))
-        }
+        },
+        onDropAccepted : files => props.onChange(files)
     })
-
     const thumbs = files.map(file => {
             return (
                 <div key={file.name}>

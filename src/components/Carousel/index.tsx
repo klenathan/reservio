@@ -130,10 +130,10 @@ const CarouselProps = (props: { carousel: IService }) => {
         <h1 className="text-3xl italic text-oliveGreen font-bold">
           {props.carousel.name}
         </h1>
-        <div>{props.carousel.place}</div>
-        <div>{props.carousel.time}</div>
+        <div className="font-medium">{props.carousel.place}</div>
+        <div className="font-medium">{props.carousel.time}</div>
         <p className="my-3">{props.carousel.description}</p>
-        <div className="text-midGreen font-semibol my-3 text-2xl">
+        <div className="text-midGreen font-bold my-3 text-2xl">
           {props.carousel.price?.toLocaleString()} VND
         </div>
         <Button

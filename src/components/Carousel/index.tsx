@@ -13,7 +13,7 @@ const Carousel = () => {
     let newSlide = currentSlide === services.length - 1 ? 0 : currentSlide + 1;
     setCurrentSlide(newSlide);
   };
- 
+
   const handlePrevSlide = () => {
     let newSlide = currentSlide === 0 ? services.length - 1 : currentSlide - 1;
     setCurrentSlide(newSlide);
@@ -69,7 +69,7 @@ const Carousel = () => {
             );
           }
         })}
-      </div> 
+      </div>
       <button
         ref={timerRef}
         onClick={handleNextSlide}
@@ -114,7 +114,7 @@ const Carousel = () => {
       </div>
     </div>
   );
-};  
+};
 
 const CarouselProps = (props: { carousel: IService }) => {
   return (

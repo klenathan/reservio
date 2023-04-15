@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
-
+import { GiHamburgerMenu } from "react-icons/gi";
+import { CgProfile } from "react-icons/cg";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface IHamburgerMenuChildProps {
@@ -76,20 +76,8 @@ export default function ProfileHamBurger() {
     shadow-sm bg-white
     hover:shadow hover:border-oliveGreen"
     >
-      <Image
-        priority
-        src="/assets/hamburger.svg"
-        height={size - 8}
-        width={size - 8}
-        alt="Profile Hamburger"
-      />
-      <Image
-        priority
-        src="/assets/profile.svg"
-        height={size}
-        width={size}
-        alt="Profile Hamburger"
-      />
+      <GiHamburgerMenu className="h-8" />
+      <CgProfile className="h-6 w-6" />
       <NavBarHamburgerMenu show={show} setShow={setShow} />
     </div>
   );

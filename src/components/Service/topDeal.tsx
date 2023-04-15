@@ -4,30 +4,36 @@ import Link from "next/link";
 import { IService } from "./serviceInterface";
 import { services } from "@/data/service";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import { useEffect } from "react";
-
-
+import { useEffect, useState, useRef } from "react";
 
 const SlideLeft = () => {
-  var slider = document.getElementById("slider");
-  slider.scrollLeft = slider.scrollLeft - 500;
-  if (slider.scrollLeft === 0) {
-    slider.scrollLeft = slider.scrollWidth;
+  let slider = document.getElementById("slider");
+  if (slider) {
+    slider.scrollLeft = slider.scrollLeft - 500;
+    if (slider.scrollLeft === 0) {
+      slider.scrollLeft = slider.scrollWidth;
+    }
   }
 };
 const SlideRight = () => {
   var slider = document.getElementById("slider");
-  if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth) {
-    slider.scrollLeft = 0;
-  } else {
-    slider.scrollLeft += 500;
+  if (slider) {
+    if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth) {
+      slider.scrollLeft = 0;
+    } else {
+      slider.scrollLeft += 500;
+    }
   }
 };
 
 const TopDealList = () => {
   return (
     <div className="flex flex-row items-center">
-      <MdChevronLeft onClick={SlideLeft} size={50} className="cursor-pointer opacity-50 hover:opacity-100">
+      <MdChevronLeft
+        onClick={SlideLeft}
+        size={50}
+        className="cursor-pointer opacity-50 hover:opacity-100"
+      >
         {" "}
       </MdChevronLeft>
       <div

@@ -13,12 +13,12 @@ export default function Profile() {
         <title>User Profile</title>
       </Head>
       <NavBar />
-      <div className="flex flex-col place-items-start">
-        <div className="flex flex-row mt-12 justify-center w-full ">
-          {/* <UserProfile> </UserProfile> */}
+      <div className="flex flex-row  pt-12 justify-center">
+        <UserProfile > </UserProfile>
+        <div className="flex flex-col">
           <HistoryPage> </HistoryPage>
-        </div>
-        <div>
+          <HistoryCard> </HistoryCard>
+          <HistoryCard> </HistoryCard>
           <HistoryCard> </HistoryCard>
         </div>
       </div>

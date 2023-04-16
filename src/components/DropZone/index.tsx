@@ -43,7 +43,7 @@ const DropZone = (props: IDropZone, {...rest}) => {
         return () => {
             files.forEach(file => URL.revokeObjectURL(file.preview))
         }
-    }, [])
+    }, [files])
     return (
         <section className="container h-fit w-80 mx-auto hover:bg-gray-100">
             <div {...getRootProps({className: 'dropzone'})}>

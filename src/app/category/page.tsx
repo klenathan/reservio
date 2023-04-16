@@ -20,7 +20,7 @@ export default function Category() {
       </Head>
       <NavBar />
 
-      <CategoryList image="/assets/profile.svg" />
+      <CategoryList />
 
       <div className="flex">
         <aside className="w-72 fixed left-0 h-3/4 p-4 mt-1 border border-black">

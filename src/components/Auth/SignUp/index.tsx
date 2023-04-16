@@ -1,14 +1,14 @@
 "use client";
 import Link from "next/link";
-import Button from "../Button";
 import {Controller, SubmitHandler, useForm} from "react-hook-form";
 import {useRef, useState} from "react";
 import axios from "axios";
 import DropZone from "components/DropZone";
-import Input from "components/Input";
 import {useRouter} from "next/navigation";
-import UsernameBubble from "../Bubble/usernameBubble";
-import PasswordBubbleWrap from "components/Bubble/passwordBubble";
+import Input from "components/Form/Input";
+import UsernameBubble from "components/Auth/SignUp/Bubble/usernameBubble";
+import PasswordBubbleWrap from "components/Auth/SignUp/Bubble/passwordBubble";
+import Button from "components/Button";
 
 interface SignUpForm {
     username: String;

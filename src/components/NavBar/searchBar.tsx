@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Image from "next/image" 
+import { IoSearchCircleSharp } from "react-icons/io5";
 
 export default function SearchBar() {
   const [keyword, setKeyword] = useState("");
@@ -7,11 +9,15 @@ export default function SearchBar() {
     e.preventDefault();
     console.log("Searching:", keyword);
   };
+  const size = 32;
+  const style = {color: "#59981A"}
   return (
-    <form className="w-4/5" onSubmit={handleSearch}>
+    <form className="w-4/5 relative" onSubmit={handleSearch}>
+      <IoSearchCircleSharp className="pointer-events-none w-8 h-8 absolute top-1/2 transform -translate-y-1/2 left-3" style={style}></IoSearchCircleSharp> 
+      
       <input
         className="w-full h-[3rem] 
-        px-5
+        px-12
         rounded-2xl border-2 border-solid
          border-gray-500"
         type="text"

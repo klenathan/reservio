@@ -85,7 +85,7 @@ const SignUpForm = () => {
 
 
     const onSubmit: SubmitHandler<SignUpForm> = async (data) => {
-        console.log(data)
+
         const formData = new FormData();
 
         formData.append("username", data.username as string);
@@ -93,8 +93,9 @@ const SignUpForm = () => {
         formData.append("password", data.password as string);
         formData.append("phone", data.phone as string);
         if (data.avatar != undefined) {
-            formData.append("avatar", data.avatar[0]);
+            formData.append("avatar", data.avatar as any);
         }
+
 
         const res = await axios
             .post(
@@ -122,7 +123,6 @@ const SignUpForm = () => {
                     });
                 }
             })
-        console.log(res)
     };
 
 

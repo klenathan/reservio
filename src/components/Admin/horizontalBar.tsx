@@ -31,10 +31,6 @@ export const options = {
     legend: {
       position: "right" as const,
     },
-    title: {
-      display: true,
-      text: "Rating and Feedback",
-    },
   },
 };
 
@@ -44,7 +40,7 @@ const data = {
   labels,
   datasets: [
     {
-      label: "Rating",
+      label: "App Rating",
       data: [1, 2, 3, 4],
       borderColor: "rgb(255, 99, 132)",
       backgroundColor: "rgba(255, 99, 132, 0.5)",
@@ -53,5 +49,12 @@ const data = {
 };
 
 export function HorizontalBar() {
-  return <Bar options={options} data={data} />;
+  return (
+    <div className="border border-black m-10 rounded-md p-10">
+      <h1 className="w-full text-xl text-oliveGreen font-bold uppercase">
+        ratings and feedbacks
+      </h1>
+      <Bar options={options} data={data} />
+    </div>
+  );
 }

@@ -3,10 +3,10 @@ import { IService } from "../Service/serviceInterface";
 import Image from "next/image";
 
 const ImageDisplay = (props: { service: IService }) => {
-  if (props.service.image.length < 3) {
+  if (props.service.images.length < 3) {
     return (
       <div className="flex justify-center">
-        {props.service.image.map((img, index) => {
+        {props.service.images.map((img, index) => {
           return (
             <Image src={img} key={index} alt={img} height={500} width={500} />
           );
@@ -17,14 +17,14 @@ const ImageDisplay = (props: { service: IService }) => {
   return (
     <div className="flex justify-center">
       <Image
-        src={props.service.image[0]}
-        alt={props.service.image[0]}
+        src={props.service.images[0]}
+        alt={props.service.images[0]}
         height={500}
         width={500}
       />
 
       <div className="">
-        {props.service.image.map((img, index) => {
+        {props.service.images.map((img, index) => {
           if (index > 0) {
             return (
               <Image src={img} key={index} alt={img} height={500} width={500} />

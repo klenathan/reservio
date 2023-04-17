@@ -2,11 +2,11 @@ export interface IService {
   id: number;
   name: string;
   category: string;
-  place: string;
+  address: string;
   time: string;
-  store: string;
+  vendorUsername: string;
   price: number;
-  image: string[];
+  images: string[];
   discount?: number;
   description: string;
 }

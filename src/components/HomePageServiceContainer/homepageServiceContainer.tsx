@@ -6,8 +6,9 @@ import axios from "axios";
 import ServiceCard from "../Card/index";
 import { IService } from "./serviceInterface";
 import SyncLoader from "react-spinners/SyncLoader";
+import LoadingSpinner from "../LoadingSpinner";
 
-const ServiceList = () => {
+const HomePageServiceContainer = () => {
   const [queryService, setServices] = useState<IService[]>([]);
   useEffect(() => {
     axios
@@ -28,13 +29,10 @@ const ServiceList = () => {
           })}
         </div>
       ) : (
-        <div className="flex flex-col w-full my-8 items-center justify-center gap-5">
-          <SyncLoader loading={queryService.length == 0} color="#59981A" />
-          <p className="text-oliveGreen font-semibold">Loading, please wait</p>
-        </div>
+        <LoadingSpinner />
       )}
     </div>
   );
 };
 
-export default ServiceList;
+export default HomePageServiceContainer;

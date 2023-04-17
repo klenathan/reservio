@@ -1,6 +1,6 @@
 import React from "react";
 import Geocoder from "../Map/geocoder";
-import { IService } from "../Service/serviceInterface";
+import { IService } from "../HomePageServiceContainer/serviceInterface";
 import ImageDisplay from "./imageDisplay";
 
 const DetailPage = (props: { service: IService }) => {

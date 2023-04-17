@@ -2,7 +2,7 @@
 import NavBar from "@/components/NavBar";
 import Head from "next/head";
 import CategoryList from "@/components/Category";
-import CateService from "@/components/Service/cateService";
+import CateService from "@/components/HomePageServiceContainer/cateService";
 import SearchableDropdown from "@/components/City";
 import { useState } from "react";
 import { ICity } from "@/components/City/cityInterface";

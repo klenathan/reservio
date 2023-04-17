@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { IService } from "../Service/serviceInterface";
+import { IService } from "../HomePageServiceContainer/serviceInterface";
 
-const ServiceCard = (props: { service: IService }) => {
+const Card = (props: { service: IService }) => {
   const img_endpoint = "https://d3j45rkkmhyyrh.cloudfront.net/";
   return (
     <Link
@@ -35,4 +35,4 @@ const ServiceCard = (props: { service: IService }) => {
   );
 };
 
-export default ServiceCard;
+export default Card;

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Button from "../Button";
-import { IService } from "../Service/serviceInterface";
+import { IService } from "../HomePageServiceContainer/serviceInterface";
 import { services } from "@/data/service";
 
 const Carousel = () => {

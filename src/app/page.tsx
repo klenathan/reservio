@@ -4,8 +4,8 @@ import NavBar from "@/components/NavBar";
 import Head from "next/head";
 import CategoryList from "@/components/Category";
 import Carousel from "@/components/Carousel";
-import ServiceList from "@/components/Service";
-import TopDealList from "@/components/Service/topDeal";
+import HomePageServiceContainer from "@/components/HomePageServiceContainer/homepageServiceContainer";
+import TopDealContainer from "@/components/HomePageServiceContainer/topDeal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,17 +24,17 @@ export default function Home() {
       </div>
 
       <div className="max-w-7xl mx-auto">
-        <h1 className="w-full text-3xl text-oliveGreen font-bold">
+        <h2 className="w-full text-3xl text-oliveGreen font-bold">
           Top deal of the day
-        </h1>
-        <TopDealList />
+        </h2>
+        <TopDealContainer />
       </div>
 
       <div className="flex items-center flex-col max-w-7xl mx-auto">
-        <h1 className="w-full text-3xl text-oliveGreen font-bold ">
+        <h2 className="w-full text-3xl text-oliveGreen font-bold ">
           Highlight Services
-        </h1>
-        <ServiceList />
+        </h2>
+        <HomePageServiceContainer />
       </div>
     </div>
   );

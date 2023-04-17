@@ -1,6 +1,6 @@
 "use client";
 import NavBar from "@/components/NavBar";
-import ServiceList from "@/components/Service";
+import ServiceList from "@/components/HomePageServiceContainer/homepageServiceContainer";
 import Store from "@/components/Store";
 import { StoreData } from "@/data/store";
 import Head from "next/head";

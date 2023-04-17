@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { IService } from "../Service/serviceInterface";
+import { IService } from "../HomePageServiceContainer/serviceInterface";
 
 const HistoryCard = (props: any) => {
   const size = 55;

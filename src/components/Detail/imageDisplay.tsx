@@ -1,5 +1,5 @@
 import React from "react";
-import { IService } from "../Service/serviceInterface";
+import { IService } from "../HomePageServiceContainer/serviceInterface";
 import Image from "next/image";
 
 const ImageDisplay = (props: { service: IService }) => {

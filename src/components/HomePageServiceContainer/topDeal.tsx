@@ -28,7 +28,7 @@ const SlideRight = () => {
   }
 };
 
-const TopDealList = () => {
+const TopDealContainer = () => {
   const [queryService, setServices] = useState<IService[]>([]);
   useEffect(() => {
     axios
@@ -43,7 +43,7 @@ const TopDealList = () => {
   return (
     <div>
       {queryService.length == 0 ? (
-        <LoadingSpinner loading={queryService.length == 0} />
+        <LoadingSpinner />
       ) : (
         <div className="flex flex-row items-center my-8 ">
           <MdChevronLeft
@@ -101,4 +101,4 @@ const TopDeal = (props: { service: IService }) => {
   );
 };
 
-export default TopDealList;
+export default TopDealContainer;

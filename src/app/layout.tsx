@@ -4,7 +4,7 @@ export const metadata = {
   title: "Reservio",
   description: "Reserve it? Reservio",
   icons: {
-    icon: '/assets/profile.svg',
+    icon: "/assets/profile.svg",
   },
 };
 

@@ -3,23 +3,62 @@ import Image from "next/image";
 import Link from "next/link";
 import { IService } from "./serviceInterface";
 import { services } from "@/data/service";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import { useEffect, useState, useRef } from "react";
+
+const SlideLeft = () => {
+  let slider = document.getElementById("slider");
+  if (slider) {
+    slider.scrollLeft = slider.scrollLeft - 500;
+    if (slider.scrollLeft === 0) {
+      slider.scrollLeft = slider.scrollWidth;
+    }
+  }
+};
+const SlideRight = () => {
+  var slider = document.getElementById("slider");
+  if (slider) {
+    if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth) {
+      slider.scrollLeft = 0;
+    } else {
+      slider.scrollLeft += 500;
+    }
+  }
+};
 
 const TopDealList = () => {
   return (
-    <div className="overflow-x-auto whitespace-no-wrap">
-      <div className="inline-flex">
-        {services.map((service) => {
-          return <TopDeal key={service.id} service={service} />;
-        })}
+    <div className="flex flex-row items-center">
+      <MdChevronLeft
+        onClick={SlideLeft}
+        size={50}
+        className="cursor-pointer opacity-50 hover:opacity-100"
+      >
+        {" "}
+      </MdChevronLeft>
+      <div
+        id="slider"
+        className="flex items-center overflow-x-auto scroll-smooth whitespace-no-wrap scrollbar-hide "
+      >
+        <div className="inline-flex items-center">
+          {services.map((service) => {
+            return <TopDeal key={service.id} service={service} />;
+          })}
+        </div>
       </div>
+      <MdChevronRight
+        size={50}
+        onClick={SlideRight}
+        className="cursor-pointer opacity-50 hover:opacity-100"
+      ></MdChevronRight>
     </div>
   );
 };
 
 const TopDeal = (props: { service: IService }) => {
   return (
-    <Link href="#" className="border border-black rounded-md m-8 relative w-64">
-      <div className="w-full bg-gray-200 mr-4 h-full rounded-md">
+    <Link href="#" className="rounded-md m-8 relative w-64 shadow-xl">
+      <div className="w-full bg-gray-200 mr-4 h-full rounded-md hover:scale-105 ease-in-out duration-300 ">
         <Image
           src={props.service.image[0]}
           alt={props.service.name}

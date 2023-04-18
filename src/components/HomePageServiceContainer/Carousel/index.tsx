@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Button from "../Button";
-import { IService } from "../HomePageServiceContainer/serviceInterface";
+import Button from "@/components/Button";
+import { IService } from "../serviceInterface";
 import { services } from "@/data/service";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -42,25 +43,11 @@ const Carousel = () => {
         className="absolute left-5 m-auto text-5xl inset-y-1/2 text-gray-400 z-20"
       >
         <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 ">
-          <svg
-            aria-hidden="true"
-            className="w-6 h-6 text-white dark:text-gray-800"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M15 19l-7-7 7-7"
-            ></path>
-          </svg>
+          <MdChevronLeft size={50} className="cursor-pointer text-white" />
           <span className="sr-only">Previous</span>
         </span>
       </button>
-      <div className="w-4/5 flex overflow-hidden relative m-auto">
+      <div className="md:w-4/5 relative flex m-auto">
         {services.map((image, index) => {
           if (index === currentSlide) {
             return (
@@ -77,21 +64,7 @@ const Carousel = () => {
         className="absolute right-5 m-auto text-5xl inset-y-1/2 text-gray-400 z-20"
       >
         <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30">
-          <svg
-            aria-hidden="true"
-            className="w-6 h-6 text-white dark:text-gray-800"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M9 5l7 7-7 7"
-            ></path>
-          </svg>
+          <MdChevronRight size={50} className="cursor-pointer text-white" />
           <span className="sr-only">Next</span>
         </span>
       </button>
@@ -120,15 +93,18 @@ const Carousel = () => {
 const CarouselProps = (props: { carousel: IService }) => {
   return (
     <div className="flex max-w-9xl">
-      <div className="relative flex flex-1">
+      <div className="lg:relative lg:flex lg:flex-1">
         <Image
           src={props.carousel.images[0] as unknown as string}
-          className="object-cover"
           alt="..."
           fill
+          sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+          priority
         />
       </div>
-      <div className="m-10 flex-1">
+      <div className="invisible lg:m-10 lg:flex-1 lg:visible">
         <h1 className="text-3xl italic text-oliveGreen font-bold">
           {props.carousel.name}
         </h1>

@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { IService } from "./serviceInterface";
-// import { services } from "@/data/service";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
@@ -12,9 +11,6 @@ const SlideLeft = () => {
   let slider = document.getElementById("slider");
   if (slider) {
     slider.scrollLeft = slider.scrollLeft - 500;
-    if (slider.scrollLeft === 0) {
-      slider.scrollLeft = slider.scrollWidth;
-    }
   }
 };
 const SlideRight = () => {
@@ -47,6 +43,7 @@ const TopDealContainer = () => {
       ) : (
         <div className="flex flex-row items-center my-8 ">
           <MdChevronLeft
+            id="left"
             onClick={SlideLeft}
             size={50}
             className="cursor-pointer opacity-50 hover:opacity-100"
@@ -64,6 +61,7 @@ const TopDealContainer = () => {
             </div>
           </div>
           <MdChevronRight
+            id="right"
             size={50}
             onClick={SlideRight}
             className="cursor-pointer opacity-50 hover:opacity-100"
@@ -88,11 +86,13 @@ const TopDeal = (props: { service: IService }) => {
             src={img_endpoint + props.service.images[0]}
             alt={props.service.name}
             fill
-            className="object-cover rounded-"
+            sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
           />
         </div>
 
-        <figcaption className="absolute text-lg text-white bottom-0 italic px-2 rounded-md">
+        <figcaption className="absolute text-lg text-white bottom-0 italic bg-slate-800 w-full opacity-50 px-2">
           <p>Discount: {(props.service.discount as number) * 100}%</p>
           <p>Location: {props.service.address}</p>
         </figcaption>

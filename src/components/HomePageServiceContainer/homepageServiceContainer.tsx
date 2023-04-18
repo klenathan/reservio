@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
-import { services } from "@/data/service";
-import Image from "next/image";
 import axios from "axios";
 
 import ServiceCard from "../Card/index";
 import { IService } from "./serviceInterface";
-import SyncLoader from "react-spinners/SyncLoader";
 import LoadingSpinner from "../LoadingSpinner";
 
 const HomePageServiceContainer = () => {

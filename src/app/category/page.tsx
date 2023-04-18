@@ -1,14 +1,14 @@
 "use client";
 import NavBar from "@/components/NavBar";
 import Head from "next/head";
-import CategoryList from "@/components/Category";
+import CategoryList from "@/components/CategoryServiceContainer/Category";
 import CateService from "@/components/HomePageServiceContainer/cateService";
-import SearchableDropdown from "@/components/City";
+import SearchableDropdown from "@/components/CategoryServiceContainer/City";
 import { useState } from "react";
-import { ICity } from "@/components/City/cityInterface";
+import { ICity } from "@/components/CategoryServiceContainer/City/cityInterface";
 import { cities } from "@/data/city";
-import Price from "@/components/Price";
-import Calendar from "@/components/Calendar";
+import Price from "@/components/CategoryServiceContainer/Price";
+import Calendar from "@/components/CategoryServiceContainer/Calendar";
 
 export default function Category() {
   const [value, setValue] = useState<string>("");
@@ -45,7 +45,6 @@ export default function Category() {
             <SearchableDropdown
               options={cities as ICity}
               label="name"
-              id="id"
               selectedVal={value}
               handleChange={(val: string) => setValue(val)}
             />

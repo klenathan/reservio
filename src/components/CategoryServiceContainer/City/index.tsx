@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ICity } from "./cityInterface";
-
+import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
 interface ISearchableDropdown {
   options?: ICity;
   label: string;
@@ -56,7 +56,7 @@ const SearchableDropdown: React.FC<ISearchableDropdown> = (props) => {
     box-border overflow-y-auto absolute
     max-h-72 w-full relative rounded-b-md
     `,
-    option: `box-border cursor-pointer block hover:bg-red-100 p-1`,
+    option: `box-border cursor-pointer block hover:shadow hover:border-oliveGreen hover:bg-limeGreen hover:bg-opacity-20 p-1`,
     optionSelected: `bg-gray-100`,
   };
   return (
@@ -80,20 +80,9 @@ const SearchableDropdown: React.FC<ISearchableDropdown> = (props) => {
           }}
           onClick={toggle}
         />
-
-        <Image
-          src="/assets/dropdown.svg"
-          height={30}
-          width={30}
-          alt="Dropdown"
-          style={
-            isOpen
-              ? {
-                  transform: "rotate(180deg)",
-                }
-              : {}
-          }
-        />
+        <div>
+          {isOpen ? <MdArrowDropDown size={30} /> : <MdArrowDropUp size={30} />}
+        </div>
       </div>
 
       <div className={`${isOpen ? style["optionsOpen"] : style["options"]}`}>

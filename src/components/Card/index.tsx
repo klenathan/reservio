@@ -14,7 +14,9 @@ const Card = (props: { service: IService }) => {
           src={`${img_endpoint}${props.service.images[0]}`}
           alt={props.service.images[0]}
           fill
-          className="rounded-md"
+          sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
         />
       </div>
       <div className="m-5">

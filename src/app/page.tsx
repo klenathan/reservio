@@ -2,8 +2,8 @@
 import { Inter } from "next/font/google";
 import NavBar from "@/components/NavBar";
 import Head from "next/head";
-import CategoryList from "@/components/Category";
-import Carousel from "@/components/Carousel";
+import CategoryList from "@/components/CategoryServiceContainer/Category";
+import Carousel from "@/components/HomePageServiceContainer/Carousel";
 import HomePageServiceContainer from "@/components/HomePageServiceContainer/homepageServiceContainer";
 import TopDealContainer from "@/components/HomePageServiceContainer/topDeal";
 
@@ -19,7 +19,7 @@ export default function Home() {
 
       <CategoryList />
 
-      <div className="w-screen flex justify-center">
+      <div className="w-screen">
         <Carousel />
       </div>
 

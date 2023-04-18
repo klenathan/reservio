@@ -1,5 +1,3 @@
-import { SyncLoader } from "react-spinners";
-
 interface ILoadingSpinner {
   text?: string;
 }

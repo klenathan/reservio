@@ -7,7 +7,7 @@ interface Listing {
     isCertified: boolean;
 }
 
-const ListingSubtitle: React.FC<Listing> = ({rating, reviewCount, location, isCertified}) => {
+const DetailSubtitle: React.FC<Listing> = ({rating, reviewCount, location, isCertified}) => {
     const tickIcon = isCertified ? <FaCheck className="mx-1"/> : null;
     const dot = <span className="mx-1">&#8226;</span>;
 
@@ -15,7 +15,6 @@ const ListingSubtitle: React.FC<Listing> = ({rating, reviewCount, location, isCe
         <div className="flex items-center text-gray-600 text-sm font-bold mb-8">
             <div className={`flex items-center }`}>
                 <FaStar className="mr-1"/>
-                {dot}
                 <span>{rating.toFixed(1)}</span>
             </div>
             {dot}
@@ -39,4 +38,4 @@ const ListingSubtitle: React.FC<Listing> = ({rating, reviewCount, location, isCe
     );
 };
 
-export default ListingSubtitle;
+export default DetailSubtitle;

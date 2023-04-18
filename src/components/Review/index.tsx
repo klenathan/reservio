@@ -59,22 +59,25 @@ const Review: React.FC<ReviewProps> = (props: ReviewProps) => {
 
             {isModalOpen && (
                 <Modal isOpen={isModalOpen} onClose={handleCloseModal} nameModal={"Reviews"}>
-                    {props.review.map((review, index) => {
-                            // TODO [ADD] The feedback form
-                            return (
-                                <div key={index} className="flex space-x-6 mb-10">
-                                    <ReviewCard
-                                        username={review.username}
-                                        avatar={review.avatar}
-                                        rating={review.rating}
-                                        feedback={review.feedback}
-                                        createAt={review.createAt}
-                                        onClick={handleOpenModal}
-                                    />
-                                </div>
-                            )
-                        }
-                    )}
+                    <div>
+                        {props.review.map((review, index) => {
+                                // TODO [ADD] The feedback form
+                                return (
+                                    <div key={index} className="flex space-x-6 mb-10">
+                                        <ReviewCard
+                                            username={review.username}
+                                            avatar={review.avatar}
+                                            rating={review.rating}
+                                            feedback={review.feedback}
+                                            createAt={review.createAt}
+                                            onClick={handleOpenModal}
+                                        />
+                                    </div>
+                                )
+                            }
+                        )}
+                    </div>
+
                 </Modal>
             )}
         </div>

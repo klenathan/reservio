@@ -64,7 +64,7 @@ const DetailInformation: React.FC<DetailInformationProps> = ({name, avatarUrl, d
             {/*Description*/}
             <div className="mb-4 border-b-2  border-gray-300 pb-2">
                 <h3 className="text-gray-700 font-bold text-2xl mb-3">Description</h3>
-                <p className="text-gray-600 text-xl">
+                <div className="text-gray-600 text-xl">
                     {isExpanded ? description : <div className={'line-clamp-3'}>{description}</div>}
                     {!isExpanded && description.length > 200 && (
                         <button className="text-black-500 hover:text-blue-700 font-semibold"
@@ -78,7 +78,7 @@ const DetailInformation: React.FC<DetailInformationProps> = ({name, avatarUrl, d
                             See less
                         </button>
                     )}
-                </p>
+                </div>
             </div>
 
             <div>

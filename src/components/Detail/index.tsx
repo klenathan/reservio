@@ -2,7 +2,7 @@ import React from "react";
 import { IService } from "../HomePageServiceContainer/serviceInterface";
 import ImageGallery from "components/Detail/ImageGallery";
 import DetailSubtitle from "components/Detail/DetailSubtitle";
-import DetailInformation from "components/Detail/DetailImforamtion";
+import DetailInformation from "@/components/Detail/DetailPageInfo";
 
 const DetailPage = (props: { service: IService }) => {
   return (

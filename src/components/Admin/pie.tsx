@@ -43,11 +43,11 @@ const data = {
 
 export default function PieChart() {
   return (
-    <div className="border border-black m-10 rounded-md p-10">
+    <div className="h-fit md:m-10 p-4">
       <h1 className="w-full text-xl text-oliveGreen font-bold uppercase">
         favorite services this month
       </h1>
-      <div className="p-10">
+      <div>
         <Pie data={data} />
       </div>
     </div>

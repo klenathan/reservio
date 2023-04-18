@@ -29,7 +29,7 @@ export const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: "right" as const,
+      position: "top" as const,
     },
   },
 };
@@ -50,11 +50,13 @@ const data = {
 
 export function HorizontalBar() {
   return (
-    <div className="border border-black m-10 rounded-md p-10">
+    <div className="h-fit md:m-10 p-4">
       <h1 className="w-full text-xl text-oliveGreen font-bold uppercase">
         ratings and feedbacks
       </h1>
-      <Bar options={options} data={data} />
+      <div>
+        <Bar options={options} data={data} />
+      </div>
     </div>
   );
 }

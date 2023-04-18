@@ -5,7 +5,7 @@ import Table from "./table";
 export default function AdminChart() {
   return (
     <div>
-      <div className="grid grid-cols-2">
+      <div className="lg:grid lg:grid-cols-2">
         <HorizontalBar />
         <PieChart />
       </div>

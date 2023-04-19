@@ -8,9 +8,9 @@ const Logo: React.FC<ILogoStyle> = (props: ILogoStyle) => {
   return (
     <Link
       href={"/"}
-      className="sm:text-left md:text-center flex flex-col cursor-pointer max-w-screen-xl"
+      className="hidden md:block md:text-center cursor-pointer max-w-screen-xl"
     >
-      <p
+      <p  
         className={`font-logo font-semibold text-5xl italic ${
           props.logoStyle == "green" ? "text-midGreen" : "text-white"
         } `}

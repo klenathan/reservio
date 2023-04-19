@@ -89,6 +89,7 @@ export default function ProfileHamBurger() {
         height={size}
         width={size}
         alt="Profile Hamburger"
+        className="hidden md:block"
       />
       <NavBarHamburgerMenu show={show} setShow={setShow} />
     </div>

@@ -9,7 +9,7 @@ interface INavBarProps {
 const NavBar: React.FC<INavBarProps> = (props: INavBarProps) => {
   return (
     <div
-      className="grid grid-cols-3 place-items-center h-[5rem] 
+      className="grid grid-cols-4 md:grid-cols-3 place-items-center h-[5rem] 
     shadow-md"
     >
       <Logo logoStyle="green" />

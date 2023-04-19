@@ -40,15 +40,14 @@ const Carousel = () => {
     <div className="mt-3 p-5 md:p-0">
       <button
         onClick={handlePrevSlide}
-        className="hidden md:block absolute left-5 m-auto text-5xl inset-y-1/2 text-gray-400 z-20"
+        className="hidden lg:block absolute left-5 m-auto text-5xl inset-y-1/2 text-gray-400 z-20"
       >
         <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 ">
           <MdChevronLeft size={50} className="cursor-pointer text-white" />
           <span className="sr-only">Previous</span>
         </span>
       </button>
-      <div className="md:w-4/5 relative flex m-auto">
-      {/* <div className="w-full md:w-4/5 flex overflow-hidden relative md:m-auto "> */}
+      <div className="w-full md:w-4/5 flex justify-center overflow-hidden relative md:m-auto ">
         {services.map((image, index) => {
           if (index === currentSlide) {
             return (
@@ -62,7 +61,7 @@ const Carousel = () => {
       <button
         ref={timerRef}
         onClick={handleNextSlide}
-        className="hidden md:block absolute right-5 m-auto text-5xl inset-y-1/2 text-gray-400 z-20"
+        className="hidden lg:block absolute right-5 m-auto text-5xl inset-y-1/2 text-gray-400 z-20"
       >
         <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30">
           <MdChevronRight size={50} className="cursor-pointer text-white" />
@@ -70,7 +69,7 @@ const Carousel = () => {
         </span>
       </button>
 
-      <div className="hidden relative md:flex justify-center mt-5">
+      <div className="hidden relative lg:flex justify-center mt-5">
         {services.map((_, index) => {
           return (
             <div
@@ -93,57 +92,35 @@ const Carousel = () => {
 
 const CarouselProps = (props: { carousel: IService }) => {
   return (
-    <div className="flex max-w-9xl">
-      <div className="lg:relative lg:flex lg:flex-1">
+    <div className="lg:grid lg:grid-cols-3">
+      <div className="flex justify-center lg:col-span-1">
         <Image
           src={props.carousel.images[0] as unknown as string}
+          className="animate-fadeIn rounded md:rounded-none "
           alt="..."
-          fill
-          sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-          priority
+          height={50}
+          width={500}
         />
       </div>
-      <div className="invisible lg:m-10 lg:flex-1 lg:visible">
-        <h1 className="text-3xl italic text-oliveGreen font-bold">
+
+      <div className="lg:m-10 flex flex-col items-center lg:col-span-2 lg:items-start">
+        <h1 className="lg:text-3xl lg:text-left text-xl italic text-oliveGreen font-bold text-center">
           {props.carousel.name}
         </h1>
         <div className="font-medium">{props.carousel.address}</div>
         <div className="font-medium">{props.carousel.time}</div>
-        <p className="my-3">{props.carousel.description}</p>
+        <p className="my-3 hidden lg:block">{props.carousel.description}</p>
         <div className="text-midGreen font-bold my-3 text-2xl">
           {props.carousel.price?.toLocaleString()} VND
-    {/* <div className="md:flex ">
-      <Image
-        src={props.carousel.image[0] as unknown as string}
-        className="animate-fadeIn rounded md:rounded-none "
-        alt="..."
-        height={50}
-        width={500}
-      />
-      <div className=" md:m-10 flex items-center  md:block ">
-        <div>
-          <h1 className="md:text-3xl italic text-oliveGreen font-bold">
-            {props.carousel.name}
-          </h1>
-          <div className="font-medium">{props.carousel.place}</div>
-          <div className="font-medium">{props.carousel.time}</div>
-          <p className="my-3 hidden md:block">{props.carousel.description}</p>
-          <div className="text-midGreen font-bold my-3 text-2xl">
-            {props.carousel.price?.toLocaleString()} VND
-          </div>
         </div>
-        <div>
-          <Button
-            btnStyle="filled"
-            onClick={() => {
-              console.log("Clicked");
-            }}
-          >
-            Reserve Now
-          </Button> */}
-        </div>
+        <Button
+          btnStyle="filled"
+          onClick={() => {
+            console.log("Clicked");
+          }}
+        >
+          Reserve Now
+        </Button>
       </div>
     </div>
   );

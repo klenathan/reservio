@@ -7,7 +7,7 @@ import { IoMdRestaurant } from "react-icons/io";
 
 const CategoryList = () => {
   return (
-    <div className="border-2 grid grid-cols-3 w-full md:w-full md:grid-cols-7 md:m-0 md:border-none mt-24  m-auto">
+    <div className="border-2 grid grid-cols-3 w-full md:w-full md:grid-cols-7 md:m-0 md:border-none mt-24 m-auto">
       <Category icon={<FaHotel />} cateName="Stay" />
       <Category icon={<AiFillCar />} cateName="Vehicles" />
       <Category icon={<MdFlight />} cateName="Flights" />

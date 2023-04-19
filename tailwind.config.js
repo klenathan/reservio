@@ -31,6 +31,9 @@ module.exports = {
             backgroundImage: {
                 authenticate: "url('/assets/background_authenticate.svg')",
             },
+            animation: {
+                fadeInDown: 'transition-all ease-in-out duration-300'
+            }
         },
     },
 };

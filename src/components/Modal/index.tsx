@@ -39,11 +39,11 @@ const Modal: React.FC<ModalProps> = (props: ModalProps) => {
 
     return (
         <div
-            className="modal flex fixed inset-0 z-50 justify-center bg-neutral-200 bg-opacity-50 ">
-            <div className="z-10  overflow-auto">
+            className="modal flex fixed inset-0 z-50 justify-center bg-neutral-700 bg-opacity-50 ">
+            <div className="z-10  overflow-auto scroll-auto">
                 <div
                     className="modal-content bg-white rounded-lg p-6 max-w-screen-md mx-auto ">
-                    <div className="flex  items-center justify-between mb-4">
+                    <div className="flex sticky top-0 bg-white p-5 z-10 items-center justify-between mb-4 ">
                         <h2 className="text-xl font-semibold w-full text-center">{props.nameModal}</h2>
                         <button onClick={props.onClose}>
                             X

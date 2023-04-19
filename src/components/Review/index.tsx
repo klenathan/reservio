@@ -28,12 +28,12 @@ const Review: React.FC<ReviewProps> = (props: ReviewProps) => {
 
 
     return (
-        <div className={'flex flex-col justify-center border-b-2  border-gray-300 pb-2'}>
+        <div className={'flex flex-col justify-center border-b-2  border-gray-300 pb-2 mb-7'}>
             <div className={'lg:grid grid-cols-2 gap-4'}>
                 {props.review.map((review, index) => {
                         if (index < 4) {
                             return (
-                                <div key={index} className="flex space-x-2 mb-2">
+                                <div key={index} className="flex space-x-2 mb-2 line-clamp-5">
                                     <ReviewCard
                                         username={review.username}
                                         avatar={review.avatar}
@@ -61,7 +61,6 @@ const Review: React.FC<ReviewProps> = (props: ReviewProps) => {
                 <Modal isOpen={isModalOpen} onClose={handleCloseModal} nameModal={"Reviews"}>
                     <div>
                         {props.review.map((review, index) => {
-                                // TODO [ADD] The feedback form
                                 return (
                                     <div key={index} className="flex space-x-6 mb-10">
                                         <ReviewCard
@@ -76,6 +75,9 @@ const Review: React.FC<ReviewProps> = (props: ReviewProps) => {
                                 )
                             }
                         )}
+                    </div>
+                    <div>
+
                     </div>
 
                 </Modal>

@@ -19,19 +19,17 @@ export default function Home() {
 
       <CategoryList />
 
-      <div className="w-screen flex justify-center">
-        <Carousel />
-      </div>
+      <Carousel />
 
       <div className="max-w-7xl mx-auto">
-        <h1 className="w-full text-3xl text-oliveGreen font-bold">
+        <h1 className=" w-full text-xl text-center  md:text-left md:text-3xl text-oliveGreen font-bold">
           Top deal of the day
         </h1>
         <TopDealList />
       </div>
 
       <div className="flex items-center flex-col max-w-7xl mx-auto">
-        <h1 className="w-full text-3xl text-oliveGreen font-bold ">
+        <h1 className="w-full text-xl md:text-left text-center md:text-3xl text-oliveGreen font-bold ">
           Highlight Services
         </h1>
         <ServiceList />

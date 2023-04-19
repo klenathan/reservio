@@ -28,11 +28,11 @@ const SlideRight = () => {
 
 const TopDealList = () => {
   return (
-    <div className="flex flex-row items-center">
+    <div className="flex flex-row items-center ">
       <MdChevronLeft
         onClick={SlideLeft}
         size={50}
-        className="cursor-pointer opacity-50 hover:opacity-100"
+        className="hidden md:block cursor-pointer opacity-50 hover:opacity-100"
       >
         {" "}
       </MdChevronLeft>
@@ -49,7 +49,7 @@ const TopDealList = () => {
       <MdChevronRight
         size={50}
         onClick={SlideRight}
-        className="cursor-pointer opacity-50 hover:opacity-100"
+        className="hidden md:block cursor-pointer opacity-50 hover:opacity-100"
       ></MdChevronRight>
     </div>
   );

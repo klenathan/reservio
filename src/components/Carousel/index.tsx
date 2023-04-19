@@ -35,7 +35,7 @@ const Carousel = () => {
     return () => clearTimeout(timer);
   }, [auto, currentSlide]);
   return (
-    <div className="relative">
+    <div className="">
       <button
         onClick={handlePrevSlide}
         className="absolute left-5 m-auto text-5xl inset-y-1/2 text-gray-400 z-20"
@@ -118,16 +118,16 @@ const Carousel = () => {
 
 const CarouselProps = (props: { carousel: IService }) => {
   return (
-    <div className="flex">
+    <div className="md:flex">
       <Image
         src={props.carousel.image[0] as unknown as string}
-        className="m-10 animate-fadeIn "
+        className="mt-3 md:m-10 animate-fadeIn "
         alt="..."
         height={50}
         width={500}
       />
       <div className="m-10">
-        <h1 className="text-3xl italic text-oliveGreen font-bold">
+        <h1 className="md:text-3xl italic text-oliveGreen font-bold">
           {props.carousel.name}
         </h1>
         <div className="font-medium">{props.carousel.place}</div>

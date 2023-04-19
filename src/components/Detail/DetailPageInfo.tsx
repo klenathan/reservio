@@ -80,11 +80,11 @@ const DetailPageInfo: React.FC<DetailPageInfoProps> = ({
       {/*Description*/}
       <div className="mb-4 border-b-2  border-gray-300 pb-2">
         <h3 className="text-gray-700 font-bold text-2xl mb-3">Description</h3>
-        <p className="text-gray-600 text-xl">
+        <div className="text-gray-600 text-xl">
           {isExpanded ? (
             description
           ) : (
-            <div className={"line-clamp-3"}>{description} </div>
+            <div className={"line-clamp-3"}>{description}</div>
           )}
           {!isExpanded && description.length > 200 && (
             <button
@@ -102,9 +102,10 @@ const DetailPageInfo: React.FC<DetailPageInfoProps> = ({
               See less
             </button>
           )}
-        </p>
+        </div>
       </div>
 
+      {/*Review*/}
       <div>
         <h3 className="text-gray-700 font-bold text-2xl mb-3">Reviews</h3>
         <Review review={rv} />

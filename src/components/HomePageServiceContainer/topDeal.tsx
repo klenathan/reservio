@@ -72,8 +72,6 @@ const TopDealContainer = () => {
 };
 
 const TopDeal = (props: { service: IService }) => {
-    const img_endpoint = "https://d3j45rkkmhyyrh.cloudfront.net/";
-
     return (
         <Link href="#" className="h-[15rem] relative w-[20rem] shadow-xl">
             <div
@@ -82,7 +80,7 @@ const TopDeal = (props: { service: IService }) => {
             >
                 <div className="relative flex h-full rounded-md">
                     <Image
-                        src={process.env.NEXT_PUBLIC_ANALYTICS_IMG_ENDPOINT + props.service.images[0]}
+                        src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + props.service.images[0]}
                         alt={props.service.name}
                         fill
                         sizes="(max-width: 768px) 100vw,

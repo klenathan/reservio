@@ -7,7 +7,6 @@ interface ModalProps {
     onClose: () => void;
 }
 
-// TODO: [Fix] the scrollable of the modal is not working
 const Modal: React.FC<ModalProps> = (props: ModalProps) => {
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {

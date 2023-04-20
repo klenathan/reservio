@@ -76,10 +76,6 @@ const Review: React.FC<ReviewProps> = (props: ReviewProps) => {
                             }
                         )}
                     </div>
-                    <div>
-
-                    </div>
-
                 </Modal>
             )}
         </div>

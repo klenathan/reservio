@@ -10,7 +10,7 @@ const ReviewCard: React.FC<IReview> = (props: IReview) => {
         <div>
             <div className={'flex flex-row space-x-1.5'} onClick={props.onClick}>
                 <div className={"w-10 h-10 relative"}>
-                    <Picture src={props.avatar}/>
+                    {props.avatar && <Picture src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + props.avatar}/>}
                 </div>
                 <div className={'flex flex-col'}>
                     <div className={'flex flex-row items-center text-m font-bold'}>

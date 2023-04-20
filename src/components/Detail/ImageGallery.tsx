@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Image from 'next/image';
 import Modal from "components/Modal";
 
@@ -16,28 +16,31 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
     const handleCloseModal = () => {
         setIsModalOpen(false);
     };
-
+    // TODO: Handle more condition of the picture when have 1 and 2
     return (
         <div className="max-w-screen-xl mx-auto grid grid-cols-1 gap-2 md:grid-cols-3 h-full">
             {/* Big image on the left */}
             <div className="h-80 md:h-full col-span-2 relative">
                 <Image
-                    src={images[0]}
+                    src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + images[0]}
                     alt="Big Image"
                     fill={true}
                     onClick={handleOpenModal}
                     className="w-full h-full object-cover cursor-pointer"
+                    loading="lazy"
                 />
             </div>
             {/* Small images on the right */}
             <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
                 <div className="h-48 relative">
                     <Image
-                        src={images[1]}
+                        // src={process.env.NEXT_PUBLIC_ANALYTICS_IMG_ENDPOINT + images[1]}
+                        src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + images[0]}
                         alt={`Image 1`}
                         fill={true}
                         onClick={handleOpenModal}
                         className="w-full h-full object-cover cursor-pointer"
+                        loading="lazy"
                     />
                 </div>
                 <div className="h-48 relative">
@@ -47,11 +50,13 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
                             onClick={handleOpenModal}
                         >
                             <Image
-                                src={images[2]}
+                                // src={process.env.NEXT_PUBLIC_ANALYTICS_IMG_ENDPOINT + images[2]}
+                                src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + images[0]}
                                 alt={`Image 3`}
                                 fill={true}
                                 onClick={handleOpenModal}
                                 className="w-full h-full object-cover blur-sm cursor-pointer"
+                                loading="lazy"
                             />
                             <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
                                 <span className="text-white font-medium text-4xl z-10">+{images.length - 3}</span>
@@ -60,11 +65,13 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
                     ) : (
                         <div className="h-48 relative">
                             <Image
-                                src={images[2]}
+                                // src={process.env.NEXT_PUBLIC_ANALYTICS_IMG_ENDPOINT + images[2]}
+                                src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + images[0]}
                                 alt={`Image 3`}
                                 fill={true}
                                 onClick={handleOpenModal}
                                 className="w-full h-full object-cover cursor-pointer"
+                                loading="lazy"
                             />
                         </div>
                     )}
@@ -76,7 +83,8 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         {images.map((image, index) => (
                             <div key={index}>
-                                <Image src={image} alt={`Image ${index}`} width={300} height={200}/>
+                                <Image src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + image}
+                                       alt={`Image ${index}`} width={300} height={200} loading="lazy"/>
                             </div>
                         ))}
                     </div>

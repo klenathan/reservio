@@ -1,8 +1,8 @@
-import {FaStar, FaMapMarkerAlt, FaCheck} from 'react-icons/fa';
+import {FaCheck, FaMapMarkerAlt, FaStar} from 'react-icons/fa';
 
 interface Listing {
-    rating: number;
-    reviewCount: number;
+    rating: number | undefined;
+    reviewCount: number | undefined;
     location: string;
     isCertified: boolean;
 }
@@ -15,7 +15,10 @@ const DetailSubtitle: React.FC<Listing> = ({rating, reviewCount, location, isCer
         <div className="flex items-center text-gray-600 text-sm font-bold mb-8">
             <div className={`flex items-center }`}>
                 <FaStar className="mr-1"/>
-                <span>{rating.toFixed(1)}</span>
+                {rating ?
+                    <span>{rating.toFixed(1)}</span> :
+                    <span>0</span>
+                }
             </div>
             {dot}
             <div className="flex items-center">

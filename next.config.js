@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     experimental: {
-        appDir: true, reactRefresh: true,
+        appDir: true, typedRoutes: true
     }, images: {
         remotePatterns: [{
             protocol: "https", hostname: "upload.wikimedia.org",

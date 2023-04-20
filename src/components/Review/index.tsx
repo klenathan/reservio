@@ -4,7 +4,7 @@ import Modal from "components/Modal";
 
 export interface IReview {
     username: string,
-    avatar: string
+    avatar: string | undefined
     rating: number,
     feedback: string,
     createAt: string,

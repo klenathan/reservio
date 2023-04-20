@@ -24,21 +24,16 @@ export default function Home() {
       </div>
 
       <div className="max-w-7xl mx-auto">
-        <h2 className="w-full text-3xl text-oliveGreen font-bold">
-          {/* <Carousel />
-
-      <div className="max-w-7xl mx-auto">
-        <h1 className=" w-full text-xl text-center  md:text-left md:text-3xl text-oliveGreen font-bold"> */}
+        <h1 className=" w-full text-xl text-center  md:text-left md:text-3xl text-oliveGreen font-bold"> 
           Top deal of the day
-        </h2>
+        </h1>
         <TopDealContainer />
       </div>
 
       <div className="flex items-center flex-col max-w-7xl mx-auto">
-        <h2 className="w-full text-3xl text-oliveGreen font-bold ">
-          {/* <h1 className="w-full text-xl md:text-left text-center md:text-3xl text-oliveGreen font-bold "> */}
+          <h1 className="w-full text-xl md:text-left text-center md:text-3xl text-oliveGreen font-bold ">
           Highlight Services
-        </h2>
+        </h1>
         <HomePageServiceContainer />
       </div>
     </div>

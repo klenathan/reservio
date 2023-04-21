@@ -17,35 +17,43 @@ const HistoryCard = (props: any) => {
             className="px-0"
           />
           <div>
-            <a href="#" className="font-[900] text-xl">
+            <a href="#" className="font-[900] text-base md:text-xl">
               RMIT HOUSE{" "}
             </a>
           </div>
         </div>
         <div>
-          <h1 className="pr-3"> STATUS </h1>
+          <h1 className="pr-3 text-sm md:text-base"> STATUS </h1>
         </div>
       </div>
 
       <div>
-        <div className="flex flex-row">
-          <Image
-            src="/assets/background_authenticate.svg"
-            className="animate-fadeIn "
-            alt="..."
-            height={50}
-            width={400}
-          />
-          <div className="pl-3 flex flex-col justify-between ">
+        <div className="flex md:flex-row flex-col">
+          <div className="relative object-contain">
+            <Image
+              src="/assets/background_authenticate.svg"
+              className="animate-fadeIn "
+              alt="..."
+              fill={true}
+            />
+          </div>
+          <div className="break-words pl-3 flex flex-col justify-between ">
             <div>
-              <a href="#" className="text-xl font-bold">
+              <a href="#" className="text-base md:text-xl font-bold">
                 DALAT HOMESTAY with beautiful view{" "}
               </a>
-              <h1 className="font-medium"> Price: <span className="text-xl font-medium text-midGreen"> ₫5.000.000 </span> </h1>
+              <h1 className="font-medium text-xs">
+                {" "}
+                Price:{" "}
+                <span className="text-xs md:text-xl font-medium text-midGreen">
+                  {" "}
+                  ₫5.000.000{" "}
+                </span>{" "}
+              </h1>
             </div>
-            <div className="font-extrabold text-gray-600 text-xl">
+            <div className="font-extrabold text-gray-600 md:text-xl">
               Total with taxes:{" "}
-              <span className="text-3xl font-extrabold text-midGreen ml-3">
+              <span className="text-xl md:text-3xl font-extrabold text-midGreen ml-3">
                 ₫5.500.000
               </span>
             </div>

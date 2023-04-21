@@ -9,14 +9,16 @@ import HistoryCard from "@/components/HistoryCard";
 export default function Profile() {
   return (
     <div>
+
       <Head>
         <title>User Profile</title>
       </Head>
-      <NavBar />
-      <div className="flex flex-row  pt-12 justify-center">
+      <NavBar> </NavBar>
+      
+      <div className="flex flex-col md:flex-row  md:pt-12 justify-center">
         <UserProfile > </UserProfile>
         <div className="flex flex-col">
-          <HistoryPage> </HistoryPage>
+        <HistoryPage> </HistoryPage>
           <HistoryCard> </HistoryCard>
           <HistoryCard> </HistoryCard>
           <HistoryCard> </HistoryCard>

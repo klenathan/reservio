@@ -3,7 +3,6 @@ import { AiFillStar } from "react-icons/ai";
 import { RxDotFilled } from "react-icons/rx";
 import { BsFacebook, BsInstagram, BsTiktok, BsYoutube } from "react-icons/bs";
 import Link from "next/link";
-import { useRouter } from "next/router";
 interface ISocialMedia {
   facebook?: string;
   instagram?: string;
@@ -25,8 +24,6 @@ interface IStore {
 }
 
 const Store = (props: { store: IStore }) => {
-  const router = useRouter();
-
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 lg:border lg:border-black lg:m-8 lg:rounded-md">
       <div className="col-span-1 flex flex-col items-center justify-center p-2">

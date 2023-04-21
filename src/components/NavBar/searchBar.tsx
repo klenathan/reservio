@@ -1,17 +1,27 @@
+import axios from "axios";
 import { useState } from "react";
+import { IoSearchCircleSharp } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
 export default function SearchBar() {
   const [keyword, setKeyword] = useState("");
-  //React.FormEvent<HTMLInputElement>
-  const handleSearch = (e: React.SyntheticEvent) => {
+  const { push } = useRouter();
+
+  const handleSearch = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    console.log("Searching:", keyword);
+    push(`/search?searchTerm=${encodeURIComponent(keyword)}`);
   };
+
   return (
-    <form className="w-4/5" onSubmit={handleSearch}>
+    <form
+      className="w-4/5 relative col-span-3 md:col-span-1"
+      onSubmit={handleSearch}
+    >
+      <IoSearchCircleSharp className="pointer-events-none w-8 h-8 absolute top-1/2 transform -translate-y-1/2 left-3 text-[#59981A]"></IoSearchCircleSharp>
+
       <input
         className="w-full h-[3rem] 
-        px-5
+        px-12
         rounded-2xl border-2 border-solid
          border-gray-500"
         type="text"

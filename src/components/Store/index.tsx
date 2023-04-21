@@ -3,6 +3,7 @@ import { AiFillStar } from "react-icons/ai";
 import { RxDotFilled } from "react-icons/rx";
 import { BsFacebook, BsInstagram, BsTiktok, BsYoutube } from "react-icons/bs";
 import Link from "next/link";
+import { useRouter } from "next/router";
 interface ISocialMedia {
   facebook?: string;
   instagram?: string;
@@ -24,6 +25,8 @@ interface IStore {
 }
 
 const Store = (props: { store: IStore }) => {
+  const router = useRouter();
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 lg:border lg:border-black lg:m-8 lg:rounded-md">
       <div className="col-span-1 flex flex-col items-center justify-center p-2">
@@ -50,7 +53,7 @@ const Store = (props: { store: IStore }) => {
           <div className="flex items-center">
             <span className="font-bold">Social Media:</span>{" "}
             {props.store.socialMedia.facebook ? (
-              <Link className="mx-1" href={props.store.socialMedia.facebook}>
+              <Link className="mx-1" href={{ pathname: props.store.socialMedia.facebook }}>
                 {" "}
                 <BsFacebook />{" "}
               </Link>
@@ -58,7 +61,7 @@ const Store = (props: { store: IStore }) => {
               ""
             )}
             {props.store.socialMedia.instagram ? (
-              <Link href={props.store.socialMedia.instagram}>
+              <Link href={{ pathname: props.store.socialMedia.instagram }}>
                 {" "}
                 <BsInstagram />{" "}
               </Link>
@@ -66,7 +69,7 @@ const Store = (props: { store: IStore }) => {
               ""
             )}
             {props.store.socialMedia.tiktok ? (
-              <Link className="mx-1" href={props.store.socialMedia.tiktok}>
+              <Link className="mx-1" href={{ pathname: props.store.socialMedia.tiktok }}>
                 {" "}
                 <BsTiktok />{" "}
               </Link>
@@ -74,7 +77,7 @@ const Store = (props: { store: IStore }) => {
               ""
             )}
             {props.store.socialMedia.youtube ? (
-              <Link className="mx-1" href={props.store.socialMedia.youtube}>
+              <Link className="mx-1" href={{ pathname: props.store.socialMedia.youtube }}>
                 {" "}
                 <BsYoutube />{" "}
               </Link>

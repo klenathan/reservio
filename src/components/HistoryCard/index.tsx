@@ -5,10 +5,10 @@ import { IService } from "../HomePageServiceContainer/serviceInterface";
 const HistoryCard = (props: any) => {
   const size = 55;
   return (
-    //ml-80 just for testing, will be
     <div className="flex flex-col mt-3 w-full shadow-lg p-5 ">
       <div className="flex flex-row items-center justify-between mb-3">
         <div className="flex flex-row items-center ">
+          <div> 
           <Image
             src="/assets/profile.svg"
             height={size}
@@ -16,6 +16,7 @@ const HistoryCard = (props: any) => {
             alt="Profile Hamburger"
             className="px-0"
           />
+          </div>
           <div>
             <a href="#" className="font-[900] text-base md:text-xl">
               RMIT HOUSE{" "}

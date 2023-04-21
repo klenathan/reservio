@@ -73,31 +73,36 @@ const TopDealContainer = () => {
 
 const TopDeal = (props: { service: IService }) => {
   return (
+    <div className="flex flex-col"> 
     <Link
       href={`/detail/${encodeURIComponent(props.service.id)}`}
-      className="h-[15rem] relative w-[20rem] shadow-xl"
+      className="h-[15rem] relative w-[20rem] "
     >
-      <div
-        className="w-full bg-gray-200 h-full rounded-md
-      hover:shadow-xl ease-in-out duration-300 "
-      >
-        <div className="relative flex h-full rounded-md">
-          <Image
-            src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + props.service.images[0]}
-            alt={props.service.name}
-            fill
-            sizes="(max-width: 768px) 100vw,
+
+        <div
+          className="w-full bg-gray-200 h-full rounded-md
+      hover:shadow-xl ease-in-out duration-300 hover:visible group"
+        >
+          <div className="relative flex h-full rounded-md">
+            <Image
+              src={
+                process.env.NEXT_PUBLIC_IMG_ENDPOINT + props.service.images[0]
+              }
+              alt={props.service.name}
+              fill
+              sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
-          />
-        </div>
+            />
+          </div>
 
-        <figcaption className="absolute text-lg text-white bottom-0 italic bg-slate-800 w-full opacity-50 px-2">
-          <p>Discount: {(props.service.discount as number) * 100}%</p>
-          <p>Location: {props.service.address}</p>
-        </figcaption>
-      </div>
+          <figcaption className="invisible group-hover:visible absolute text-lg text-white bottom-0 italic bg-slate-700 w-full opacity-50 px-2">
+            <p>Discount: {(props.service.discount as number) * 100}%</p>
+          </figcaption>
+        </div>
     </Link>
+    <p className="text-xl text-center font-bold">{(props.service.name as string)}</p>
+    </div> 
   );
 };
 

@@ -49,7 +49,7 @@ const DetailPage = (props: { service: IService }) => {
             console.log(e)
         })
 
-    }, []);
+    }, [props.service.vendorUsername]);
 
 
     return (

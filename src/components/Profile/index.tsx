@@ -5,7 +5,7 @@ import Link from "next/link";
 const UserProfile = (props: any) => {
   const size = 100;
   return (
-    <div className="flex flex-col pr-12">
+    <div className="flex flex-row md:flex-col pr-12 items-center">
       <div className="relative self-center ">
         <Image
           priority

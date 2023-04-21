@@ -6,7 +6,7 @@ const Card = (props: { service: IService }) => {
   const img_endpoint = "https://d3j45rkkmhyyrh.cloudfront.net/";
   return (
     <Link
-      href="/detail"
+      href={`/detail/${encodeURIComponent(props.service.id)}`}
       className="flex flex-col justify-center w-full shadow-xl rounded-md my-8  "
     >
       <div className="relative w-full h-[15rem] rounded-t-md">

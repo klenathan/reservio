@@ -2,21 +2,35 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Button from "@/components/Button";
 import { IService } from "../serviceInterface";
-import { services } from "@/data/service";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import axios from "axios";
+import Link from "next/link";
 
 const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [auto, setAuto] = useState(true);
+  const [queryService, setServices] = useState<IService[]>([]);
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://06ufwajgc6.execute-api.ap-southeast-1.amazonaws.com/service"
+      )
+      .then((r) => {
+        setServices(r.data);
+      });
+  }, []);
 
   const timerRef = useRef<HTMLButtonElement | null>(null);
   const handleNextSlide = () => {
-    let newSlide = currentSlide === services.length - 1 ? 0 : currentSlide + 1;
+    let newSlide =
+      currentSlide === queryService.length - 1 ? 0 : currentSlide + 1;
     setCurrentSlide(newSlide);
   };
 
   const handlePrevSlide = () => {
-    let newSlide = currentSlide === 0 ? services.length - 1 : currentSlide - 1;
+    let newSlide =
+      currentSlide === 0 ? queryService.length - 1 : currentSlide - 1;
     setCurrentSlide(newSlide);
   };
 
@@ -28,13 +42,13 @@ const Carousel = () => {
     let timer: ReturnType<typeof setTimeout> = setTimeout(() => {
       if (auto) {
         let newSlide =
-          currentSlide === services.length - 1 ? 0 : currentSlide + 1;
+          currentSlide === queryService.length - 1 ? 0 : currentSlide + 1;
         setCurrentSlide(newSlide);
       }
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, [auto, currentSlide]);
+  }, [auto, currentSlide, queryService.length]);
 
   return (
     <div className="mt-3 p-5 md:p-0">
@@ -48,11 +62,11 @@ const Carousel = () => {
         </span>
       </button>
       <div className="w-full md:w-4/5 flex justify-center overflow-hidden relative md:m-auto ">
-        {services.map((image, index) => {
+        {queryService.map((service, index) => {
           if (index === currentSlide) {
             return (
-              <div key={image.id}>
-                <CarouselProps carousel={image} />
+              <div key={service.id}>
+                <CarouselProps carousel={service} />
               </div>
             );
           }
@@ -70,7 +84,7 @@ const Carousel = () => {
       </button>
 
       <div className="hidden relative lg:flex justify-center mt-5">
-        {services.map((_, index) => {
+        {queryService.map((_, index) => {
           return (
             <div
               className={
@@ -91,11 +105,12 @@ const Carousel = () => {
 };
 
 const CarouselProps = (props: { carousel: IService }) => {
+  const img_endpoint = "https://d3j45rkkmhyyrh.cloudfront.net/";
   return (
     <div className="lg:grid lg:grid-cols-3">
       <div className="flex justify-center lg:col-span-1">
         <Image
-          src={props.carousel.images[0] as unknown as string}
+          src={`${img_endpoint}${props.carousel.images[0]}`}
           className="animate-fadeIn rounded md:rounded-none "
           alt="..."
           height={50}
@@ -108,19 +123,17 @@ const CarouselProps = (props: { carousel: IService }) => {
           {props.carousel.name}
         </h1>
         <div className="font-medium">{props.carousel.address}</div>
-        <div className="font-medium">{props.carousel.time}</div>
-        <p className="my-3 hidden lg:block">{props.carousel.description}</p>
+        {/* <div className="font-medium">{props.carousel.time}</div> */}
+        <p className="my-3 hidden lg:block">{props.carousel.desc}</p>
         <div className="text-midGreen font-bold my-3 text-2xl">
           {props.carousel.price?.toLocaleString()} VND
         </div>
-        <Button
-          btnStyle="filled"
-          onClick={() => {
-            console.log("Clicked");
-          }}
+        <Link
+          href={`/detail/${encodeURIComponent(props.carousel.id)}`}
+          className="flex flex-col justify-center w-full shadow-xl rounded-md my-8  "
         >
-          Reserve Now
-        </Button>
+          <Button btnStyle="filled">Reserve Now</Button>
+        </Link>
       </div>
     </div>
   );

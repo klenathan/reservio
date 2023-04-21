@@ -3,7 +3,6 @@
 // import NavBar from "@/components/NavBar";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import NavBarSkeleton from "@/components/NavBar/skeleton";
-import { SyncLoader } from "react-spinners";
 
 export default function Loading() {
   return (

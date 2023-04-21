@@ -10,7 +10,7 @@ const Logo: React.FC<ILogoStyle> = (props: ILogoStyle) => {
       href={"/"}
       className="hidden md:block md:text-center flex-col cursor-pointer max-w-screen-xl"
     >
-      <p  
+      <p
         className={`font-logo font-semibold text-5xl italic ${
           props.logoStyle == "green" ? "text-midGreen" : "text-white"
         } `}

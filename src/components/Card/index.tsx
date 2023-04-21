@@ -24,7 +24,10 @@ const Card = (props: { service: IService }) => {
           {props.service.name}
         </h1>
         <p>{props.service.category}</p>
-        <p>{props.service.address}</p>
+        <div className="h-24">  
+        <p className="line-clamp-3">{props.service.address}</p>
+        </div>
+
         <p>@{props.service.vendorUsername}</p>
         <div className="flex flex-row items-center">
           <div className="text-oliveGreen font-bold my-3 text-2xl pr-1">

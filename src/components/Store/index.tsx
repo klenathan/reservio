@@ -53,7 +53,11 @@ const Store = (props: { store: IStore }) => {
           <div className="flex items-center">
             <span className="font-bold">Social Media:</span>{" "}
             {props.store.socialMedia.facebook ? (
-              <Link className="mx-1" href={{ pathname: props.store.socialMedia.facebook }}>
+
+              <Link
+                className="mx-1"
+                href={new URL(props.store.socialMedia.facebook)}
+              >
                 {" "}
                 <BsFacebook />{" "}
               </Link>
@@ -61,7 +65,9 @@ const Store = (props: { store: IStore }) => {
               ""
             )}
             {props.store.socialMedia.instagram ? (
-              <Link href={{ pathname: props.store.socialMedia.instagram }}>
+
+              <Link href={new URL(props.store.socialMedia.instagram)}>
+
                 {" "}
                 <BsInstagram />{" "}
               </Link>
@@ -69,7 +75,12 @@ const Store = (props: { store: IStore }) => {
               ""
             )}
             {props.store.socialMedia.tiktok ? (
-              <Link className="mx-1" href={{ pathname: props.store.socialMedia.tiktok }}>
+
+              <Link
+                className="mx-1"
+                href={new URL(props.store.socialMedia.tiktok)}
+              >
+
                 {" "}
                 <BsTiktok />{" "}
               </Link>
@@ -77,7 +88,12 @@ const Store = (props: { store: IStore }) => {
               ""
             )}
             {props.store.socialMedia.youtube ? (
-              <Link className="mx-1" href={{ pathname: props.store.socialMedia.youtube }}>
+
+              <Link
+                className="mx-1"
+                href={new URL(props.store.socialMedia.youtube)}
+              >
+
                 {" "}
                 <BsYoutube />{" "}
               </Link>

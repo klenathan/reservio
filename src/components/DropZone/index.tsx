@@ -21,7 +21,7 @@ const DropZone = (props: IDropZone, {...rest}) => {
                 preview: URL.createObjectURL(file)
             })))
         },
-        onDropAccepted : files => props.onChange(files)
+        onDropAccepted: files => props.onChange(files)
     })
     const thumbs = files.map(file => {
             return (
@@ -50,9 +50,7 @@ const DropZone = (props: IDropZone, {...rest}) => {
                 <input {...getInputProps()} />
                 <div className={"relative w-36 h-36 mx-auto"}>
                     {thumbs.length === 0 ? (
-                            <div className={"flex flex-col h-auto"}>
-                                <Picture src={"/assets/sbcf-default-avatar.png"}/>
-                            </div>
+                            <Picture src={"/assets/sbcf-default-avatar.png"}/>
                         ) :
                         (<div>{thumbs}</div>
                         )

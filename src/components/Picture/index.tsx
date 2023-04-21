@@ -1,4 +1,5 @@
 import Image from "next/image";
+import React from "react";
 
 interface IPictureProps {
     src: string,
@@ -18,6 +19,8 @@ const Picture: React.FC<IPictureProps> = (props: IPictureProps) => {
             className={`${props.frameStyle ? style[props.frameStyle] : style["avatar"]}`}
             alt={props.src}
             fill={true}
+            priority={true}
+            quality={100}
             {...props.event}
         />
 

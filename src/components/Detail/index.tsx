@@ -8,7 +8,7 @@ import DetailPageInfo from "components/Detail/DetailPageInfo";
 import Picture from "components/Picture";
 import {FaStar} from "react-icons/fa";
 import axios from "axios";
-import Loading from "@/app/detail/loading";
+import Loading from "@/app/(main)/detail/loading";
 
 // TODO: [FIX] Map contianer is already intitialized when refreshs
 const Map = dynamic(() => import("components/Map/map"), {ssr: false});
@@ -26,7 +26,7 @@ const DetailPage = (props: { service: IService }) => {
     const [isError, setIsError] = useState(false)
 
     const genGeocoder = async () => {
-        return await geocoderFunction('RMIT')
+        return await geocoderFunction(props.service.address)
     };
 
     if (props.service.address) {
@@ -37,11 +37,6 @@ const DetailPage = (props: { service: IService }) => {
     }
 
     useEffect(() => {
-        genGeocoder().then((d) => {
-            setLat(parseFloat(d[0].lat));
-            setLng(parseFloat(d[0].lon));
-        });
-
         axios.get(`${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}user/${props.service.vendorUsername}`)
             .then((res) => {
                 console.log(res)

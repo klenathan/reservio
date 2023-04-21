@@ -97,7 +97,7 @@ const SignUpForm = () => {
         }
 
 
-        const res = await axios
+        axios
             .post(
                 `https://06ufwajgc6.execute-api.ap-southeast-1.amazonaws.com/auth/signup`,
                 formData

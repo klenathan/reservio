@@ -25,7 +25,7 @@ interface IStore {
 
 const Store = (props: { store: IStore }) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 lg:border lg:border-black lg:m-8 lg:rounded-md">
+    <div className="w-full grid grid-cols-1 lg:grid-cols-4 lg:border lg:border-black lg:m-8 lg:rounded-md">
       <div className="col-span-1 flex flex-col items-center justify-center p-2">
         <div className="relative h-32 w-32">
           <Image
@@ -39,7 +39,7 @@ const Store = (props: { store: IStore }) => {
         <div>{props.store.name}</div>
         <div>@{props.store.vendor}</div>
       </div>
-      <div className="col-span-2 p-1 flex flex-col-reverse lg:grid lg:grid-cols-3">
+      <div className="col-span-3 p-1 flex flex-col-reverse lg:grid lg:grid-cols-3">
         <div className="lg:p-8 lg:col-span-2 ">
           <div>
             <span className="font-bold">About:</span> {props.store.about}
@@ -50,7 +50,6 @@ const Store = (props: { store: IStore }) => {
           <div className="flex items-center">
             <span className="font-bold">Social Media:</span>{" "}
             {props.store.socialMedia.facebook ? (
-
               <Link
                 className="mx-1"
                 href={new URL(props.store.socialMedia.facebook)}
@@ -62,9 +61,7 @@ const Store = (props: { store: IStore }) => {
               ""
             )}
             {props.store.socialMedia.instagram ? (
-
               <Link href={new URL(props.store.socialMedia.instagram)}>
-
                 {" "}
                 <BsInstagram />{" "}
               </Link>
@@ -72,12 +69,10 @@ const Store = (props: { store: IStore }) => {
               ""
             )}
             {props.store.socialMedia.tiktok ? (
-
               <Link
                 className="mx-1"
                 href={new URL(props.store.socialMedia.tiktok)}
               >
-
                 {" "}
                 <BsTiktok />{" "}
               </Link>
@@ -85,12 +80,10 @@ const Store = (props: { store: IStore }) => {
               ""
             )}
             {props.store.socialMedia.youtube ? (
-
               <Link
                 className="mx-1"
                 href={new URL(props.store.socialMedia.youtube)}
               >
-
                 {" "}
                 <BsYoutube />{" "}
               </Link>
@@ -99,7 +92,7 @@ const Store = (props: { store: IStore }) => {
             )}
           </div>
         </div>
-        <div className="lg:p-10 lg:col-span-1 text-center">
+        <div className="lg:p-10 lg:col-span-1">
           <div className="flex justify-center">
             <div className="flex items-center font-bold">
               <AiFillStar /> {""} {props.store.rating} / 5.0

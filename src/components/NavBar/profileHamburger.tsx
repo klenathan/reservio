@@ -12,7 +12,7 @@ const HamburgerMenuChild: React.FC<IHamburgerMenuChildProps> = (
 ) => {
   return (
     <Link
-      href={props.href ?? "/#"}
+      href={new URL(props.href ?? "/#")}
       className={`hover:bg-limeGreen hover:bg-opacity-20 
       first:rounded-t-xl last:rounded-b-xl
     py-2 px-2`}

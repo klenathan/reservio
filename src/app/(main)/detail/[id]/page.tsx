@@ -1,11 +1,11 @@
 "use client";
 import Breadcrumb from "components/Breadcrumb";
 import {useEffect, useState} from "react";
-import axios from "axios";
 import {IService} from "components/HomePageServiceContainer/serviceInterface";
 import Loading from "@/app/(main)/detail/loading";
 import DetailPage from "components/Detail";
 import {NotFound} from "next/dist/client/components/error";
+import apiClient from "@/config/axios.config";
 
 interface DetailParams {
     params: {
@@ -26,9 +26,9 @@ export default function Detail(slugs: DetailParams) {
 
     // TODO: Optimize the page loading and not found
     useEffect(() => {
-        axios
+        apiClient
             .get(
-                `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}service/${slugs.params.id}`
+                `service/${slugs.params.id}`
             )
             .then((res) => {
                 setData(res.data);

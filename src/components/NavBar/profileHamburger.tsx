@@ -1,7 +1,9 @@
+
 import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+
 
 interface IHamburgerMenuChildProps {
   children: JSX.Element | JSX.Element[] | string;
@@ -10,9 +12,10 @@ interface IHamburgerMenuChildProps {
 const HamburgerMenuChild: React.FC<IHamburgerMenuChildProps> = (
   props: IHamburgerMenuChildProps
 ) => {
+  
   return (
     <Link
-      href={new URL(props.href ?? "/#")}
+      href={{pathname: props.href }}
       className={`hover:bg-limeGreen hover:bg-opacity-20 
       first:rounded-t-xl last:rounded-b-xl
     py-2 px-2`}

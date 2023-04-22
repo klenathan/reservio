@@ -52,16 +52,17 @@ const Carousel = () => {
 
   return (
     <div className="mt-3 p-5 md:p-0">
+      
+      <div className="w-full md:w-4/5 flex justify-center overflow-hidden relative md:m-auto ">
       <button
         onClick={handlePrevSlide}
-        className="hidden lg:block absolute left-5 m-auto text-5xl inset-y-1/2 text-gray-400 z-20"
+        className=" left-5 m-auto text-5xl inset-y-1/2 text-gray-400 z-20 md:mr-7"
       >
         <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 ">
           <MdChevronLeft size={50} className="cursor-pointer text-white" />
           <span className="sr-only">Previous</span>
         </span>
       </button>
-      <div className="w-full md:w-4/5 flex justify-center overflow-hidden relative md:m-auto ">
         {queryService.map((service, index) => {
           if (index === currentSlide) {
             return (
@@ -71,19 +72,20 @@ const Carousel = () => {
             );
           }
         })}
-      </div>
-      <button
+        <button
         ref={timerRef}
         onClick={handleNextSlide}
-        className="hidden lg:block absolute right-5 m-auto text-5xl inset-y-1/2 text-gray-400 z-20"
+        className="right-5 m-auto text-5xl inset-y-1/2 text-gray-400 z-20"
       >
         <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30">
           <MdChevronRight size={50} className="cursor-pointer text-white" />
           <span className="sr-only">Next</span>
         </span>
       </button>
+      </div>
+      
 
-      <div className="hidden relative lg:flex justify-center mt-5">
+      <div className="relative flex justify-center md:mt-5 mt-5">
         {queryService.map((_, index) => {
           return (
             <div
@@ -130,9 +132,10 @@ const CarouselProps = (props: { carousel: IService }) => {
         </div>
         <Link
           href={`/detail/${encodeURIComponent(props.carousel.id)}`}
-          className="flex flex-col justify-center w-full shadow-xl rounded-md my-8  "
-        >
-          <Button btnStyle="filled">Reserve Now</Button>
+          className="flex flex-col w-1/3 shadow-xl rounded-md md:my-8 "
+        > 
+           <Button btnStyle="filled">Reserve Now</Button>
+          
         </Link>
       </div>
     </div>

@@ -30,7 +30,7 @@ const Geocoder = () => {
                 />
                 <button type="submit">Submit</button>
             </form>
-            {lat !== null && lng !== null && <Map latitude={lat} longitude={lng}/>}
+            {lat !== null && lng !== null && <Map latitude={lat} longitude={lng} scrollWheelZoom={true}/>}
         </div>
     );
 };

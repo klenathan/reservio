@@ -33,8 +33,8 @@ const LoginForm = () => {
             )
             .then((res) => {
                 console.log(res)
-                // localStorage.setItem("Token", JSON.stringify(res.data));
-                // push("/");
+                localStorage.setItem("Token", JSON.stringify(res.data));
+                push("/");
             })
             .catch((e) => {
                 const errorsInfo = e.response.data;

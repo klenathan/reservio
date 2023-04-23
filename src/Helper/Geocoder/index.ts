@@ -1,6 +1,5 @@
 export const geocoderFunction = async (address: string) => {
     try {
-        console.log(address)
         const response = await fetch(
             `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
                 address
@@ -12,7 +11,6 @@ export const geocoderFunction = async (address: string) => {
         }
 
         const data = await response.json();
-        console.log(data);
         if (data.length === 0) {
             throw new Error("No results found");
         }

@@ -1,109 +1,110 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { IService } from "./serviceInterface";
-import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import axios from "axios";
+import {IService} from "./serviceInterface";
+import {MdChevronLeft, MdChevronRight} from "react-icons/md";
 import LoadingSpinner from "../LoadingSpinner";
+import apiClient from "@/config/axios.config";
 
 const SlideLeft = () => {
-  let slider = document.getElementById("slider");
-  if (slider) {
-    slider.scrollLeft = slider.scrollLeft - 500;
-  }
+    let slider = document.getElementById("slider");
+    if (slider) {
+        slider.scrollLeft = slider.scrollLeft - 500;
+    }
 };
 const SlideRight = () => {
-  var slider = document.getElementById("slider");
-  if (slider) {
-    if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth) {
-      slider.scrollLeft = 0;
-    } else {
-      slider.scrollLeft += 500;
+    var slider = document.getElementById("slider");
+    if (slider) {
+        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth) {
+            slider.scrollLeft = 0;
+        } else {
+            slider.scrollLeft += 500;
+        }
     }
-  }
 };
 
 const TopDealContainer = () => {
-  const [queryService, setServices] = useState<IService[]>([]);
-  useEffect(() => {
-    axios
-      .get(
-        "https://06ufwajgc6.execute-api.ap-southeast-1.amazonaws.com/service"
-      )
-      .then((r) => {
-        setServices(r.data);
-      });
-  }, []);
+    const [queryService, setServices] = useState<IService[]>([]);
+    useEffect(() => {
+        apiClient
+            .get(
+                "service"
+            )
+            .then((r) => {
+                setServices(r.data);
+            });
+    }, []);
 
-  return (
-    <div>
-      {queryService.length == 0 ? (
-        <LoadingSpinner />
-      ) : (
-        <div className="flex flex-row items-center my-8 ">
-          <MdChevronLeft
-            id="left"
-            onClick={SlideLeft}
-            size={50}
-            className="cursor-pointer opacity-50 hover:opacity-100"
-          >
-            {" "}
-          </MdChevronLeft>
-          <div
-            id="slider"
-            className="flex items-center overflow-x-auto scroll-smooth whitespace-no-wrap scrollbar-hide "
-          >
-            <div className="inline-flex gap-8 items-center">
-              {queryService.map((service) => {
-                return <TopDeal key={service.id} service={service} />;
-              })}
-            </div>
-          </div>
-          <MdChevronRight
-            id="right"
-            size={50}
-            onClick={SlideRight}
-            className="cursor-pointer opacity-50 hover:opacity-100"
-          ></MdChevronRight>
+    return (
+        <div>
+            {queryService.length == 0 ? (
+                <LoadingSpinner/>
+            ) : (
+                <div className="flex flex-row items-center my-8 ">
+                    <MdChevronLeft
+                        id="left"
+                        onClick={SlideLeft}
+                        size={50}
+                        className="cursor-pointer opacity-50 hover:opacity-100"
+                    >
+                        {" "}
+                    </MdChevronLeft>
+                    <div
+                        id="slider"
+                        className="flex items-center overflow-x-auto scroll-smooth whitespace-no-wrap scrollbar-hide "
+                    >
+                        <div className="inline-flex gap-8 items-center">
+                            {queryService.map((service) => {
+                                return <TopDeal key={service.id} service={service}/>;
+                            })}
+                        </div>
+                    </div>
+                    <MdChevronRight
+                        id="right"
+                        size={50}
+                        onClick={SlideRight}
+                        className="cursor-pointer opacity-50 hover:opacity-100"
+                    ></MdChevronRight>
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 };
 
 const TopDeal = (props: { service: IService }) => {
-  return (
-    <div className="flex flex-col"> 
-    <Link
-      href={`/detail/${encodeURIComponent(props.service.id)}`}
-      className="h-[15rem] relative w-[20rem] "
-    >
+    return (
+        <div className="flex flex-col">
+            <Link
+                href={`/detail/${encodeURIComponent(props.service.id)}`}
+                className="h-[15rem] relative w-[20rem] "
+            >
 
-        <div
-          className="w-full bg-gray-200 h-full rounded-md
+                <div
+                    className="w-full bg-gray-200 h-full rounded-md
       hover:shadow-xl ease-in-out duration-300 hover:visible group"
-        >
-          <div className="relative flex h-full rounded-md">
-            <Image
-              src={
-                process.env.NEXT_PUBLIC_IMG_ENDPOINT + props.service.images[0]
-              }
-              alt={props.service.name}
-              fill
-              sizes="(max-width: 768px) 100vw,
+                >
+                    <div className="relative flex h-full rounded-md">
+                        <Image
+                            src={
+                                process.env.NEXT_PUBLIC_IMG_ENDPOINT + props.service.images[0]
+                            }
+                            alt={props.service.name}
+                            fill
+                            sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
-            />
-          </div>
+                        />
+                    </div>
 
-          <figcaption className="invisible group-hover:visible absolute text-lg text-white bottom-0 italic bg-slate-700 w-full opacity-50 px-2">
-            <p>Discount: {(props.service.discount as number) * 100}%</p>
-          </figcaption>
+                    <figcaption
+                        className="invisible group-hover:visible absolute text-lg text-white bottom-0 italic bg-slate-700 w-full opacity-50 px-2">
+                        <p>Discount: {(props.service.discount as number) * 100}%</p>
+                    </figcaption>
+                </div>
+            </Link>
+            <p className="text-xl text-center font-bold">{(props.service.name as string)}</p>
         </div>
-    </Link>
-    <p className="text-xl text-center font-bold">{(props.service.name as string)}</p>
-    </div> 
-  );
+    );
 };
 
 export default TopDealContainer;

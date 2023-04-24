@@ -30,12 +30,15 @@ const HistoryCard = (props: any) => {
 
       <div>
         <div className="flex md:flex-row flex-col">
-          <div className="relative object-contain">
+          <div className="relative md:w-[35rem] h-[15rem] rounded-t-md">
             <Image
               src="/assets/background_authenticate.svg"
-              className="animate-fadeIn "
+              className="animate-fadeIn object-cover"
               alt="..."
-              fill={true}
+              fill
+              sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
             />
           </div>
           <div className="break-words pl-3 flex flex-col justify-between ">

@@ -1,15 +1,14 @@
 "use client";
 import CategoryList from "components/CategoryServiceContainer/Category";
-import SearchableDropdown from "components/CategoryServiceContainer/City";
 import { useEffect, useState } from "react";
-import { ICity } from "components/CategoryServiceContainer/City/cityInterface";
 import { cities } from "@/data/city";
 import Price from "components/CategoryServiceContainer/Price";
 import Calendar from "components/CategoryServiceContainer/Calendar";
 import apiClient from "@/config/axios.config";
 import Card from "@/components/Card";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import { Product } from "../../../../../Types";
+import { City, Product } from "../../../../../Types";
+import SearchableDropdown from "@/components/SearchableDropdown";
 interface CategoryParams {
   params: {
     id: string;
@@ -50,8 +49,8 @@ export default function Category(slugs: CategoryParams) {
               Filter by City:
             </h1>
             <SearchableDropdown
-              options={cities as ICity}
-              label="name"
+              options={cities as City}
+              label="city"
               selectedVal={value}
               handleChange={(val: string) => setValue(val)}
             />

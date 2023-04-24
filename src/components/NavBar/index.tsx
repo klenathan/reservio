@@ -21,7 +21,7 @@ const NavBar: React.FC<INavBarProps> = (props: INavBarProps) => {
 
   return (
     <div
-      className="top-0 fixed min-w-full grid grid-cols-4 md:grid-cols-5 place-items-center h-[5rem] 
+      className="top-0 fixed md:static min-w-full grid grid-cols-4 md:grid-cols-5 place-items-center h-[5rem] 
     shadow-md z-50 bg-white"
     >
       <Logo logoStyle="green" />

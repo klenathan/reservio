@@ -1,3 +1,6 @@
+import { ReactElement } from "react";
+import { IconType } from "react-icons";
+
 export type User = {
   id: string;
   username: string;
@@ -54,4 +57,15 @@ export type Review = {
   rating: number;
   feedback: string;
   createAt: string;
+};
+
+export type Category = {
+  id: string;
+  category?: string;
+  icon?: ReactElement<IconType>;
+};
+
+export type City = {
+  id?: number;
+  city?: string;
 };

@@ -142,7 +142,7 @@ const SignUpForm = () => {
                   pattern: {
                     value:
                       /^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/,
-                    message: "Invalid user name",
+                    message: "Invalid username",
                   },
                 }}
                 onChange={handleUsernameChange}

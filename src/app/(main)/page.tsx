@@ -1,16 +1,16 @@
 "use client";
-import {Inter} from "next/font/google";
+import { Inter } from "next/font/google";
 import CategoryList from "components/CategoryServiceContainer/Category";
 import Carousel from "components/HomePageServiceContainer/Carousel";
 import HomePageServiceContainer from "components/HomePageServiceContainer/homepageServiceContainer";
 import TopDealContainer from "components/HomePageServiceContainer/topDeal";
 
-const inter = Inter({subsets: ["latin"]});
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-    return (
-        <div className="overflow-hidden">
-            <CategoryList/>
+  return (
+    <div className="overflow-hidden">
+      {/* <CategoryList/>
 
             <div className="w-screen">
                 <Carousel/>
@@ -28,7 +28,7 @@ export default function Home() {
                     Highlight Services
                 </h1>
                 <HomePageServiceContainer/>
-            </div>
-        </div>
-    );
+            </div> */}
+    </div>
+  );
 }

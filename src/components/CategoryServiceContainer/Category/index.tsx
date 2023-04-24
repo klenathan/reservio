@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { IconType } from "react-icons";
 import { FaHotel } from "react-icons/fa";
-import { AiFillCar } from "react-icons/ai";
+import { AiFillCar, AiOutlinePlusCircle } from "react-icons/ai";
 import {
   MdOutlineHealthAndSafety,
   MdCastForEducation,
@@ -58,6 +58,11 @@ const CategoryList = () => {
       id: "Hospitality",
       name: "Hospitality",
       icon: <FaHotel />,
+    },
+    {
+      id: "Others",
+      name: "Others",
+      icon: <AiOutlinePlusCircle />,
     },
   ];
   return (

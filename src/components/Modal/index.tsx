@@ -41,7 +41,7 @@ const Modal: React.FC<ModalProps> = (props: ModalProps) => {
 
   return (
     <div className="modal flex fixed inset-0 z-50 justify-center items-center bg-neutral-700 bg-opacity-50">
-      <div className="z-10  overflow-auto scroll-auto">
+      <div className="h-3/4 z-10 overflow-auto scroll-auto">
         <div className="modal-content bg-white rounded-lg p-6 max-w-screen-md mx-auto ">
           <div className="flex sticky top-0 bg-white p-5 z-10 items-center justify-between mb-4 ">
             <FormHeader name={props.nameModal} />

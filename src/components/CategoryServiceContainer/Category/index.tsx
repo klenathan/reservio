@@ -9,7 +9,7 @@ const CategoryList = () => {
           <Category
             key={category.id}
             id={category.id}
-            cateName={category.name}
+            category={category.category}
             icon={category.icon}
           />
         );
@@ -23,7 +23,7 @@ const Category = (props: Category) => {
     <Link href={`/category/${encodeURIComponent(props.id)}`}>
       <div className="text-center m-3">
         <div className="flex justify-center">{props.icon}</div>
-        <div>{props.cateName}</div>
+        <div>{props.category}</div>
       </div>
     </Link>
   );

@@ -9,7 +9,10 @@ export default function SearchBar() {
 
   const handleSearch = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    push(`/search?searchTerm=${encodeURIComponent(keyword)}`);
+    // let params = { query: keyword };
+    // axios.get(
+    //   `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/search`, params)
+    // );
   };
 
   return (

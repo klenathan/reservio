@@ -8,14 +8,14 @@ const HistoryCard = (props: any) => {
     <div className="flex flex-col mt-3 w-full shadow-lg p-5 ">
       <div className="flex flex-row items-center justify-between mb-3">
         <div className="flex flex-row items-center ">
-          <div> 
-          <Image
-            src="/assets/profile.svg"
-            height={size}
-            width={size}
-            alt="Profile Hamburger"
-            className="px-0"
-          />
+          <div>
+            <Image
+              src="/assets/profile.svg"
+              height={size}
+              width={size}
+              alt="Profile Hamburger"
+              className="px-0"
+            />
           </div>
           <div>
             <a href="#" className="font-[900] text-base md:text-xl">
@@ -30,7 +30,7 @@ const HistoryCard = (props: any) => {
 
       <div>
         <div className="flex md:flex-row flex-col">
-          <div className="relative md:w-[35rem] h-[15rem] rounded-t-md">
+          <div className="relative md:w-[20rem] h-[15rem] rounded-t-md">
             <Image
               src="/assets/background_authenticate.svg"
               className="animate-fadeIn object-cover"

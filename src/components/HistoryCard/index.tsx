@@ -1,30 +1,41 @@
 import Image from "next/image";
-import Link from "next/link";
-import { IService } from "../HomePageServiceContainer/serviceInterface";
 
-const HistoryCard = (props: any) => {
+
+interface IHistoryCardProps {
+  vendorName: string;
+  status: string;
+  productName: string;
+  price: number;
+  totalPrice: number;
+  statusColor: string;
+}
+
+
+const HistoryCard: React.FC<IHistoryCardProps> = (props: IHistoryCardProps) => {
   const size = 55;
   return (
     <div className="flex flex-col mt-3 w-full shadow-lg p-5 ">
       <div className="flex flex-row items-center justify-between mb-3">
-        <div className="flex flex-row items-center ">
-          <div>
+        <div className="flex flex-row items-center w-3/5">
+          <div className="relative w-[2rem] h-[2rem]">
             <Image
               src="/assets/profile.svg"
-              height={size}
-              width={size}
+              fill
+            sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
               alt="Profile Hamburger"
-              className="px-0"
+              className="px-0 object-cover"
             />
           </div>
-          <div>
-            <a href="#" className="font-[900] text-base md:text-xl">
-              RMIT HOUSE{" "}
+          <div className="">
+            <a href="#" className="font-[900] text-base md:text-xl ">
+              {props.vendorName}
             </a>
           </div>
         </div>
         <div>
-          <h1 className="pr-3 text-sm md:text-base"> STATUS </h1>
+          <h1 className={`pr-3 text-sm md:text-base font-bold uppercase text-${props.statusColor}`}> {props.status} </h1>
         </div>
       </div>
 
@@ -37,28 +48,28 @@ const HistoryCard = (props: any) => {
               alt="..."
               fill
               sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
+                (max-width: 1200px) 50vw,
+                33vw"
             />
           </div>
           <div className="break-words pl-3 flex flex-col justify-between ">
             <div>
               <a href="#" className="text-base md:text-xl font-bold">
-                DALAT HOMESTAY with beautiful view{" "}
+                {props.productName}
               </a>
               <h1 className="font-medium text-xs">
                 {" "}
                 Price:{" "}
                 <span className="text-xs md:text-xl font-medium text-midGreen">
                   {" "}
-                  ₫5.000.000{" "}
+                  ₫{props.price}
                 </span>{" "}
               </h1>
             </div>
             <div className="font-extrabold text-gray-600 md:text-xl">
-              Total with taxes:{" "}
+              Total with taxes:
               <span className="text-xl md:text-3xl font-extrabold text-midGreen ml-3">
-                ₫5.500.000
+                ₫{props.totalPrice}
               </span>
             </div>
           </div>

@@ -36,7 +36,7 @@ const DetailPage = (props: { service: Product }) => {
             {/*Subtitle*/}
             <DetailSubtitle
                 rating={props.service.avgRating}
-                reviewCount={props.service.avgReview}
+                reviewCount={props.service._count?.reservation}
                 location={props.service.address}
                 isCertified={props.service.vendor.certified}
             />

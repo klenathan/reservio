@@ -1,9 +1,7 @@
-
 import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-
 
 interface IHamburgerMenuChildProps {
   children: JSX.Element | JSX.Element[] | string;
@@ -12,10 +10,9 @@ interface IHamburgerMenuChildProps {
 const HamburgerMenuChild: React.FC<IHamburgerMenuChildProps> = (
   props: IHamburgerMenuChildProps
 ) => {
-  
   return (
     <Link
-      href={{pathname: props.href }}
+      href={{ pathname: props.href }}
       className={`hover:bg-limeGreen hover:bg-opacity-20 
       first:rounded-t-xl last:rounded-b-xl
     py-2 px-2`}
@@ -59,7 +56,6 @@ const NavBarHamburgerMenu: React.FC<IHamburgerMenuProps> = (
 };
 
 export default function ProfileHamBurger() {
-  const size = 32;
   const [show, setShow] = useState(false);
   const toggleHamburgerMenu = () => {
     if (show) {
@@ -77,7 +73,7 @@ export default function ProfileHamBurger() {
      flex flex-row items-center border-2 border-solid 
     border-gray-300 rounded-3xl px-2 py-1 gap-3
     shadow-sm bg-white
-    hover:shadow hover:border-oliveGreen"
+    hover:shadow hover:border-oliveGreen col-span-1"
     >
       <GiHamburgerMenu className="h-8" />
       <CgProfile className="h-6 w-6" />

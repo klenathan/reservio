@@ -1,6 +1,6 @@
 "use client";
 import Breadcrumb from "components/Breadcrumb";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Loading from "@/app/(main)/detail/loading";
 import DetailPage from "components/Detail";
 import {NotFound} from "next/dist/client/components/error";
@@ -48,6 +48,7 @@ export default function Detail(slugs: DetailParams) {
         <div className="h-full px-4 md:px-8 lg:px-16 xl:px-24 2xl:px-40">
             <Breadcrumb items={items}/>
             {product ? <DetailPage service={product}/> : <Loading/>}
+
         </div>
     );
 }

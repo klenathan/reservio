@@ -8,6 +8,8 @@ import Picture from "components/Picture";
 import {FaStar} from "react-icons/fa";
 import Loading from "@/app/(main)/detail/loading";
 import {Product} from "../../../Types";
+import Pricing from "components/Detail/Pricing";
+import FloatingButtonPricing from "components/Detail/FloatingButtonPricing";
 
 const Map = dynamic(() => import("components/Map/Map"), {ssr: false});
 
@@ -46,7 +48,7 @@ const DetailPage = (props: { service: Product }) => {
 
             {/*Detail information*/}
             <div className={"flex flex-col lg:flex-row w-full h-max mt-4"}>
-                <div className={"lg:w-3/4 lg:pr-24"}>
+                <div className={"lg:w-2/3 lg:pr-24"}>
                     <DetailPageInfo
                         name={props.service.name}
                         description={props.service.desc}
@@ -55,25 +57,44 @@ const DetailPage = (props: { service: Product }) => {
                         avatar={props.service.vendor.user.avatar}
                     />
                 </div>
-                <div className={"bg-neutral-200 md:w-1/4"}>Pricing components</div>
+                <div
+                    className={"hidden w-full lg:w-1/3 lg:block  border-2 border-neutral-10000 shadow-lg rounded-2xl h-fit"}>
+                    <Pricing
+                        price={props.service.price}
+                        avgRating={props.service.avgRating}
+                        countRating={props.service._count?.reviews}
+                        // TODO: Remember to change the logined user
+                        userName={props.service.vendor.username}
+                        productName={props.service.name}
+                    />
+                </div>
+
+                <div
+                    className="fixed bottom-0 left-0 z-10 flex justify-between w-full p-5 bg-neutral-300 h-fit lg:hidden">
+                    <FloatingButtonPricing
+                        price={props.service.price}
+                        avgRating={props.service.avgRating}
+                        countReviews={props.service._count?.reviews}
+                    />
+                </div>
+
             </div>
 
-            {/*TODO: [ADD] add to cart*/}
             {/*Map*/}
-            <div className={"border-b-2 border-gray-300 w-full pb-2 space-y-7 mt-7"}>
-                <div className={"text-gray-700 font-bold text-2xl mb-3"}>
-                    Where you will be here
-                </div>
-                <div className={"relative w-full h-80 lg:w-3/4 lg:h-96 m-auto z-0"}>
-                    {lat !== null && lng !== null ? (
-                        <Map latitude={lat} longitude={lng} scrollWheelZoom={false}/>
-                    ) : (
-                        <div className={"text-2xl text-center font-bold"}>
-                            Map is not found 😭😭😭😭
-                        </div>
-                    )}
-                </div>
-            </div>
+            {/*<div className={"border-b-2 border-gray-300 w-full pb-2 space-y-7 mt-7"}>*/}
+            {/*    <div className={"text-gray-700 font-bold text-2xl mb-3"}>*/}
+            {/*        Where you will be here*/}
+            {/*    </div>*/}
+            {/*    <div className={"relative w-full h-80 lg:w-3/4 lg:h-96 m-auto z-0"}>*/}
+            {/*        {lat !== null && lng !== null ? (*/}
+            {/*            <Map latitude={lat} longitude={lng} scrollWheelZoom={false}/>*/}
+            {/*        ) : (*/}
+            {/*            <div className={"text-2xl text-center font-bold"}>*/}
+            {/*                Map is not found 😭😭😭😭*/}
+            {/*            </div>*/}
+            {/*        )}*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
             {/*Vendor preview*/}
             {props.service.vendor ? (

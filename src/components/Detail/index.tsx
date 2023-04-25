@@ -112,7 +112,9 @@ const DetailPage = (props: { service: Product }) => {
               <div className={"text-lg font-bold"}>
                 Service by {props.service.vendor.username}
               </div>
-              <div>Joined since {props.service.vendor.createdAt}</div>
+              <div>
+                Joined since {Date.parse(props.service.vendor.createdAt)}
+              </div>
               <div className="inline-flex items-center">
                 <FaStar className="mr-1" />
                 <span>{props.service.avgRating}</span>
@@ -157,7 +159,10 @@ const DetailPage = (props: { service: Product }) => {
             <div className={"text-lg font-bold"}>
               Service by {props.service.vendor.username}
             </div>
-            <div>Joined since {props.service.vendor.createdAt}</div>
+            <div>
+              Joined since{" "}
+              {new Date(props.service.vendor.createdAt).toDateString()}
+            </div>
             <div className="inline-flex items-center">
               <FaStar className="mr-1" />
               <span>{props.service.avgRating}</span>

@@ -25,14 +25,13 @@ const SignUpForm = () => {
         formState: {errors},
         setError,
         watch,
-        control
+        control,
     } = useForm<SignUpForm>({mode: "onBlur"});
-
 
     const [usernameValidation, setUsernameValidation] = useState({
         length: false,
         noConsecutiveSpecialChars: false,
-        noStartEndSpecialChars: false
+        noStartEndSpecialChars: false,
     });
 
     const [passwordState, setPasswordState] = useState({
@@ -44,29 +43,26 @@ const SignUpForm = () => {
 
     const [inputFocused, setInputFocused] = useState({
         username: false,
-        password: false
+        password: false,
     });
-
 
     const {push} = useRouter();
 
-
     const password = useRef<String>();
-    const username = useRef<String>()
-    const email = useRef<String>()
+    const username = useRef<String>();
+    const email = useRef<String>();
 
     password.current = watch("password", "");
-    email.current = watch("email", "")
-    username.current = watch("username", "")
-
+    email.current = watch("email", "");
+    username.current = watch("username", "");
 
     const handleUsernameChange = () => {
-        const value = username.current
+        const value = username.current;
         if (typeof value === "string") {
             setUsernameValidation({
                 length: /^(?=[a-zA-Z0-9._]{8,20}$)/.test(value),
                 noConsecutiveSpecialChars: /^(?!.*[_.]{2})/.test(value),
-                noStartEndSpecialChars: /^[^_.].*[^_.]$/.test(value)
+                noStartEndSpecialChars: /^[^_.].*[^_.]$/.test(value),
             });
         }
     };
@@ -83,9 +79,7 @@ const SignUpForm = () => {
         }
     }
 
-
     const onSubmit: SubmitHandler<SignUpForm> = async (data) => {
-
         const formData = new FormData();
 
         formData.append("username", data.username as string);
@@ -95,7 +89,6 @@ const SignUpForm = () => {
         if (data.avatar != undefined) {
             formData.append("avatar", data.avatar as any);
         }
-
 
         apiClient
             .post(
@@ -123,8 +116,7 @@ const SignUpForm = () => {
                     });
                 }
             })
-    };
-
+    }
 
     return (
         <div className="bg-white shadow rounded md:w-2/3 w-full leading-3 p-6 mt-4">
@@ -133,7 +125,6 @@ const SignUpForm = () => {
             </h1>
             <form onSubmit={handleSubmit(onSubmit)} className=" mt-2 md:mt-1">
                 <div className="w-full md:flex">
-
                     <div className="md:w-1/2">
                         <div className={"relative"}>
                             <Input
@@ -146,18 +137,23 @@ const SignUpForm = () => {
                                 rules={{
                                     required: "Username is required",
                                     pattern: {
-                                        value: /^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/,
-                                        message:
-                                            "Invalid user name",
-                                    }
+                                        value:
+                                            /^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/,
+                                        message: "Invalid username",
+                                    },
                                 }}
                                 onChange={handleUsernameChange}
-                                onFocus={() => setInputFocused({username: true, password: false})}
-                                onBlur={() => setInputFocused({username: false, password: false})}
+                                onFocus={() =>
+                                    setInputFocused({username: true, password: false})
+                                }
+                                onBlur={() =>
+                                    setInputFocused({username: false, password: false})
+                                }
                             />
-                            {inputFocused.username && <UsernameBubble {...usernameValidation}/>}
+                            {inputFocused.username && (
+                                <UsernameBubble {...usernameValidation} />
+                            )}
                         </div>
-
 
                         <Input
                             name={"email"}
@@ -167,9 +163,8 @@ const SignUpForm = () => {
                                 required: "Email is required",
                                 pattern: {
                                     value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                                    message:
-                                        "Invalid email",
-                                }
+                                    message: "Invalid email",
+                                },
                             }}
                             type={"email"}
                             placeholder={"e.g. reservio@reservio.com"}
@@ -187,14 +182,20 @@ const SignUpForm = () => {
                                         value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
                                         message:
                                             "Password mus be minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
-                                    }
+                                    },
                                 }}
                                 errors={errors.password}
                                 onChange={handlePasswordChange}
-                                onFocus={() => setInputFocused({username: false, password: true})}
-                                onBlur={() => setInputFocused({username: false, password: false})}
+                                onFocus={() =>
+                                    setInputFocused({username: false, password: true})
+                                }
+                                onBlur={() =>
+                                    setInputFocused({username: false, password: false})
+                                }
                             />
-                            {inputFocused.password && <PasswordBubbleWrap {...passwordState}/>}
+                            {inputFocused.password && (
+                                <PasswordBubbleWrap {...passwordState} />
+                            )}
                         </div>
 
                         <Input
@@ -219,10 +220,9 @@ const SignUpForm = () => {
                                     value: /^(84|0[3|5|7|8|9])+([0-9]{8})\b$/,
                                     message:
                                         "Your phone number must be Vietnamese phone and 10 digits number",
-                                }
+                                },
                             }}
                             placeholder={"e.g. 0987654321"}
-
                             errors={errors.phone}
                         />
                     </div>
@@ -245,7 +245,6 @@ const SignUpForm = () => {
                                     onChange={(files) => onChange(files[0])}
                                 />
                             )}
-
                         />
                         <div className={"w-full mt-4 space-y-3"}>
                             <h2 className={"font-bold"}>
@@ -256,13 +255,11 @@ const SignUpForm = () => {
                             </h3>
                         </div>
                     </div>
-
                 </div>
                 <div className="text-center mt-4">
                     <Button btnStyle="filled">Signup</Button>
                 </div>
             </form>
-
 
             <div className="text-center">
                 <p className="text-sm font-light text-gray-500">
@@ -276,6 +273,6 @@ const SignUpForm = () => {
                 </p>
             </div>
         </div>
-    )
-};
+    );
+}
 export default SignUpForm;

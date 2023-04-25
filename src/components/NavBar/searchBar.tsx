@@ -9,14 +9,14 @@ export default function SearchBar() {
 
   const handleSearch = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    push(`/search?searchTerm=${encodeURIComponent(keyword)}`);
+    // let params = { query: keyword };
+    // axios.get(
+    //   `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/search`, params)
+    // );
   };
 
   return (
-    <form
-      className="w-4/5 relative col-span-3 md:col-span-1"
-      onSubmit={handleSearch}
-    >
+    <form className="w-4/5 relative col-span-2" onSubmit={handleSearch}>
       <IoSearchCircleSharp className="pointer-events-none w-8 h-8 absolute top-1/2 transform -translate-y-1/2 left-3 text-[#59981A]"></IoSearchCircleSharp>
 
       <input

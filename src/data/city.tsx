@@ -1,254 +1,254 @@
 export const cities = [
   {
     id: 1,
-    name: "An Giang",
+    city: "An Giang",
   },
   {
     id: 2,
-    name: "Ba Ria-Vung Tau",
+    city: "Ba Ria-Vung Tau",
   },
   {
     id: 3,
-    name: "Bac Giang",
+    city: "Bac Giang",
   },
   {
     id: 4,
-    name: "Bac Kan",
+    city: "Bac Kan",
   },
   {
     id: 5,
-    name: "Bac Lieu",
+    city: "Bac Lieu",
   },
   {
     id: 6,
-    name: "Bac Ninh",
+    city: "Bac Ninh",
   },
   {
     id: 7,
-    name: "Ben Tre",
+    city: "Ben Tre",
   },
   {
     id: 8,
-    name: "Binh Dinh",
+    city: "Binh Dinh",
   },
   {
     id: 9,
-    name: "Binh Duong",
+    city: "Binh Duong",
   },
   {
     id: 10,
-    name: "Binh Phuoc",
+    city: "Binh Phuoc",
   },
   {
     id: 11,
-    name: "Binh Thuan",
+    city: "Binh Thuan",
   },
   {
     id: 12,
-    name: "Ca Mau",
+    city: "Ca Mau",
   },
   {
     id: 13,
-    name: "Can Tho",
+    city: "Can Tho",
   },
   {
     id: 14,
-    name: "Cao Bang",
+    city: "Cao Bang",
   },
   {
     id: 15,
-    name: "Da Nang",
+    city: "Da Nang",
   },
   {
     id: 16,
-    name: "Dak Lak",
+    city: "Dak Lak",
   },
   {
     id: 17,
-    name: "Dak Nong",
+    city: "Dak Nong",
   },
   {
     id: 18,
-    name: "Dien Bien",
+    city: "Dien Bien",
   },
   {
     id: 19,
-    name: "Dong Nai",
+    city: "Dong Nai",
   },
   {
     id: 20,
-    name: "Dong Thap",
+    city: "Dong Thap",
   },
   {
     id: 21,
-    name: "Gia Lai",
+    city: "Gia Lai",
   },
   {
     id: 22,
-    name: "Ha Giang",
+    city: "Ha Giang",
   },
   {
     id: 23,
-    name: "Ha Nam",
+    city: "Ha Nam",
   },
   {
     id: 24,
-    name: "Ha Noi",
+    city: "Ha Noi",
   },
   {
     id: 25,
-    name: "Ha Tinh",
+    city: "Ha Tinh",
   },
   {
     id: 26,
-    name: "Hai Duong",
+    city: "Hai Duong",
   },
   {
     id: 27,
-    name: "Hai Phong",
+    city: "Hai Phong",
   },
   {
     id: 28,
-    name: "Hau Giang",
+    city: "Hau Giang",
   },
   {
     id: 29,
-    name: "Ho Chi Minh City",
+    city: "Ho Chi Minh City",
   },
   {
     id: 30,
-    name: "Hoa Binh",
+    city: "Hoa Binh",
   },
   {
     id: 31,
-    name: "Hung Yen",
+    city: "Hung Yen",
   },
   {
     id: 32,
-    name: "Khanh Hoa",
+    city: "Khanh Hoa",
   },
   {
     id: 33,
-    name: "Kien Giang",
+    city: "Kien Giang",
   },
   {
     id: 34,
-    name: "Kon Tum",
+    city: "Kon Tum",
   },
   {
     id: 35,
-    name: "Lai Chau",
+    city: "Lai Chau",
   },
   {
     id: 36,
-    name: "Lam Dong",
+    city: "Lam Dong",
   },
   {
     id: 37,
-    name: "Lang Son",
+    city: "Lang Son",
   },
   {
     id: 38,
-    name: "Lao Cai",
+    city: "Lao Cai",
   },
   {
     id: 39,
-    name: "Long An",
+    city: "Long An",
   },
   {
     id: 40,
-    name: "Nam Dinh",
+    city: "Nam Dinh",
   },
   {
     id: 41,
-    name: "Nghe An",
+    city: "Nghe An",
   },
   {
     id: 42,
-    name: "Ninh Binh",
+    city: "Ninh Binh",
   },
   {
     id: 43,
-    name: "Ninh Thuan",
+    city: "Ninh Thuan",
   },
   {
     id: 44,
-    name: "Phu Tho",
+    city: "Phu Tho",
   },
   {
     id: 45,
-    name: "Phu Yen",
+    city: "Phu Yen",
   },
   {
     id: 46,
-    name: "Quang Binh",
+    city: "Quang Binh",
   },
   {
     id: 47,
-    name: "Quang Nam",
+    city: "Quang Nam",
   },
   {
     id: 48,
-    name: "Quang Ngai",
+    city: "Quang Ngai",
   },
   {
     id: 49,
-    name: "Quang Ninh",
+    city: "Quang Ninh",
   },
   {
     id: 50,
-    name: "Quang Tri",
+    city: "Quang Tri",
   },
   {
     id: 51,
-    name: "Soc Trang",
+    city: "Soc Trang",
   },
   {
     id: 52,
-    name: "Son La",
+    city: "Son La",
   },
   {
     id: 53,
-    name: "Tay Ninh",
+    city: "Tay Ninh",
   },
   {
     id: 54,
-    name: "Thai Binh",
+    city: "Thai Binh",
   },
   {
     id: 55,
-    name: "Thai Nguyen",
+    city: "Thai Nguyen",
   },
   {
     id: 56,
-    name: "Thanh Hoa",
+    city: "Thanh Hoa",
   },
   {
     id: 57,
-    name: "Thua Thien-Hue",
+    city: "Thua Thien-Hue",
   },
   {
     id: 58,
-    name: "Tien Giang",
+    city: "Tien Giang",
   },
   {
     id: 59,
-    name: "Tra Vinh",
+    city: "Tra Vinh",
   },
   {
     id: 60,
-    name: "Tuyen Quang",
+    city: "Tuyen Quang",
   },
   {
     id: 61,
-    name: "Vinh Long",
+    city: "Vinh Long",
   },
   {
     id: 62,
-    name: "Vinh Phuc",
+    city: "Vinh Phuc",
   },
   {
     id: 63,
-    name: "Yen Bai",
+    city: "Yen Bai",
   },
 ];

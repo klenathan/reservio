@@ -19,13 +19,8 @@ export default function Profile() {
         <UserProfile> </UserProfile>
         <div className="flex flex-col "> 
         <HistoryPage> </HistoryPage>
-        <div className="grid grid-cols-3 gap-7">
-        <VendorHistoryCard></VendorHistoryCard>
-        <VendorHistoryCard></VendorHistoryCard> 
-        <VendorHistoryCard></VendorHistoryCard> 
         </div>
         </div>
       </div>
-    </div>
   );
 }

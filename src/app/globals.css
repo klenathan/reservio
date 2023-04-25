@@ -4,3 +4,21 @@
 @tailwind components;
 @tailwind utilities;
 
+.status-border {
+    border: 2px solid black;
+  }
+  
+  .status-border.status-pendingYellow {
+    border-color: #EEBC3C;
+  }
+  
+  .status-border.status-acceptedBlue {
+    border-color: #2659C3;
+  }
+  
+  .status-border.status-rejectedRed {
+    border-color: #D20D3C;
+  }
+  .status-border.status-completedGreen {
+    border-color: #5E9C1B;
+  }

@@ -32,8 +32,9 @@ const LoginForm = () => {
                 formData
             )
             .then((res) => {
-                console.log(res)
-                localStorage.setItem("Token", JSON.stringify(res.data));
+                sessionStorage.setItem("accessToken", res.data.accessToken);
+                localStorage.setItem("refreshToken", res.data.refreshToken);
+                localStorage.setItem('userData', JSON.stringify(res.data.user))
                 push("/");
             })
             .catch((e) => {

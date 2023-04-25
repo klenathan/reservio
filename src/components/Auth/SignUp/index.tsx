@@ -2,13 +2,13 @@
 import Link from "next/link";
 import {Controller, SubmitHandler, useForm} from "react-hook-form";
 import {useRef, useState} from "react";
-import axios from "axios";
 import DropZone from "components/DropZone";
 import {useRouter} from "next/navigation";
 import Input from "components/Form/Input";
 import UsernameBubble from "components/Auth/SignUp/Bubble/usernameBubble";
 import PasswordBubbleWrap from "components/Auth/SignUp/Bubble/passwordBubble";
 import Button from "components/Button";
+import apiClient from "@/config/axios.config";
 
 interface SignUpForm {
     username: String;
@@ -97,9 +97,9 @@ const SignUpForm = () => {
         }
 
 
-        axios
+        apiClient
             .post(
-                `https://06ufwajgc6.execute-api.ap-southeast-1.amazonaws.com/auth/signup`,
+                `auth/signup`,
                 formData
             )
             .then((res) => {

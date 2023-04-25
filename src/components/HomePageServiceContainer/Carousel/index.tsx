@@ -14,7 +14,7 @@ const Carousel = () => {
     useEffect(() => {
         apiClient
             .get(
-                "service"
+                "service/highlight"
             )
             .then((r) => {
                 setServices(r.data);

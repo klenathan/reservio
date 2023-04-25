@@ -117,7 +117,7 @@ const HistoryPage = (props: any) => {
         </button>
       </div>
       <div>
-        {filteredUserCards.map((card) => (
+        {/* {filteredUserCards.map((card) => (
           <HistoryCard
             key={card.productName}
             vendorName={card.vendorName}
@@ -127,7 +127,7 @@ const HistoryPage = (props: any) => {
             totalPrice={card.totalPrice}
             statusColor={changeColor(selectedStatus)}
           />
-        ))}
+        ))} */}
         <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-10"> 
          {filteredUserCards.map((card) => (
           <VendorHistoryCard

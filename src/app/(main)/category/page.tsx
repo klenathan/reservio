@@ -39,21 +39,21 @@ export default function Category(slugs: any) {
         <aside className="w-72 fixed left-0 h-3/4 p-4 mt-1 border border-black">
           <div className="my-3">
             <h1 className="text-xl text-oliveGreen font-bold mb-2">
-              Filter by Date:
+              By Date:
             </h1>
             <Calendar />
           </div>
 
           <div className="my-3">
             <h1 className="text-xl text-oliveGreen font-bold mb-2">
-              Filter by Price:
+              By Price:
             </h1>
             <Price />
           </div>
 
           <div className="my-3">
             <h1 className="text-xl text-oliveGreen font-bold mb-2">
-              Filter by City:
+              By City:
             </h1>
             <SearchableDropdown
               options={cities as City}

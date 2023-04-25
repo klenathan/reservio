@@ -48,8 +48,8 @@ const NavBarHamburgerMenu: React.FC<IHamburgerMenuProps> = (
     `}
     >
       <HamburgerMenuChild href="/login">Login</HamburgerMenuChild>
-      <HamburgerMenuChild>Hello</HamburgerMenuChild>
-      <HamburgerMenuChild>Hello</HamburgerMenuChild>
+      <HamburgerMenuChild href="/userprofile">My Profile</HamburgerMenuChild>
+      <HamburgerMenuChild href="/vendorprofile">Vendor Profile</HamburgerMenuChild>
       <HamburgerMenuChild>Hello</HamburgerMenuChild>
     </div>
   );

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { IoSearchCircleSharp } from "react-icons/io5";

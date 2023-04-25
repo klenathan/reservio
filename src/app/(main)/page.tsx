@@ -1,6 +1,6 @@
 "use client";
 import { Inter } from "next/font/google";
-import CategoryList from "components/CategoryServiceContainer/Category";
+import CategoryList from "@/components/CategoryServiceContainer/CategoryList";
 import Carousel from "components/HomePageServiceContainer/Carousel";
 import HomePageServiceContainer from "components/HomePageServiceContainer/homepageServiceContainer";
 import TopDealContainer from "components/HomePageServiceContainer/topDeal";

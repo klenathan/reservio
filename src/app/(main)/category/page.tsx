@@ -1,5 +1,5 @@
 "use client";
-import CategoryList from "components/CategoryServiceContainer/Category";
+import CategoryList from "@/components/CategoryServiceContainer/CategoryList";
 import { useEffect, useState } from "react";
 import { cities } from "@/data/city";
 import Price from "components/CategoryServiceContainer/Price";

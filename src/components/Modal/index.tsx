@@ -9,7 +9,7 @@ interface ModalProps {
   onClose: () => void;
 }
 
-const  Modal: React.FC<ModalProps> = (props: ModalProps) => {
+const Modal: React.FC<ModalProps> = (props: ModalProps) => {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {

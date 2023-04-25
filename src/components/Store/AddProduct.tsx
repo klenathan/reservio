@@ -8,9 +8,10 @@ import Input from "../Form/Input";
 import SearchableDropdown from "../SearchableDropdown";
 
 interface IFromInput {
-  name?: string;
+  name: string;
   price: string;
-  category?: string;
+  category: string;
+  quantity: string;
 }
 
 const AddProduct = () => {
@@ -21,12 +22,25 @@ const AddProduct = () => {
     formState: { errors },
   } = useForm<IFromInput>();
 
+  const validateQuantity = (value: string) => {
+    if (parseInt(value) < 1) {
+      return "Quantity must be greater than or equal to 1";
+    }
+    return true;
+  };
+
+  const validatePrice = (value: string) => {
+    if (parseInt(value) < 1000) {
+      return "Price must be greater than or equal to 1000VND";
+    }
+    return true;
+  };
   const onSubmit: SubmitHandler<IFromInput> = async (data) => {
     const formData = new FormData();
     formData.append("name", data.name as string);
     formData.append("price", data.price as string);
     formData.append("category", value as string);
-
+    formData.append("quantity", value as string);
     apiClient
       .post("service", formData)
       .then((res) => {
@@ -55,9 +69,24 @@ const AddProduct = () => {
             label={"Price"}
             type={"number"}
             control={control}
-            rules={{ required: "Price is required" }}
+            rules={{
+              required: "Price is required",
+              validate: validatePrice,
+            }}
             errors={errors.price}
             placeholder={"e.g. 100,000"}
+          />
+          <Input
+            name={"quantity"}
+            label={"Quantity"}
+            type={"number"}
+            control={control}
+            rules={{
+              required: "Quantity is required",
+              validate: validateQuantity,
+            }}
+            errors={errors.quantity}
+            placeholder={"e.g. 100"}
           />
           <div>
             <label className={"block my-2 font-medium text-gray-900"}>

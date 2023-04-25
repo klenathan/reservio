@@ -29,7 +29,7 @@ const Page = () => {
           <Modal
             isOpen={isModalOpen}
             onClose={handleCloseModal}
-            nameModal={"Create Your Own Store"}
+            nameModal={"Add New Product"}
           >
             <AddProduct />
           </Modal>

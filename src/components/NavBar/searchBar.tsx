@@ -8,7 +8,7 @@ export default function SearchBar() {
 
   const handleSearch = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    router.push(`/category?keyword=${keyword}`);
+    router.push(`/products?keyword=${keyword}`);
   };
 
   return (

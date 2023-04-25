@@ -15,10 +15,12 @@ export default function Category(slugs: any) {
   const [queryService, setServices] = useState<Product[]>([]);
 
   useEffect(() => {
-    apiClient.get(`service/category/${slugs.searchParams.id}`).then((r) => {
-      setServices(r.data);
-    });
-  }, [slugs.params.id]);
+    apiClient
+      .get(`service/category/${slugs.searchParams.category}`)
+      .then((r) => {
+        setServices(r.data.products);
+      });
+  }, [slugs.searchParams.category]);
 
   useEffect(() => {
     apiClient
@@ -29,7 +31,7 @@ export default function Category(slugs: any) {
       .catch((e) => {
         console.log(e);
       });
-  }, []);
+  }, [slugs.searchParams.keyword]);
 
   return (
     <div className="overflow-hidden">
@@ -38,9 +40,7 @@ export default function Category(slugs: any) {
       <div className="flex">
         <aside className="w-72 fixed left-0 h-3/4 p-4 mt-1 border border-black">
           <div className="my-3">
-            <h1 className="text-xl text-oliveGreen font-bold mb-2">
-              By Date:
-            </h1>
+            <h1 className="text-xl text-oliveGreen font-bold mb-2">By Date:</h1>
             <Calendar />
           </div>
 
@@ -52,9 +52,7 @@ export default function Category(slugs: any) {
           </div>
 
           <div className="my-3">
-            <h1 className="text-xl text-oliveGreen font-bold mb-2">
-              By City:
-            </h1>
+            <h1 className="text-xl text-oliveGreen font-bold mb-2">By City:</h1>
             <SearchableDropdown
               options={cities as City}
               label="city"

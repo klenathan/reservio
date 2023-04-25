@@ -20,7 +20,7 @@ const CategoryList = () => {
 
 const Category = (props: Category) => {
   return (
-    <Link href={`/category/${encodeURIComponent(props.id)}`}>
+    <Link href={`/category?id=${encodeURIComponent(props.id)}`}>
       <div className="text-center m-3">
         <div className="flex justify-center">{props.icon}</div>
         <div>{props.category}</div>

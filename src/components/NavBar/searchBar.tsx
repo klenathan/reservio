@@ -1,18 +1,15 @@
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { IoSearchCircleSharp } from "react-icons/io5";
-import { useRouter } from "next/navigation";
 
 export default function SearchBar() {
   const [keyword, setKeyword] = useState("");
-  const { push } = useRouter();
+  const router = useRouter();
 
   const handleSearch = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    // let params = { query: keyword };
-    // axios.get(
-    //   `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/search`, params)
-    // );
+    router.push(`/category?keyword=${keyword}`);
   };
 
   return (
@@ -23,7 +20,7 @@ export default function SearchBar() {
         className="w-full h-[3rem] 
         px-12
         rounded-2xl border-2 border-solid
-         border-gray-500"
+        border-gray-500"
         type="text"
         name="Search"
         id="search-input"

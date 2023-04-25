@@ -7,22 +7,29 @@ import Calendar from "components/CategoryServiceContainer/Calendar";
 import apiClient from "@/config/axios.config";
 import Card from "@/components/Card";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import { City, Product } from "../../../../../Types";
+import { City, Product } from "../../../../Types";
 import SearchableDropdown from "@/components/SearchableDropdown";
-interface CategoryParams {
-  params: {
-    id: string;
-  };
-}
-export default function Category(slugs: CategoryParams) {
+
+export default function Category(slugs: any) {
   const [value, setValue] = useState<string>("");
   const [queryService, setServices] = useState<Product[]>([]);
+
   useEffect(() => {
-    apiClient.get(`service/category/${slugs.params.id}`).then((r) => {
-      console.log(r.data);
+    apiClient.get(`service/category/${slugs.searchParams.id}`).then((r) => {
       setServices(r.data);
     });
   }, [slugs.params.id]);
+
+  useEffect(() => {
+    apiClient
+      .get(`search?query=${slugs.searchParams.keyword}`)
+      .then((r) => {
+        setServices(r.data.products);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
 
   return (
     <div className="overflow-hidden">

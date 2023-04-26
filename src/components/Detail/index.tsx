@@ -10,12 +10,14 @@ import Loading from "@/app/(main)/detail/loading";
 import {Product} from "../../../Types";
 import Pricing from "components/Detail/Pricing";
 import FloatingButtonPricing from "components/Detail/FloatingButtonPricing";
+import {useAuth} from "components/Auth/Context/AuthContext";
 
 const Map = dynamic(() => import("components/Map/Map"), {ssr: false});
 
 const DetailPage = (props: { service: Product }) => {
     const [lat, setLat] = useState<number | null>(null);
     const [lng, setLng] = useState<number | null>(null);
+    const {user} = useAuth()
 
     const genGeocoder = async () => {
         return await geocoderFunction(props.service.address);
@@ -62,12 +64,13 @@ const DetailPage = (props: { service: Product }) => {
                             "hidden w-full lg:w-1/3 lg:block  border-2 border-neutral-10000 shadow-lg rounded-2xl h-fit"
                         }
                     >
+                        {/*Pricing*/}
                         <Pricing
                             price={props.service.price}
                             avgRating={props.service.avgRating}
                             countRating={props.service._count?.reviews}
                             // TODO: Remember to change the logined user
-                            userName={props.service.vendor.username}
+                            userName={user?.username}
                             productName={props.service.name}
                         />
                     </div>

@@ -47,7 +47,6 @@ apiClient.interceptors.response.use(
                 )
 
                 sessionStorage.setItem('accessToken', response.data.accessToken);
-                // sessionStorage.setItem('userData', response.data.)
                 localStorage.setItem('refreshToken', response.data.refreshToken);
 
                 return apiClient(originalRequest);

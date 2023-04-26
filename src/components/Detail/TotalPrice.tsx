@@ -15,7 +15,7 @@ interface TotalPriceProps {
     start: string | undefined;
     end: string | undefined;
     productName: string;
-    userName: string;
+    userName?: string;
     parentCallBack?: any;
     maxQuantity: number
     countReservation: number;
@@ -66,7 +66,7 @@ const TotalPrice = (props: TotalPriceProps) => {
         }
 
     }
-    
+
     return (
         <div
             className={

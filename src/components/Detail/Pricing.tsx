@@ -13,7 +13,7 @@ interface PricingProps {
     price: number;
     avgRating: number;
     countRating: number | undefined;
-    userName: string;
+    userName?: string;
     productName: string;
 }
 

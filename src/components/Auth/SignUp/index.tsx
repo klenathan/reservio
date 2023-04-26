@@ -96,7 +96,6 @@ const SignUpForm = () => {
                 formData
             )
             .then((res) => {
-                localStorage.setItem("Token", JSON.stringify(res.data))
                 push("/");
             })
             .catch((e) => {

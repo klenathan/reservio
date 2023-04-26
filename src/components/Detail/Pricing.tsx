@@ -1,6 +1,6 @@
 import {FaStar} from "react-icons/fa";
 import PricingInformation from "components/Detail/PricingInformation";
-import {useState} from "react";
+import React, {useState} from "react";
 import TotalPrice from "components/Detail/TotalPrice";
 
 interface ChoiceProps {
@@ -50,16 +50,28 @@ export default function Pricing(props: PricingProps) {
             />
 
             {/*Total price*/}
-            <TotalPrice
-                end={choice?.end}
-                start={choice?.start}
-                price={props.price}
-                userName={props.userName}
-                productName={props.productName}
-                parentCallBack={handleChoice}
-                maxQuantity={300}
-                countReservation={100}
-            />
+            {props.userName ?
+                <TotalPrice
+                    end={choice?.end}
+                    start={choice?.start}
+                    price={props.price}
+                    userName={props.userName}
+                    productName={props.productName}
+                    parentCallBack={handleChoice}
+                    maxQuantity={300}
+                    countReservation={100}
+                /> :
+                <TotalPrice
+                    end={choice?.end}
+                    start={choice?.start}
+                    price={props.price}
+                    userName={"Honneyyy 😘😘😘😘"}
+                    productName={props.productName}
+                    parentCallBack={handleChoice}
+                    maxQuantity={300}
+                    countReservation={100}
+                />
+            }
         </div>
     );
 }

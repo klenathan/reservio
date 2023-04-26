@@ -2,6 +2,7 @@ import React, {useRef} from "react";
 import Input from "components/Form/Input";
 import {useForm} from "react-hook-form";
 import Button from "components/Button";
+import {useRouter} from "next/navigation";
 
 interface InformationProps {
     smallText: string;
@@ -19,6 +20,7 @@ interface TotalPriceProps {
     parentCallBack?: any;
     maxQuantity: number
     countReservation: number;
+    isLogin?: boolean
 }
 
 const RowInformation = (props: InformationProps) => (
@@ -49,6 +51,8 @@ const TotalPrice = (props: TotalPriceProps) => {
         },
         mode: "onBlur"
     });
+
+    const {push} = useRouter()
 
     const quantity = useRef<number>();
     quantity.current = watch("quantity", 0);
@@ -148,23 +152,36 @@ const TotalPrice = (props: TotalPriceProps) => {
                     />
                 )}
             </div>
-            <div className={"mt-2 p-3 grid grid-cols-2 gap-4 align-middle"}>
-                <Button btnStyle={"filled"}>Confirm</Button>
-                <Button
-                    btnStyle={"filled"}
-                    onClick={() => {
-                        props.parentCallBack({
-                            start: undefined,
-                            end: undefined,
-                        });
-                        reset({
-                            quantity: 1,
-                        });
-                    }}
-                >
-                    Cancel
-                </Button>
-            </div>
+            {props.isLogin ?
+                <div className={"mt-2 p-3 grid grid-cols-2 gap-4 align-middle"}>
+                    <Button btnStyle={"filled"}>Confirm</Button>
+                    <Button
+                        btnStyle={"filled"}
+                        onClick={() => {
+                            props.parentCallBack({
+                                start: undefined,
+                                end: undefined,
+                            });
+                            reset({
+                                quantity: 1,
+                            });
+                        }}
+                    >
+                        Cancel
+                    </Button>
+                </div>
+                :
+                <div className={"flex mt-2 p-3 justify-center"}>
+                    <Button
+                        btnStyle={"filled"}
+                        onClick={() => push('/login')}
+                    >
+                        Login for book me 😘
+                    </Button>
+                </div>
+
+            }
+
         </div>
     );
 };

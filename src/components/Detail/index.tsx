@@ -19,6 +19,7 @@ const DetailPage = (props: { service: Product }) => {
     const [lng, setLng] = useState<number | null>(null);
     const {user} = useAuth()
 
+
     const genGeocoder = async () => {
         return await geocoderFunction(props.service.address);
     };
@@ -69,7 +70,6 @@ const DetailPage = (props: { service: Product }) => {
                             price={props.service.price}
                             avgRating={props.service.avgRating}
                             countRating={props.service._count?.reviews}
-                            // TODO: Remember to change the logined user
                             userName={user?.username}
                             productName={props.service.name}
                         />
@@ -81,6 +81,8 @@ const DetailPage = (props: { service: Product }) => {
                             price={props.service.price}
                             avgRating={props.service.avgRating}
                             countReviews={props.service._count?.reviews}
+                            userName={user?.username}
+                            productName={props.service.name}
                         />
                     </div>
                 </div>
@@ -88,7 +90,6 @@ const DetailPage = (props: { service: Product }) => {
                 {/*Map*/}
 
             </div>
-            {/*TODO: [ADD] add to cart*/}
             {/*Map*/}
             <div className={"border-b-2 border-gray-300 w-full pb-2 space-y-7 mt-7"}>
                 <div className={"text-gray-700 font-bold text-2xl mb-3"}>

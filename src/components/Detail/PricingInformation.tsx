@@ -1,5 +1,7 @@
 import Button from "components/Button";
 import React from "react";
+import {useAuth} from "components/Auth/Context/AuthContext";
+import {useRouter} from "next/navigation";
 
 interface PriceInformationProps {
     start: string
@@ -10,6 +12,10 @@ interface PriceInformationProps {
 }
 
 const PricingInformation: React.FC<PriceInformationProps> = (props: PriceInformationProps) => {
+    const {isLogin} = useAuth()
+    const {push} = useRouter()
+
+
     return (
         <div className={'border-2 border-neutral-300 rounded w-full p-2 hover:shadow-lg space-y-4'}>
             <div className={'flex justify-between'}>
@@ -24,10 +30,13 @@ const PricingInformation: React.FC<PriceInformationProps> = (props: PriceInforma
                 <Button
                     btnStyle={"filled"}
                     onClick={() => {
-                        props.parentCallBack({
-                            start: props.start,
-                            end: props.end,
-                        })
+                        isLogin ?
+                            props.parentCallBack({
+                                start: props.start,
+                                end: props.end,
+                            })
+                            :
+                            push('/login')
                     }}
                 >
                     Book now

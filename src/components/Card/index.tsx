@@ -28,7 +28,7 @@ const Card = (props: { service: Product }) => {
           <p className="line-clamp-3">{props.service.address}</p>
         </div>
 
-        <p>@{props.service.vendor.username}</p>
+        {/* <p>@{props.service.vendor.username}</p> */}
         <div className="flex flex-row items-center">
           <div className="text-oliveGreen font-bold my-3 text-2xl pr-1">
             {props.service.price?.toLocaleString()} VND

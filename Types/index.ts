@@ -18,8 +18,10 @@ export type User = {
 };
 
 export type Vendor = {
+  images: any;
   id: string;
   username: string;
+  name: string;
   certified: boolean;
   status: string;
   desc: string;
@@ -27,6 +29,9 @@ export type Vendor = {
   createdAt: string;
   user: User;
   products: Product[];
+  _count?: {
+    products: number;
+  };
 };
 
 export type Product = {

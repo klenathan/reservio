@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-
 interface IVendorCardProps {
   userName: string;
   status: string;
@@ -11,9 +10,7 @@ interface IVendorCardProps {
   statusColor: string;
 }
 
-
 const VendorHistoryCard = (props: any) => {
-
   return (
     <div
       className="w-full md:w-full shadow-lg mb-3 mt-3 rounded-md
@@ -30,36 +27,39 @@ const VendorHistoryCard = (props: any) => {
           className="object-cover"
         />
 
-        <div className={`absolute top-3 right-3 p-1 rounded-md backdrop-blu status-border status-${props.statusColor}`}> 
-          <p className={`font-bold uppercase text-${props.statusColor}`}>{props.status}</p>
+        <div
+          className={`absolute top-3 right-3 p-1 rounded-md backdrop-blu status-border status-${props.statusColor}`}
+        >
+          <p className={`font-bold uppercase text-${props.statusColor}`}>
+            {props.status}
+          </p>
         </div>
       </div>
 
       <div className="break-words p-3 pl-1 pt-1 md:p-6 md:pl-2 md:pt-1 flex flex-col justify-between  ">
         <div className="flex flex-col">
           <div className="flex flex-row items-center">
-         
-          <a href="#" className="text-base md:text-xl font-bold ">
-            Username: {props.userName}
-          </a>
-          <div className="relative w-[1rem] h-[1rem] ml-1">
-            <Image
-              src="/assets/profile.svg"
-              fill
-            sizes="(max-width: 768px) 100vw,
+            <a href="#" className="text-base md:text-xl font-bold ">
+              Username: {props.userName}
+            </a>
+            <div className="relative w-[1rem] h-[1rem] ml-1">
+              <Image
+                src="/assets/profile.svg"
+                fill
+                sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
-              alt="Profile Hamburger"
-              className="px-0 object-cover"
-            />
-          </div>
+                alt="Profile Hamburger"
+                className="px-0 object-cover"
+              />
+            </div>
           </div>
           <a href="#" className="text-base md:text-xl font-bold">
-          {props.productName}
+            {props.productName}
           </a>
           <h1 className="font-medium text-xs">
             <span className="text-xs md:text-xl font-medium text-midGreen">
-            ₫{props.price}
+              ₫{props.price}
             </span>
           </h1>
         </div>

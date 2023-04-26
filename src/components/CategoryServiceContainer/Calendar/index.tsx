@@ -1,5 +1,5 @@
 import React from "react";
-import { DateRangePicker } from "react-date-range";
+import { DateRange, DateRangePicker, DefinedRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { useState } from "react";
@@ -15,14 +15,18 @@ const Calendar = () => {
   const handleSelect = (ranges: any) => {
     setStartDate(ranges.selection.startDate);
     setEndDate(ranges.selection.endDate);
+
   };
   return (
-    <div>
+    <div className="">
       <DateRangePicker
         ranges={[selectionRange]}
         minDate={new Date()}
         rangeColors={["#59981A"]}
         onChange={handleSelect}
+        fixedHeight={false}
+        showDateDisplay={true}
+       
       />
     </div>
   );

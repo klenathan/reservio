@@ -41,6 +41,7 @@ const Input = (props: InputProps) => {
                         autoComplete={"off"}
                         type={type}
                         min={props.min}
+                        max={props.max}
                         onChange={(event) => {
                             field.onChange(event);
                             if (props.onChange) {

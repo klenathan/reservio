@@ -6,19 +6,33 @@
 
 .status-border {
     border: 2px solid black;
-  }
-  
-  .status-border.status-pendingYellow {
+}
+
+.status-border.status-pendingYellow {
     border-color: #EEBC3C;
-  }
-  
-  .status-border.status-acceptedBlue {
+}
+
+.status-border.status-acceptedBlue {
     border-color: #2659C3;
-  }
-  
-  .status-border.status-rejectedRed {
+}
+
+.status-border.status-rejectedRed {
     border-color: #D20D3C;
-  }
-  .status-border.status-completedGreen {
+}
+
+.status-border.status-completedGreen {
     border-color: #5E9C1B;
-  }
+}
+
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ddd;
+}
+
+::-webkit-scrollbar-track {
+    background: #666;
+}

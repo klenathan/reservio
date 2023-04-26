@@ -2,6 +2,7 @@ import {FaStar} from "react-icons/fa";
 import PricingInformation from "components/Detail/PricingInformation";
 import React, {useState} from "react";
 import TotalPrice from "components/Detail/TotalPrice";
+import {useAuth} from "components/Auth/Context/AuthContext";
 
 interface ChoiceProps {
     start: string;
@@ -13,12 +14,12 @@ interface PricingProps {
     price: number;
     avgRating: number;
     countRating: number | undefined;
-    userName?: string;
     productName: string;
 }
 
 export default function Pricing(props: PricingProps) {
     const [choice, setChoice] = useState<ChoiceProps>();
+    const {isLogin, user} = useAuth()
     const handleChoice = (childData: any) => {
         setChoice(childData);
     };
@@ -50,28 +51,17 @@ export default function Pricing(props: PricingProps) {
             />
 
             {/*Total price*/}
-            {props.userName ?
-                <TotalPrice
-                    end={choice?.end}
-                    start={choice?.start}
-                    price={props.price}
-                    userName={props.userName}
-                    productName={props.productName}
-                    parentCallBack={handleChoice}
-                    maxQuantity={300}
-                    countReservation={100}
-                /> :
-                <TotalPrice
-                    end={choice?.end}
-                    start={choice?.start}
-                    price={props.price}
-                    userName={"Honneyyy 😘😘😘😘"}
-                    productName={props.productName}
-                    parentCallBack={handleChoice}
-                    maxQuantity={300}
-                    countReservation={100}
-                />
-            }
+            <TotalPrice
+                end={choice?.end}
+                start={choice?.start}
+                price={props.price}
+                userName={user?.username}
+                productName={props.productName}
+                parentCallBack={handleChoice}
+                maxQuantity={300}
+                countReservation={100}
+                isLogin={isLogin}
+            />
         </div>
     );
 }

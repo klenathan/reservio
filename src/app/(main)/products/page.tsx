@@ -38,7 +38,7 @@ export default function Category(slugs: any) {
       <CategoryList />
 
       <div className="flex">
-        <aside className="w-72 fixed left-0 h-3/4 p-4 mt-1 border border-black">
+        <aside className="w-80 fixed left-0 h-3/4 p-4 mt-1 border border-black">
           <div className="my-3">
             <h1 className="text-xl text-oliveGreen font-bold mb-2">By Date:</h1>
             <Calendar />

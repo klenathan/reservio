@@ -49,7 +49,7 @@ const TotalPrice = (props: TotalPriceProps) => {
         defaultValues: {
             quantity: 1,
         },
-        mode: "onBlur"
+        mode: "onChange"
     });
 
     const {push} = useRouter()
@@ -86,7 +86,9 @@ const TotalPrice = (props: TotalPriceProps) => {
                     smallText={"Service Name"}
                     mainText={props.productName}
                 />
-                <RowInformation smallText={"Username"} mainText={props.userName}/>
+                {props.userName ?
+                    <RowInformation smallText={"Username"} mainText={props.userName}/> :
+                    <RowInformation smallText={"Username"} mainText={"Honneyyy 😘😘😘😘"}/>}
                 <div className={"grid grid-cols-3 outline outline-1 outline-black"}>
                     {props.start ? (
                         <ColInformation

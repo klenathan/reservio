@@ -49,7 +49,6 @@ const FloatingButtonPricing: React.FC<FloatingButtonPricingProps> = (
                         price={props.price}
                         avgRating={props.avgRating}
                         countRating={props.countReviews}
-                        userName={props.userName}
                         productName={props.productName}
                     />
                 </Modal>

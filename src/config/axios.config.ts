@@ -1,6 +1,5 @@
 import axios, {AxiosResponse} from 'axios';
 import {AppConfig} from "@/config/app.config";
-import {Cookies} from "typescript-cookie";
 
 
 interface RefreshTokenResponse {
@@ -14,10 +13,12 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
     async (config) => {
-        const accessToken = Cookies.get('accessToken');
+        const accessToken = sessionStorage.getItem('accessToken');
+
         if (accessToken) {
             config.headers.Authorization = `Bearer ${accessToken}`;
         }
+
         return config;
     },
     (error) => Promise.reject(error),
@@ -27,30 +28,37 @@ apiClient.interceptors.response.use(
     (response: AxiosResponse) => response,
     async (error) => {
         const originalRequest = error.config;
-        const refreshToken = Cookies.get('refreshToken');
+        const refreshToken = localStorage.getItem('refreshToken');
 
         if (
-            error.response?.status === 401 &&
+            error.response?.status === 400 &&
+            error.response?.status === 404 &&
             refreshToken &&
             !originalRequest._retry
         ) {
             originalRequest._retry = true;
             try {
+                ``
                 const response = await axios.post<RefreshTokenResponse>(
                     `${apiClient.defaults.baseURL}auth/token/refresh`,
+                    {},
                     {
-                        refreshToken,
-                    },
-                );
-                Cookies.set('accessToken', response.data.accessToken);
-                Cookies.set('refreshToken', response.data.refreshToken);
+                        headers: {Authorization: `Bearer ${refreshToken}`}
+                    }
+                )
+
+                sessionStorage.setItem('accessToken', response.data.accessToken);
+                localStorage.setItem('refreshToken', response.data.refreshToken);
+
                 return apiClient(originalRequest);
-            } catch (error) {
-                // Handle refresh token request error
+            } catch
+                (error) {
+                // const {push} = useRouter();
+                // push("/")
             }
         }
         return Promise.reject(error);
     },
-);
+)
 
 export default apiClient;

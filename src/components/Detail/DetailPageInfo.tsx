@@ -1,64 +1,23 @@
 import React, { useState } from "react";
 import Picture from "components/Picture";
-import Review, { IReview } from "components/Review";
+import Review from "components/Review";
 
 interface DetailPageInfoProps {
   name: string;
   description: string;
   vendorName: string;
   avatar?: string;
+  reviews: Review[];
 }
 
 const DetailPageInfo: React.FC<DetailPageInfoProps> = (
   props: DetailPageInfoProps
 ) => {
   const [isExpanded, setIsExpanded] = useState(false);
+
   const toggleDescription = () => {
     setIsExpanded(!isExpanded);
   };
-
-  const rv: IReview[] = [
-    {
-      username: "Name",
-      avatar: props.avatar,
-      rating: 5,
-      feedback:
-        "Lorem ipsum dolor sit amet,urna. Nam eleifend ex sit amet risus pellentesque, sed gravida libero euismod. Phasellus vitae mauris vehicula odio posuere ornare. Nullam venenatis varius massa, at scelerisque magna ornare tempor. Morbi mattis, turpis sit amet posuere fermentum, ex diam efficitur neque, id tincidunt tellus nunc ut nulla. Integer faucibus iaculis gravida. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut egestas elit vitae sagittis dignissim. Donec risus libero, mattis ut felis quis, ultrices maximus ipsum. Nam sollicitudin tellus eu risus condimentum vestibulum. Morbi ut nulla malesuada, lobortis diam in, mattis massa.\n",
-      createAt: "September 2023",
-    },
-    {
-      username: "Name 2",
-      avatar: props.avatar,
-      rating: 5,
-      feedback:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vehicula aliquet tincidunt. Vivamus a nisi fringilla, congue risus sit amet, maximus ante. Proin sed dignissim urna. Nam eleifend ex sit amet risus pellentesque, sed gravida libero euismod. Phasellus vitae mauris vehicula odio posuere ornare. Nullam venenatis varius massa, at scelerisque magna ornare tempor. Morbi mattis, turpis sit amet posuere fermentum, ex diam efficitur neque, id tincidunt tellus nunc ut nulla. Integer faucibus iaculis gravida. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut egestas elit vitae sagittis dignissim. Donec risus libero, mattis ut felis quis, ultrices maximus ipsum. Nam sollicitudin tellus eu risus condimentum vestibulum. Morbi ut nulla malesuada, lobortis diam in, mattis massa.\n",
-      createAt: "September 2023",
-    },
-    {
-      username: "Name 3",
-      avatar: props.avatar,
-      rating: 5,
-      feedback:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vehicula aliquet tincidunt. Vivamus a nisi fringilla, congue risus sit amet, maximus ante. Proin sed dignissim urna. Nam eleifend ex sit amet risus pellentesque, sed gravida libero euismod. Phasellus vitae mauris vehicula odio posuere ornare. Nullam venenatis varius massa, at scelerisque magna ornare tempor. Morbi mattis, turpis sit amet posuere fermentum, ex diam efficitur neque, id tincidunt tellus nunc ut nulla. Integer faucibus iaculis gravida. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut egestas elit vitae sagittis dignissim. Donec risus libero, mattis ut felis quis, ultrices maximus ipsum. Nam sollicitudin tellus eu risus condimentum vestibulum. Morbi ut nulla malesuada, lobortis diam in, mattis massa.\n",
-      createAt: "September 2023",
-    },
-    {
-      username: "Name 3",
-      avatar: props.avatar,
-      rating: 5,
-      feedback:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vehicula aliquet tincidunt. Vivamus a nisi fringilla, congue risus sit amet, maximus ante. Proin sed dignissim urna. Nam eleifend ex sit amet risus pellentesque, sed gravida libero euismod. Phasellus vitae mauris vehicula odio posuere ornare. Nullam venenatis varius massa, at scelerisque magna ornare tempor. Morbi mattis, turpis sit amet posuere fermentum, ex diam efficitur neque, id tincidunt tellus nunc ut nulla. Integer faucibus iaculis gravida. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut egestas elit vitae sagittis dignissim. Donec risus libero, mattis ut felis quis, ultrices maximus ipsum. Nam sollicitudin tellus eu risus condimentum vestibulum. Morbi ut nulla malesuada, lobortis diam in, mattis massa.\n",
-      createAt: "September 2023",
-    },
-    {
-      username: "Name 3",
-      avatar: props.avatar,
-      rating: 5,
-      feedback:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vehicula aliquet tincidunt. Vivamus a nisi fringilla, congue risus sit amet, maximus ante. Proin sed dignissim urna. Nam eleifend ex sit amet risus pellentesque, sed gravida libero euismod. Phasellus vitae mauris vehicula odio posuere ornare. Nullam venenatis varius massa, at scelerisque magna ornare tempor. Morbi mattis, turpis sit amet posuere fermentum, ex diam efficitur neque, id tincidunt tellus nunc ut nulla. Integer faucibus iaculis gravida. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut egestas elit vitae sagittis dignissim. Donec risus libero, mattis ut felis quis, ultrices maximus ipsum. Nam sollicitudin tellus eu risus condimentum vestibulum. Morbi ut nulla malesuada, lobortis diam in, mattis massa.\n",
-      createAt: "September 2023",
-    },
-  ];
 
   return (
     <div className="flex flex-col md:items-start md:justify-start space-y-7 ">
@@ -108,19 +67,21 @@ const DetailPageInfo: React.FC<DetailPageInfoProps> = (
           </div>
         ) : (
           <div className={"text-2xl text-center font-bold"}>
-            {" "}
-            No information 😭😭😭😭😭{" "}
+            No information 😭😭😭😭😭
           </div>
         )}
       </div>
 
       {/*Review*/}
-      <div>
+      <div className={"border-b-2 border-gray-300 pb-2 w-full"}>
         <h3 className="text-gray-700 font-bold text-2xl mb-3">Reviews</h3>
-        {/*{props.review ?*/}
-        <Review review={rv} />
-
-        {/*}*/}
+        {props.reviews ? (
+          <Review review={props.reviews} />
+        ) : (
+          <div className={"text-2xl text-center font-bold"}>
+            Reviews are not found 😭😭😭😭
+          </div>
+        )}
       </div>
     </div>
   );

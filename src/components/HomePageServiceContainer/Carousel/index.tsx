@@ -3,23 +3,23 @@ import Image from "next/image";
 import Button from "@/components/Button";
 import { IService } from "../serviceInterface";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import axios from "axios";
 import Link from "next/link";
+import apiClient from "@/config/axios.config";
 
 const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [auto, setAuto] = useState(true);
   const [queryService, setServices] = useState<IService[]>([]);
 
-  useEffect(() => {
-    axios
-      .get(
-        "https://06ufwajgc6.execute-api.ap-southeast-1.amazonaws.com/service"
-      )
-      .then((r) => {
-        setServices(r.data);
-      });
-  }, []);
+    useEffect(() => {
+        apiClient
+            .get(
+                "service/highlight"
+            )
+            .then((r) => {
+                setServices(r.data);
+            });
+    }, []);
 
   const timerRef = useRef<HTMLButtonElement | null>(null);
   const handleNextSlide = () => {
@@ -52,17 +52,16 @@ const Carousel = () => {
 
   return (
     <div className="mt-3 p-5 md:p-0">
-      
       <div className="w-full md:w-4/5 flex justify-center overflow-hidden relative md:m-auto ">
-      <button
-        onClick={handlePrevSlide}
-        className=" left-5 m-auto text-5xl inset-y-1/2 text-gray-400 z-20 md:mr-7"
-      >
-        <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 ">
-          <MdChevronLeft size={50} className="cursor-pointer text-white" />
-          <span className="sr-only">Previous</span>
-        </span>
-      </button>
+        <button
+          onClick={handlePrevSlide}
+          className=" left-5 m-auto text-5xl inset-y-1/2 text-gray-400 z-20 md:mr-7"
+        >
+          <span className="hidden lg:inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 ">
+            <MdChevronLeft size={50} className="cursor-pointer text-white" />
+            <span className="sr-only">Previous</span>
+          </span>
+        </button>
         {queryService.map((service, index) => {
           if (index === currentSlide) {
             return (
@@ -73,17 +72,16 @@ const Carousel = () => {
           }
         })}
         <button
-        ref={timerRef}
-        onClick={handleNextSlide}
-        className="right-5 m-auto text-5xl inset-y-1/2 text-gray-400 z-20"
-      >
-        <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30">
-          <MdChevronRight size={50} className="cursor-pointer text-white" />
-          <span className="sr-only">Next</span>
-        </span>
-      </button>
+          ref={timerRef}
+          onClick={handleNextSlide}
+          className="right-5 m-auto text-5xl inset-y-1/2 text-gray-400 z-20"
+        >
+          <span className="hidden lg:inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30">
+            <MdChevronRight size={50} className="cursor-pointer text-white" />
+            <span className="sr-only">Next</span>
+          </span>
+        </button>
       </div>
-      
 
       <div className="relative flex justify-center md:mt-5 mt-5">
         {queryService.map((_, index) => {
@@ -133,9 +131,8 @@ const CarouselProps = (props: { carousel: IService }) => {
         <Link
           href={`/detail/${encodeURIComponent(props.carousel.id)}`}
           className="flex flex-col w-1/3 shadow-xl rounded-md md:my-8 "
-        > 
-           <Button btnStyle="filled">Reserve Now</Button>
-          
+        >
+          <Button btnStyle="filled">Reserve Now</Button>
         </Link>
       </div>
     </div>

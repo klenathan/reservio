@@ -1,21 +1,22 @@
 'use client'
 import NavBar from "components/NavBar";
-import Head from "next/head";
+
 
 export default function MainLayout({
                                        children,
                                    }: {
     children: React.ReactNode;
 }) {
+    // className="flex h-screen flex-col"
     return (
-        <section>
-            <NavBar>
-                <Head>
-                    <title>Reservio</title>
-                </Head>
-            </NavBar>
+        <div className="relative">
+            <NavBar/>
+            {/*<Suspense fallback={<Loading/>}>*/}
             {children}
-        </section>
+
+            {/*</Suspense>*/}
+            {/*<Footer/>*/}
+        </div>
 
     )
 }

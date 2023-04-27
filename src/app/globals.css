@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap');
+@import 'react-date-range/dist/styles.css';
+@import 'react-date-range/dist/theme/default.css';
 
 @tailwind base;
 @tailwind components;
@@ -30,9 +32,11 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #ddd;
+    background: #59981A;
+    border-radius: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #666;
+    background: #ddd;
+    border-radius: 8px;
 }

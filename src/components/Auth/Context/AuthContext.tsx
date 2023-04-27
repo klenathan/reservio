@@ -1,6 +1,7 @@
 'use client'
 import {createContext, ReactNode, useContext, useEffect, useState} from "react";
 import {User} from "../../../../Types";
+import axios from "axios";
 import apiClient from "@/config/axios.config";
 
 type AuthContextType = {
@@ -41,11 +42,14 @@ export function AuthProvider({children}: AuthProviderProps) {
     const [isLogin, setIsLogin] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(true); // initialize isLoading to true
 
+
     useEffect(() => {
         if (localStorage.getItem('refreshToken')) {
             if (!sessionStorage.getItem('accessToken')) {
-                apiClient
-                    .get('auth/token/refresh')
+                axios
+                    .post(`${apiClient.defaults.baseURL}auth/token/refresh`, {}, {
+                        headers: {Authorization: `Bearer ${localStorage.getItem('refreshToken')}`}
+                    })
                     .then((response) => {
                         sessionStorage.setItem('accessToken', response.data.accessToken);
                         setIsLogin(true); // set isLogin to true when authentication succeeds

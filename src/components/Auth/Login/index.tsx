@@ -7,7 +7,8 @@ import FormHeader from "../../Form/FormHeader";
 import apiClient from "@/config/axios.config";
 import {useAuth} from "components/Auth/Context/AuthContext";
 import {useEffect} from "react";
-import Loading from "@/app/loading";
+
+// import Loading from "@/app/(main)/loading";
 
 interface IFromInput {
     username: String;
@@ -33,7 +34,7 @@ const LoginForm = () => {
     })
 
     if (isLoading) {
-        return <Loading/>
+        return <div><p>Loading Auth Contexts</p></div>
     }
 
 

@@ -3,6 +3,7 @@ import {createContext, ReactNode, useContext, useEffect, useState} from "react";
 import {User} from "../../../../Types";
 import axios from "axios";
 import apiClient from "@/config/axios.config";
+import {useRouter} from "next/navigation";
 
 type AuthContextType = {
     user: User | null;

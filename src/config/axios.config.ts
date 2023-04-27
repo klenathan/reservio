@@ -32,6 +32,7 @@ apiClient.interceptors.response.use(
 
         if (
             error.response?.status === 400 &&
+            error.response?.status === 404 &&
             refreshToken &&
             !originalRequest._retry
         ) {

@@ -8,8 +8,8 @@ import Picture from "components/Picture";
 import {FaStar} from "react-icons/fa";
 import Loading from "@/app/(main)/detail/loading";
 import {Product} from "../../../Types";
-import Pricing from "components/Detail/Pricing";
-import FloatingButtonPricing from "components/Detail/FloatingButtonPricing";
+import Pricing from "components/Detail/Pricing/Pricing";
+import FloatingButtonPricing from "components/Detail/Pricing/FloatingButtonPricing";
 import {useAuth} from "components/Auth/Context/AuthContext";
 
 const Map = dynamic(() => import("components/Map/Map"), {ssr: false});
@@ -70,7 +70,6 @@ const DetailPage = (props: { service: Product }) => {
                             price={props.service.price}
                             avgRating={props.service.avgRating}
                             countRating={props.service._count?.reviews}
-                            userName={user?.username}
                             productName={props.service.name}
                         />
                     </div>

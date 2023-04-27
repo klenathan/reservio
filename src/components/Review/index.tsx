@@ -55,7 +55,7 @@ const Review = (props: { review: Review[] }) => {
                     <div className={'overflow-auto scroll-auto h-full max-h-96'}>
                         {props.review.map((review, index) => {
                             return (
-                                <div key={index} className="flex space-x-6 mb-10">
+                                <div key={index} className="flex space-x-6 mt-6">
                                     <ReviewCard
                                         username={review.user.username}
                                         avatar={review.user.avatar}

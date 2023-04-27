@@ -13,17 +13,33 @@ interface IHamburgerMenuChildProps {
 const HamburgerMenuChild: React.FC<IHamburgerMenuChildProps> = (
     props: IHamburgerMenuChildProps
 ) => {
-    return (
-        <Link
-            href={{pathname: props.href}}
-            className={`hover:bg-limeGreen hover:bg-opacity-20 
+    if (!props.href) {
+        return (
+            <Link
+                prefetch={false}
+                href={"/"}
+                className={`hover:bg-limeGreen hover:bg-opacity-20 
       first:rounded-t-xl last:rounded-b-xl
     py-2 px-2`}
-            onClick={props.onClick}
-        >
-            {props.children}
-        </Link>
-    );
+                onClick={props.onClick}
+            >
+                {props.children}
+            </Link>
+        );
+    } else {
+        return (
+            <Link
+                href={{pathname: props.href}}
+                className={`hover:bg-limeGreen hover:bg-opacity-20 
+      first:rounded-t-xl last:rounded-b-xl
+    py-2 px-2`}
+                onClick={props.onClick}
+            >
+                {props.children}
+            </Link>
+        );
+    }
+
 };
 
 interface IHamburgerMenuProps {

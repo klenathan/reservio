@@ -43,14 +43,16 @@ const Modal: React.FC<ModalProps> = (props: ModalProps) => {
         <div
             className="modal flex fixed inset-0 z-50 justify-center items-center bg-neutral-700 bg-opacity-50 rounded-lg">
             <div className="h-3/4 z-10  rounded-lg">
-                <div className="modal-content bg-white rounded-lg p-6 max-w-screen-md mx-auto ">
-                    <div className="flex sticky top-0 bg-white p-5 z-10 items-center justify-between mb-4 w-full ">
+                <div className="modal-content bg-white rounded-lg  max-w-screen-md mx-auto ">
+                    <div
+                        className="flex shadow-xl sticky top-0 bg-white z-10 px-6 py-6 rounded-t-lg items-center justify-between w-full ">
                         <FormHeader name={props.nameModal}/>
                         <button className="ml-4" onClick={props.onClose}>
                             <AiOutlineClose size={30}/>
                         </button>
                     </div>
-                    {props.children}
+                    <div className={"px-6 pb-6"}>{props.children}</div>
+
                 </div>
             </div>
         </div>

@@ -1,9 +1,7 @@
-
-
 const Footer = () => {
-    return(
-        <div >
-          
+    return (
+        <div>
+            <h2> FOOOOTEEERRR </h2>
         </div>
     )
 }

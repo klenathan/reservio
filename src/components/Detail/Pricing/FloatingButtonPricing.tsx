@@ -1,7 +1,7 @@
 import {FaStar} from "react-icons/fa";
 import React, {useState} from "react";
 import Modal from "components/Modal";
-import Pricing from "components/Detail/Pricing";
+import Pricing from "components/Detail/Pricing/Pricing";
 
 interface FloatingButtonPricingProps {
     price: number;

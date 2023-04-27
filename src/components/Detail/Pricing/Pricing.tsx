@@ -1,8 +1,8 @@
 import {FaStar} from "react-icons/fa";
-import PricingInformation from "components/Detail/PricingInformation";
 import React, {useState} from "react";
-import TotalPrice from "components/Detail/TotalPrice";
+import TotalPrice from "components/Detail/Pricing/TotalPrice";
 import {useAuth} from "components/Auth/Context/AuthContext";
+import PricingFlexible from "components/Detail/Pricing/PricingFlexible";
 
 interface ChoiceProps {
     start: string;
@@ -42,13 +42,14 @@ export default function Pricing(props: PricingProps) {
             </div>
 
             {/*Information display*/}
-            <PricingInformation
-                start={"10:30"}
-                end={"11:00"}
-                maxQuantity={300}
-                countReservation={100}
-                parentCallBack={handleChoice}
-            />
+            {/*<PricingFixing*/}
+            {/*    start={"10:30"}*/}
+            {/*    end={"11:00"}*/}
+            {/*    maxQuantity={300}*/}
+            {/*    countReservation={100}*/}
+            {/*    parentCallBack={handleChoice}*/}
+            {/*/>*/}
+            <PricingFlexible/>
 
             {/*Total price*/}
             <TotalPrice

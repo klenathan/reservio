@@ -3,7 +3,7 @@ import React from "react";
 import {useAuth} from "components/Auth/Context/AuthContext";
 import {useRouter} from "next/navigation";
 
-interface PriceInformationProps {
+interface PriceFixingProps {
     start: string
     end: string
     maxQuantity: number
@@ -11,7 +11,7 @@ interface PriceInformationProps {
     parentCallBack?: any
 }
 
-const PricingInformation: React.FC<PriceInformationProps> = (props: PriceInformationProps) => {
+const PricingFixing: React.FC<PriceFixingProps> = (props: PriceFixingProps) => {
     const {isLogin} = useAuth()
     const {push} = useRouter()
 
@@ -53,4 +53,4 @@ const PricingInformation: React.FC<PriceInformationProps> = (props: PriceInforma
     )
 }
 
-export default PricingInformation;
+export default PricingFixing;

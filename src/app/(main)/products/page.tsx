@@ -14,7 +14,7 @@ export default function Category(slugs: any) {
   const [value, setValue] = useState<string>("");
   const [queryService, setServices] = useState<Product[]>([]);
   const [queryVendor, setVendors] = useState<Vendor[]>([]);
-
+  console.log(slugs);
   function fetchData(
     endpoint: string,
     searchParam: string,
@@ -56,8 +56,8 @@ export default function Category(slugs: any) {
     <div className="overflow-hidden">
       <CategoryList />
 
-      <div className="flex">
-        <aside className="w-80 fixed left-0 h-3/4 p-4 mt-1 border border-black">
+      <div className="grid grid-cols-4">
+        {/* <aside className="col-span-1 fixed left-0 h-3/4 p-4 mt-1 border border-black">
           <div className="my-3">
             <h1 className="text-xl text-oliveGreen font-bold mb-2">By Date:</h1>
             <Calendar />
@@ -79,12 +79,19 @@ export default function Category(slugs: any) {
               handleChange={(val: string) => setValue(val)}
             />
           </div>
-        </aside>
-        <div>
+        </aside> */}
+        <div className="col-span-4">
+          {queryVendor.length == 0 && queryService.length == 0 ? (
+            <div>Not found!!!!!</div>
+          ) : (
+            ""
+          )}
           {queryVendor.length > 0 ? (
             <div className="flex-1 ml-80">
-              <h1>Vendors: </h1>
-              <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 md:grid-cols-2 place-items-center max-w-7xl mx-6 ">
+              <h1 className="text-xl text-oliveGreen font-bold mb-2">
+                Vendor:
+              </h1>
+              <div className="max-w-7xl mx-6 ">
                 {queryVendor.map((vendor) => {
                   return <VendorCard key={vendor.id} vendor={vendor} />;
                 })}
@@ -94,9 +101,11 @@ export default function Category(slugs: any) {
             ""
           )}
 
-          {queryService.length != 0 ? (
+          {queryService.length > 0 ? (
             <div className="flex-1 ml-80">
-              <h1>Services: </h1>
+              <h1 className="text-xl text-oliveGreen font-bold mb-2">
+                Service:
+              </h1>
               <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 md:grid-cols-2 place-items-center max-w-7xl mx-6 ">
                 {queryService.map((service) => {
                   return <Card key={service.id} service={service} />;
@@ -105,7 +114,7 @@ export default function Category(slugs: any) {
               </div>
             </div>
           ) : (
-            <div>Not found!!!!</div>
+            ""
           )}
         </div>
       </div>

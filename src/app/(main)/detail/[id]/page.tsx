@@ -5,6 +5,7 @@ import DetailPage from "components/Detail";
 import {NotFound} from "next/dist/client/components/error";
 import apiClient from "@/config/axios.config";
 import {Product} from "../../../../../Types";
+import LoadingSpinner from "components/LoadingSpinner";
 
 interface DetailParams {
     params: {
@@ -36,13 +37,9 @@ export default function Detail(slugs: DetailParams) {
     }, [slugs.params.id]);
 
     if (!product && !isError) {
-        // return <div
-        //     className="relative h-[calc(100vh_-_10rem)] -top-[5rem] w-full flex flex-col justify-center items-center overflow-hidden -z-10">
-        //     <LoadingSpinner text="Loading product data, please wait..."/>
-        // </div>;
         return <div
-        >
-            asdasdsad
+            className="relative h-[calc(100vh_-_10rem)] -top-[5rem] w-full flex flex-col justify-center items-center overflow-hidden -z-10">
+            <LoadingSpinner text="Loading product data, please wait..."/>
         </div>;
     }
 

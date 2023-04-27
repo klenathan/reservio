@@ -1,50 +1,56 @@
 import React, {useState} from "react";
+import {DateRange, DateRangeProps, Range} from "react-date-range";
 
+interface DatePickerProps extends DateRangeProps {
+    onDateSelect?: (range: Range[]) => void;
+}
 
-const DatePicker: React.FC = () => {
-    const dateNow = new Date();
+const dateNow = new Date();
 
-    const [state, setState] = useState([
+const DatePicker: React.FC<DatePickerProps> = ({
+                                                   onDateSelect,
+                                                   ...datePickerProps
+                                               }) => {
+    const [dateRange, setDateRange] = useState<Range[]>([
         {
             startDate: dateNow,
-            endDate: null,
+            endDate: dateNow,
             key: "selection"
         }
     ]);
+    const [isOpen, setIsOpen] = useState<boolean>(false)
 
-    const [isOpen, setIsOpen] = useState(false);
+    const startDateString = dateRange[0].startDate ? dateRange[0].startDate?.toDateString().replace(/^\S+\s/, '') : '';
+    const endDateString = dateRange[0].endDate ? dateRange[0].endDate.toDateString().replace(/^\S+\s/, '') : '';
 
-    const handleSelect = (ranges: any) => {
-        setState([ranges.selection]);
-        setIsOpen(false);
-    };
-
-    const toggleCalendar = () => {
-        setIsOpen(!isOpen);
-    };
 
     return (
         <div>
-            <div onClick={toggleCalendar}>
-                {state[0].startDate.toLocaleDateString()} -{" "}
-                {/*{state[0].endDate?.toLocaleDateString() || "Select Date"}*/}
+            <div>
+                <div>
+                    Start Date
+                </div>
+                <div>
+                    {startDateString}
+                </div>
+                <div>
+                    End Date
+                </div>
+                <div>
+                    {endDateString}
+                </div>
             </div>
+            <DateRange
+                editableDateInputs={true}
+                onChange={item => setDateRange([item.selection])}
+                moveRangeOnFirstSelection={false}
+                showDateDisplay={false}
+                ranges={dateRange}
+                minDate={dateNow}
+                dragSelectionEnabled={true}
 
-            {/*{isOpen && (*/}
-            {/*    <Calendar*/}
-            {/*        date={state[0].startDate}*/}
-            {/*        onChange={(date) =>*/}
-            {/*            setState([{...state[0], startDate: date, endDate: null}])*/}
-            {/*        }*/}
-            {/*        onRangeFocusChange={() => {*/}
-            {/*        }}*/}
-            {/*        // onShown={() => {*/}
-            {/*        // }}*/}
-            {/*        onHidden={() => setIsOpen(false)}*/}
-            {/*    />*/}
-            {/*)}*/}
-
-
+                {...datePickerProps}
+            />
         </div>
     );
 };

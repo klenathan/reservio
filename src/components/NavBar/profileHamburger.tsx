@@ -3,6 +3,7 @@ import {GiHamburgerMenu} from "react-icons/gi";
 import {CgProfile} from "react-icons/cg";
 import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
 import {useAuth} from "components/Auth/Context/AuthContext";
+import Picture from "components/Picture";
 
 interface IHamburgerMenuChildProps {
     children: JSX.Element | JSX.Element[] | string;
@@ -44,13 +45,14 @@ const HamburgerMenuChild: React.FC<IHamburgerMenuChildProps> = (
 
 interface IHamburgerMenuProps {
     show: boolean;
+    logout?: () => void,
     setShow: Dispatch<SetStateAction<boolean>>;
 }
 
 const NavBarHamburgerMenu: React.FC<IHamburgerMenuProps> = (
     props: IHamburgerMenuProps
 ) => {
-    const {user, login, logout} = useAuth()
+
 
     useEffect(() => {
         const handleClick = (e: any) => {
@@ -73,12 +75,13 @@ const NavBarHamburgerMenu: React.FC<IHamburgerMenuProps> = (
             <HamburgerMenuChild href="/login">Login</HamburgerMenuChild>
             <HamburgerMenuChild href="/userprofile">My Profile</HamburgerMenuChild>
             <HamburgerMenuChild href="/vendorprofile">Vendor Profile</HamburgerMenuChild>
-            <HamburgerMenuChild onClick={logout}>Logout</HamburgerMenuChild>
+            {props.logout && <HamburgerMenuChild onClick={props.logout}>Logout</HamburgerMenuChild>}
         </div>
     );
 };
 
 export default function ProfileHamBurger() {
+    const {user, login, logout} = useAuth()
     const [show, setShow] = useState(false);
     const toggleHamburgerMenu = () => {
         if (show) {
@@ -99,8 +102,15 @@ export default function ProfileHamBurger() {
     hover:shadow hover:border-oliveGreen col-span-1"
         >
             <GiHamburgerMenu className="h-8"/>
-            <CgProfile className="h-6 w-6"/>
-            <NavBarHamburgerMenu show={show} setShow={setShow}/>
+            {!user ?
+                <CgProfile className="h-6 w-6"/>
+                :
+                <div className={'relative w-8 h-8 border-2 rounded-full border-gray-400 '}>
+                    <Picture src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + user.avatar}/>
+
+                </div>
+            }
+            <NavBarHamburgerMenu logout={logout} show={show} setShow={setShow}/>
         </div>
     );
 }

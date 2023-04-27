@@ -28,7 +28,7 @@ const TopDealContainer = () => {
     useEffect(() => {
         apiClient
             .get(
-                "service"
+                "service/highlight"
             )
             .then((r) => {
                 setServices(r.data);

@@ -3,6 +3,7 @@ import {createContext, ReactNode, useContext, useEffect, useState} from "react";
 import {User} from "../../../../Types";
 import axios from "axios";
 import apiClient from "@/config/axios.config";
+import {useRouter} from "next/navigation";
 
 type AuthContextType = {
     user: User | null;
@@ -45,14 +46,18 @@ export function AuthProvider({children}: AuthProviderProps) {
 
     useEffect(() => {
         if (localStorage.getItem('refreshToken')) {
-            if (!sessionStorage.getItem('accessToken')) {
+            const accessToken = sessionStorage.getItem('accessToken')
+            const userData = sessionStorage.getItem('userData')
+            if (!accessToken || !userData) {
                 axios
                     .post(`${apiClient.defaults.baseURL}auth/token/refresh`, {}, {
                         headers: {Authorization: `Bearer ${localStorage.getItem('refreshToken')}`}
                     })
                     .then((response) => {
                         sessionStorage.setItem('accessToken', response.data.accessToken);
-                        setIsLogin(true); // set isLogin to true when authentication succeeds
+                        sessionStorage.setItem('userData', JSON.stringify(response.data.user));
+                        setUser(response.data.user)
+                        setIsLogin(true);
                     })
                     .catch(() => {
                         setIsLogin(false); // set isLogin to false when authentication fails
@@ -61,20 +66,22 @@ export function AuthProvider({children}: AuthProviderProps) {
                         setIsLoading(false); // set isLoading to false when authentication request is completed
                     });
             } else {
+                setUser(JSON.parse(userData))
                 setIsLogin(true);
                 setIsLoading(false);
             }
         } else {
             setIsLoading(false);
         }
-    }, []);
 
+    }, []);
     const login = () => {
         setIsLogin(true);
     };
 
     const logout = () => {
         sessionStorage.removeItem('accessToken')
+        sessionStorage.removeItem('userData')
         localStorage.removeItem('refreshToken')
         setUser(null)
         setIsLogin(false);

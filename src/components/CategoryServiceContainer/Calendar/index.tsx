@@ -15,10 +15,9 @@ const Calendar = () => {
   const handleSelect = (ranges: any) => {
     setStartDate(ranges.selection.startDate);
     setEndDate(ranges.selection.endDate);
-
   };
   return (
-    <div className="">
+    <div>
       <DateRangePicker
         ranges={[selectionRange]}
         minDate={new Date()}
@@ -26,7 +25,6 @@ const Calendar = () => {
         onChange={handleSelect}
         fixedHeight={false}
         showDateDisplay={true}
-       
       />
     </div>
   );

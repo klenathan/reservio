@@ -14,7 +14,7 @@ export default function Category(slugs: any) {
   const [value, setValue] = useState<string>("");
   const [queryService, setServices] = useState<Product[]>([]);
   const [queryVendor, setVendors] = useState<Vendor[]>([]);
-  console.log(slugs);
+
   function fetchData(
     endpoint: string,
     searchParam: string,
@@ -56,8 +56,8 @@ export default function Category(slugs: any) {
     <div className="overflow-hidden">
       <CategoryList />
 
-      <div className="grid grid-cols-4">
-        {/* <aside className="col-span-1 fixed left-0 h-3/4 p-4 mt-1 border border-black">
+      <div className="grid grid-cols-5">
+        <aside className="col-span-2 fixed left-0 h-3/4 p-4 mt-1 border border-black">
           <div className="my-3">
             <h1 className="text-xl text-oliveGreen font-bold mb-2">By Date:</h1>
             <Calendar />
@@ -79,8 +79,8 @@ export default function Category(slugs: any) {
               handleChange={(val: string) => setValue(val)}
             />
           </div>
-        </aside> */}
-        <div className="col-span-4">
+        </aside>
+        <div className="col-span-3 ml-40">
           {queryVendor.length == 0 && queryService.length == 0 ? (
             <div>Not found!!!!!</div>
           ) : (

@@ -2,7 +2,6 @@ import apiClient from "@/config/axios.config";
 import { categories } from "@/const/Categories";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { AiOutlinePlusCircle } from "react-icons/ai";
 import { Category } from "../../../Types";
 import Form from "../Form";
 import Input from "../Form/Input";
@@ -44,19 +43,23 @@ const AddProduct = () => {
   };
   const onSubmit: SubmitHandler<IFromInput> = async (data) => {
     const formData = new FormData();
+    console.log(data);
+    console.log(value);
     formData.append("name", data.name as string);
     formData.append("price", data.price as string);
-    formData.append("category", value as string);
+    formData.append("category", data.category as string);
     formData.append("quantity", value as string);
-    apiClient
-      .post("service", formData)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((e) => {
-        const errorsInfo = e.response.data;
-        console.log(errorsInfo.error);
-      });
+    console.log(formData);
+
+    // apiClient
+    //   .post("service", formData)
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((e) => {
+    //     const errorsInfo = e.response.data;
+    //     console.log(errorsInfo.error);
+    //   });
   };
 
   const fixTimeHandle = () => {
@@ -96,7 +99,7 @@ const AddProduct = () => {
   ));
 
   return (
-    <div className="col-span-1">
+    <div className="col-span-1 overflow-auto scroll-auto h-full max-h-96">
       <Form onSubmit={handleSubmit(onSubmit)} button="Submit">
         <Input
           name={"name"}

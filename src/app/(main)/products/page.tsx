@@ -15,49 +15,34 @@ export default function Category(slugs: any) {
   const [queryService, setServices] = useState<Product[]>([]);
   const [queryVendor, setVendors] = useState<Vendor[]>([]);
 
-  function fetchData(
-    endpoint: string,
-    searchParam: string,
-    setData: any,
-    setVendors: any
-  ) {
-    if (searchParam) {
+  useEffect(() => {
+    if (slugs.searchParams.category) {
       apiClient
-        .get(endpoint + searchParam)
-        .then((r) => {
-          setData(r.data.products);
-          setVendors(r.data.vendors);
+        .get(`service/category/${slugs.searchParams.category}`)
+        .then((res) => setServices(res.data));
+    }
+  }, [slugs.searchParams.category]);
+
+  useEffect(() => {
+    if (slugs.searchParams.keyword) {
+      apiClient
+        .get(`search?query=${slugs.searchParams.keyword}`)
+        .then((res) => {
+          setServices(res.data.products);
+          setVendors(res.data.vendors);
         })
         .catch((e) => {
           console.log(e);
         });
     }
-  }
-
-  useEffect(() => {
-    fetchData(
-      "service/category/",
-      slugs.searchParams.category,
-      setServices,
-      setVendors
-    );
-  }, [slugs.searchParams.category]);
-
-  useEffect(() => {
-    fetchData(
-      "search?query=",
-      slugs.searchParams.keyword,
-      setServices,
-      setVendors
-    );
   }, [slugs.searchParams.keyword]);
 
   return (
     <div className="overflow-hidden">
       <CategoryList />
 
-      <div className="grid grid-cols-5">
-        <aside className="col-span-2 fixed left-0 h-3/4 p-4 mt-1 border border-black">
+      <div className="min-h-3/4 flex">
+        <aside className="flex-none h-3/4 p-4 mt-1 border border-black">
           <div className="my-3">
             <h1 className="text-xl text-oliveGreen font-bold mb-2">By Date:</h1>
             <Calendar />
@@ -80,14 +65,14 @@ export default function Category(slugs: any) {
             />
           </div>
         </aside>
-        <div className="col-span-3 ml-40">
+        <div className="flex-1 min-w-0 overflow-auto">
           {queryVendor.length == 0 && queryService.length == 0 ? (
             <div>Not found!!!!!</div>
           ) : (
             ""
           )}
           {queryVendor.length > 0 ? (
-            <div className="flex-1 ml-80">
+            <div className="flex-1 w-full">
               <h1 className="text-xl text-oliveGreen font-bold mb-2">
                 Vendor:
               </h1>
@@ -102,7 +87,7 @@ export default function Category(slugs: any) {
           )}
 
           {queryService.length > 0 ? (
-            <div className="flex-1 ml-80">
+            <div className="flex-1 w-full">
               <h1 className="text-xl text-oliveGreen font-bold mb-2">
                 Service:
               </h1>
@@ -110,7 +95,6 @@ export default function Category(slugs: any) {
                 {queryService.map((service) => {
                   return <Card key={service.id} service={service} />;
                 })}
-                
               </div>
             </div>
           ) : (

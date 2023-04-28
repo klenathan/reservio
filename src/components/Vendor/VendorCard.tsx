@@ -31,17 +31,19 @@ const VendorCard = (props: { vendor: Vendor }) => {
         </div>
       </div>
       <div className="flex items-center">
-        {props.vendor.category.map((cate) => {
-          let cateObj = categories.find((obj) => {
-            return obj.id == cate;
-          });
-          return (
-            <div key={cateObj?.id} className="text-center m-1 shadow-md">
-              <div className="flex justify-center">{cateObj?.icon}</div>
-              <div>{cateObj?.category}</div>
-            </div>
-          );
-        })}
+        {props.vendor.category.length > 0
+          ? props.vendor.category.map((cate) => {
+              let cateObj = categories.find((obj) => {
+                return obj.id == cate;
+              });
+              return (
+                <div key={cateObj?.id} className="text-center m-1 shadow-md">
+                  <div className="flex justify-center">{cateObj?.icon}</div>
+                  <div>{cateObj?.category}</div>
+                </div>
+              );
+            })
+          : ""}
         <div className="text-center m-1 shadow-md">
           <div className="flex justify-center">
             <GrServices />

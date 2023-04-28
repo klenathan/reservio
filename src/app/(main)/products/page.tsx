@@ -101,7 +101,7 @@ export default function Category(slugs: any) {
                 {queryService.map((service) => {
                   return <Card key={service.id} service={service} />;
                 })}
-                )
+                
               </div>
             </div>
           ) : (

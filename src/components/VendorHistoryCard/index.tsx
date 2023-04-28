@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import Button from "../Button";
+import { useState } from "react";
 
 interface IVendorCardProps {
   userName: string;
@@ -10,7 +12,18 @@ interface IVendorCardProps {
   statusColor: string;
 }
 
-const VendorHistoryCard = (props: any) => {
+
+const VendorHistoryCard = (props: IVendorCardProps) => {
+  const [status, setStatus] = useState(props.status);
+
+  const handleAccept = () => {
+    setStatus("accepted");
+  };
+
+  const handleReject = () => {
+    setStatus("rejected");
+  };
+  const newLocal = this;
   return (
     <div
       className="w-full md:w-full shadow-lg mb-3 mt-3 rounded-md
@@ -37,32 +50,58 @@ const VendorHistoryCard = (props: any) => {
       </div>
 
       <div className="break-words p-3 pl-1 pt-1 md:p-6 md:pl-2 md:pt-1 flex flex-col justify-between  ">
-        <div className="flex flex-col">
-          <div className="flex flex-row items-center">
-            <a href="#" className="text-base md:text-xl font-bold ">
-              Username: {props.userName}
-            </a>
-            <div className="relative w-[1rem] h-[1rem] ml-1">
-              <Image
-                src="/assets/profile.svg"
-                fill
-                sizes="(max-width: 768px) 100vw,
+        <div className="flex flex-row justify-between">
+          <div className="flex flex-col">
+            <div className="flex flex-row items-center">
+              <a href="#" className="text-base md:text-xl font-bold ">
+                Username: {props.userName}
+              </a>
+              <div className="relative w-[1rem] h-[1rem] ml-1">
+                <Image
+                  src="/assets/profile.svg"
+                  fill
+                  sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
-                alt="Profile Hamburger"
-                className="px-0 object-cover"
-              />
+                  alt="Profile Hamburger"
+                  className="px-0 object-cover"
+                />
+              </div>
             </div>
+            <a href="#" className="text-base md:text-xl font-bold">
+              {props.productName}
+            </a>
+            <h1 className="font-medium text-xs">
+              <span className="text-xs md:text-xl font-medium text-midGreen">
+                ₫{props.price}
+              </span>
+            </h1>
           </div>
-          <a href="#" className="text-base md:text-xl font-bold">
-            {props.productName}
-          </a>
-          <h1 className="font-medium text-xs">
-            <span className="text-xs md:text-xl font-medium text-midGreen">
-              ₫{props.price}
-            </span>
-          </h1>
+          <div className="grid grid-rows-2 gap-2 mt-2">
+          {props.status === "pending" ? (
+    <>
+            <Button
+              className="  shadow
+    hover:shadow-xl text-white bg-gradient-to-tr from-midGreen to-limeGreen py-2 px-4"
+              btnStyle="bomaytulam"
+              onClick={handleAccept}
+            >
+              Accept
+            </Button>
+            <Button
+              className="  shadow
+    hover:shadow-xl text-white bg-gradient-to-tr from-heavyRed to-lightRed py-0 px-0"
+              btnStyle="bomaytulam"
+              onClick={handleReject}
+            >
+              Reject
+            </Button>
+            </>
+          ) : null}
+          </div>
         </div>
+     
+
         <div className="font-extrabold text-gray-600 md:text-base pt-3">
           Total with taxes:
           <span className="text-xl md:text-2xl font-extrabold text-midGreen ml-3">

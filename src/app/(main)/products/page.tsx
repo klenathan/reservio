@@ -9,11 +9,24 @@ import Card from "@/components/Card";
 import { City, Product, Vendor } from "../../../../Types";
 import SearchableDropdown from "@/components/SearchableDropdown";
 import VendorCard from "@/components/Vendor/VendorCard";
-
+import Form from "@/components/Form";
+import { SubmitHandler, useForm } from "react-hook-form";
+interface IFromInput {
+  minPrice?: string;
+  maxPrice?: string;
+  category?: string;
+  fromDate?: string;
+  toDate?: string;
+}
 export default function Category(slugs: any) {
   const [value, setValue] = useState<string>("");
   const [queryService, setServices] = useState<Product[]>([]);
   const [queryVendor, setVendors] = useState<Vendor[]>([]);
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<IFromInput>();
 
   useEffect(() => {
     if (slugs.searchParams.category) {
@@ -37,33 +50,60 @@ export default function Category(slugs: any) {
     }
   }, [slugs.searchParams.keyword]);
 
+  const onSubmit: SubmitHandler<IFromInput> = async (data) => {
+    let minPrice = data.minPrice ? data.minPrice : "";
+    let maxPrice = data.maxPrice ? data.maxPrice : "";
+    let category = slugs.searchParams.category
+      ? slugs.searchParams.category
+      : "";
+    let fromDate = data.fromDate ? data.fromDate : "";
+    let toDate = data.toDate ? data.toDate : "";
+    apiClient
+      .get(
+        `/service?minPrice=${minPrice}&maxPrice=${maxPrice}&category=${category}&fromDate=${fromDate}&toDate=${toDate}`
+      )
+      .then((res) => setServices(res.data))
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   return (
     <div className="overflow-hidden">
       <CategoryList />
 
       <div className="min-h-3/4 flex">
         <aside className="flex-none h-3/4 p-4 mt-1 border border-black">
-          <div className="my-3">
-            <h1 className="text-xl text-oliveGreen font-bold mb-2">By Date:</h1>
-            <Calendar />
-          </div>
+          <Form onSubmit={handleSubmit(onSubmit)} button="Submit">
+            <div className="my-3">
+              <h1 className="text-xl text-oliveGreen font-bold mb-2">
+                By Date:
+              </h1>
+              <Calendar />
+            </div>
 
-          <div className="my-3">
-            <h1 className="text-xl text-oliveGreen font-bold mb-2">
-              By Price:
-            </h1>
-            <Price />
-          </div>
+            <div className="my-3">
+              <h1 className="text-xl text-oliveGreen font-bold mb-2">
+                By Price:
+              </h1>
+              <Price
+                control={control}
+                minPrice={errors.minPrice}
+                maxPrice={errors.maxPrice}
+              />
+            </div>
 
-          <div className="my-3">
-            <h1 className="text-xl text-oliveGreen font-bold mb-2">By City:</h1>
-            <SearchableDropdown
-              options={cities as City}
-              label="city"
-              selectedVal={value}
-              handleChange={(val: string) => setValue(val)}
-            />
-          </div>
+            <div className="my-3">
+              <h1 className="text-xl text-oliveGreen font-bold mb-2">
+                By City:
+              </h1>
+              <SearchableDropdown
+                options={cities as City}
+                label="city"
+                selectedVal={value}
+                handleChange={(val: string) => setValue(val)}
+              />
+            </div>
+          </Form>
         </aside>
         <div className="flex-1 min-w-0 overflow-auto">
           {queryVendor.length == 0 && queryService.length == 0 ? (

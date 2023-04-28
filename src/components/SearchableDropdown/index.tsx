@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import { ICity } from "./cityInterface";
 import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
+import { Category, City } from "../../../Types";
 interface ISearchableDropdown {
-  options?: ICity;
+  options?: City | Category;
   label: string;
   id?: string;
   selectedVal?: string;
@@ -79,6 +78,9 @@ const SearchableDropdown: React.FC<ISearchableDropdown> = (props) => {
             props.handleChange(null);
           }}
           onClick={toggle}
+          placeholder={
+            props.label.charAt(0).toUpperCase() + props.label.slice(1)
+          }
         />
         <div>
           {isOpen ? <MdArrowDropDown size={30} /> : <MdArrowDropUp size={30} />}

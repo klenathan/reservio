@@ -1,5 +1,5 @@
 import {Controller} from "react-hook-form";
-import {InputHTMLAttributes} from "react";
+import React, {InputHTMLAttributes} from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     name: string;
@@ -11,7 +11,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     control: any;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onFocus?: () => void;
-    onBlur?: () => void
+    onBlur?: () => void;
+    customStyle?: string
 }
 
 const Input = (props: InputProps) => {
@@ -19,12 +20,16 @@ const Input = (props: InputProps) => {
 
     return (
         <div>
-            <label
-                htmlFor={name}
-                className={`block my-2 font-medium text-gray-900 ${errors && "text-red-500"}`}
-            >
-                {label}
-            </label>
+            {props.label &&
+                <label
+                    htmlFor={name}
+                    className={`block my-2 font-medium text-gray-900 ${
+                        errors && "text-red-500"
+                    }`}
+                >
+                    {label}
+                </label>
+            }
             <Controller
                 name={name}
                 control={control}
@@ -35,7 +40,9 @@ const Input = (props: InputProps) => {
                         {...field}
                         autoComplete={"off"}
                         type={type}
-                        onChange={event => {
+                        min={props.min}
+                        max={props.max}
+                        onChange={(event) => {
                             field.onChange(event);
                             if (props.onChange) {
                                 props.onChange(event);
@@ -49,8 +56,9 @@ const Input = (props: InputProps) => {
                         }}
                         onFocus={props.onFocus}
                         placeholder={placeholder}
-                        className={`bg-gray-200 rounded text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mb-2 
-                ${errors && "border-red-500 border-2 outline-none "}`}
+                        disabled={props.disabled}
+                        className={`${props.customStyle ? props.customStyle : `bg-gray-200 rounded text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mb-2 
+                ${errors && "border-red-500 border-2 outline-none "}`}`}
                     />
                 )}
             />

@@ -1,21 +1,29 @@
 import "./globals.css";
+import {AuthProvider} from "components/Auth/Context/AuthContext";
+import {ReactNode} from "react";
+import Head from "next/head";
 
 export const metadata = {
-  title: "Reservio",
-  description: "Reserve it? Reservio",
-  icons: {
-    icon: "/assets/profile.svg",
-  },
+    title: "Reservio",
+    description: "Reserve it? Reservio",
+    icons: {
+        icon: "/assets/profile.svg",
+    },
 };
 
 export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
+                                       children,
+                                   }: {
+    children: ReactNode;
 }) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
+    return (
+        <html lang="en">
+        <Head>
+            <title>Reservio</title>
+        </Head>
+        <AuthProvider>
+            <body>{children}</body>
+        </AuthProvider>
+        </html>
+    );
 }

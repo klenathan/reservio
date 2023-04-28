@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { IService } from "../HomePageServiceContainer/serviceInterface";
+import { Product } from "../../../Types";
 
-const Card = (props: { service: IService }) => {
-  const img_endpoint = "https://d3j45rkkmhyyrh.cloudfront.net/";
+const Card = (props: { service: Product }) => {
+  const img_endpoint = process.env.NEXT_PUBLIC_IMG_ENDPOINT;
   return (
     <Link
       href={`/detail/${encodeURIComponent(props.service.id)}`}
@@ -24,8 +24,11 @@ const Card = (props: { service: IService }) => {
           {props.service.name}
         </h1>
         <p>{props.service.category}</p>
-        <p>{props.service.address}</p>
-        <p>@{props.service.vendorUsername}</p>
+        <div>
+          <p className="line-clamp-3">{props.service.address}</p>
+        </div>
+
+        <p>@{props.service.vendor.username}</p>
         <div className="flex flex-row items-center">
           <div className="text-oliveGreen font-bold my-3 text-2xl pr-1">
             {props.service.price?.toLocaleString()} VND

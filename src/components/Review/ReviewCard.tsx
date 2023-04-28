@@ -1,8 +1,15 @@
 import React from "react";
-import {IReview} from "components/Review/index";
 import Picture from "components/Picture";
 import {FaStar} from "react-icons/fa";
 
+export interface IReview {
+    username: string,
+    avatar: string | undefined
+    rating: number,
+    feedback: string,
+    createAt: string,
+    onClick?: React.MouseEventHandler<HTMLElement>
+}
 
 const ReviewCard: React.FC<IReview> = (props: IReview) => {
     const dot = <span className="mx-1">&#8226;</span>;

@@ -11,6 +11,7 @@ import SearchableDropdown from "@/components/SearchableDropdown";
 import VendorCard from "@/components/Vendor/VendorCard";
 
 export default function Category(slugs: any) {
+  console.log(slugs)
   const [value, setValue] = useState<string>("");
   const [queryService, setServices] = useState<Product[]>([]);
   const [queryVendor, setVendors] = useState<Vendor[]>([]);
@@ -81,11 +82,11 @@ export default function Category(slugs: any) {
           </div>
         </aside>
         <div className="col-span-3 ml-40">
-          {queryVendor.length == 0 && queryService.length == 0 ? (
+          {/* {queryVendor.length == 0 && queryService.length == 0 ? (
             <div>Not found!!!!!</div>
           ) : (
             ""
-          )}
+          )} */}
           {queryVendor.length > 0 ? (
             <div className="flex-1 ml-80">
               <h1 className="text-xl text-oliveGreen font-bold mb-2">

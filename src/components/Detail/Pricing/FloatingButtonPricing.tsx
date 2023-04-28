@@ -45,12 +45,15 @@ const FloatingButtonPricing: React.FC<FloatingButtonPricingProps> = (
                     onClose={handleCloseModal}
                     nameModal={"Buy me ☕"}
                 >
-                    <Pricing
-                        price={props.price}
-                        avgRating={props.avgRating}
-                        countRating={props.countReviews}
-                        productName={props.productName}
-                    />
+                    <div className={'overflow-auto h-96'}>
+                        <Pricing
+                            price={props.price}
+                            avgRating={props.avgRating}
+                            countRating={props.countReviews}
+                            productName={props.productName}
+                        />
+                    </div>
+
                 </Modal>
             )}
         </>

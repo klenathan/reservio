@@ -8,8 +8,6 @@ import apiClient from "@/config/axios.config";
 import {useAuth} from "components/Auth/Context/AuthContext";
 import {useEffect} from "react";
 
-// import Loading from "@/app/(main)/loading";
-
 interface IFromInput {
     username: String;
     password: String;
@@ -50,6 +48,7 @@ const LoginForm = () => {
             )
             .then((res) => {
                 sessionStorage.setItem("accessToken", res.data.accessToken);
+                sessionStorage.setItem('userData', JSON.stringify(res.data.user));
                 localStorage.setItem("refreshToken", res.data.refreshToken);
                 setUser(res.data.user)
                 login()

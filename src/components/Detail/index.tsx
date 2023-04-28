@@ -19,7 +19,6 @@ const DetailPage = (props: { service: Product }) => {
     const [lng, setLng] = useState<number | null>(null);
     const {user} = useAuth()
 
-
     const genGeocoder = async () => {
         return await geocoderFunction(props.service.address);
     };

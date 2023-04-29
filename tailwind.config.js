@@ -27,6 +27,8 @@ module.exports = {
                 rejectedRed: "#D20D3C",
                 acceptedBlue: "#2659C3",
                 completedGreen: "#5E9C1B",
+                heavyRed: "#D20D3C",
+                lightRed: "#FF2C5E",
             },
             backgroundImage: {
                 authenticate: "url('/assets/background_authenticate.svg')",

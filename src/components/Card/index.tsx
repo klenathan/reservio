@@ -12,7 +12,7 @@ const Card = (props: { service: Product }) => {
       <div className="relative w-full h-[15rem] rounded-t-md">
         <Image
           src={`${img_endpoint}${props.service.images[0]}`}
-          alt={props.service.images[0]}
+          alt={props.service.name}
           fill
           sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,

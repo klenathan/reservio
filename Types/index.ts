@@ -74,3 +74,13 @@ export type City = {
   id?: number;
   city?: string;
 };
+
+export type Discount = {
+  id?: string;
+  name: string;
+  desc: string;
+  amount: number;
+  image: string;
+  start: string;
+  end: string;
+};

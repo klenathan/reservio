@@ -5,9 +5,10 @@ import Form from "../Form";
 import Input from "../Form/Input";
 
 interface IFromInput {
-  desc?: string;
-  name?: string;
+  description: string;
+  name: string;
   address: string;
+  phone?: string;
 }
 
 const NewVendorForm = () => {
@@ -19,9 +20,10 @@ const NewVendorForm = () => {
 
   const onSubmit: SubmitHandler<IFromInput> = async (data) => {
     const formData = new FormData();
-    formData.append("description", data.desc as string);
+    formData.append("description", data.description as string);
     formData.append("name", data.name as string);
     formData.append("address", data.address as string);
+    formData.append("phone", data.phone as string);
 
     apiClient
       .post("vendor", formData)
@@ -43,7 +45,7 @@ const NewVendorForm = () => {
             type={"text"}
             control={control}
             rules={{ required: "Description is required" }}
-            errors={errors.desc}
+            errors={errors.description}
             placeholder={"e.g. Reserve it? Reservio"}
           />
           <Input
@@ -51,6 +53,8 @@ const NewVendorForm = () => {
             label={"Name"}
             type={"text"}
             control={control}
+            rules={{ required: "Store name is required" }}
+            errors={errors.name}
             placeholder={"e.g. Reservio"}
           />
           <Input
@@ -63,6 +67,21 @@ const NewVendorForm = () => {
             placeholder={
               "e.g. 702 Đ. Nguyễn Văn Linh, Tân Hưng, Quận 7, Thành phố Hồ Chí Minh"
             }
+          />
+          <Input
+            name={"phone"}
+            label={"Phone"}
+            type={"phone"}
+            control={control}
+            rules={{
+              pattern: {
+                value: /^(84|0[3|5|7|8|9])+([0-9]{8})\b$/,
+                message:
+                  "Your phone number must be Vietnamese phone and 10 digits number",
+              },
+            }}
+            errors={errors.phone}
+            placeholder={"e.g. 0987654321"}
           />
         </div>
       </Form>

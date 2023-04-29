@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import CategoryList from "@/components/CategoryServiceContainer/CategoryList";
 import Carousel from "components/HomePageServiceContainer/Carousel";
 import HomePageServiceContainer from "components/HomePageServiceContainer/homepageServiceContainer";
-import TopDealContainer from "components/HomePageServiceContainer/topDeal";
+import TopDealContainer from "@/components/HomePageServiceContainer/discount";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +18,7 @@ export default function Home() {
 
       <div className="max-w-7xl mx-auto">
         <h1 className=" w-full text-xl text-center  md:text-left md:text-3xl text-oliveGreen font-bold">
-          Top deal of the day
+          Discounts
         </h1>
         <TopDealContainer />
       </div>

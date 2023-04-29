@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import LoadingSpinner from "../LoadingSpinner";
 import apiClient from "@/config/axios.config";
@@ -70,7 +69,7 @@ const Discount = () => {
 const DiscountCard = (props: { discount: Discount }) => {
   return (
     <div className="flex flex-col">
-      <Link href={"/"} className="h-[15rem] relative w-[20rem] ">
+      <div className="h-[15rem] relative w-[20rem] ">
         <div
           className="w-full bg-gray-200 h-full rounded-md
       hover:shadow-xl ease-in-out duration-300 hover:visible group"
@@ -93,7 +92,7 @@ const DiscountCard = (props: { discount: Discount }) => {
             </p>
           </figcaption>
         </div>
-      </Link>
+      </div>
       <p className="text-xl text-center font-bold">
         {props.discount.name as string}
       </p>

@@ -2,11 +2,13 @@ import {FaStar} from "react-icons/fa";
 import React, {useState} from "react";
 import TotalPrice from "components/Detail/Pricing/TotalPrice";
 import {useAuth} from "components/Auth/Context/AuthContext";
-import PricingFlexible from "components/Detail/Pricing/PricingFlexible";
+import PricingFlexible from "components/Detail/Pricing/FlexiblePricing/PricingFlexible";
 
-interface ChoiceProps {
-    start: string;
-    end: string;
+interface PricingChoiceProps {
+    startDateString: string;
+    endDateString: string;
+    startDateNum?: number
+    endDateNum?: number
     totalPrice?: number;
 }
 
@@ -18,7 +20,7 @@ interface PricingProps {
 }
 
 export default function Pricing(props: PricingProps) {
-    const [choice, setChoice] = useState<ChoiceProps>();
+    const [choice, setChoice] = useState<PricingChoiceProps>();
     const {isLogin, user} = useAuth()
     const handleChoice = (childData: any) => {
         setChoice(childData);
@@ -27,7 +29,7 @@ export default function Pricing(props: PricingProps) {
     const dot = <span className="mx-1">&#8226;</span>;
 
     return (
-        <div className={"w-full p-0 lg:p-5 space-y-4"}>
+        <div className={"w-full p-2 lg:p-5 space-y-4"}>
             {/*Price display*/}
             <div className={"flex flex-row w-full justify-between"}>
                 <div className={"font-bold text-lg"}>
@@ -42,6 +44,7 @@ export default function Pricing(props: PricingProps) {
             </div>
 
             {/*Information display*/}
+
             {/*<PricingFixing*/}
             {/*    start={"10:30"}*/}
             {/*    end={"11:00"}*/}
@@ -49,12 +52,14 @@ export default function Pricing(props: PricingProps) {
             {/*    countReservation={100}*/}
             {/*    parentCallBack={handleChoice}*/}
             {/*/>*/}
-            <PricingFlexible/>
+            <PricingFlexible
+                parentCallBack={handleChoice}
+            />
 
             {/*Total price*/}
             <TotalPrice
-                end={choice?.end}
-                start={choice?.start}
+                end={choice?.endDateString}
+                start={choice?.startDateString}
                 price={props.price}
                 userName={user?.username}
                 productName={props.productName}

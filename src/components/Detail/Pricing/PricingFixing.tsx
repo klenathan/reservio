@@ -17,8 +17,8 @@ const PricingFixing: React.FC<PriceFixingProps> = (props: PriceFixingProps) => {
 
 
     return (
-        <div className={'border-2 border-neutral-300 rounded w-full p-2 hover:shadow-lg space-y-4'}>
-            <div className={'flex justify-between'}>
+        <div className={'border-2 border-neutral-300 rounded w-full py-2 px-4 hover:shadow-lg space-y-4'}>
+            <div className={'flex justify-around'}>
                 <div className={'text-center'}>
                     <div className={'font-bold'}>Start time</div>
                     <div>{props.start}</div>
@@ -32,8 +32,8 @@ const PricingFixing: React.FC<PriceFixingProps> = (props: PriceFixingProps) => {
                     onClick={() => {
                         isLogin ?
                             props.parentCallBack({
-                                start: props.start,
-                                end: props.end,
+                                startDateString: props.start,
+                                endDateString: props.end,
                             })
                             :
                             push('/login')

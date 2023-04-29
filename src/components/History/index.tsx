@@ -1,6 +1,6 @@
 import { useState } from "react";
 import HistoryCard from "../HistoryCard";
-import VendorHistoryCard from "../VendorHistoryCard";
+import VendorHistoryCard from "../Vendor/VendorHistoryCard";
 
 const HistoryPage = (props: any) => {
   const [selectedStatus, setSelectedStatus] = useState("pending");
@@ -56,7 +56,9 @@ const HistoryPage = (props: any) => {
     },
   ];
 
-  const filteredUserCards = userCardArr.filter((card) => card.status === selectedStatus);
+  const filteredUserCards = userCardArr.filter(
+    (card) => card.status === selectedStatus
+  );
   const changeColor = (selectedStatus: string) => {
     switch (selectedStatus) {
       case "pending":
@@ -71,7 +73,6 @@ const HistoryPage = (props: any) => {
         return "";
     }
   };
-
 
   return (
     <div className="flex flex-col w-full">
@@ -117,7 +118,7 @@ const HistoryPage = (props: any) => {
         </button>
       </div>
       <div>
-        {/* {filteredUserCards.map((card) => (
+        {filteredUserCards.map((card) => (
           <HistoryCard
             key={card.productName}
             vendorName={card.vendorName}
@@ -127,19 +128,19 @@ const HistoryPage = (props: any) => {
             totalPrice={card.totalPrice}
             statusColor={changeColor(selectedStatus)}
           />
-        ))} */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-10"> 
-         {filteredUserCards.map((card) => (
-          <VendorHistoryCard
-            key={card.productName}
-            userName={card.userName}
-            status ={card.status}
-            productName={card.productName}
-            price={card.price}
-            totalPrice={card.totalPrice}
-            statusColor={changeColor(selectedStatus)}
-          />
         ))}
+        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-10">
+          {filteredUserCards.map((card) => (
+            <VendorHistoryCard
+              key={card.productName}
+              userName={card.userName}
+              status={card.status}
+              productName={card.productName}
+              price={card.price}
+              totalPrice={card.totalPrice}
+              statusColor={changeColor(selectedStatus)}
+            />
+          ))}
         </div>
       </div>
     </div>

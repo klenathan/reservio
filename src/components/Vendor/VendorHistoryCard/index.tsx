@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Button from "../Button";
+import Button from "../../Button";
 import { useState } from "react";
 
 interface IVendorCardProps {
@@ -11,7 +11,6 @@ interface IVendorCardProps {
   totalPrice: number;
   statusColor: string;
 }
-
 
 const VendorHistoryCard = (props: IVendorCardProps) => {
   const [status, setStatus] = useState(props.status);
@@ -73,39 +72,38 @@ const VendorHistoryCard = (props: IVendorCardProps) => {
             </a>
             <h1 className="font-medium text-xs">
               <span className="text-xs md:text-xl font-medium text-midGreen">
-                ₫{props.price}
+                ₫{props.price.toLocaleString()}
               </span>
             </h1>
           </div>
           <div className="grid grid-rows-2 gap-2 mt-2">
-          {props.status === "pending" ? (
-    <>
-            <Button
-              className="  shadow
+            {props.status === "pending" ? (
+              <>
+                <Button
+                  className="  shadow
     hover:shadow-xl text-white bg-gradient-to-tr from-midGreen to-limeGreen py-2 px-4"
-              btnStyle="bomaytulam"
-              onClick={handleAccept}
-            >
-              Accept
-            </Button>
-            <Button
-              className="  shadow
+                  btnStyle="bomaytulam"
+                  onClick={handleAccept}
+                >
+                  Accept
+                </Button>
+                <Button
+                  className="  shadow
     hover:shadow-xl text-white bg-gradient-to-tr from-heavyRed to-lightRed py-0 px-0"
-              btnStyle="bomaytulam"
-              onClick={handleReject}
-            >
-              Reject
-            </Button>
-            </>
-          ) : null}
+                  btnStyle="bomaytulam"
+                  onClick={handleReject}
+                >
+                  Reject
+                </Button>
+              </>
+            ) : null}
           </div>
         </div>
-     
 
         <div className="font-extrabold text-gray-600 md:text-base pt-3">
           Total with taxes:
           <span className="text-xl md:text-2xl font-extrabold text-midGreen ml-3">
-            ₫{props.totalPrice}
+            ₫{props.totalPrice.toLocaleString()}
           </span>
         </div>
       </div>

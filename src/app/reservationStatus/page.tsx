@@ -1,6 +1,7 @@
-
+"use client";
 import NavBar from "@/components/NavBar";
 import Head from "next/head";
+import ReservationStatus  from "@/components/ReservationStatus";
 
 
 export default function Profile() {
@@ -9,9 +10,9 @@ export default function Profile() {
       <Head>
         <title>Reservation status</title>
       </Head>
-      {/* <NavBar> </NavBar> */}
-      <div>
-        
+      <NavBar/>
+      <div className="px-10">
+        <ReservationStatus/>
       </div>
 
       </div>

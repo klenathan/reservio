@@ -15,6 +15,8 @@ interface TotalPriceProps {
     price: number;
     start: string | undefined;
     end: string | undefined;
+    startDate: string | undefined
+    endDate: string | undefined
     productName: string;
     userName?: string;
     parentCallBack?: any;
@@ -89,6 +91,32 @@ const TotalPrice = (props: TotalPriceProps) => {
                 {props.userName ?
                     <RowInformation smallText={"Username"} mainText={props.userName}/> :
                     <RowInformation smallText={"Username"} mainText={"Honneyyy 😘😘😘😘"}/>}
+
+                <div className={'grid grid-cols-2 outline outline-1 outline-black'}>
+                    {props.startDate ?
+                        <ColInformation
+                            smallText={'Start date'}
+                            mainText={props.startDate}
+                            moreStyle={"border-r-2 border-black"}
+                        />
+                        :
+                        <ColInformation
+                            smallText={'Start date'}
+                            moreStyle={"border-r-2 border-black"}
+
+                        />
+                    }
+                    {props.endDate ?
+                        <ColInformation
+                            smallText={'End date'}
+                            mainText={props.endDate}
+                        />
+                        :
+                        <ColInformation smallText={"End date"}/>
+                    }
+                </div>
+
+
                 <div className={"grid grid-cols-3 outline outline-1 outline-black"}>
                     {props.start ? (
                         <ColInformation

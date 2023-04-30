@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from "react";
-import DatePicker from "components/Detail/Pricing/FlexiblePricing/DatePicker";
 import TimeReservation from "components/Detail/Pricing/FlexiblePricing/TimeReservation";
 import Button from "components/Button";
 import {useAuth} from "components/Auth/Context/AuthContext";
 import {useRouter} from "next/navigation";
+import DatePicker from "components/Detail/Pricing/FlexiblePricing/DatePicker";
+import {addDays, isEqual, startOfDay} from "date-fns";
 
 interface ChoiceProps {
+    startDate?: Date
+    endDate?: Date
     name?: string
     hour?: number
     minutes?: number
@@ -15,29 +18,33 @@ interface PriceFlexibleProps {
     parentCallBack?: any
 }
 
-interface validTimeProps {
-    isValid: boolean
-    moveToNextDay: boolean
-}
-
+// TODO add the notification when the time not valid (in the same day the end time must higher than the start time)
 const PricingFlexible = (props: PriceFlexibleProps) => {
     const [endTime, setEndTime] = useState<ChoiceProps>()
     const [startTime, setStartTime] = useState<ChoiceProps>()
-    const [validDate, setValidDate] = useState<validTimeProps>({
-        isValid: true,
-        moveToNextDay: false
+    const [date, setDate] = useState<ChoiceProps>({
+        startDate: new Date(),
+        endDate: new Date()
     })
 
     const {isLogin} = useAuth()
     const {push} = useRouter()
 
-    const handleCallBack = (childDate: any) => {
-        if (childDate.name == 'startDate') {
-            setStartTime(childDate)
+    const handleTimeCallBack = (childTime: any) => {
+        if (childTime.name == 'startDate') {
+            setStartTime(childTime)
         } else {
-            setEndTime(childDate)
+            setEndTime(childTime)
         }
     }
+
+    const handleDateCallBack = (childDate: any) => {
+        setDate({
+            startDate: childDate.startDate,
+            endDate: childDate.endDate
+        })
+    }
+
 
     const handleCallBackTheValueToTotalPrice = () => {
         if (endTime && startTime) {
@@ -49,32 +56,28 @@ const PricingFlexible = (props: PriceFlexibleProps) => {
     }
 
     useEffect(() => {
-        if (startTime?.hour && endTime?.hour) {
+        if (!date?.startDate || !date?.endDate || !startTime?.hour || !endTime?.hour) {
+            return;
+        }
+        if (isEqual(startOfDay(date.endDate), startOfDay(date.startDate))) {
             if (endTime.hour < startTime.hour) {
-                setValidDate({
-                    isValid: false,
-                    // TODO: Change when have the Date picker
-                    moveToNextDay: true
+                setDate({
+                    startDate: date.startDate,
+                    endDate: addDays(date.endDate, 1)
                 })
-            } else {
-                setValidDate({
-                    isValid: true,
-                    // TODO: Change when have the Date picker
-                    moveToNextDay: false
-                })
+
             }
         }
-    }, [startTime, endTime])
+    }, [endTime])
 
 
     return (
         <div>
-            <DatePicker/>
-            <TimeReservation countReservation={200} maxQuantity={300} parentCallBack={handleCallBack}/>
+            <DatePicker parentCallBack={handleDateCallBack} userEndDate={date.endDate}/>
+            <TimeReservation countReservation={200} maxQuantity={300} parentCallBack={handleTimeCallBack}/>
             <div className={'flex w-full justify-center '}>
                 <Button
                     btnStyle={"filled"}
-                    disabled={!validDate.isValid}
                     onClick={() => {
                         isLogin ?
                             props.parentCallBack(handleCallBackTheValueToTotalPrice)

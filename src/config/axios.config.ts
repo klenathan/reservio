@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from 'axios';
 import {AppConfig} from "@/config/app.config";
+import {redirect} from "next/navigation";
 
 
 interface RefreshTokenResponse {
@@ -32,7 +33,6 @@ apiClient.interceptors.response.use(
 
         if (
             error.response?.status === 400 &&
-            error.response?.status === 404 &&
             refreshToken &&
             !originalRequest._retry
         ) {
@@ -55,6 +55,7 @@ apiClient.interceptors.response.use(
                 (error) {
                 // const {push} = useRouter();
                 // push("/")
+                redirect('/')
             }
         }
         return Promise.reject(error);

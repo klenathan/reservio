@@ -22,7 +22,6 @@ interface TimePickerProps {
 const TimePicker: React.FC<TimePickerProps> = (props: TimePickerProps) => {
     const {
         control,
-        formState: {errors},
         watch
     } = useForm({
         mode: 'onChange',

@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import TotalPrice from "components/Detail/Pricing/TotalPrice";
 import {useAuth} from "components/Auth/Context/AuthContext";
 import PricingFlexible from "components/Detail/Pricing/FlexiblePricing/PricingFlexible";
+import Test from "components/Detail/Test";
 
 interface PricingChoiceProps {
     startDateString: string;
@@ -55,6 +56,7 @@ export default function Pricing(props: PricingProps) {
             <PricingFlexible
                 parentCallBack={handleChoice}
             />
+            <Test />
 
             {/*Total price*/}
             <TotalPrice

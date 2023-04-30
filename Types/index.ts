@@ -20,13 +20,22 @@ export type User = {
 export type Vendor = {
   id: string;
   username: string;
+  name: string;
   certified: boolean;
   status: string;
+  phone: string;
   desc: string;
   category: string[];
   createdAt: string;
   user: User;
   products: Product[];
+  _count?: {
+    products: string;
+  };
+  rating: {
+    _avg: string;
+    _count: string;
+  };
 };
 
 export type Product = {
@@ -68,4 +77,14 @@ export type Category = {
 export type City = {
   id?: number;
   city?: string;
+};
+
+export type Discount = {
+  id?: string;
+  name: string;
+  desc: string;
+  amount: number;
+  image: string;
+  start: string;
+  end: string;
 };

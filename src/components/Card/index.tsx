@@ -12,7 +12,7 @@ const Card = (props: { service: Product }) => {
       <div className="relative w-full h-[15rem] rounded-t-md">
         <Image
           src={`${img_endpoint}${props.service.images[0]}`}
-          alt={props.service.images[0]}
+          alt={props.service.name}
           fill
           sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
@@ -28,7 +28,7 @@ const Card = (props: { service: Product }) => {
           <p className="line-clamp-3">{props.service.address}</p>
         </div>
 
-        <p>@{props.service.vendor.username}</p>
+        {/* <p>@{props.service.vendor.username}</p> */}
         <div className="flex flex-row items-center">
           <div className="text-oliveGreen font-bold my-3 text-2xl pr-1">
             {props.service.price?.toLocaleString()} VND

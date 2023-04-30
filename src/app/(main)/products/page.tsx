@@ -6,75 +6,141 @@ import Price from "components/CategoryServiceContainer/Price";
 import Calendar from "components/CategoryServiceContainer/Calendar";
 import apiClient from "@/config/axios.config";
 import Card from "@/components/Card";
-import LoadingSpinner from "@/components/LoadingSpinner";
-import { City, Product } from "../../../../Types";
+import { City, Product, Vendor } from "../../../../Types";
 import SearchableDropdown from "@/components/SearchableDropdown";
-
+import VendorCard from "@/components/Vendor/VendorCard";
+import Form from "@/components/Form";
+import { SubmitHandler, useForm } from "react-hook-form";
+interface IFromInput {
+  minPrice?: string;
+  maxPrice?: string;
+  category?: string;
+  fromDate?: string;
+  toDate?: string;
+}
 export default function Category(slugs: any) {
   const [value, setValue] = useState<string>("");
   const [queryService, setServices] = useState<Product[]>([]);
+  const [queryVendor, setVendors] = useState<Vendor[]>([]);
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<IFromInput>();
 
   useEffect(() => {
-    apiClient
-      .get(`service/category/${slugs.searchParams.category}`)
-      .then((r) => {
-        setServices(r.data.products);
-      });
+    if (slugs.searchParams.category) {
+      apiClient
+        .get(`service/category/${slugs.searchParams.category}`)
+        .then((res) => setServices(res.data));
+    }
   }, [slugs.searchParams.category]);
 
   useEffect(() => {
+    if (slugs.searchParams.keyword) {
+      apiClient
+        .get(`search?query=${slugs.searchParams.keyword}`)
+        .then((res) => {
+          setServices(res.data.products);
+          setVendors(res.data.vendors);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  }, [slugs.searchParams.keyword]);
+
+  const onSubmit: SubmitHandler<IFromInput> = async (data) => {
+    let minPrice = data.minPrice ? data.minPrice : "";
+    let maxPrice = data.maxPrice ? data.maxPrice : "";
+    let category = slugs.searchParams.category
+      ? slugs.searchParams.category
+      : "";
+    let fromDate = data.fromDate ? data.fromDate : "";
+    let toDate = data.toDate ? data.toDate : "";
     apiClient
-      .get(`search?query=${slugs.searchParams.keyword}`)
-      .then((r) => {
-        setServices(r.data.products);
-      })
+      .get(
+        `/service?minPrice=${minPrice}&maxPrice=${maxPrice}&category=${category}&fromDate=${fromDate}&toDate=${toDate}`
+      )
+      .then((res) => setServices(res.data))
       .catch((e) => {
         console.log(e);
       });
-  }, [slugs.searchParams.keyword]);
-
+  };
   return (
     <div className="overflow-hidden">
       <CategoryList />
 
-      <div className="flex">
-        <aside className="w-72 fixed left-0 h-3/4 p-4 mt-1 border border-black">
-          <div className="my-3">
-            <h1 className="text-xl text-oliveGreen font-bold mb-2">By Date:</h1>
-            <Calendar />
-          </div>
+      <div className="min-h-3/4 flex">
+        <aside className="flex-none h-3/4 p-4 mt-1 border border-black">
+          <Form onSubmit={handleSubmit(onSubmit)} button="Submit">
+            <div className="my-3">
+              <h1 className="text-xl text-oliveGreen font-bold mb-2">
+                By Date:
+              </h1>
+              <Calendar />
+            </div>
 
-          <div className="my-3">
-            <h1 className="text-xl text-oliveGreen font-bold mb-2">
-              By Price:
-            </h1>
-            <Price />
-          </div>
+            <div className="my-3">
+              <h1 className="text-xl text-oliveGreen font-bold mb-2">
+                By Price:
+              </h1>
+              <Price
+                control={control}
+                minPrice={errors.minPrice}
+                maxPrice={errors.maxPrice}
+              />
+            </div>
 
-          <div className="my-3">
-            <h1 className="text-xl text-oliveGreen font-bold mb-2">By City:</h1>
-            <SearchableDropdown
-              options={cities as City}
-              label="city"
-              selectedVal={value}
-              handleChange={(val: string) => setValue(val)}
-            />
-          </div>
+            <div className="my-3">
+              <h1 className="text-xl text-oliveGreen font-bold mb-2">
+                By City:
+              </h1>
+              <SearchableDropdown
+                options={cities as City}
+                label="city"
+                selectedVal={value}
+                handleChange={(val: string) => setValue(val)}
+              />
+            </div>
+          </Form>
         </aside>
-        {queryService.length != 0 ? (
-          <div className="flex-1 ml-72">
-            <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 md:grid-cols-2 place-items-center max-w-7xl mx-6 ">
-              <div className="grid grid-cols-1 gap-10 lg:grid-cols-4 md:grid-cols-2 place-items-center max-w-7xl">
+        <div className="flex-1 min-w-0 overflow-auto">
+          {queryVendor.length == 0 && queryService.length == 0 ? (
+            <div>Not found!!!!!</div>
+          ) : (
+            ""
+          )}
+          {queryVendor.length > 0 ? (
+            <div className="flex-1 w-full">
+              <h1 className="text-xl text-oliveGreen font-bold mb-2">
+                Vendor:
+              </h1>
+              <div className="max-w-7xl mx-6 ">
+                {queryVendor.map((vendor) => {
+                  return <VendorCard key={vendor.id} vendor={vendor} />;
+                })}
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+
+          {queryService.length > 0 ? (
+            <div className="flex-1 w-full">
+              <h1 className="text-xl text-oliveGreen font-bold mb-2">
+                Service:
+              </h1>
+              <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 md:grid-cols-2 place-items-center max-w-7xl mx-6 ">
                 {queryService.map((service) => {
                   return <Card key={service.id} service={service} />;
                 })}
               </div>
-              )
             </div>
-          </div>
-        ) : (
-          <LoadingSpinner />
-        )}
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     </div>
   );

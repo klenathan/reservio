@@ -9,6 +9,7 @@ export default function SearchBar() {
   const handleSearch = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     router.push(`/products?keyword=${keyword}`);
+    setKeyword("");
   };
 
   return (
@@ -22,7 +23,6 @@ export default function SearchBar() {
         border-gray-500"
         type="text"
         name="Search"
-        id="search-input"
         onChange={(e) => {
           setKeyword(e.target.value);
         }}

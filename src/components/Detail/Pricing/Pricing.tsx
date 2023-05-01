@@ -28,10 +28,19 @@ export default function Pricing(props: PricingProps) {
         endDate: new Date()
     });
     const [price, setPrice] = useState<number>(props.price);
+    const [isConfirm, setIsConfirm] = useState<boolean>(false)
     const {isLogin, user} = useAuth()
     const handleChoice = (childData: any) => {
         setChoice(childData);
     };
+
+    const handleIsConfirm = () => {
+        setIsConfirm(true)
+    }
+
+    const handleIsNotConfirm = () => {
+        setIsConfirm(false)
+    }
 
     useEffect(() => {
         if (choice?.price) {
@@ -64,28 +73,35 @@ export default function Pricing(props: PricingProps) {
                     maxQuantity={300}
                     countReservation={100}
                     parentCallBack={handleChoice}
+
                 /> :
                 <PricingFlexible
                     parentCallBack={handleChoice}
                     price={props.price}
+                    confirm={handleIsConfirm}
                 />
             }
 
 
             {/*Total price*/}
-            <TotalPrice
-                endTime={choice?.endTimeString}
-                startTime={choice?.startTimeString}
-                price={price}
-                userName={user?.username}
-                productName={props.productName}
-                parentCallBack={handleChoice}
-                startDate={choice?.startDate}
-                endDate={choice?.endDate}
-                maxQuantity={300}
-                countReservation={100}
-                isLogin={isLogin}
-            />
+            {isConfirm ?
+                <TotalPrice
+                    endTime={choice?.endTimeString}
+                    startTime={choice?.startTimeString}
+                    price={price}
+                    userName={user?.username}
+                    productName={props.productName}
+                    parentCallBack={handleChoice}
+                    startDate={choice?.startDate}
+                    endDate={choice?.endDate}
+                    maxQuantity={300}
+                    countReservation={100}
+                    isLogin={isLogin}
+                    notConfirm={handleIsNotConfirm}
+                /> :
+                null
+            }
+
         </div>
     );
 }

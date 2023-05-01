@@ -24,6 +24,7 @@ interface TotalPriceProps {
     countReservation: number;
     isLogin?: boolean
     parentCallBack?: any;
+    notConfirm?: () => void
 }
 
 const RowInformation = (props: InformationProps) => (
@@ -204,6 +205,7 @@ const TotalPrice = (props: TotalPriceProps) => {
                             reset({
                                 quantity: 1,
                             });
+                            props.notConfirm && props.notConfirm()
                         }}
                     >
                         Cancel

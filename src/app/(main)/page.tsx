@@ -14,7 +14,9 @@ export default function Home() {
 
             <div className="w-screen">
                 {/*<Carousel />*/}
-                <CarouselHomePage/>
+                {/*<div className={'w-full'}>*/}
+                    <CarouselHomePage/>
+                {/*</div>*/}
             </div>
 
             <div className="max-w-7xl mx-auto">

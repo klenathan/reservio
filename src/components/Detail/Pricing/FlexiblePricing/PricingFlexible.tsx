@@ -18,6 +18,7 @@ interface ChoiceProps {
 interface PriceFlexibleProps {
     parentCallBack?: any
     price?: number
+    confirm?: () => void
 }
 
 // TODO add the notification when the time not valid (in the same day the end time must higher than the start time)
@@ -50,8 +51,8 @@ const PricingFlexible = (props: PriceFlexibleProps) => {
     const calculatePrice = () => {
         if (!date?.startDate || !date?.endDate || !startTime?.hour || !endTime?.hour) {
             return {
-                startTimeString: startTime?.hour + ':' + startTime?.hour,
-                endTimeString: endTime?.hour + ':' + endTime?.hour,
+                startTimeString: startTime?.hour + ':' + startTime?.minutes,
+                endTimeString: endTime?.hour + ':' + endTime?.minutes,
                 startDate: date.startDate,
                 endDate: date.endDate,
                 price: props.price
@@ -79,7 +80,7 @@ const PricingFlexible = (props: PriceFlexibleProps) => {
         }
         const start = set(date.startDate, {hours: startTime.hour, minutes: startTime.minutes})
         const end = set(date.endDate, {hours: endTime.hour, minutes: endTime.minutes})
-        
+
         if (differenceInMinutes(end, start) < 0) {
             setDate({
                 startDate: date.startDate,
@@ -99,7 +100,8 @@ const PricingFlexible = (props: PriceFlexibleProps) => {
                     btnStyle={"filled"}
                     onClick={() => {
                         isLogin ?
-                            props.parentCallBack(calculatePrice)
+                            (props.parentCallBack(calculatePrice),
+                            props.confirm && props.confirm())
                             :
                             push('/login')
                     }}

@@ -2,11 +2,9 @@
 import AdminChart from "components/Admin";
 
 const Admin = () => {
-    return (
-        <div>
-            <AdminChart/>
-        </div>
-    );
+  return (
+      <AdminChart/>
+  );
 };
 
 export default Admin;

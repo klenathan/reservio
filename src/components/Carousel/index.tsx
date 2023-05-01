@@ -47,7 +47,8 @@ const Carousel: React.FC<CarouselProps> = (props: CarouselProps) => {
     }, [auto, currentSlide, queryService.length]);
 
     return (
-        <div className="mt-3 p-5 md:p-0">
+        //TODO For optimize you must have the container when use 🐱
+        <div className="mt-3 md:p-5">
             <div className="w-full flex justify-center overflow-hidden relative md:m-auto ">
                 <button
                     onClick={handlePrevSlide}

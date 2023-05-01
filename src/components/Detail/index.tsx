@@ -70,6 +70,7 @@ const DetailPage = (props: { service: Product }) => {
                             avgRating={props.service.avgRating}
                             countRating={props.service._count?.reviews}
                             productName={props.service.name}
+                            type={props.service.type}
                         />
                     </div>
 
@@ -84,10 +85,8 @@ const DetailPage = (props: { service: Product }) => {
                         />
                     </div>
                 </div>
-
-                {/*Map*/}
-
             </div>
+
             {/*Map*/}
             <div className={"border-b-2 border-gray-300 w-full pb-2 space-y-7 mt-7"}>
                 <div className={"text-gray-700 font-bold text-2xl mb-3"}>

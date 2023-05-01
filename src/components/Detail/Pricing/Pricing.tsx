@@ -1,15 +1,17 @@
 import {FaStar} from "react-icons/fa";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import TotalPrice from "components/Detail/Pricing/TotalPrice";
 import {useAuth} from "components/Auth/Context/AuthContext";
 import PricingFlexible from "components/Detail/Pricing/FlexiblePricing/PricingFlexible";
+import {ProductPricingType} from "../../../../Types";
+import PricingFixing from "components/Detail/Pricing/PricingFixing";
 
 interface PricingChoiceProps {
-    startDateString: string;
-    endDateString: string;
-    startDateNum?: number
-    endDateNum?: number
-    totalPrice?: number;
+    startTimeString?: string;
+    endTimeString?: string;
+    startDate?: Date
+    endDate?: Date
+    price?: number;
 }
 
 interface PricingProps {
@@ -17,14 +19,25 @@ interface PricingProps {
     avgRating: number;
     countRating: number | undefined;
     productName: string;
+    type: ProductPricingType
 }
 
 export default function Pricing(props: PricingProps) {
-    const [choice, setChoice] = useState<PricingChoiceProps>();
+    const [choice, setChoice] = useState<PricingChoiceProps>({
+        startDate: new Date(),
+        endDate: new Date()
+    });
+    const [price, setPrice] = useState<number>(props.price);
     const {isLogin, user} = useAuth()
     const handleChoice = (childData: any) => {
         setChoice(childData);
     };
+
+    useEffect(() => {
+        if (choice?.price) {
+            setPrice(choice.price)
+        }
+    }, [choice?.price])
 
     const dot = <span className="mx-1">&#8226;</span>;
 
@@ -44,28 +57,31 @@ export default function Pricing(props: PricingProps) {
             </div>
 
             {/*Information display*/}
+            {props.type == 'FIXING' ?
+                <PricingFixing
+                    start={"10:30"}
+                    end={"11:00"}
+                    maxQuantity={300}
+                    countReservation={100}
+                    parentCallBack={handleChoice}
+                /> :
+                <PricingFlexible
+                    parentCallBack={handleChoice}
+                    price={props.price}
+                />
+            }
 
-            {/*<PricingFixing*/}
-            {/*    start={"10:30"}*/}
-            {/*    end={"11:00"}*/}
-            {/*    maxQuantity={300}*/}
-            {/*    countReservation={100}*/}
-            {/*    parentCallBack={handleChoice}*/}
-            {/*/>*/}
-            <PricingFlexible
-                parentCallBack={handleChoice}
-            />
 
             {/*Total price*/}
             <TotalPrice
-                end={choice?.endDateString}
-                start={choice?.startDateString}
-                price={props.price}
+                endTime={choice?.endTimeString}
+                startTime={choice?.startTimeString}
+                price={price}
                 userName={user?.username}
                 productName={props.productName}
                 parentCallBack={handleChoice}
-                startDate={'Mar 30 2023'}
-                endDate={'Mar 30 2023'}
+                startDate={choice?.startDate}
+                endDate={choice?.endDate}
                 maxQuantity={300}
                 countReservation={100}
                 isLogin={isLogin}

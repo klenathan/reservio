@@ -36,6 +36,7 @@ export default function Detail(slugs: DetailParams) {
             });
     }, [slugs.params.id]);
 
+
     if (!product && !isError) {
         return <div
             className="relative h-[calc(100vh_-_10rem)] -top-[5rem] w-full flex flex-col justify-center items-center overflow-hidden -z-10">

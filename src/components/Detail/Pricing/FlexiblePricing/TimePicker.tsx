@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import Select from 'react-select';
 
@@ -22,28 +22,7 @@ interface TimePickerProps {
 const TimePicker: React.FC<TimePickerProps> = (props: TimePickerProps) => {
     const {
         control,
-        watch
-    } = useForm({
-        mode: 'onChange',
-    });
-
-    const [selectedTime, setSelectedTime] = useState<TimeSelected | null>(null);
-
-    const hourOption: TimePickerOption[] = Array.from({length: 24}, (_, i) => ({
-        label: i.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false}),
-        value: i
-    }))
-    const minutesOption: TimePickerOption[] = Array.from([0, 30], i => ({
-        label: i.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false}),
-        value: i
-    }))
-
-
-    const hourChosen = useRef<TimePickerOption>()
-    const minutesChosen = useRef<TimePickerOption>()
-
-    hourChosen.current = watch('hour', '')
-    minutesChosen.current = watch('minutes', '')
+    } = useForm();
 
     const dateNow = new Date()
     let hourNow = dateNow.getHours()
@@ -58,43 +37,21 @@ const TimePicker: React.FC<TimePickerProps> = (props: TimePickerProps) => {
         minutesNow = 0
     }
 
-    useEffect(() => {
-        if (!hourChosen.current?.value && !minutesChosen.current?.value) {
-            setSelectedTime(
-                {
-                    name: props.name,
-                    hour: hourNow,
-                    minutes: minutesNow
-                }
-            )
-        } else if (!hourChosen.current?.value && minutesChosen.current?.value) {
-            setSelectedTime(
-                {
-                    name: props.name,
-                    hour: hourNow,
-                    minutes: minutesChosen.current?.value
-                }
-            )
-        } else if (hourChosen.current?.value && !minutesChosen.current?.value) {
-            setSelectedTime(
-                {
-                    name: props.name,
-                    hour: hourChosen.current?.value,
-                    minutes: minutesNow
-                }
-            )
-        } else {
-            setSelectedTime(
-                {
-                    name: props.name,
-                    hour: hourChosen.current?.value,
-                    minutes: minutesChosen.current?.value
-                }
-            )
-        }
+    const [selectedTime, setSelectedTime] = useState<TimeSelected | null>({
+        name: props.name,
+        hour: hourNow,
+        minutes: minutesNow
+    });
 
+    const hourOption: TimePickerOption[] = Array.from({length: 24}, (_, i) => ({
+        label: i.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false}),
+        value: i
+    }))
+    const minutesOption: TimePickerOption[] = Array.from([0, 30], i => ({
+        label: i.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false}),
+        value: i
+    }))
 
-    }, [hourChosen.current, minutesChosen.current])
 
     useEffect(() => {
         if (selectedTime) {
@@ -108,7 +65,7 @@ const TimePicker: React.FC<TimePickerProps> = (props: TimePickerProps) => {
             <Controller
                 name={'hour'}
                 control={control}
-                defaultValue={0}
+                defaultValue={hourNow}
                 render={({field}) => (
                     <Select
                         {...field}
@@ -116,6 +73,16 @@ const TimePicker: React.FC<TimePickerProps> = (props: TimePickerProps) => {
                         options={hourOption}
                         placeholder={hourNow.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false})}
                         className="w-full"
+                        value={hourOption.find(option => option.value === selectedTime?.hour)}
+                        onChange={(e) => {
+                            setSelectedTime(
+                                {
+                                    name: props.name,
+                                    hour: e?.value,
+                                    minutes: selectedTime?.minutes
+                                }
+                            )
+                        }}
                     />
                 )}
             />
@@ -125,7 +92,7 @@ const TimePicker: React.FC<TimePickerProps> = (props: TimePickerProps) => {
             <Controller
                 name={'minutes'}
                 control={control}
-                defaultValue={0}
+                defaultValue={minutesNow}
                 render={({field}) => (
                     <Select
                         {...field}
@@ -133,6 +100,16 @@ const TimePicker: React.FC<TimePickerProps> = (props: TimePickerProps) => {
                         isSearchable={false}
                         placeholder={minutesNow.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false})}
                         className="w-full"
+                        value={minutesOption.find(option => option.value === selectedTime?.minutes)}
+                        onChange={(e) =>
+                            setSelectedTime(
+                                {
+                                    name: props.name,
+                                    hour: selectedTime?.hour,
+                                    minutes: e?.value
+                                }
+                            )
+                        }
                     />
                 )}
             />

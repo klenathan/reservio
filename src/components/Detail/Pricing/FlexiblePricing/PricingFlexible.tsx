@@ -4,7 +4,8 @@ import Button from "components/Button";
 import {useAuth} from "components/Auth/Context/AuthContext";
 import {useRouter} from "next/navigation";
 import DatePicker from "components/Detail/Pricing/FlexiblePricing/DatePicker";
-import {addDays, isEqual, startOfDay} from "date-fns";
+import {addDays, differenceInMinutes, set} from "date-fns";
+
 
 interface ChoiceProps {
     startDate?: Date
@@ -16,6 +17,7 @@ interface ChoiceProps {
 
 interface PriceFlexibleProps {
     parentCallBack?: any
+    price?: number
 }
 
 // TODO add the notification when the time not valid (in the same day the end time must higher than the start time)
@@ -45,13 +47,29 @@ const PricingFlexible = (props: PriceFlexibleProps) => {
         })
     }
 
-
-    const handleCallBackTheValueToTotalPrice = () => {
-        if (endTime && startTime) {
+    const calculatePrice = () => {
+        if (!date?.startDate || !date?.endDate || !startTime?.hour || !endTime?.hour) {
             return {
-                startDateString: startTime.hour + ':' + startTime.minutes,
-                endDateString: endTime.hour + ':' + endTime.minutes
+                startTimeString: startTime?.hour + ':' + startTime?.hour,
+                endTimeString: endTime?.hour + ':' + endTime?.hour,
+                startDate: date.startDate,
+                endDate: date.endDate,
+                price: props.price
             }
+        }
+
+        const start = set(date.startDate, {hours: startTime.hour, minutes: startTime.minutes})
+        const end = set(date.endDate, {hours: endTime.hour, minutes: endTime.minutes})
+        const quantityOfHour = differenceInMinutes(end, start)
+
+        const totalPrice = props.price as number * (quantityOfHour / 60)
+
+        return {
+            startTimeString: startTime.hour + ':' + startTime.minutes,
+            endTimeString: endTime.hour + ':' + endTime.minutes,
+            startDate: start,
+            endDate: end,
+            price: totalPrice
         }
     }
 
@@ -59,14 +77,15 @@ const PricingFlexible = (props: PriceFlexibleProps) => {
         if (!date?.startDate || !date?.endDate || !startTime?.hour || !endTime?.hour) {
             return;
         }
-        if (isEqual(startOfDay(date.endDate), startOfDay(date.startDate))) {
-            if (endTime.hour < startTime.hour) {
-                setDate({
-                    startDate: date.startDate,
-                    endDate: addDays(date.endDate, 1)
-                })
+        const start = set(date.startDate, {hours: startTime.hour, minutes: startTime.minutes})
+        const end = set(date.endDate, {hours: endTime.hour, minutes: endTime.minutes})
+        
+        if (differenceInMinutes(end, start) < 0) {
+            setDate({
+                startDate: date.startDate,
+                endDate: addDays(date.endDate, 1)
+            })
 
-            }
         }
     }, [endTime])
 
@@ -80,7 +99,7 @@ const PricingFlexible = (props: PriceFlexibleProps) => {
                     btnStyle={"filled"}
                     onClick={() => {
                         isLogin ?
-                            props.parentCallBack(handleCallBackTheValueToTotalPrice)
+                            props.parentCallBack(calculatePrice)
                             :
                             push('/login')
                     }}

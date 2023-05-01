@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import Image from 'next/image';
 import Modal from "components/Modal";
+import ImageCarousel from "components/Detail/ImageCarousel";
+import Carousel from "components/Carousel";
 
 interface ImageGalleryProps {
     images: string[];
@@ -17,6 +19,14 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
         setIsModalOpen(false);
     };
 
+    if(images.length == 0){
+        return (
+            <div>
+                NO images 😭😭😭
+            </div>
+        )
+    }
+
     if (images.length == 1) {
         return (
             <div className={'relative w-full h-80'}>
@@ -25,30 +35,19 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
                     alt="Image"
                     fill={true}
                     onClick={handleOpenModal}
-                    className="object-cover cursor-pointer"
+                    className="object-cover cursor-pointer rounded-lg"
                     loading="lazy"
                 />
             </div>
         )
     } else if (images.length == 2) {
         return (
-            <div className={'flex flex-col lg:flex-row'}>
-                {images.map((image, index) => (
-                    <div key={index} className={'relative h-96 w-full '}>
-                        <Image
-                            src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + images[index]}
-                            alt={`Image ${index}`}
-                            fill={true}
-                            onClick={handleOpenModal}
-                            className="object-cover cursor-pointer"
-                            loading="lazy"
-                        />
-                    </div>
-
-                ))}
-            </div>
+            <Carousel slice={images}>
+                <ImageCarousel onClick={handleOpenModal}/>
+            </Carousel>
         )
     }
+
     return (
         <div className="max-w-screen-xl mx-auto grid grid-cols-1 gap-2 md:grid-cols-3 h-full">
             {/* Big image on the left */}

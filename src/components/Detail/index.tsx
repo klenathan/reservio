@@ -45,12 +45,14 @@ const DetailPage = (props: { service: Product }) => {
                     isCertified={props.service.vendor.certified}
                 />
 
-                {/*Display image*/}
-                <ImageGallery images={props.service.images}/>
 
-                {/*Detail information*/}
                 <div className={"flex flex-col lg:flex-row w-full h-max mt-4"}>
-                    <div className={"lg:w-2/3 lg:pr-24"}>
+                    <div className={"lg:w-2/3 lg:pr-4 space-y-4"}>
+                        {/*Display image*/}
+
+                        <ImageGallery images={props.service.images}/>
+                        {/*Detail information*/}
+
                         <DetailPageInfo
                             name={props.service.name}
                             description={props.service.desc}
@@ -61,7 +63,7 @@ const DetailPage = (props: { service: Product }) => {
                     </div>
                     <div
                         className={
-                            "hidden w-full lg:w-1/3 lg:block  border-2 border-neutral-10000 shadow-lg rounded-2xl h-fit"
+                            "hidden w-full border-2 border-neutral-10000 shadow-lg rounded-2xl h-fit lg:w-1/3 lg:block lg:sticky  lg:top-0 lg:z-50"
                         }
                     >
                         {/*Pricing*/}
@@ -70,6 +72,7 @@ const DetailPage = (props: { service: Product }) => {
                             avgRating={props.service.avgRating}
                             countRating={props.service._count?.reviews}
                             productName={props.service.name}
+                            type={props.service.type}
                         />
                     </div>
 
@@ -84,10 +87,8 @@ const DetailPage = (props: { service: Product }) => {
                         />
                     </div>
                 </div>
-
-                {/*Map*/}
-
             </div>
+
             {/*Map*/}
             <div className={"border-b-2 border-gray-300 w-full pb-2 space-y-7 mt-7"}>
                 <div className={"text-gray-700 font-bold text-2xl mb-3"}>

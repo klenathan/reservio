@@ -36,6 +36,7 @@ export default function Detail(slugs: DetailParams) {
             });
     }, [slugs.params.id]);
 
+
     if (!product && !isError) {
         return <div
             className="relative h-[calc(100vh_-_10rem)] -top-[5rem] w-full flex flex-col justify-center items-center overflow-hidden -z-10">
@@ -48,7 +49,7 @@ export default function Detail(slugs: DetailParams) {
     }
 
     return (
-        <div className="h-full px-4 md:px-8 lg:px-16 xl:px-24 2xl:px-40">
+        <div className="h-full px-4 md:px-8 lg:px-40 2xl:px-56">
             <Breadcrumb items={items}/>
             <DetailPage service={product}/>
         </div>

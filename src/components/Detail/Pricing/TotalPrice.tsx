@@ -3,6 +3,7 @@ import Input from "components/Form/Input";
 import {useForm} from "react-hook-form";
 import Button from "components/Button";
 import {useRouter} from "next/navigation";
+import {format} from "date-fns";
 
 interface InformationProps {
     smallText: string;
@@ -13,14 +14,17 @@ interface InformationProps {
 
 interface TotalPriceProps {
     price: number;
-    start: string | undefined;
-    end: string | undefined;
+    startTime: string | undefined;
+    endTime: string | undefined;
+    startDate: Date | undefined
+    endDate: Date | undefined
     productName: string;
     userName?: string;
-    parentCallBack?: any;
     maxQuantity: number
     countReservation: number;
     isLogin?: boolean
+    parentCallBack?: any;
+    notConfirm?: () => void
 }
 
 const RowInformation = (props: InformationProps) => (
@@ -59,6 +63,14 @@ const TotalPrice = (props: TotalPriceProps) => {
 
     const availableQuantity = props.maxQuantity - props.countReservation
 
+    let startDateString;
+    let endDateString;
+    if (props.startDate && props.endDate) {
+        startDateString = format(props.startDate, "MMM dd yyyy")
+        endDateString = format(props.endDate, "MMM dd yyyy")
+    }
+
+
     const transformValue = (value: number) => {
         if (value > availableQuantity) {
             setValue('quantity', availableQuantity)
@@ -89,11 +101,37 @@ const TotalPrice = (props: TotalPriceProps) => {
                 {props.userName ?
                     <RowInformation smallText={"Username"} mainText={props.userName}/> :
                     <RowInformation smallText={"Username"} mainText={"Honneyyy 😘😘😘😘"}/>}
+
+                <div className={'grid grid-cols-2 outline outline-1 outline-black'}>
+                    {props.startDate ?
+                        <ColInformation
+                            smallText={'Start date'}
+                            mainText={startDateString}
+                            moreStyle={"border-r-2 border-black"}
+                        />
+                        :
+                        <ColInformation
+                            smallText={'Start date'}
+                            moreStyle={"border-r-2 border-black"}
+
+                        />
+                    }
+                    {props.endDate ?
+                        <ColInformation
+                            smallText={'End date'}
+                            mainText={endDateString}
+                        />
+                        :
+                        <ColInformation smallText={"End date"}/>
+                    }
+                </div>
+
+
                 <div className={"grid grid-cols-3 outline outline-1 outline-black"}>
-                    {props.start ? (
+                    {props.startTime ? (
                         <ColInformation
                             smallText={"Start"}
-                            mainText={props.start}
+                            mainText={props.startTime}
                             moreStyle={"border-r-2 border-black"}
                         />
                     ) : (
@@ -103,10 +141,10 @@ const TotalPrice = (props: TotalPriceProps) => {
                         />
                     )}
 
-                    {props.end ? (
+                    {props.endTime ? (
                         <ColInformation
                             smallText={"End"}
-                            mainText={props.end}
+                            mainText={props.endTime}
                             moreStyle={"border-r-2 border-black"}
                         />
                     ) : (
@@ -116,7 +154,7 @@ const TotalPrice = (props: TotalPriceProps) => {
                         />
                     )}
                     <ColInformation smallText={"Quantity"}>
-                        {!props.start ? (
+                        {!props.startTime ? (
                             <Input
                                 name={"quantity"}
                                 type={"number"}
@@ -167,6 +205,7 @@ const TotalPrice = (props: TotalPriceProps) => {
                             reset({
                                 quantity: 1,
                             });
+                            props.notConfirm && props.notConfirm()
                         }}
                     >
                         Cancel

@@ -45,12 +45,14 @@ const DetailPage = (props: { service: Product }) => {
                     isCertified={props.service.vendor.certified}
                 />
 
-                {/*Display image*/}
-                <ImageGallery images={props.service.images}/>
 
-                {/*Detail information*/}
                 <div className={"flex flex-col lg:flex-row w-full h-max mt-4"}>
-                    <div className={"lg:w-2/3 lg:pr-24"}>
+                    <div className={"lg:w-2/3 lg:pr-4 space-y-4"}>
+                        {/*Display image*/}
+
+                        <ImageGallery images={props.service.images}/>
+                        {/*Detail information*/}
+
                         <DetailPageInfo
                             name={props.service.name}
                             description={props.service.desc}
@@ -88,20 +90,20 @@ const DetailPage = (props: { service: Product }) => {
             </div>
 
             {/*Map*/}
-            <div className={"border-b-2 border-gray-300 w-full pb-2 space-y-7 mt-7"}>
-                <div className={"text-gray-700 font-bold text-2xl mb-3"}>
-                    Where you will be here
-                </div>
-                <div className={"relative w-full h-80 lg:w-3/4 lg:h-96 m-auto z-0"}>
-                    {lat !== null && lng !== null ? (
-                        <Map latitude={lat} longitude={lng} scrollWheelZoom={false}/>
-                    ) : (
-                        <div className={"text-2xl text-center font-bold"}>
-                            Map is not found 😭😭😭😭
-                        </div>
-                    )}
-                </div>
-            </div>
+            {/*<div className={"border-b-2 border-gray-300 w-full pb-2 space-y-7 mt-7"}>*/}
+            {/*    <div className={"text-gray-700 font-bold text-2xl mb-3"}>*/}
+            {/*        Where you will be here*/}
+            {/*    </div>*/}
+            {/*    <div className={"relative w-full h-80 lg:w-3/4 lg:h-96 m-auto z-0"}>*/}
+            {/*        {lat !== null && lng !== null ? (*/}
+            {/*            <Map latitude={lat} longitude={lng} scrollWheelZoom={false}/>*/}
+            {/*        ) : (*/}
+            {/*            <div className={"text-2xl text-center font-bold"}>*/}
+            {/*                Map is not found 😭😭😭😭*/}
+            {/*            </div>*/}
+            {/*        )}*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
             {/*Vendor preview*/}
             {props.service.vendor ? (

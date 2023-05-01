@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import Image from 'next/image';
 import Modal from "components/Modal";
+import Test from "components/Detail/Test";
+import Carousel from "components/Carousel";
 
 interface ImageGalleryProps {
     images: string[];
@@ -25,28 +27,31 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
                     alt="Image"
                     fill={true}
                     onClick={handleOpenModal}
-                    className="object-cover cursor-pointer"
+                    className="object-cover cursor-pointer rounded-lg"
                     loading="lazy"
                 />
             </div>
         )
     } else if (images.length == 2) {
         return (
-            <div className={'flex flex-col lg:flex-row'}>
-                {images.map((image, index) => (
-                    <div key={index} className={'relative h-96 w-full '}>
-                        <Image
-                            src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + images[index]}
-                            alt={`Image ${index}`}
-                            fill={true}
-                            onClick={handleOpenModal}
-                            className="object-cover cursor-pointer"
-                            loading="lazy"
-                        />
-                    </div>
-
-                ))}
-            </div>
+            // <div className={'flex flex-col lg:flex-row'}>
+            //     {images.map((image, index) => (
+            //         <div key={index} className={'relative h-96 w-full '}>
+            //             <Image
+            //                 src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + images[index]}
+            //                 alt={`Image ${index}`}
+            //                 fill={true}
+            //                 onClick={handleOpenModal}
+            //                 className="object-cover cursor-pointer"
+            //                 loading="lazy"
+            //             />
+            //         </div>
+            //
+            //     ))}
+            // </div>
+            <Carousel slice={images}>
+                <Test />
+            </Carousel>
         )
     }
     return (

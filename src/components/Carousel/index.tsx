@@ -1,0 +1,105 @@
+import React, {useEffect, useRef, useState} from 'react';
+import {MdChevronLeft, MdChevronRight} from "react-icons/md";
+
+
+interface CarouselProps {
+    slice?: any
+    children?: React.ReactNode
+}
+
+const Carousel: React.FC<CarouselProps> = (props: CarouselProps) => {
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [auto, setAuto] = useState(true);
+    const [queryService, setServices] = useState(props.slice);
+
+
+    const timerRef = useRef<HTMLButtonElement | null>(null);
+
+    useEffect(() => {
+        setServices(props.slice)
+    }, [props.slice])
+    const handleNextSlide = () => {
+        let newSlide =
+            currentSlide === queryService.length - 1 ? 0 : currentSlide + 1;
+        setCurrentSlide(newSlide);
+    };
+
+    const handlePrevSlide = () => {
+        let newSlide =
+            currentSlide === 0 ? queryService.length - 1 : currentSlide - 1;
+        setCurrentSlide(newSlide);
+    };
+
+    useEffect(() => {
+        if (timerRef.current) {
+            clearTimeout(timerRef.current as unknown as number);
+        }
+
+        let timer: ReturnType<typeof setTimeout> = setTimeout(() => {
+            if (auto) {
+                let newSlide =
+                    currentSlide === queryService.length - 1 ? 0 : currentSlide + 1;
+                setCurrentSlide(newSlide);
+            }
+        }, 5000);
+
+        return () => clearTimeout(timer);
+    }, [auto, currentSlide, queryService.length]);
+
+    return (
+        <div className="mt-3 p-5 md:p-0">
+            <div className="w-full flex justify-center overflow-hidden relative md:m-auto ">
+                <button
+                    onClick={handlePrevSlide}
+                    className=" left-5 m-auto text-5xl inset-y-1/2 text-gray-400 z-20 md:mr-7"
+                >
+          <span className="hidden lg:inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 ">
+            <MdChevronLeft size={50} className="cursor-pointer text-white"/>
+            <span className="sr-only">Previous</span>
+          </span>
+                </button>
+                {queryService.map((service: [], index: number) => {
+                        if (index === currentSlide) {
+                            return React.Children.map(props.children, (child) => {
+                                return React.cloneElement(child as React.ReactElement<any>, {
+                                    service,
+                                });
+                            })
+                        }
+                    }
+                )
+                }
+                <button
+                    ref={timerRef}
+                    onClick={handleNextSlide}
+                    className="right-5 m-auto text-5xl inset-y-1/2 text-gray-400 z-20"
+                >
+          <span className="hidden lg:inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30">
+            <MdChevronRight size={50} className="cursor-pointer text-white"/>
+            <span className="sr-only">Next</span>
+          </span>
+                </button>
+            </div>
+
+            <div className="relative flex justify-center md:mt-5 mt-5">
+                {queryService.map((_: any, index: string | number | ((prevState: number) => number)) => {
+                    return (
+                        <div
+                            className={
+                                index === currentSlide
+                                    ? "h-3 w-3 bg-gray-700 rounded-full mx-2 mb-2 cursor-pointer"
+                                    : "h-3 w-3 bg-gray-300 rounded-full mx-2 mb-2 cursor-pointer"
+                            }
+                            key={index as number}
+                            onClick={() => {
+                                setCurrentSlide(index as number);
+                            }}
+                        />
+                    );
+                })}
+            </div>
+        </div>
+    )
+}
+
+export default Carousel

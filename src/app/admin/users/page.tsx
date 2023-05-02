@@ -1,15 +1,12 @@
 "use client";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import apiClient from "@/config/axios.config";
-import axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
 import {
   Column,
-  useFilters,
+  useGlobalFilter,
   usePagination,
-  UsePaginationInstanceProps,
-  UsePaginationState,
   useSortBy,
   useTable,
 } from "react-table";
@@ -32,8 +29,14 @@ interface IUser {
   vendor: Vendor | null;
 }
 
-
 const TableComponent = (props: { data: IUser[] }) => {
+  const [searchParam, setSearchParam] = useState("");
+
+  useEffect(() => {
+    tableInstance.setGlobalFilter(searchParam);
+  }, [searchParam]);
+
+  const data = props.data;
   const columns: Column<IUser>[] = React.useMemo(
     () =>
       [
@@ -102,18 +105,60 @@ const TableComponent = (props: { data: IUser[] }) => {
       ] as Column<IUser>[],
     []
   );
-  const data = props.data;
   const {
     state: { pageIndex, pageSize },
     ...tableInstance
   } = useTable(
-    { columns, data: data, initialState: { pageSize: 15 } },
+    {
+      columns,
+      data: data,
+      initialState: { pageSize: 15, globalFilter: searchParam },
+    },
+    useGlobalFilter,
     useSortBy,
-    usePagination,
-    useFilters
+    usePagination
   );
+
   return (
-    <div className="flex flex-col gap-6 items-center w-full">
+    <div className="flex flex-col gap-6 items-center w-full justify-center">
+      <div className="flex gap-2 h-full">
+        <label
+          htmlFor="search-user"
+          className="flex items-center font-semibold"
+        >
+          Search in {data.length} records:
+        </label>
+        <input
+          className="border-2 rounded p-1"
+          id="search-user"
+          placeholder="Search"
+          type="text"
+          value={searchParam}
+          onChange={(e) => {
+            setSearchParam(e.target.value);
+          }}
+        />
+      </div>
+      <p>
+        Showing <b>{pageSize}</b> of <b>{data.length}</b> records
+      </p>
+      <div className="flex gap-8">
+        <button
+          className="w-[30px] h-[25px] rounded-lg bg-red-500"
+          onClick={tableInstance.previousPage}
+        >
+          {"<<"}
+        </button>
+        <p>
+          {pageIndex + 1} / {tableInstance.pageCount}
+        </p>
+        <button
+          className="w-[30px] h-[25px] rounded-lg bg-red-500"
+          onClick={tableInstance.nextPage}
+        >
+          {">>"}
+        </button>
+      </div>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           {tableInstance.headerGroups.map((headerGroup) => (
@@ -164,23 +209,6 @@ const TableComponent = (props: { data: IUser[] }) => {
           })}
         </tbody>
       </table>
-      <div className="flex gap-8">
-        <button
-          className="w-[30px] h-[25px] rounded-lg bg-red-500"
-          onClick={tableInstance.previousPage}
-        >
-          {"<<"}
-        </button>
-        <p>
-          {pageIndex + 1} / {tableInstance.pageCount}
-        </p>
-        <button
-          className="w-[30px] h-[25px] rounded-lg bg-red-500"
-          onClick={tableInstance.nextPage}
-        >
-          {">>"}
-        </button>
-      </div>
     </div>
   );
 };

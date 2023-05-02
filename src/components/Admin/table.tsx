@@ -4,6 +4,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Column, useTable } from "react-table";
 import { User } from "../../../Types";
+import LoadingSpinner from "../LoadingSpinner";
 
 interface Vendor {
   id: string;
@@ -75,7 +76,7 @@ const TableComponent = (props: { data: IUser[] }) => {
           Header: "Action",
           Cell: (cell: any) => (
             <button
-            className="underline font-semibold hover:text-red-400"
+              className="underline font-semibold hover:text-red-400"
               onClick={() => {
                 console.log("clicked", cell.row.values.id);
               }}
@@ -157,7 +158,7 @@ const Table = () => {
       <h1 className="w-full text-xl text-oliveGreen font-bold uppercase pl-4">
         All Accounts:
       </h1>
-      {users.length > 0 && <TableComponent data={users} />}
+      {users.length > 0 ? <TableComponent data={users} /> : <LoadingSpinner />}
     </div>
   );
 };

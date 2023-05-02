@@ -1,9 +1,10 @@
-import React, {useRef} from "react";
+import React, {useRef, useState} from "react";
 import Input from "components/Form/Input";
 import {useForm} from "react-hook-form";
 import Button from "components/Button";
 import {useRouter} from "next/navigation";
 import {format} from "date-fns";
+import Modal from "components/Modal";
 
 interface InformationProps {
     smallText: string;
@@ -40,7 +41,7 @@ const ColInformation = (props: InformationProps) => (
         {props.mainText && <div className={"font-bold"}>{props.mainText}</div>}
         {props.children}
     </div>
-);
+)
 const TotalPrice = (props: TotalPriceProps) => {
     const {
         control,
@@ -55,6 +56,19 @@ const TotalPrice = (props: TotalPriceProps) => {
         },
         mode: "onChange"
     });
+
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [isError, setIsError] = useState<boolean>()
+
+    const handleModalOpen = () => {
+        setIsModalOpen(true)
+    }
+
+    const handleModalClose = () => {
+        setIsModalOpen(false)
+    }
 
     const {push} = useRouter()
 
@@ -85,23 +99,25 @@ const TotalPrice = (props: TotalPriceProps) => {
 
     return (
         <div
-            className={
-                "h-full p-2 bg-yellow-100 bg-opacity-50 rounded-xl pt-5 shadow-lg "
-            }
+            className={"h-full p-2 bg-yellow-100 bg-opacity-50 rounded-xl pt-5 shadow-lg "}
         >
             <div
                 className={
                     "m-auto w-11/12 h-full outline outline-2 outline-black grid grid-flow-row auto-rows-max"
                 }
             >
+                {/*Service Name*/}
                 <RowInformation
                     smallText={"Service Name"}
                     mainText={props.productName}
                 />
+
+                {/*Username*/}
                 {props.userName ?
                     <RowInformation smallText={"Username"} mainText={props.userName}/> :
                     <RowInformation smallText={"Username"} mainText={"Honneyyy 😘😘😘😘"}/>}
 
+                {/*Date*/}
                 <div className={'grid grid-cols-2 outline outline-1 outline-black'}>
                     {props.startDate ?
                         <ColInformation
@@ -126,7 +142,7 @@ const TotalPrice = (props: TotalPriceProps) => {
                     }
                 </div>
 
-
+                {/*Time*/}
                 <div className={"grid grid-cols-3 outline outline-1 outline-black"}>
                     {props.startTime ? (
                         <ColInformation
@@ -153,6 +169,8 @@ const TotalPrice = (props: TotalPriceProps) => {
                             moreStyle={"border-r-2 border-black"}
                         />
                     )}
+
+                    {/*Quantity*/}
                     <ColInformation smallText={"Quantity"}>
                         {!props.startTime ? (
                             <Input
@@ -180,6 +198,19 @@ const TotalPrice = (props: TotalPriceProps) => {
                         )}
                     </ColInformation>
                 </div>
+
+                {/*Discount*/}
+                <RowInformation
+                    smallText={'Discount'}
+                >
+                    <Button btnStyle={"filled"} onClick={handleModalOpen}/>
+                    <Modal nameModal={'🈹 Choose your discount 🈹'} isOpen={isModalOpen} onClose={handleModalClose}>
+
+                    </Modal>
+
+                </RowInformation>
+
+                {/*Total Price*/}
                 {quantity.current ? (
                     <RowInformation
                         smallText={"Total Price"}

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import {AiOutlineClose} from "react-icons/ai";
 import FormHeader from "../Form/FormHeader";
 
@@ -10,6 +10,9 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = (props: ModalProps) => {
+    const modal = useRef<any>()
+
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -17,11 +20,11 @@ const Modal: React.FC<ModalProps> = (props: ModalProps) => {
       }
     };
     const handleClickOutside = (event: MouseEvent) => {
-      const modal = document.querySelector(".modal") as HTMLElement;
-      const modalContent = document.querySelector(
-        ".modal-content"
-      ) as HTMLElement;
-      if (modal && !modalContent.contains(event.target as HTMLElement)) {
+      // const modal = document.querySelector(".modal") as HTMLElement;
+      // const modalContent = document.querySelector(
+      //   ".modal-content"
+      // ) as HTMLElement;
+      if (modal.current && !modal.current.contains(event.target as HTMLElement)) {
         props.onClose();
       }
     };
@@ -42,7 +45,7 @@ const Modal: React.FC<ModalProps> = (props: ModalProps) => {
   return (
     <div className="modal flex fixed inset-0 z-50 justify-center items-center bg-neutral-700 bg-opacity-50">
       <div className="h-3/4 w-full lg:w-max z-50">
-        <div className="modal-content bg-white rounded-lg max-w-screen-lg mx-auto ">
+        <div ref={modal} className="modal-content bg-white rounded-lg max-w-screen-lg mx-auto ">
           <div className="flex shadow-xl sticky top-0 bg-white z-10 px-6 py-6 rounded-t-lg items-center justify-between w-full ">
             <FormHeader name={props.nameModal} />
             <button className="ml-4" onClick={props.onClose}>

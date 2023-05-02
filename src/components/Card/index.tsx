@@ -7,10 +7,12 @@ const Card = (props: { service: Product }) => {
   return (
     <Link
       href={`/detail/${encodeURIComponent(props.service.id)}`}
-      className="flex flex-col justify-center w-full shadow-xl rounded-md my-8  "
+      className="flex flex-col w-full h-full shadow-xl rounded-xl my-8 transition-all
+      border-4 border-transparent hover:border-midGreen"
     >
       <div className="relative w-full h-[15rem] rounded-t-md">
         <Image
+          className="object-cover rounded-t-md"
           src={`${img_endpoint}${props.service.images[0]}`}
           alt={props.service.name}
           fill
@@ -19,7 +21,7 @@ const Card = (props: { service: Product }) => {
               33vw"
         />
       </div>
-      <div className="m-5">
+      <div className="flex flex-[1] flex-col m-5">
         <h1 className="text-xl text-black font-bold truncate">
           {props.service.name}
         </h1>
@@ -27,14 +29,12 @@ const Card = (props: { service: Product }) => {
         <div>
           <p className="line-clamp-3">{props.service.address}</p>
         </div>
-
-        {/* <p>@{props.service.vendor.username}</p> */}
-        <div className="flex flex-row items-center">
-          <div className="text-oliveGreen font-bold my-3 text-2xl pr-1">
-            {props.service.price?.toLocaleString()} VND
-          </div>
-          <div className="text-black font-semibol text-base"> per hour</div>
+      </div>
+      <div className="flex flex-row flex-[1] m-5 items-center border-t">
+        <div className="text-oliveGreen font-bold my-3 text-2xl pr-1">
+          {props.service.price?.toLocaleString()} VND
         </div>
+        <div className="text-black font-semibol text-base"> per hour</div>
       </div>
     </Link>
   );

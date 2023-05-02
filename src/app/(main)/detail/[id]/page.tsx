@@ -14,7 +14,6 @@ interface DetailParams {
 
 export default function Detail(slugs: DetailParams) {
     const {data, isError, isLoading} = useFetch<Product>(`service/${slugs.params.id}`)
-
     const items = [
         {label: "Home", href: "/"},
         {label: data?.category, href: `/category?id=${data?.category}`},
@@ -22,7 +21,7 @@ export default function Detail(slugs: DetailParams) {
     ];
 
 
-    if (!data && !isError) {
+    if (isLoading) {
         return (
             <div
                 className="relative h-[calc(100vh_-_10rem)] -top-[5rem] w-full flex flex-col justify-center items-center overflow-hidden -z-10">
@@ -31,14 +30,17 @@ export default function Detail(slugs: DetailParams) {
         );
     }
 
-    if (isError || !data) {
+    if (isError && !data) {
         return <NotFound/>;
     }
 
-    return (
-        <div className="h-full px-4 md:px-8 lg:px-40 2xl:px-56">
-            <Breadcrumb items={items}/>
-            <DetailPage service={data}/>
-        </div>
-    );
+    if (data) {
+        return (
+            <div className="h-full px-4 md:px-8 2xl:px-56">
+                <Breadcrumb items={items}/>
+                <DetailPage service={data}/>
+            </div>
+        );
+    }
+
 }

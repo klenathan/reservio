@@ -5,6 +5,10 @@ import Button from "components/Button";
 import {useRouter} from "next/navigation";
 import {format} from "date-fns";
 import Modal from "components/Modal";
+import useFetch from "@/Helper/ClientFetch/useFetch";
+import {Discount} from "../../../../Types";
+import LoadingSpinner from "components/LoadingSpinner";
+import DiscountCard from "components/Detail/Pricing/DiscountCard";
 
 interface InformationProps {
     smallText: string;
@@ -57,13 +61,19 @@ const TotalPrice = (props: TotalPriceProps) => {
         mode: "onChange"
     });
 
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+    const {data, isError, isLoading} = useFetch<Discount[]>('service/discount')
+    const [discount, setDiscount] = useState<any>(
+        {amount: 0}
+    )
 
-    const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [isError, setIsError] = useState<boolean>()
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
     const handleModalOpen = () => {
         setIsModalOpen(true)
+    }
+
+    const handleDiscount = (childData: any) => {
+        setDiscount(childData)
     }
 
     const handleModalClose = () => {
@@ -203,8 +213,39 @@ const TotalPrice = (props: TotalPriceProps) => {
                 <RowInformation
                     smallText={'Discount'}
                 >
-                    <Button btnStyle={"filled"} onClick={handleModalOpen}/>
+                    <div
+                        className={'flex font-bold justify-center w-full bg-neutral-100 hover:bg-neutral-200 cursor-pointer'}
+                        onClick={handleModalOpen}
+                    >
+                        {!discount || discount.amount == 0 ?
+                            <div>Choose your discount</div> :
+                            <div>{discount.id} - {discount.amount}%</div>
+                        }
+                    </div>
+
                     <Modal nameModal={'🈹 Choose your discount 🈹'} isOpen={isModalOpen} onClose={handleModalClose}>
+                        {isLoading && <LoadingSpinner text={"Waiting for discount"}/>}
+                        {isError && <div>Something when wrong</div>}
+                        <div
+                            className={'overflow-auto h-full max-h-96 space-y-4 py-6 px-1.5 md:px-6 lg:px-10 snap-both scroll-smooth'}>
+                            {data &&
+                                data.map((discount) => (
+                                    <div key={discount.id}>
+                                        <DiscountCard
+                                            id={discount.id as string}
+                                            name={discount.name}
+                                            desc={discount.desc}
+                                            amount={discount.amount}
+                                            startDate={discount.start}
+                                            endDate={discount.end}
+                                            parentCallBack={handleDiscount}
+                                            onClose={handleModalClose}
+                                        />
+                                    </div>
+                                ))
+
+                            }
+                        </div>
 
                     </Modal>
 
@@ -214,12 +255,12 @@ const TotalPrice = (props: TotalPriceProps) => {
                 {quantity.current ? (
                     <RowInformation
                         smallText={"Total Price"}
-                        mainText={`₫${(quantity.current * props.price).toLocaleString()}`}
+                        mainText={`₫${((quantity.current * props.price) * ((100 - discount?.amount) / 100)).toLocaleString()}`}
                     />
                 ) : (
                     <RowInformation
                         smallText={"Total Price"}
-                        mainText={`₫${props.price}`}
+                        mainText={`₫${props.price.toLocaleString()}`}
                     />
                 )}
             </div>

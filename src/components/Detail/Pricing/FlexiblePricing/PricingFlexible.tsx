@@ -21,7 +21,7 @@ interface PriceFlexibleProps {
     confirm?: () => void
 }
 
-// TODO add the notification when the time not valid (in the same day the end time must higher than the start time)
+
 const PricingFlexible = (props: PriceFlexibleProps) => {
     const [endTime, setEndTime] = useState<ChoiceProps>()
     const [startTime, setStartTime] = useState<ChoiceProps>()

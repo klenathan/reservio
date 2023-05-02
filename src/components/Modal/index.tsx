@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { AiOutlineClose } from "react-icons/ai";
+import React, {useEffect} from "react";
+import {AiOutlineClose} from "react-icons/ai";
 import FormHeader from "../Form/FormHeader";
 
 interface ModalProps {
@@ -41,15 +41,15 @@ const Modal: React.FC<ModalProps> = (props: ModalProps) => {
 
   return (
     <div className="modal flex fixed inset-0 z-50 justify-center items-center bg-neutral-700 bg-opacity-50">
-      <div className="h-3/4 z-10 rounded-lg">
-        <div className="modal-content bg-white rounded-lg  max-w-screen-md mx-auto ">
+      <div className="h-3/4 w-full lg:w-max z-50">
+        <div className="modal-content bg-white rounded-lg max-w-screen-lg mx-auto ">
           <div className="flex shadow-xl sticky top-0 bg-white z-10 px-6 py-6 rounded-t-lg items-center justify-between w-full ">
             <FormHeader name={props.nameModal} />
             <button className="ml-4" onClick={props.onClose}>
               <AiOutlineClose size={30} />
             </button>
           </div>
-          <div className={"px-6 pb-6"}>{props.children}</div>
+          {props.children}
         </div>
       </div>
     </div>

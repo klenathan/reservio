@@ -7,8 +7,8 @@ const SideNavBtn = (props: {
 }) => {
   return (
     <Link
-      className="flex justify-center py-2 border-b w-full hover:bg-gray-200 cursor-pointer"
-      href={props.href}
+      className="flex justify-center py-4 border-b w-full hover:bg-gray-200 cursor-pointer"
+      href={{ pathname: props.href }}
     >
       {props.children}
     </Link>
@@ -24,7 +24,7 @@ export default function SideBar(props: { className?: string }) {
       <div className="py-4 border-b w-full">
         <Logo logoStyle="green" />
       </div>
-      <div className="flex flex-col w-full gap-2">
+      <div className="flex flex-col w-full">
         <SideNavBtn href="/admin">Home</SideNavBtn>
         <SideNavBtn href="/admin/users">Users management</SideNavBtn>
       </div>

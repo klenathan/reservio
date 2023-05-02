@@ -19,7 +19,7 @@ interface PricingProps {
     avgRating: number;
     countRating: number | undefined;
     productName: string;
-    type: ProductPricingType
+    type?: ProductPricingType
 }
 
 export default function Pricing(props: PricingProps) {

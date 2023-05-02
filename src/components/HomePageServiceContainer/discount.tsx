@@ -68,7 +68,7 @@ const Discount = () => {
 
 const DiscountCard = (props: { discount: Discount }) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col border">
       <div className="h-[15rem] relative w-[20rem] ">
         <div
           className="w-full bg-gray-200 h-full rounded-md

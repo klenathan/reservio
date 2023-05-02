@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import dynamic from "next/dynamic";
 import {geocoderFunction} from "@/Helper/Geocoder";
 import DetailSubtitle from "components/Detail/DetailSubtitle";
-import ImageGallery from "components/Detail/ImageGallery";
+import ImageGallery from "components/Detail/ImageGallery/ImageGallery";
 import DetailPageInfo from "components/Detail/DetailPageInfo";
 import Picture from "components/Picture";
 import {FaStar} from "react-icons/fa";
@@ -63,7 +63,7 @@ const DetailPage = (props: { service: Product }) => {
                     </div>
                     <div
                         className={
-                            "hidden w-full border-2 border-neutral-10000 shadow-lg rounded-2xl h-fit lg:w-1/3 lg:block lg:sticky  lg:top-0 lg:z-50"
+                            "hidden w-full border-2 border-neutral-10000 shadow-lg rounded-2xl h-fit lg:w-1/3 lg:block lg:sticky  lg:top-0 lg:z-10"
                         }
                     >
                         {/*Pricing*/}

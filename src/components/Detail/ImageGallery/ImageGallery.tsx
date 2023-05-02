@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import Image from 'next/image';
 import Modal from "components/Modal";
-import ImageCarousel from "components/Detail/ImageCarousel";
 import Carousel from "components/Carousel";
+import ImageModalCarousel from "components/Detail/ImageGallery/ImageModalCarousel";
+import ImageCarousel from "components/Detail/ImageGallery/ImageCarousel";
 
 interface ImageGalleryProps {
     images: string[];
@@ -24,8 +25,8 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
         // TODO Create the new modal of viewing gallery
         <Modal isOpen={isModalOpen} onClose={handleCloseModal} nameModal={"Image Gallery"}>
             <div>
-                <Carousel slice={images}>
-                    <ImageCarousel onClick={handleOpenModal}/>
+                <Carousel slice={images} auto={false} preview={true}>
+                    <ImageModalCarousel/>
                 </Carousel>
             </div>
         </Modal>
@@ -57,7 +58,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
     } else if (images.length == 2) {
         return (
             <div>
-                <Carousel slice={images}>
+                <Carousel slice={images} auto={true}>
                     <ImageCarousel onClick={handleOpenModal}/>
                 </Carousel>
                 {modal}

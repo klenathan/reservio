@@ -23,7 +23,7 @@ const DetailPageInfo: React.FC<DetailPageInfoProps> = (
         <div className="flex flex-col md:items-start md:justify-start space-y-7 ">
             {/*Name and avatar*/}
             <div className="flex flex-row w-full border-b-2 border-gray-300 pb-2 justify-between">
-                <div className={'flex items-center space-x-20'}>
+                <div className={'flex items-center space-x-4 md:space-x-20'}>
                     <div className={"flex flex-col md:ml-0 m-auto"}>
                         <div className="w-20 h-20 md:w-28 md:h-28 relative items-center">
                             {props.avatar && (

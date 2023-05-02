@@ -4,7 +4,7 @@ import TotalPrice from "components/Detail/Pricing/TotalPrice";
 import {useAuth} from "components/Auth/Context/AuthContext";
 import PricingFlexible from "components/Detail/Pricing/FlexiblePricing/PricingFlexible";
 import {ProductPricingType} from "../../../../Types";
-import PricingFixing from "components/Detail/Pricing/PricingFixing";
+import PricingFixing from "components/Detail/Pricing/FixingPricing/PricingFixing";
 
 interface PricingChoiceProps {
     startTimeString?: string;

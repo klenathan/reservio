@@ -19,7 +19,7 @@ const CarouselHomePage = () => {
     }, []);
 
     return (
-        <Carousel slice={queryService}>
+        <Carousel slice={queryService} auto={true}>
             <CarouselHomePageContent />
         </Carousel>
     )

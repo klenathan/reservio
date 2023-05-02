@@ -8,6 +8,7 @@ interface ImageGalleryProps {
     images: string[];
 }
 
+
 const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -19,7 +20,19 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
         setIsModalOpen(false);
     };
 
-    if(images.length == 0){
+    const modal = isModalOpen && (
+        // TODO Create the new modal of viewing gallery
+        <Modal isOpen={isModalOpen} onClose={handleCloseModal} nameModal={"Image Gallery"}>
+            <div>
+                <Carousel slice={images}>
+                    <ImageCarousel onClick={handleOpenModal}/>
+                </Carousel>
+            </div>
+        </Modal>
+    )
+
+
+    if (images.length == 0) {
         return (
             <div>
                 NO images 😭😭😭
@@ -38,13 +51,18 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
                     className="object-cover cursor-pointer rounded-lg"
                     loading="lazy"
                 />
+                {modal}
             </div>
         )
     } else if (images.length == 2) {
         return (
-            <Carousel slice={images}>
-                <ImageCarousel onClick={handleOpenModal}/>
-            </Carousel>
+            <div>
+                <Carousel slice={images}>
+                    <ImageCarousel onClick={handleOpenModal}/>
+                </Carousel>
+                {modal}
+            </div>
+
         )
     }
 
@@ -106,19 +124,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
                 </div>
             </div>
             {/* Modal */}
-            {isModalOpen && (
-                // TODO Create the new modal of viewing gallery
-                <Modal isOpen={isModalOpen} onClose={handleCloseModal} nameModal={"Image Gallery"}>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
-                        {images.map((image, index) => (
-                            <div key={index}>
-                                <Image src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + image}
-                                       alt={`Image ${index}`} width={300} height={200} loading="lazy"/>
-                            </div>
-                        ))}
-                    </div>
-                </Modal>
-            )}
+            {modal}
         </div>
     );
 };

@@ -1,34 +1,28 @@
 import {useCallback, useState} from "react";
 import apiClient from "@/config/axios.config";
+import {AxiosError, AxiosResponse} from "axios";
 
 interface PostResult {
     response?: any;
-    isError?: any;
     isPosting: boolean;
-    post: any
+    post: (payload: FormData) => Promise<void>;
 }
 
-export default function usePost(): PostResult {
-    const [response, setResponse] = useState();
-    const [isError, setIsError] = useState<any>();
+export default function usePost(url: string): PostResult {
+    const [response, setResponse] = useState<any>();
     const [isPosting, setIsPosting] = useState(false);
 
+    const post = useCallback(async (payload: FormData) => {
+        try {
+            setIsPosting(true);
+            const res: AxiosResponse = await apiClient.post(url, payload);
+            setResponse(res.data);
+        } catch (error : any) {
+            throw new AxiosError(error);
+        } finally {
+            setIsPosting(false);
+        }
+    }, [url]);
 
-    const post = useCallback((url: string, payload: any) => {
-        console.log("asdasd", payload)
-        setIsPosting(true);
-        apiClient
-            .post(url, payload)
-            .then((res) => {
-                setResponse(res.data)
-            })
-            .catch((e) => {
-                setIsError(e)
-            })
-            .finally(() => setIsPosting(false))
-    }, [])
-
-        console.log("sdadsa ", response, isError, isPosting)
-
-    return {response, isError, isPosting, post};
+    return {response, isPosting, post};
 }

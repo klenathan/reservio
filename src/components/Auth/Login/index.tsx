@@ -24,13 +24,25 @@ const LoginForm = () => {
     const {push} = useRouter()
 
     const {isLogin, setUser, login, isLoading} = useAuth()
-    const {response, isError, isPosting, post} = usePost()
+
+    const {response, isPosting, post} = usePost(`auth/login`)
 
     useEffect(() => {
         if (isLogin) {
             redirect('/')
         }
     })
+
+    useEffect(() => {
+        if (response != undefined) {
+            sessionStorage.setItem("accessToken", response.accessToken);
+            sessionStorage.setItem('userData', JSON.stringify(response.user));
+            localStorage.setItem("refreshToken", response.refreshToken);
+            setUser(response.user)
+            login()
+            push("/");
+        }
+    }, [login, push, response, setUser])
 
     if (isLoading) {
         return <div><p>Loading Auth Contexts</p></div>
@@ -41,16 +53,15 @@ const LoginForm = () => {
         const formData = new FormData();
         formData.append("username", data.username as string);
         formData.append("password", data.password as string);
-        post(`auth/login`, formData)
 
-        if (isError) {
-            console.log(isError)
-            const errorsInfo = isError.response.data;
+        try {
+            await post(formData)
+        } catch (errors: any) {
+            const errorsInfo = errors.message.response.data;
             let message: string;
 
-            console.log(errorsInfo.error);
 
-            if (errorsInfo.error == "NotFoundError") {
+            if (errorsInfo.error == "NoFoundError" || errorsInfo.message == "No User found" ) {
                 message = "User not found";
             } else if (errorsInfo.error == "WRONG_CREDENTIAL") {
                 message = "Wrong password";

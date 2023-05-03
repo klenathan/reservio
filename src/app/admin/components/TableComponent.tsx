@@ -36,7 +36,7 @@ const TableComponent = <T extends object>(props: {
   );
 
   return (
-    <div className="flex flex-col gap-6 items-center w-full justify-center">
+    <div className="flex flex-col gap-6 items-center w-full justify-center border-t pt-4 overflow-hidden">
       <div className="flex gap-2 h-full">
         <label
           htmlFor="search-user"
@@ -56,26 +56,29 @@ const TableComponent = <T extends object>(props: {
         />
       </div>
       <p>
-        Showing <b>{pageSize}</b> of <b>{data.length}</b> records
+        Showing <b>{pageSize < data.length ? pageSize : data.length}</b> of{" "}
+        <b>{data.length}</b> records
       </p>
-      <div className="flex gap-8">
+      <div className="flex gap-8 items-center">
         <button
-          className="w-[30px] h-[25px] rounded-lg bg-red-500"
+          className="w-[40px] h-[40px] font-semibold text-midGreen rounded-full border-2 border-midGreen
+          hover:bg-green-100"
           onClick={tableInstance.previousPage}
         >
-          {"<<"}
+          {"<"}
         </button>
-        <p>
+        <p className="font-semibold">
           {pageIndex + 1} / {tableInstance.pageCount}
         </p>
         <button
-          className="w-[30px] h-[25px] rounded-lg bg-red-500"
+          className="w-[40px] h-[40px] font-semibold text-midGreen rounded-full border-2 border-midGreen
+          hover:bg-green-100"
           onClick={tableInstance.nextPage}
         >
           {">>"}
         </button>
       </div>
-      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <table className="max-w-full w-fit bg-red-200 text-sm text-left text-gray-500 dark:text-gray-400 block overflow-x-auto">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           {tableInstance.headerGroups.map((headerGroup) => (
             <tr key={headerGroup.getHeaderGroupProps().key}>
@@ -85,7 +88,7 @@ const TableComponent = <T extends object>(props: {
                 );
                 return (
                   <th
-                    className="px-6 py-3"
+                    className="px-6 py-3 "
                     {...headerProps}
                     key={headerProps.key}
                   >

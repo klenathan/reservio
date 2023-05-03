@@ -52,7 +52,15 @@ export default function AdminUserView() {
         },
         {
           Header: "Status",
-          accessor: "status",
+          accessor: (row) => {
+            const color =
+              row.status == "PENDING"
+                ? "text-yellow-600"
+                : row.status == "ACTIVATE"
+                ? "text-green-600"
+                : row.status == "DEACTIVATE" ? "text-gray-600 ": "text-red-400";
+            return <p className={`${color} font-semibold`}>{row.status}</p>;
+          },
         },
         {
           Header: "Create date",
@@ -72,9 +80,9 @@ export default function AdminUserView() {
           },
           Cell: (cell: any) => {
             return cell.value == "True" ? (
-              <p className="font-semibold text-green-400">True</p>
+              <p className="font-semibold text-green-600">True</p>
             ) : (
-              <p className="font-semibold text-red-400">False</p>
+              <p className="font-semibold text-red-600">False</p>
             );
           },
         },
@@ -83,7 +91,7 @@ export default function AdminUserView() {
           Header: "Action",
           Cell: (cell: any) => (
             <button
-              className="underline font-semibold hover:text-red-400"
+              className="underline font-semibold hover:text-red-600"
               onClick={() => {
                 console.log("clicked", cell.row.values.id);
               }}

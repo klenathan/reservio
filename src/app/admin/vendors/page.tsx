@@ -30,20 +30,12 @@ export default function AdminUserView() {
           accessor: "id",
         },
         {
-          Header: "Username",
-          accessor: "username",
-        },
-        {
           Header: "Email",
-          accessor: (row) => {
-            return row.user?.email;
-          },
+          accessor: "user_email",
         },
         {
           Header: "Owner",
-          accessor: (row) => {
-            return row.user?.firstName;
-          },
+          accessor: "user_firstname",
         },
         {
           Header: "Store Name",
@@ -51,21 +43,31 @@ export default function AdminUserView() {
         },
         {
           Header: "Phone",
-          accessor: (row) => {
-            return row.user?.phoneNo;
-          },
+          accessor: "user_phoneno",
         },
         {
           Header: "Status",
-          accessor: "status",
+          accessor: (row) => {
+            const color =
+              row.status == "PENDING"
+                ? "text-yellow-600"
+                : row.status == "ACCEPTED"
+                ? "text-green-600"
+                : "text-red-400";
+            return <p className={`${color} font-semibold`}>{row.status}</p>;
+          },
+        },
+        {
+          Header: "Sale made",
+          accessor: "sale",
         },
         {
           Header: "Create date",
-          accessor: "createdAt",
+          accessor: "createdat",
         },
         {
           Header: "Updated date",
-          accessor: "updatedAt",
+          accessor: "updatedat",
         },
         {
           Header: "Certified",
@@ -79,7 +81,7 @@ export default function AdminUserView() {
             return cell.value == "True" ? (
               <p className="font-semibold text-midGreen">Certified</p>
             ) : (
-              <p className="font-semibold text-red-400">Uncertified</p>
+              <p className="font-semibold text-red-600">Uncertified</p>
             );
           },
         },
@@ -88,12 +90,12 @@ export default function AdminUserView() {
           Header: "Action",
           Cell: (cell: any) => (
             <button
-              className="underline font-semibold hover:text-red-400"
+              className="underline font-semibold hover:text-red-600"
               onClick={() => {
                 console.log("clicked", cell.row.values.id);
               }}
             >
-              Deactivate
+              Ban
             </button>
           ),
         },
@@ -103,7 +105,7 @@ export default function AdminUserView() {
 
   useEffect(() => {
     apiClient
-      .get(`/vendor`)
+      .get(`/admin/vendor`)
       .then((response) => {
         setUsers(response.data);
       })

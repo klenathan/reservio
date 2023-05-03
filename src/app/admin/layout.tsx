@@ -1,4 +1,5 @@
 import SideBar from "@/components/Admin/sideBar";
+import Head from "next/head";
 
 export default function AdminLayout({
   children,
@@ -6,9 +7,14 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative flex flex-row">
-      <div className="flex-1 bg-gray-200 " />
-      <div className={`flex-[5] h-screen overflow-auto`}>{children}</div>
+    <div>
+      <Head>
+        <title>Admin Panel</title>
+      </Head>
+      <div className="relative flex flex-row">
+        <SideBar className="flex-1" />
+        <div className={`flex-[5] h-screen overflow-auto`}>{children}</div>
+      </div>
     </div>
   );
 }

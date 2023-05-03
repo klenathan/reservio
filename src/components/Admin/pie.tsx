@@ -16,12 +16,13 @@ const data = {
   ],
   datasets: [
     {
-      label: "# of Votes",
+      label: "# of reservations",
       data: [12, 19, 3, 5, 2, 3, 5],
       backgroundColor: [
-        "rgba(255, 99, 132, 0.2)",
-        "rgba(54, 162, 235, 0.2)",
-        "rgba(255, 206, 86, 0.2)",
+        "hsla(214, 60%, 80%, 1)",
+        "hsla(100, 60%, 80%, 1)",
+        "hsla(40, 60%, 80%, 1)",
+        ,
         "rgba(75, 192, 192, 0.2)",
         "rgba(153, 102, 255, 0.2)",
         "rgba(255, 159, 64, 0.2)",
@@ -41,14 +42,14 @@ const data = {
   ],
 };
 
-export default function PieChart() {
+export default function PieChart(props: { data?: any }) {
   return (
-    <div className="h-fit md:m-10 p-4">
-      <h1 className="w-full text-xl text-oliveGreen font-bold uppercase">
-        favorite services this month
+    <div className="h-80 flex flex-col items-center justify-center rounded-xl bg-zinc-50">
+      <h1 className="w-full text-center text-xl text-oliveGreen font-bold uppercase">
+        All time sale by categories
       </h1>
-      <div>
-        <Pie data={data} />
+      <div className="grid place-items-center h-[80%]  w-full">
+        <Pie data={props.data || data} />
       </div>
     </div>
   );

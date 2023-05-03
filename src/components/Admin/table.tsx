@@ -105,7 +105,7 @@ const Table = () => {
   }, []);
 
   return (
-    <div>
+    <div className="w-full">
       <h1 className="w-full text-xl text-oliveGreen font-bold uppercase pl-4">
         All Accounts:
       </h1>

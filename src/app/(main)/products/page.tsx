@@ -71,8 +71,8 @@ export default function Category(slugs: any) {
     <div className="overflow-hidden">
       <CategoryList />
 
-      <div className="min-h-3/4 flex">
-        <aside className="flex-none h-3/4 p-4 mt-1 border border-black">
+      <div className="min-h-3/4 flex w-full">
+        <aside className="flex-none h-3/4 p-4 mt-1 border border-black w-1/5">
           <Form onSubmit={handleSubmit(onSubmit)} button="Submit">
             <div className="my-3">
               <h1 className="text-xl text-oliveGreen font-bold mb-2">

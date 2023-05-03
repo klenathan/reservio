@@ -40,6 +40,8 @@ export default function AdminChart(props: { className?: string }) {
   const { user } = useAuth();
   const [categoryCount, setCategoryCount] = useState();
   const [vendorReservationData, setVendorReservationData] = useState();
+  const [traffic, setTraffic] = useState<any>({});
+
   useEffect(() => {
     apiClient
       .get(`/admin`)
@@ -52,6 +54,7 @@ export default function AdminChart(props: { className?: string }) {
           response.data.VendorReservationCount
         );
         setVendorReservationData(vendorReservationCount);
+        setTraffic(response.data.traffic);
       })
       .catch((e) => {
         console.log(e.response.data);
@@ -60,13 +63,26 @@ export default function AdminChart(props: { className?: string }) {
   }, []);
   return (
     <div
-      className={`${props.className} flex flex-col items-center h-screen overflow-auto`}
+      className={`${props.className} flex flex-col gap-8 items-center h-screen overflow-auto`}
     >
       <div className="w-full py-4 flex justify-center">
         <p className="text-2xl font-semibold">Hello, {user?.firstName}</p>
       </div>
       <div className=" lg:grid lg:grid-cols-2 gap-10 w-[80%]">
-        {categoryCount && <PieChart data={categoryCount} />}
+        {traffic && (
+          <div className="h-80 text-xl flex flex-col items-start justify-around rounded-xl bg-zinc-50">
+            <h2 className="mx-8 font-bold text-2xl">Lifetime stats</h2>
+            <p className="mx-8">
+              <b>Total visits</b>: {traffic.trafficCount}
+            </p>
+            <p className="mx-8">
+              <b>Total reservation</b>: {traffic.reservationCount}
+            </p>
+            <p className="mx-8">
+              <b>Conversion rate</b>: {traffic.conversionRate.toFixed(2)}%
+            </p>
+          </div>
+        )}
         {vendorReservationData && (
           <HorizontalBar data={vendorReservationData} />
         )}

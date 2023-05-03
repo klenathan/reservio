@@ -36,7 +36,7 @@ const TableComponent = <T extends object>(props: {
   );
 
   return (
-    <div className="flex flex-col gap-6 items-center w-full justify-center border-t pt-4 overflow-hidden">
+    <div className="flex flex-col gap-6 items-center w-full justify-center pt-4 overflow-hidden">
       <div className="flex gap-2 h-full">
         <label
           htmlFor="search-user"

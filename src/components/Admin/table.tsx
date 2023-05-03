@@ -105,8 +105,8 @@ const Table = () => {
   }, []);
 
   return (
-    <div className="w-full">
-      <h1 className="w-full text-xl text-oliveGreen font-bold uppercase pl-4">
+    <div className="w-full border-t">
+      <h1 className="w-full text-center text-xl text-oliveGreen font-bold uppercase p-4">
         All Accounts:
       </h1>
       {users.length > 0 ? (

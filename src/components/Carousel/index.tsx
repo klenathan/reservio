@@ -140,7 +140,6 @@ const Carousel: React.FC<CarouselProps> = (props: CarouselProps) => {
                     )}
                 </div>
             }
-
         </div>
     );
 };

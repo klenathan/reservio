@@ -43,7 +43,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
 
     if (images.length == 1) {
         return (
-            <div className={'relative w-full h-80'}>
+            <div className={'relative w-full h-80 md:h-96'}>
                 <Image
                     src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + images[0]}
                     alt="Image"

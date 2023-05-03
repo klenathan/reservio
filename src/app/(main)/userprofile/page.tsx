@@ -1,9 +1,6 @@
 "use client";
 import UserProfile from "@/components/Profile";
 import HistoryPage from "@/components/History";
-import HistoryCard from "@/components/HistoryCard";
-import {useEffect, useState} from "react";
-import apiClient from "@/config/axios.config";
 
 export default function Profile() {
     // useEffect(() => {
@@ -22,7 +19,9 @@ export default function Profile() {
 
     return (
         <div className="flex flex-col md:flex-row  md:pt-12 justify-center">
-            <UserProfile> </UserProfile>
+            <div className="md:pr-12"> 
+            <UserProfile email={"adasd"} phone={"0213123"} userName={"Asdasds"} />
+            </div>
             <div className="flex flex-col">
                 <HistoryPage> </HistoryPage>
             </div>

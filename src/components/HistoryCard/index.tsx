@@ -13,6 +13,7 @@ interface IHistoryCardProps {
 
 
 const HistoryCard: React.FC<IHistoryCardProps> = (props: IHistoryCardProps) => {
+  const formattedPrice = props.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
   const size = 55;
   return (
     <div className="flex flex-col mt-3 w-full shadow-lg p-5 ">
@@ -63,14 +64,14 @@ const HistoryCard: React.FC<IHistoryCardProps> = (props: IHistoryCardProps) => {
                 Price:{" "}
                 <span className="text-xs md:text-xl font-medium text-midGreen">
                   {" "}
-                  ₫{props.price}
+                  {formattedPrice}
                 </span>{" "}
               </h1>
             </div>
             <div className="font-extrabold text-gray-600 md:text-xl">
-              Total with taxes:
+              Total:
               <span className="text-xl md:text-3xl font-extrabold text-midGreen ml-3">
-                ₫{props.totalPrice}
+                {formattedPrice}
               </span>
             </div>
           </div>

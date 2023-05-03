@@ -52,13 +52,15 @@ export type Product = {
     images: string[];
     address: string;
     price: number;
+    quantity: number
     desc: string;
     type: ProductPricingType,
     avgRating: number;
     reviews: Review[];
     createdAt: string;
     _count?: {
-        reservation: number;
+        Reservation: number;
+        ProductFixedTimeSlot: number;
         reviews: number;
     };
 };

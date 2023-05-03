@@ -11,7 +11,7 @@ export default function Profile() {
         <title>Reservation status</title>
       </Head>
       <NavBar />
-      <div className="md:mx-24 mx-8 ">
+      <div className="md:mx-24 mx-5">
         <ReservationStatus />
         <div className="mt-5"> 
         <ReservationInfo />

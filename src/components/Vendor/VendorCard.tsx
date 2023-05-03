@@ -5,6 +5,7 @@ import { categories } from "@/const/Categories";
 import { GrServices } from "react-icons/gr";
 
 const VendorCard = (props: { vendor: Vendor }) => {
+  
   const img_endpoint = process.env.NEXT_PUBLIC_IMG_ENDPOINT;
   return (
     <Link

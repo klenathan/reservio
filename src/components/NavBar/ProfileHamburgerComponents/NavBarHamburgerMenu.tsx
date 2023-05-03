@@ -73,19 +73,25 @@ const NavBarHamburgerMenu: React.FC<IHamburgerMenuProps> = (
     >
       {props.isLogin ? (
         <>
-          <HamburgerMenuChild href="/userprofile">
+          <HamburgerMenuChild
+            href={`/userprofile/${encodeURIComponent(props.user.username)}`}
+          >
             My Profile
           </HamburgerMenuChild>
           {props.user?.vendor && (
             <>
-              <HamburgerMenuChild href="/vendorprofile">
+              <HamburgerMenuChild
+                href={`/vendorprofile/${encodeURIComponent(
+                  props.user.username
+                )}`}
+              >
                 Vendor Profile
               </HamburgerMenuChild>
               <HamburgerMenuChild
                 className="border-b-2"
                 href={`/store/${encodeURIComponent(props.user.username)}`}
               >
-                Your Store
+                My Store
               </HamburgerMenuChild>
             </>
           )}

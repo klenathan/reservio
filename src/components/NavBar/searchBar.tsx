@@ -23,6 +23,7 @@ export default function SearchBar() {
         border-gray-500"
         type="text"
         name="Search"
+        value={keyword}
         onChange={(e) => {
           setKeyword(e.target.value);
         }}

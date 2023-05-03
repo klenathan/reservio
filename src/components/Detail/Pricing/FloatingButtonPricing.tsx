@@ -10,6 +10,7 @@ interface FloatingButtonPricingProps {
     productName: string
     userName?: string
     maxQuantity: number
+    id: string
     countReservation: number
 }
 
@@ -55,6 +56,7 @@ const FloatingButtonPricing: React.FC<FloatingButtonPricingProps> = (
                             productName={props.productName}
                             countReservation={props.countReservation}
                             maxQuantity={props.maxQuantity}
+                            id={props.id}
 
                         />
                     </div>

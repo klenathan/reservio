@@ -12,7 +12,7 @@ export default function Profile() {
       </Head>
       <div className="flex flex-col md:flex-row  md:pt-12 justify-center">
         <div className="md:pr-12"> 
-        <UserProfile> </UserProfile>
+        <UserProfile userName="asd" email="ads" phone="as"/>
         </div>
         <div className="flex flex-col ">
           <HistoryPage> </HistoryPage>

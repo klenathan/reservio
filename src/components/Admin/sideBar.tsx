@@ -29,6 +29,7 @@ export default function SideBar(props: { className?: string }) {
       <div className="flex flex-col w-full">
         <SideNavBtn href="/admin">Home</SideNavBtn>
         <SideNavBtn href="/admin/users">Users management</SideNavBtn>
+        <SideNavBtn href="/admin/vendors">Vendor management</SideNavBtn>
       </div>
     </div>
   );

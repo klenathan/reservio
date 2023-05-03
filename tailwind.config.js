@@ -36,6 +36,9 @@ module.exports = {
             },
             animation: {
                 fadeInDown: 'transition-all ease-in-out duration-300'
+            },
+            screens: {
+                '2k' : '2048px'
             }
         },
     },

@@ -47,7 +47,7 @@ const DetailPage = (props: { service: Product }) => {
 
 
                 <div className={"flex flex-col lg:flex-row w-full h-max mt-4"}>
-                    <div className={"lg:w-2/3 lg:pr-4 space-y-4"}>
+                    <div className={"lg:w-3/4 lg:pr-4 space-y-4"}>
                         {/*Display image*/}
 
                         <ImageGallery images={props.service.images}/>

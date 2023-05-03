@@ -36,9 +36,12 @@ export default function Detail(slugs: DetailParams) {
 
     if (data) {
         return (
-            <div className="h-full px-4 md:px-8 2xl:px-56">
-                <Breadcrumb items={items}/>
-                <DetailPage service={data}/>
+            // md:px-8 lg:px-56
+            <div className="h-full w-full flex justify-center px-4 md:px-0">
+                <div className="md:min-w-screen-lg xl:max-w-screen-xl 2k:max-w-screen-2xl">
+                    <Breadcrumb items={items}/>
+                    <DetailPage service={data}/>
+                </div>
             </div>
         );
     }

@@ -4,9 +4,9 @@ import {redirect, useRouter} from "next/navigation";
 import Input from "@/components/Form/Input";
 import Form from "../../Form";
 import FormHeader from "../../Form/FormHeader";
-import apiClient from "@/config/axios.config";
 import {useAuth} from "components/Auth/Context/AuthContext";
 import {useEffect} from "react";
+import usePost from "@/Helper/ClientFetch/usePost";
 
 interface IFromInput {
     username: String;
@@ -24,6 +24,7 @@ const LoginForm = () => {
     const {push} = useRouter()
 
     const {isLogin, setUser, login, isLoading} = useAuth()
+    const {response, isError, isPosting, post} = usePost()
 
     useEffect(() => {
         if (isLogin) {
@@ -40,47 +41,36 @@ const LoginForm = () => {
         const formData = new FormData();
         formData.append("username", data.username as string);
         formData.append("password", data.password as string);
+        post(`auth/login`, formData)
 
-        apiClient
-            .post(
-                `auth/login`,
-                formData
-            )
-            .then((res) => {
-                sessionStorage.setItem("accessToken", res.data.accessToken);
-                sessionStorage.setItem('userData', JSON.stringify(res.data.user));
-                localStorage.setItem("refreshToken", res.data.refreshToken);
-                setUser(res.data.user)
-                login()
-                push("/");
-            })
-            .catch((e) => {
-                console.log(e)
-                const errorsInfo = e.response.data;
-                let message: string;
+        if (isError) {
+            console.log(isError)
+            const errorsInfo = isError.response.data;
+            let message: string;
 
-                console.log(errorsInfo.error);
+            console.log(errorsInfo.error);
 
-                if (errorsInfo.error == "NotFoundError") {
-                    message = "User not found";
-                } else if (errorsInfo.error == "WRONG_CREDENTIAL") {
-                    message = "Wrong password";
-                } else {
-                    message = errorsInfo.error;
-                }
+            if (errorsInfo.error == "NotFoundError") {
+                message = "User not found";
+            } else if (errorsInfo.error == "WRONG_CREDENTIAL") {
+                message = "Wrong password";
+            } else {
+                message = errorsInfo.error;
+            }
 
-                setError("root.serverError", {
-                    type: errorsInfo.errors,
-                    message: message,
-                });
+            setError("root.serverError", {
+                type: errorsInfo.errors,
+                message: message,
             });
+        }
     };
+
 
     return (
         <div className="bg-white shadow rounded lg:w-1/3 md:w-1/2 w-full p-10 mt-8">
             <FormHeader name="Login to Reservio"/>
 
-            <Form onSubmit={handleSubmit(onSubmit)} button="Login">
+            <Form onSubmit={handleSubmit(onSubmit)} isPosting={isPosting} button="Login">
                 <div>
                     <Input
                         name={"username"}

@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Input from "components/Form/Input";
 import {useForm} from "react-hook-form";
 import Button from "components/Button";
@@ -67,7 +67,17 @@ const TotalPrice = (props: TotalPriceProps) => {
     )
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+    const [isPriceValid, setIsPriceValid] = useState<boolean>()
 
+    useEffect(() => {
+        console.log('asdasd', props.price)
+        if(props.price && props.price != 0){
+             setIsPriceValid(true)
+        }else{
+            setIsPriceValid(false)
+        }
+        console.log(isPriceValid)
+    }, [props.price])
     const handleModalOpen = () => {
         setIsModalOpen(true)
     }
@@ -79,6 +89,7 @@ const TotalPrice = (props: TotalPriceProps) => {
     const handleModalClose = () => {
         setIsModalOpen(false)
     }
+
 
     const {push} = useRouter()
 
@@ -266,7 +277,9 @@ const TotalPrice = (props: TotalPriceProps) => {
             </div>
             {props.isLogin ?
                 <div className={"mt-2 p-3 grid grid-cols-2 gap-4 align-middle"}>
-                    <Button btnStyle={"filled"}>Confirm</Button>
+                    <Button btnStyle={"filled"}
+                            disabled={!isPriceValid}
+                    >Confirm</Button>
                     <Button
                         btnStyle={"filled"}
                         onClick={() => {

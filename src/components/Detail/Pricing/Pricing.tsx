@@ -1,5 +1,5 @@
 import {FaStar} from "react-icons/fa";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import TotalPrice from "components/Detail/Pricing/TotalPrice";
 import {useAuth} from "components/Auth/Context/AuthContext";
 import PricingFlexible from "components/Detail/Pricing/FlexiblePricing/PricingFlexible";
@@ -19,15 +19,18 @@ interface PricingProps {
     avgRating: number;
     countRating: number | undefined;
     productName: string;
+    maxQuantity: number
+    countReservation: number
     type?: ProductPricingType
 }
 
 export default function Pricing(props: PricingProps) {
     const [choice, setChoice] = useState<PricingChoiceProps>({
+        price: props.price,
         startDate: new Date(),
         endDate: new Date()
     });
-    const [price, setPrice] = useState<number>(props.price);
+    // const [price, setPrice] = useState<number>(props.price);
     const [isConfirm, setIsConfirm] = useState<boolean>(false)
     const {isLogin, user} = useAuth()
     const handleChoice = (childData: any) => {
@@ -41,12 +44,6 @@ export default function Pricing(props: PricingProps) {
     const handleIsNotConfirm = () => {
         setIsConfirm(false)
     }
-
-    useEffect(() => {
-        if (choice?.price) {
-            setPrice(choice.price)
-        }
-    }, [choice?.price])
 
     const dot = <span className="mx-1">&#8226;</span>;
 
@@ -70,8 +67,8 @@ export default function Pricing(props: PricingProps) {
                 <PricingFixing
                     start={"10:30"}
                     end={"11:00"}
-                    maxQuantity={300}
-                    countReservation={100}
+                    maxQuantity={props.maxQuantity}
+                    countReservation={props.countReservation}
                     parentCallBack={handleChoice}
 
                 /> :
@@ -79,6 +76,8 @@ export default function Pricing(props: PricingProps) {
                     parentCallBack={handleChoice}
                     price={props.price}
                     confirm={handleIsConfirm}
+                    countReservation={props.countReservation}
+                    maxQuantity={props.maxQuantity}
                 />
             }
 
@@ -88,14 +87,14 @@ export default function Pricing(props: PricingProps) {
                 <TotalPrice
                     endTime={choice?.endTimeString}
                     startTime={choice?.startTimeString}
-                    price={price}
+                    price={choice.price as number}
                     userName={user?.username}
                     productName={props.productName}
                     parentCallBack={handleChoice}
                     startDate={choice?.startDate}
                     endDate={choice?.endDate}
-                    maxQuantity={300}
-                    countReservation={100}
+                    maxQuantity={props.maxQuantity}
+                    countReservation={props.countReservation}
                     isLogin={isLogin}
                     notConfirm={handleIsNotConfirm}
                 /> :

@@ -23,6 +23,7 @@ const DetailPage = (props: { service: Product }) => {
         return await geocoderFunction(props.service.address);
     };
 
+
     if (props.service.address) {
         genGeocoder().then((d) => {
             setLat(parseFloat(d[0].lat));
@@ -40,7 +41,7 @@ const DetailPage = (props: { service: Product }) => {
                 {/*Subtitle*/}
                 <DetailSubtitle
                     rating={props.service.avgRating}
-                    reviewCount={props.service._count?.reservation}
+                    reviewCount={props.service._count?.Reservation}
                     location={props.service.address}
                     isCertified={props.service.vendor.certified}
                 />
@@ -73,6 +74,9 @@ const DetailPage = (props: { service: Product }) => {
                             countRating={props.service._count?.reviews}
                             productName={props.service.name}
                             type={props.service.type}
+                            countReservation={props.service._count?.Reservation as number}
+                            maxQuantity={props.service.quantity}
+
                         />
                     </div>
 
@@ -84,6 +88,8 @@ const DetailPage = (props: { service: Product }) => {
                             countReviews={props.service._count?.reviews}
                             userName={user?.username}
                             productName={props.service.name}
+                            countReservation={props.service._count?.Reservation as number}
+                            maxQuantity={props.service.quantity}
                         />
                     </div>
                 </div>

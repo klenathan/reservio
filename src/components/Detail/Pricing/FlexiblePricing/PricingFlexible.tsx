@@ -13,12 +13,17 @@ interface ChoiceProps {
     name?: string
     hour?: number
     minutes?: number
+    countReservation?: number
+
 }
 
 interface PriceFlexibleProps {
     parentCallBack?: any
     price?: number
     confirm?: () => void
+    maxQuantity: number
+    countReservation: number
+
 }
 
 
@@ -55,7 +60,7 @@ const PricingFlexible = (props: PriceFlexibleProps) => {
                 endTimeString: endTime?.hour + ':' + endTime?.minutes,
                 startDate: date.startDate,
                 endDate: date.endDate,
-                price: props.price
+                price: 0
             }
         }
 
@@ -64,6 +69,7 @@ const PricingFlexible = (props: PriceFlexibleProps) => {
         const quantityOfHour = differenceInMinutes(end, start)
 
         const totalPrice = props.price as number * (quantityOfHour / 60)
+
 
         return {
             startTimeString: startTime.hour + ':' + startTime.minutes,
@@ -94,7 +100,7 @@ const PricingFlexible = (props: PriceFlexibleProps) => {
     return (
         <div>
             <DatePicker parentCallBack={handleDateCallBack} userEndDate={date.endDate}/>
-            <TimeReservation countReservation={200} maxQuantity={300} parentCallBack={handleTimeCallBack}/>
+            <TimeReservation countReservation={props.countReservation} maxQuantity={props.maxQuantity} parentCallBack={handleTimeCallBack}/>
             <div className={'flex w-full justify-center '}>
                 <Button
                     btnStyle={"filled"}

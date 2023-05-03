@@ -32,7 +32,7 @@ const NavBar: React.FC<INavBarProps> = (props: INavBarProps) => {
       <div className="flex w-full justify-evenly">
         {isLogin && !user?.vendor ? (
           <>
-            <button onClick={handleOpenModal}>Request New Vendor</button>
+            <button className="font-semibold hover:underline hover:text-midGreen" onClick={handleOpenModal}>Request New Vendor</button>
             {isModalOpen && (
               <Modal
                 isOpen={isModalOpen}

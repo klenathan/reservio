@@ -8,6 +8,7 @@ module.exports = {
 
         // Or if using `src` directory:
         "./src/**/*.{js,ts,jsx,tsx}",
+        "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
     ],
     plugins: [
         require('tailwind-scrollbar-hide'),
@@ -38,4 +39,5 @@ module.exports = {
             }
         },
     },
+    darkMode: 'class'
 };

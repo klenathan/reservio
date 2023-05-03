@@ -16,16 +16,16 @@ const TimeReservation: React.FC<TimeReservationProps> = (props: TimeReservationP
 
     return (
         <div
-            className={'flex flex-col space-y-4  outline outline-2 rounded-xl outline-neutral-200 hover:outline-black mt-4 p-2 mb-4'}>
+            className={'flex flex-col space-y-4 outline outline-2 rounded-xl outline-neutral-200 hover:outline-black mt-4 py-2 px-4 mb-4'}>
             <div className={'flex flex-col w-full space-y-4'}>
-                <div className={'inline-flex text-center place-items-center justify-around w-full '}>
+                <div className={'inline-flex place-items-center justify-around w-full '}>
                     <div className={'font-bold '}>Start time</div>
                     <TimePicker
                         name={'startDate'}
                         parentCallBack={handleCallback}
                     />
                 </div>
-                <div className={'inline-flex text-center place-items-center  justify-around w-fulls'}>
+                <div className={'inline-flex  place-items-center  justify-around w-fulls'}>
                     <div className={'font-bold'}>End time</div>
                     <TimePicker
                         name={'endDate'}

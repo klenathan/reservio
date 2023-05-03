@@ -1,107 +1,73 @@
-import React, {useEffect, useRef, useState} from "react";
-import {DateRange, DateRangeProps, Range} from "react-date-range";
+import React, {useEffect, useState} from "react";
+import Datepicker from "react-tailwindcss-datepicker";
+import {BsCalendar3} from "react-icons/bs";
+import {PopoverDirectionType} from "react-tailwindcss-datepicker/dist/types";
+import {subDays} from "date-fns";
 
-interface DatePickerProps extends DateRangeProps {
-    onDateSelect?: (range: Range[]) => void;
+interface DatePickerProps {
+  userEndDate?: Date;
+  parentCallBack?: any;
 }
 
-const dateNow = new Date();
+const DatePicker: React.FC<DatePickerProps> = (props: DatePickerProps) => {
+  const [dateRange, setDateRange] = useState({
+    startDate: new Date(),
+    endDate: props.userEndDate as Date,
+  });
+  const [prevUserEndDate, setPrevUserEndDate] = useState(props.userEndDate);
+  const [isDateRangeUpdated, setIsDateRangeUpdated] = useState(false);
 
-// TODO FInd new component
-const DatePicker: React.FC<DatePickerProps> = ({
-                                                   onDateSelect,
-                                                   ...datePickerProps
-                                               }) => {
-    const [dateRange, setDateRange] = useState<Range[]>([
-        {
-            startDate: dateNow,
-            endDate: dateNow,
-            key: "selection"
-        }
-    ]);
-    const [isOpen, setIsOpen] = useState<boolean>(false)
+  const handleDateChange = (newValue: any) => {
+    setDateRange({
+      startDate: new Date(newValue.startDate),
+      endDate: new Date(newValue.endDate),
+    });
+    setIsDateRangeUpdated(true);
+  };
 
-    const startDateString = dateRange[0].startDate ? dateRange[0].startDate?.toDateString().replace(/^\S+\s/, '') : '';
-    const endDateString = dateRange[0].endDate ? dateRange[0].endDate.toDateString().replace(/^\S+\s/, '') : '';
-
-    const handleOpenCalendar = () => {
-        setIsOpen(!isOpen)
+  useEffect(() => {
+    if (isDateRangeUpdated) {
+      setPrevUserEndDate(dateRange.endDate);
+      setIsDateRangeUpdated(false);
     }
+  }, [isDateRangeUpdated, dateRange.endDate]);
 
-    const datePicker = useRef<any>()
+  useEffect(() => {
+    if (prevUserEndDate !== props.userEndDate) {
+      setPrevUserEndDate(props.userEndDate);
+      setDateRange({
+        startDate: dateRange.startDate,
+        endDate: props.userEndDate as Date,
+      });
+    }
+  }, [props.userEndDate, prevUserEndDate]);
 
-    useEffect(() => {
-        const handleCloseCalendar = () => {
-            setIsOpen(false)
+  useEffect(() => {
+    props.parentCallBack(dateRange);
+  }, [dateRange]);
+
+  return (
+    <div className={" cursor-pointer outline outline-2 rounded-xl outline-neutral-200 py-2 px-4 space-y-4 "}>
+      <div className={"font-bold"}>Choose your date:</div>
+      <Datepicker
+        minDate={subDays(new Date(), 1)}
+        startFrom={new Date()}
+        readOnly={true}
+        displayFormat={"MMM DD YYYY"}
+        onChange={handleDateChange}
+        showFooter={true}
+        containerClassName={"relative w-full border border-limeGreen rounded-lg max-h"}
+        inputClassName={
+          "relative transition-all duration-300 py-2.5 pl-2 pr-10 w-full rounded-lg text-sm placeholder-neutral-400 " +
+          "focus:ring disabled:opacity-40 disabled:cursor-not-allowed focus:border-lime-500 focus:ring-lime-500/20"
         }
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Escape") {
-                handleCloseCalendar()
-            }
-        };
-
-        const handleClickOutside = (event: MouseEvent) => {
-            if (datePicker.current && !datePicker.current?.contains(event.target as Node)) {
-                handleCloseCalendar()
-            }
-        };
-        if (isOpen) {
-            document.addEventListener("keydown", handleKeyDown);
-            document.addEventListener("mousedown", handleClickOutside);
-        }
-        return () => {
-            document.removeEventListener("keydown", handleKeyDown);
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [isOpen]);
-
-
-    return (
-        <div ref={datePicker}>
-            <div
-                className={'grid grid-cols-2 flex-row justify-between m-auto cursor-pointer outline outline-2 rounded-xl outline-neutral-200 hover:outline-black'}
-                onClick={handleOpenCalendar}
-            >
-                <div className={'flex flex-col text-center border-r-2 py-2'}>
-                    <div className={'font-bold'}>
-                        Start Date
-                    </div>
-                    <div>
-                        {startDateString}
-                    </div>
-                </div>
-                <div className={'flex-col text-center  py-2'}>
-                    <div className={'font-bold'}>
-                        End Date
-                    </div>
-                    <div>
-                        {endDateString}
-                    </div>
-                </div>
-
-            </div>
-            {isOpen &&
-                <div className={'relative flex justify-center items-center border-4 border-midGreen' +
-                    ' my-3 rounded-xl w-full'}>
-                    <DateRange
-                        editableDateInputs={true}
-                        className={"rounded-lg flex"}
-                        color="#59981a"
-                        rangeColors={['#59981a', '#f33e5b', '#fed14c']}
-                        onChange={item => setDateRange([item.selection])}
-                        moveRangeOnFirstSelection={false}
-                        showDateDisplay={false}
-                        ranges={dateRange}
-                        minDate={dateNow}
-                        dragSelectionEnabled={true}
-                        {...datePickerProps}
-                    />
-                </div>
-
-            }
-
-        </div>
-    );
+        value={dateRange}
+        primaryColor={"lime"}
+        popoverDirection={"down" as PopoverDirectionType}
+        toggleIcon={() => <BsCalendar3 />}
+      />
+    </div>
+  );
 };
 
 export default DatePicker;

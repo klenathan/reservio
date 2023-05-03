@@ -64,6 +64,8 @@ export default function Pricing(props: PricingProps) {
                 userName={user?.username}
                 productName={props.productName}
                 parentCallBack={handleChoice}
+                startDate={'Mar 30 2023'}
+                endDate={'Mar 30 2023'}
                 maxQuantity={300}
                 countReservation={100}
                 isLogin={isLogin}

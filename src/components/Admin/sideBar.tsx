@@ -16,12 +16,14 @@ const SideNavBtn = (props: {
 };
 
 export default function SideBar(props: { className?: string }) {
+
+  
   return (
     <div
       className={`${props.className} flex flex-col 
       items-center h-screen border-r`}
     >
-      <div className="py-4 border-b w-full">
+      <div className="py-4 border-b w-full hover:bg-green-100 transition-all">
         <Logo logoStyle="green" />
       </div>
       <div className="flex flex-col w-full">

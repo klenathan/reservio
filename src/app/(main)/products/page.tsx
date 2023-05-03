@@ -129,9 +129,9 @@ export default function Category(slugs: any) {
           {queryService.length > 0 ? (
             <div className="flex-1 flex flex-col items-center w-full">
               <h1 className="text-xl text-oliveGreen font-bold mb-2 self-start">
-                Service:
+                Services:
               </h1>
-              <div className="grid grid-cols-1 gap-10 lg:grid-cols-4 xl:grid-cols-5 md:grid-cols-2 place-items-center w-[80%] mx-6 ">
+              <div className="grid grid-cols-1 gap-10 lg:grid-cols-4 2xl:grid-cols-5 md:grid-cols-2 place-items-center w-[80%] mx-6 ">
                 {queryService.map((service) => {
                   return <Card key={service.id} service={service} />;
                 })}

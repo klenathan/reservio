@@ -7,8 +7,8 @@ const Card = (props: { service: Product }) => {
   return (
     <Link
       href={`/detail/${encodeURIComponent(props.service.id)}`}
-      className="flex flex-col w-full h-full shadow-xl rounded-xl my-8 transition-all
-      border-4 border-transparent hover:border-midGreen"
+      className="flex flex-col w-full h-full shadow-xl rounded-xl my-8 transition-all border
+        hover:bg-zinc-100"
     >
       <div className="relative w-full h-[15rem] rounded-t-md">
         <Image

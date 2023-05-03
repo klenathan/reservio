@@ -40,7 +40,7 @@ export default function AdminChart(props: { className?: string }) {
   const { user } = useAuth();
   const [categoryCount, setCategoryCount] = useState();
   const [vendorReservationData, setVendorReservationData] = useState();
-  const [traffic, setTraffic] = useState<any>({});
+  const [traffic, setTraffic] = useState<any>();
 
   useEffect(() => {
     apiClient

@@ -12,7 +12,8 @@ interface IVendorCardProps {
   statusColor: string;
 }
 
-const VendorHistoryCard = (props: IVendorCardProps) => {
+const VendorVerifyCard = (props: IVendorCardProps) => {
+  const formattedPrice = props.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
   const [status, setStatus] = useState(props.status);
 
   const handleAccept = () => {
@@ -52,10 +53,7 @@ const VendorHistoryCard = (props: IVendorCardProps) => {
         <div className="flex flex-row justify-between">
           <div className="flex flex-col">
             <div className="flex flex-row items-center">
-              <a href="#" className="text-base md:text-xl font-bold ">
-                Username: {props.userName}
-              </a>
-              <div className="relative w-[1rem] h-[1rem] ml-1">
+              <div className="relative w-[1rem] h-[1rem] ">
                 <Image
                   src="/assets/profile.svg"
                   fill
@@ -66,17 +64,20 @@ const VendorHistoryCard = (props: IVendorCardProps) => {
                   className="px-0 object-cover"
                 />
               </div>
+              <a href="#" className="text-base md:text-xl font-bold ">
+                Username: {props.userName}
+              </a>
             </div>
             <a href="#" className="text-base md:text-xl font-bold">
               {props.productName}
             </a>
             <h1 className="font-medium text-xs">
               <span className="text-xs md:text-xl font-medium text-midGreen">
-                ₫{props.price.toLocaleString()}
+                {formattedPrice}
               </span>
             </h1>
           </div>
-          <div className="grid grid-rows-2 gap-2 mt-2">
+          <div className="grid grid-rows-2 gap-2 mt-2 ml-2" >
             {props.status === "pending" ? (
               <>
                 <Button
@@ -101,13 +102,13 @@ const VendorHistoryCard = (props: IVendorCardProps) => {
         </div>
 
         <div className="font-extrabold text-gray-600 md:text-base pt-3">
-          Total with taxes:
+          Total:
           <span className="text-xl md:text-2xl font-extrabold text-midGreen ml-3">
-            ₫{props.totalPrice.toLocaleString()}
+            {formattedPrice}
           </span>
         </div>
       </div>
     </div>
   );
 };
-export default VendorHistoryCard;
+export default VendorVerifyCard;

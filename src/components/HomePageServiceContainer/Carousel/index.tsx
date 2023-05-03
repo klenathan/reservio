@@ -122,7 +122,7 @@ const CarouselProps = (props: { carousel: IService }) => {
         <h1 className="lg:text-3xl lg:text-left text-xl italic text-oliveGreen font-bold text-center">
           {props.carousel.name}
         </h1>
-        <div className="font-medium">{props.carousel.address}</div>
+        <div className="font-medium line-clamp-3 ">{props.carousel.address}</div>
         {/* <div className="font-medium">{props.carousel.time}</div> */}
         <p className="my-3 hidden lg:block">{props.carousel.desc}</p>
         <div className="text-midGreen font-bold my-3 text-2xl">

@@ -1,8 +1,8 @@
 import Image from "next/image";
 const ReservationStatus = (props: any) => {
   return (
-    <div className="flex flex-col mt-10  border-b-4 border-dashed pb-3">
-      <h1 className="text-midGreen font-bold text-3xl self-end">
+    <div className="flex flex-col mt-10  border-b-4 border-dashed pb-3 border-gray-400">
+      <h1 className="text-midGreen font-bold text-3xl md:self-end self-center">
         RESERVATION STATUS
       </h1>
       <div className="flex flex-row mt-16 justify-between">
@@ -50,9 +50,6 @@ const ReservationStatus = (props: any) => {
             className="px-0 object-cover"
           />
         </div>
-      </div>
-      <div>
-        <h1> the line</h1>
       </div>
     </div>
   );

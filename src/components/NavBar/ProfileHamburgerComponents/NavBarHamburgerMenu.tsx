@@ -5,6 +5,7 @@ import { User } from "../../../../Types";
 
 interface IHamburgerMenuChildProps {
   children: JSX.Element | JSX.Element[] | string;
+  className?: string;
   href?: string;
   onClick?: () => void;
 }
@@ -17,7 +18,7 @@ const HamburgerMenuChild: React.FC<IHamburgerMenuChildProps> = (
       <Link
         prefetch={false}
         href={"/"}
-        className={`hover:bg-limeGreen hover:bg-opacity-20 
+        className={`${props.className} hover:bg-limeGreen hover:bg-opacity-20 
       first:rounded-t-xl last:rounded-b-xl
     py-2 px-2`}
         onClick={props.onClick}
@@ -29,7 +30,7 @@ const HamburgerMenuChild: React.FC<IHamburgerMenuChildProps> = (
     return (
       <Link
         href={{ pathname: props.href }}
-        className={`hover:bg-limeGreen hover:bg-opacity-20 
+        className={`${props.className} hover:bg-limeGreen hover:bg-opacity-20 
       first:rounded-t-xl last:rounded-b-xl
     py-2 px-2`}
         onClick={props.onClick}
@@ -75,19 +76,24 @@ const NavBarHamburgerMenu: React.FC<IHamburgerMenuProps> = (
           <HamburgerMenuChild href="/userprofile">
             My Profile
           </HamburgerMenuChild>
-          {props.user?.vendor ? (
+          {props.user?.vendor && (
             <>
               <HamburgerMenuChild href="/vendorprofile">
                 Vendor Profile
               </HamburgerMenuChild>
               <HamburgerMenuChild
+                className="border-b-2"
                 href={`/store/${encodeURIComponent(props.user.username)}`}
               >
                 Your Store
               </HamburgerMenuChild>
             </>
-          ) : (
-            ""
+          )}
+
+          {props.user?.admin && (
+            <HamburgerMenuChild className="border-b-2" href={`/admin`}>
+              Admin Panel
+            </HamburgerMenuChild>
           )}
 
           {props.logout && (

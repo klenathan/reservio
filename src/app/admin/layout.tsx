@@ -7,10 +7,8 @@ export default function AdminLayout({
 }) {
   return (
     <div className="relative flex flex-row">
-      <SideBar className="flex-1"/>
-      <div className={`flex-[5] h-screen overflow-auto`}>
-      {children}
-      </div>
+      <div className="flex-1 bg-gray-200 " />
+      <div className={`flex-[5] h-screen overflow-auto`}>{children}</div>
     </div>
   );
 }

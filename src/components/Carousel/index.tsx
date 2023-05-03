@@ -16,7 +16,7 @@ const Carousel: React.FC<CarouselProps> = (props: CarouselProps) => {
 
     const timerRef = useRef<HTMLButtonElement | null>(null);
 
-    console.log(auto)
+    // console.log(auto)
 
     useEffect(() => {
         setServices(props.slice);

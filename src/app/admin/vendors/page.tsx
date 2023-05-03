@@ -4,30 +4,25 @@ import apiClient from "@/config/axios.config";
 import React from "react";
 import { useEffect, useState } from "react";
 import { Column } from "react-table";
+import { User } from "../../../../Types";
 import TableComponent from "../components/TableComponent";
 
-interface Vendor {
+interface IVendor {
+  certified: boolean;
+  desc: string;
   id: string;
-}
-
-interface IUser {
-  id: string;
-  avatar: string;
-  createdAt: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  phoneNo: string;
+  name: string;
+  phone: string;
   status: string;
-  updatedAt: string;
+  user: User | null;
+  userId: string;
   username: string;
-  vendor: Vendor | null;
 }
 
 export default function AdminUserView() {
   const [users, setUsers] = useState([]);
 
-  const columns: Column<IUser>[] = React.useMemo(
+  const columns: Column<IVendor>[] = React.useMemo(
     () =>
       [
         {
@@ -40,15 +35,25 @@ export default function AdminUserView() {
         },
         {
           Header: "Email",
-          accessor: "email",
+          accessor: (row) => {
+            return row.user?.email;
+          },
         },
         {
-          Header: "name",
-          accessor: "firstName",
+          Header: "Owner",
+          accessor: (row) => {
+            return row.user?.firstName;
+          },
+        },
+        {
+          Header: "Store Name",
+          accessor: "name",
         },
         {
           Header: "Phone",
-          accessor: "phoneNo",
+          accessor: (row) => {
+            return row.user?.phoneNo;
+          },
         },
         {
           Header: "Status",
@@ -63,18 +68,18 @@ export default function AdminUserView() {
           accessor: "updatedAt",
         },
         {
-          Header: "Vendor",
+          Header: "Certified",
           id: "vendor",
           accessor: (row) => {
             //// Cannot clean code this :(
             //// had to do this so that it can be sorted
-            return row.vendor != null ? "True" : "False";
+            return row.certified ? "True" : "False";
           },
           Cell: (cell: any) => {
             return cell.value == "True" ? (
-              <p className="font-semibold text-green-400">True</p>
+              <p className="font-semibold text-midGreen">Certified</p>
             ) : (
-              <p className="font-semibold text-red-400">False</p>
+              <p className="font-semibold text-red-400">Uncertified</p>
             );
           },
         },
@@ -92,13 +97,13 @@ export default function AdminUserView() {
             </button>
           ),
         },
-      ] as Column<IUser>[],
+      ] as Column<IVendor>[],
     []
   );
 
   useEffect(() => {
     apiClient
-      .get(`/user`)
+      .get(`/vendor`)
       .then((response) => {
         setUsers(response.data);
       })
@@ -111,7 +116,7 @@ export default function AdminUserView() {
   return (
     <div className="flex flex-col items-center gap-6 pt-6">
       <h1 className=" text-xl text-oliveGreen font-bold uppercase pl-4">
-        All Accounts:
+        All Vendors:
       </h1>
       {users.length > 0 ? (
         <TableComponent columns={columns} data={users} />

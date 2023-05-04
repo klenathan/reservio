@@ -11,8 +11,6 @@ import SearchableDropdown from "@/components/SearchableDropdown";
 import VendorCard from "@/components/Vendor/VendorCard";
 import Form from "@/components/Form";
 import {SubmitHandler, useForm} from "react-hook-form";
-import useFetch from "@/Helper/ClientFetch/useFetch";
-import LoadingSpinner from "components/LoadingSpinner";
 
 interface IFromInput {
   minPrice?: string;
@@ -31,15 +29,13 @@ export default function Category(slugs: any) {
     formState: { errors },
   } = useForm<IFromInput>();
 
-   const {data, isError, isLoading} = useFetch<Product[]>(`service/category/${slugs.searchParams.category}`)
-  // useEffect(() => {
-  //   if (slugs.searchParams.category) {
-  //
-  //     apiClient
-  //       .get(`service/category/${slugs.searchParams.category}`)
-  //       .then((res) => setServices(res.data));
-  //   }
-  // }, [slugs.searchParams.category]);
+  useEffect(() => {
+    if (slugs.searchParams.category) {
+      apiClient
+        .get(`service/category/${slugs.searchParams.category}`)
+        .then((res) => setServices(res.data));
+    }
+  }, [slugs.searchParams.category]);
 
   useEffect(() => {
     if (slugs.searchParams.keyword) {
@@ -72,8 +68,7 @@ export default function Category(slugs: any) {
         console.log(e);
       });
   };
-  console.log(isLoading)
-  return  isLoading ? <LoadingSpinner/> : (
+  return (
     <div className="overflow-hidden">
       <CategoryList />
 

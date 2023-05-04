@@ -40,7 +40,7 @@ export type Vendor = {
 
 export enum ProductPricingType {
     flexible = "FLEXIBLE",
-    fixing = "FIXING"
+    fixed = "FIXED"
 }
 
 export type Product = {

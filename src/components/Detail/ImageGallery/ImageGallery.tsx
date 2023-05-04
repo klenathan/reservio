@@ -22,7 +22,6 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
     };
 
     const modal = isModalOpen && (
-        // TODO Create the new modal of viewing gallery
         <Modal isOpen={isModalOpen} onClose={handleCloseModal} nameModal={"Image Gallery"}>
             <div>
                 <Carousel slice={images} auto={false} preview={true}>
@@ -32,10 +31,9 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
         </Modal>
     )
 
-
     if (images.length == 0) {
         return (
-            <div>
+            <div className={"text-2xl text-center font-bold"}>
                 NO images 😭😭😭
             </div>
         )
@@ -55,79 +53,18 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
                 {modal}
             </div>
         )
-    } else if (images.length == 2) {
-        return (
-            <div>
-                <Carousel slice={images} auto={true}>
-                    <ImageCarousel onClick={handleOpenModal}/>
-                </Carousel>
-                {modal}
-            </div>
-
-        )
     }
 
+
     return (
-        <div className="max-w-screen-xl mx-auto grid grid-cols-1 gap-2 md:grid-cols-3 h-full">
-            {/* Big image on the left */}
-            <div className="h-80 md:h-96 col-span-2 relative">
-                <Image
-                    src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + images[0]}
-                    alt={'Big Image'}
-                    fill={true}
-                    onClick={handleOpenModal}
-                    className="w-full h-full object-cover cursor-pointer"
-                    loading="lazy"
-                />
-            </div>
-            {/* Small images on the right */}
-            <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
-                <div className="h-48 relative">
-                    <Image
-                        src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + images[1]}
-                        alt={`Image 1`}
-                        fill={true}
-                        onClick={handleOpenModal}
-                        className="w-full h-full object-cover cursor-pointer"
-                        loading="lazy"
-                    />
-                </div>
-                <div className="h-48 relative">
-                    {images.length > 3 ? (
-                        <div
-                            className="h-48 bg-gray-700 rounded-lg overflow-hidden flex items-center justify-center cursor-pointer relative"
-                            onClick={handleOpenModal}
-                        >
-                            <Image
-                                src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + images[2]}
-                                alt={`Image 3`}
-                                fill={true}
-                                onClick={handleOpenModal}
-                                className="w-full h-full object-cover blur-sm cursor-pointer"
-                                loading="lazy"
-                            />
-                            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-                                <span className="text-white font-medium text-4xl z-10">+{images.length - 3}</span>
-                            </div>
-                        </div>
-                    ) : (
-                        <div className="h-48 relative">
-                            <Image
-                                src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + images[2]}
-                                alt={`Image 3`}
-                                fill={true}
-                                onClick={handleOpenModal}
-                                className="w-full h-full object-cover cursor-pointer"
-                                loading="lazy"
-                            />
-                        </div>
-                    )}
-                </div>
-            </div>
-            {/* Modal */}
+        <div>
+            <Carousel slice={images} auto={true}>
+                <ImageCarousel onClick={handleOpenModal}/>
+            </Carousel>
             {modal}
         </div>
-    );
-};
+
+    )
+}
 
 export default ImageGallery;

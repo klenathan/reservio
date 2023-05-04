@@ -1,16 +1,19 @@
 "use client";
 import CategoryList from "@/components/CategoryServiceContainer/CategoryList";
-import { useEffect, useState } from "react";
-import { cities } from "@/data/city";
+import {useEffect, useState} from "react";
+import {cities} from "@/data/city";
 import Price from "components/CategoryServiceContainer/Price";
 import Calendar from "components/CategoryServiceContainer/Calendar";
 import apiClient from "@/config/axios.config";
 import Card from "@/components/Card";
-import { City, Product, Vendor } from "../../../../Types";
+import {City, Product, Vendor} from "../../../../Types";
 import SearchableDropdown from "@/components/SearchableDropdown";
 import VendorCard from "@/components/Vendor/VendorCard";
 import Form from "@/components/Form";
-import { SubmitHandler, useForm } from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
+import useFetch from "@/Helper/ClientFetch/useFetch";
+import LoadingSpinner from "components/LoadingSpinner";
+
 interface IFromInput {
   minPrice?: string;
   maxPrice?: string;
@@ -28,13 +31,15 @@ export default function Category(slugs: any) {
     formState: { errors },
   } = useForm<IFromInput>();
 
-  useEffect(() => {
-    if (slugs.searchParams.category) {
-      apiClient
-        .get(`service/category/${slugs.searchParams.category}`)
-        .then((res) => setServices(res.data));
-    }
-  }, [slugs.searchParams.category]);
+   const {data, isError, isLoading} = useFetch<Product[]>(`service/category/${slugs.searchParams.category}`)
+  // useEffect(() => {
+  //   if (slugs.searchParams.category) {
+  //
+  //     apiClient
+  //       .get(`service/category/${slugs.searchParams.category}`)
+  //       .then((res) => setServices(res.data));
+  //   }
+  // }, [slugs.searchParams.category]);
 
   useEffect(() => {
     if (slugs.searchParams.keyword) {
@@ -67,7 +72,8 @@ export default function Category(slugs: any) {
         console.log(e);
       });
   };
-  return (
+  console.log(isLoading)
+  return  isLoading ? <LoadingSpinner/> : (
     <div className="overflow-hidden">
       <CategoryList />
 

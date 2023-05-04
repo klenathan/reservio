@@ -64,7 +64,7 @@ export default function Pricing(props: PricingProps) {
             </div>
 
             {/*Information display*/}
-            {props.type == 'FIXING' ?
+            {props.type == 'FIXED' ?
                 <PricingFixing
                     start={"10:30"}
                     end={"11:00"}

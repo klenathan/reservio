@@ -10,10 +10,9 @@ interface FetchResult<T> {
 export default function useFetch<T>(url: string): FetchResult<T> {
     const [data, setData] = useState<T>();
     const [isError, setIsError] = useState<any>();
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        setIsLoading(true);
         apiClient
             .get<T>(url)
             .then((res) => {

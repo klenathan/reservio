@@ -13,7 +13,7 @@ export default function SearchBar() {
   };
 
   return (
-    <form className="w-4/5 relative col-span-2" onSubmit={handleSearch}>
+    <form className="w-4/5 relative " onSubmit={handleSearch}>
       <IoSearchCircleSharp className="pointer-events-none w-8 h-8 absolute top-1/2 transform -translate-y-1/2 left-3 text-[#59981A]"></IoSearchCircleSharp>
 
       <input

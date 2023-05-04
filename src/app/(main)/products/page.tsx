@@ -112,11 +112,11 @@ export default function Category(slugs: any) {
             ""
           )}
           {queryVendor.length > 0 ? (
-            <div className="flex-1 w-full">
-              <h1 className="text-xl text-oliveGreen font-bold mb-2">
+            <div className="flex-1 w-full flex flex-col items-center">
+            <h1 className="text-2xl text-oliveGreen font-bold mb-1 md:text-3xl text-center">
                 Vendor:
               </h1>
-              <div className="max-w-7xl mx-6 ">
+              <div className="max-w-7xl mx-6 w-[80%]">
                 {queryVendor.map((vendor) => {
                   return <VendorCard key={vendor.id} vendor={vendor} />;
                 })}
@@ -127,8 +127,8 @@ export default function Category(slugs: any) {
           )}
 
           {queryService.length > 0 ? (
-            <div className="flex-1 w-full">
-              <h1 className="text-2xl text-oliveGreen font-bold mb-1 md:text-xl text-center md:text-left  ">
+            <div className="flex-1 w-full flex flex-col items-center">
+              <h1 className="text-2xl text-oliveGreen font-bold mb-1 md:text-3xl text-center">
                 Service:
               </h1>
               <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 md:grid-cols-2 place-items-center max-w-7xl md:mr-6 md:ml-0 mx-6">

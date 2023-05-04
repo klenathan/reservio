@@ -1,10 +1,11 @@
 import Button from "../Button";
-import { SubmitHandler, useForm } from "react-hook-form";
+import {SubmitHandler} from "react-hook-form";
 
 interface IForm {
   children?: string | JSX.Element | JSX.Element[] | (string | JSX.Element)[];
   button?: string;
   onSubmit: SubmitHandler<any>;
+  isPosting?: boolean
 }
 
 const Form: React.FC<IForm> = (props: IForm) => {
@@ -13,7 +14,7 @@ const Form: React.FC<IForm> = (props: IForm) => {
       <div>{props.children}</div>
 
       <div className="text-center">
-        <Button btnStyle={"filled"}>{props.button}</Button>
+        <Button btnStyle={"filled"}>{props.isPosting ? "Posting" : props.button}</Button>
       </div>
     </form>
   );

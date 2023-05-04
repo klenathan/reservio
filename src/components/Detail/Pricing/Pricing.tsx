@@ -16,6 +16,7 @@ interface PricingChoiceProps {
 
 interface PricingProps {
     price: number;
+    id: string
     avgRating: number;
     countRating: number | undefined;
     productName: string;
@@ -97,6 +98,7 @@ export default function Pricing(props: PricingProps) {
                     countReservation={props.countReservation}
                     isLogin={isLogin}
                     notConfirm={handleIsNotConfirm}
+                    productId={props.id}
                 /> :
                 null
             }

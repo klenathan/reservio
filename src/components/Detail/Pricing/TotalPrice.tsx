@@ -3,12 +3,13 @@ import Input from "components/Form/Input";
 import {useForm} from "react-hook-form";
 import Button from "components/Button";
 import {useRouter} from "next/navigation";
-import {format} from "date-fns";
+import {format, getUnixTime} from "date-fns";
 import Modal from "components/Modal";
 import useFetch from "@/Helper/ClientFetch/useFetch";
 import {Discount} from "../../../../Types";
 import LoadingSpinner from "components/LoadingSpinner";
 import DiscountCard from "components/Detail/Pricing/DiscountCard";
+import usePost from "@/Helper/ClientFetch/usePost";
 
 interface InformationProps {
     smallText: string;
@@ -18,12 +19,14 @@ interface InformationProps {
 }
 
 interface TotalPriceProps {
+    productId: string,
+    productName: string;
+    productFixedTimeSlotId?: string
     price: number;
     startTime: string | undefined;
     endTime: string | undefined;
     startDate: Date | undefined
     endDate: Date | undefined
-    productName: string;
     userName?: string;
     maxQuantity: number
     countReservation: number;
@@ -70,10 +73,9 @@ const TotalPrice = (props: TotalPriceProps) => {
     const [isPriceValid, setIsPriceValid] = useState<boolean>()
 
     useEffect(() => {
-        console.log('asdasd', props.price)
-        if(props.price && props.price != 0){
-             setIsPriceValid(true)
-        }else{
+        if (props.price && props.price != 0) {
+            setIsPriceValid(true)
+        } else {
             setIsPriceValid(false)
         }
         console.log(isPriceValid)
@@ -115,7 +117,27 @@ const TotalPrice = (props: TotalPriceProps) => {
         if (value < 1) {
             setValue('quantity', 1)
         }
+    }
+    const {response, isPosting, post} = usePost(`/reservation`)
 
+    const makeReservation = async () => {
+        const reservationData = new FormData()
+
+        const startAt = getUnixTime(props.startDate as any)
+        const endAt = getUnixTime(props.endDate as any)
+
+        reservationData.append('productId', props.productId)
+        props.productFixedTimeSlotId && reservationData.append("productFixedTimeSlotId", props.productFixedTimeSlotId)
+        reservationData.append('quantity', quantity.current as any)
+        reservationData.append('startAt', startAt as any)
+        reservationData.append('endAt', endAt as any)
+        discount.id && reservationData.append('discountId', discount.id)
+
+        try {
+            await post(reservationData)
+        } catch (e: any) {
+            console.log(e)
+        }
     }
 
     return (
@@ -279,6 +301,7 @@ const TotalPrice = (props: TotalPriceProps) => {
                 <div className={"mt-2 p-3 grid grid-cols-2 gap-4 align-middle"}>
                     <Button btnStyle={"filled"}
                             disabled={!isPriceValid}
+                            onClick={makeReservation}
                     >Confirm</Button>
                     <Button
                         btnStyle={"filled"}

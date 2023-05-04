@@ -131,7 +131,7 @@ export default function Category(slugs: any) {
               <h1 className="text-xl text-oliveGreen font-bold mb-2 self-start">
                 Services:
               </h1>
-              <div className="grid grid-cols-1 gap-10 lg:grid-cols-4 2xl:grid-cols-5 md:grid-cols-2 place-items-center w-[80%] mx-6 ">
+              <div className="grid grid-cols-1 gap-8 lg:grid-cols-4 3xl:grid-cols-5 md:grid-cols-2 place-items-center w-[90%] mx-6 ">
                 {queryService.map((service) => {
                   return <Card key={service.id} service={service} />;
                 })}

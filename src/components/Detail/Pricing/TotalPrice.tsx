@@ -65,12 +65,14 @@ const TotalPrice = (props: TotalPriceProps) => {
     });
 
     const {data, isError, isLoading} = useFetch<Discount[]>('service/discount')
-    const [discount, setDiscount] = useState<any>(
-        {amount: 0}
-    )
+    const {response, isPosting, post} = usePost(`/reservation`)
 
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
     const [isPriceValid, setIsPriceValid] = useState<boolean>()
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+    const [discount, setDiscount] = useState<any>({amount: 0})
+
+    const {push} = useRouter()
+
 
     useEffect(() => {
         if (props.price && props.price != 0) {
@@ -78,8 +80,8 @@ const TotalPrice = (props: TotalPriceProps) => {
         } else {
             setIsPriceValid(false)
         }
-        console.log(isPriceValid)
     }, [props.price])
+
     const handleModalOpen = () => {
         setIsModalOpen(true)
     }
@@ -93,46 +95,41 @@ const TotalPrice = (props: TotalPriceProps) => {
     }
 
 
-    const {push} = useRouter()
-
     const quantity = useRef<number>();
     quantity.current = watch("quantity", 0);
+
 
     const availableQuantity = props.maxQuantity - props.countReservation
 
     let startDateString;
     let endDateString;
+
     if (props.startDate && props.endDate) {
         startDateString = format(props.startDate, "MMM dd yyyy")
         endDateString = format(props.endDate, "MMM dd yyyy")
     }
-
 
     const transformValue = (value: number) => {
         if (value > availableQuantity) {
             setValue('quantity', availableQuantity)
             setError('quantity', {type: 'invalid', message: `${availableQuantity} slots only 😵`})
         }
-
-        if (value < 1) {
-            setValue('quantity', 1)
-        }
     }
-    const {response, isPosting, post} = usePost(`/reservation`)
 
     const makeReservation = async () => {
         const reservationData = new FormData()
 
-        const startAt = getUnixTime(props.startDate as any)
-        const endAt = getUnixTime(props.endDate as any)
-
         reservationData.append('productId', props.productId)
         props.productFixedTimeSlotId && reservationData.append("productFixedTimeSlotId", props.productFixedTimeSlotId)
         reservationData.append('quantity', quantity.current as any)
-        reservationData.append('startAt', startAt as any)
-        reservationData.append('endAt', endAt as any)
+        if (!props.productFixedTimeSlotId) {
+            const startAt = getUnixTime(props.startDate as any)
+            const endAt = getUnixTime(props.endDate as any)
+            reservationData.append('startAt', startAt as any)
+            reservationData.append('endAt', endAt as any)
+        }
         discount.id && reservationData.append('discountId', discount.id)
-
+        
         try {
             await post(reservationData)
         } catch (e: any) {
@@ -215,15 +212,14 @@ const TotalPrice = (props: TotalPriceProps) => {
 
                     {/*Quantity*/}
                     <ColInformation smallText={"Quantity"}>
-                        {!props.startTime ? (
+                        {!props.maxQuantity ? (
                             <Input
                                 name={"quantity"}
                                 type={"number"}
                                 min={0}
                                 control={control}
                                 placeholder={"1"}
-                                customStyle={"w-full h-fit cursor-not-allowed disable"}
-                                disabled={true}
+                                customStyle={"w-full h-fit"}
                             />
                         ) : (
                             <Input
@@ -297,19 +293,19 @@ const TotalPrice = (props: TotalPriceProps) => {
                     />
                 )}
             </div>
+
+            {/*Buttons*/}
             {props.isLogin ?
                 <div className={"mt-2 p-3 grid grid-cols-2 gap-4 align-middle"}>
                     <Button btnStyle={"filled"}
                             disabled={!isPriceValid}
                             onClick={makeReservation}
-                    >Confirm</Button>
+                    >
+                        Confirm
+                    </Button>
                     <Button
                         btnStyle={"filled"}
                         onClick={() => {
-                            props.parentCallBack({
-                                start: undefined,
-                                end: undefined,
-                            });
                             reset({
                                 quantity: 1,
                             });
@@ -328,9 +324,7 @@ const TotalPrice = (props: TotalPriceProps) => {
                         Login for book me 😘
                     </Button>
                 </div>
-
             }
-
         </div>
     );
 };

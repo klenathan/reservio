@@ -11,6 +11,9 @@ interface PricingChoiceProps {
     endTimeString?: string;
     startDate?: Date
     endDate?: Date
+    maxQuantity?:number
+    countReservation?:number
+    id?: string
     price?: number;
 }
 
@@ -30,11 +33,12 @@ export default function Pricing(props: PricingProps) {
     const [choice, setChoice] = useState<PricingChoiceProps>({
         price: props.price,
         startDate: new Date(),
-        endDate: new Date()
+        endDate: new Date(),
     });
-    // const [price, setPrice] = useState<number>(props.price);
+
     const [isConfirm, setIsConfirm] = useState<boolean>(false)
     const {isLogin, user} = useAuth()
+
     const handleChoice = (childData: any) => {
         setChoice(childData);
     };
@@ -51,6 +55,7 @@ export default function Pricing(props: PricingProps) {
 
     return (
         <div className={"w-full p-2 lg:p-5 space-y-4"}>
+
             {/*Price display*/}
             <div className={"flex flex-row w-full justify-between"}>
                 <div className={"font-bold text-lg"}>
@@ -64,16 +69,19 @@ export default function Pricing(props: PricingProps) {
                 </div>
             </div>
 
-            {/*Information display*/}
-            {props.type == 'FIXED' ?
+            {/*Fixing price*/}
+            {props.type == "FIXED" && props.productFixedTimeSlot.map((fixedTime) => (
                 <PricingFixing
-                    start={"10:30"}
-                    end={"11:00"}
-                    maxQuantity={props.maxQuantity}
-                    countReservation={props.countReservation}
+                    key={fixedTime.id}
+                    price={props.price}
+                    productFixedTimeSlot={fixedTime}
                     parentCallBack={handleChoice}
+                    confirm={handleIsConfirm}
+                />
+            ))}
 
-                /> :
+            {/*Information display*/}
+            {props.type == 'FLEXIBLE' &&
                 <PricingFlexible
                     parentCallBack={handleChoice}
                     price={props.price}
@@ -83,9 +91,8 @@ export default function Pricing(props: PricingProps) {
                 />
             }
 
-
             {/*Total price*/}
-            {isConfirm ?
+            {isConfirm &&
                 <TotalPrice
                     endTime={choice?.endTimeString}
                     startTime={choice?.startTimeString}
@@ -95,15 +102,14 @@ export default function Pricing(props: PricingProps) {
                     parentCallBack={handleChoice}
                     startDate={choice?.startDate}
                     endDate={choice?.endDate}
-                    maxQuantity={props.maxQuantity}
-                    countReservation={props.countReservation}
+                    maxQuantity={choice.maxQuantity as number}
+                    countReservation={choice.countReservation as number}
                     isLogin={isLogin}
                     notConfirm={handleIsNotConfirm}
                     productId={props.id}
-                /> :
-                null
+                    productFixedTimeSlotId={choice.id}
+                />
             }
-
         </div>
     );
 }

@@ -2,6 +2,7 @@ import {FaStar} from "react-icons/fa";
 import React, {useState} from "react";
 import Modal from "components/Modal";
 import Pricing from "components/Detail/Pricing/Pricing";
+import {ProductFixedTimeSlot, ProductPricingType} from "../../../../Types";
 
 interface FloatingButtonPricingProps {
     price: number;
@@ -9,9 +10,11 @@ interface FloatingButtonPricingProps {
     countReviews: number | undefined;
     productName: string
     userName?: string
+    productFixedTimeSlot: ProductFixedTimeSlot[]
     maxQuantity: number
     id: string
     countReservation: number
+    type: ProductPricingType
 }
 
 const FloatingButtonPricing: React.FC<FloatingButtonPricingProps> = (
@@ -48,7 +51,7 @@ const FloatingButtonPricing: React.FC<FloatingButtonPricingProps> = (
                     onClose={handleCloseModal}
                     nameModal={"Buy me ☕"}
                 >
-                    <div className={'overflow-auto scroll-auto h-96 px-6 py-6'}>
+                    <div className={'overflow-auto scroll-auto w-screen h-[calc(100vh_-_20rem)] max-w-prose px-6 py-6 snap-center'}>
                         <Pricing
                             price={props.price}
                             avgRating={props.avgRating}
@@ -56,8 +59,9 @@ const FloatingButtonPricing: React.FC<FloatingButtonPricingProps> = (
                             productName={props.productName}
                             countReservation={props.countReservation}
                             maxQuantity={props.maxQuantity}
+                            type={props.type}
                             id={props.id}
-
+                            productFixedTimeSlot={props.productFixedTimeSlot}
                         />
                     </div>
 

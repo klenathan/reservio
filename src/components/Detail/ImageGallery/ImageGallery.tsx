@@ -43,7 +43,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
 
     if (images.length == 1) {
         return (
-            <div className={'relative w-full h-80 md:h-96'}>
+            <div className={'relative h-80 md:h-[25rem] w-full md:mr-5'}>
                 <Image
                     src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + images[0]}
                     alt="Image"
@@ -70,7 +70,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
     return (
         <div className="max-w-screen-xl mx-auto grid grid-cols-1 gap-2 md:grid-cols-3 h-full">
             {/* Big image on the left */}
-            <div className="h-80 md:h-full col-span-2 relative">
+            <div className="h-80 md:h-96 col-span-2 relative">
                 <Image
                     src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + images[0]}
                     alt={'Big Image'}

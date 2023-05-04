@@ -8,7 +8,7 @@ interface ServiceCardProps {
 
 const CarouselImage = (props: ServiceCardProps) => {
     return (
-        <div key={props.service} className={'relative h-72 md:h-96 w-full md:mr-5'}>
+        <div key={props.service} className={'relative h-80 md:h-[25rem] w-full md:mr-5'}>
             <Image
                 src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + props.service}
                 alt={`Image ${props.service.alt}`}
@@ -16,7 +16,7 @@ const CarouselImage = (props: ServiceCardProps) => {
                 quality={100}
                 // priority={true}
                 onClick={props.onClick}
-                className="object-center cursor-pointer w-full h-auto rounded-lg"
+                className="cursor-pointer w-full h-auto rounded-lg object-cover"
                 loading={'lazy'}
             />
         </div>

@@ -99,6 +99,8 @@ const SignUpForm = () => {
                 push("/");
             })
             .catch((e) => {
+                console.log(e);
+                
                 const errorInfo = e.response.data
 
                 if (errorInfo.error == "UNIQUE_CONSTRAIN_VIOLATED" && errorInfo.message.includes("username")) {

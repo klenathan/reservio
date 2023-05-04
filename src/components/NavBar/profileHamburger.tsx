@@ -1,115 +1,13 @@
-import Link from "next/link";
+
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useAuth } from "components/Auth/Context/AuthContext";
 import Picture from "components/Picture";
-
-interface IHamburgerMenuChildProps {
-  children: JSX.Element | JSX.Element[] | string;
-  href?: string;
-  onClick?: () => void;
-}
-
-const HamburgerMenuChild: React.FC<IHamburgerMenuChildProps> = (
-  props: IHamburgerMenuChildProps
-) => {
-  if (!props.href) {
-    return (
-      <Link
-        prefetch={false}
-        href={"/"}
-        className={`hover:bg-limeGreen hover:bg-opacity-20 
-      first:rounded-t-xl last:rounded-b-xl
-    py-2 px-2`}
-        onClick={props.onClick}
-      >
-        {props.children}
-      </Link>
-    );
-  } else {
-    return (
-      <Link
-        href={{ pathname: props.href }}
-        className={`hover:bg-limeGreen hover:bg-opacity-20 
-      first:rounded-t-xl last:rounded-b-xl
-    py-2 px-2`}
-        onClick={props.onClick}
-      >
-        {props.children}
-      </Link>
-    );
-  }
-};
-
-interface IHamburgerMenuProps {
-  show: boolean;
-  logout?: () => void;
-  setShow: Dispatch<SetStateAction<boolean>>;
-}
-
-const NavBarHamburgerMenu: React.FC<IHamburgerMenuProps> = (
-  props: IHamburgerMenuProps
-) => {
-  useEffect(() => {
-    const handleClick = (e: any) => {
-      props.setShow(false);
-    };
-    document.addEventListener("click", handleClick);
-    return () => {
-      document.removeEventListener("click", handleClick);
-    };
-  });
-
-  const { isLogin, user } = useAuth();
-
-  return (
-    <div
-      className={`absolute ${props.show ? "flex" : "hidden"} flex-col top-12 
-        rounded-xl shadow-[0_0px_20px_0px_rgba(0,0,0,0.2)]
-        w-40 gap-3 
-        left-1/2 transform -translate-x-1/2
-        bg-white z-10
-    `}
-    >
-      {isLogin ? (
-        <>
-          <HamburgerMenuChild href="/userprofile">
-            My Profile
-          </HamburgerMenuChild>
-          {user?.vendor ? (
-            <>
-              <HamburgerMenuChild href="/vendorprofile">
-                Vendor Profile
-              </HamburgerMenuChild>
-              <HamburgerMenuChild
-                href={`/store/${encodeURIComponent(user.username)}`}
-              >
-                Your Store
-              </HamburgerMenuChild>
-            </>
-          ) : (
-            ""
-          )}
-
-          {props.logout && (
-            <HamburgerMenuChild onClick={props.logout}>
-              Logout
-            </HamburgerMenuChild>
-          )}
-        </>
-      ) : (
-        <>
-          <HamburgerMenuChild href="/login">Login</HamburgerMenuChild>
-          <HamburgerMenuChild href="/signup">Sign Up</HamburgerMenuChild>
-        </>
-      )}
-    </div>
-  );
-};
+import NavBarHamburgerMenu from "./ProfileHamburgerComponents/NavBarHamburgerMenu";
 
 export default function ProfileHamBurger() {
-  const { user, logout } = useAuth();
+  const { user, logout, isLogin } = useAuth();
 
   const [show, setShow] = useState(false);
   const toggleHamburgerMenu = () => {
@@ -140,7 +38,7 @@ export default function ProfileHamBurger() {
           <Picture src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + user.avatar} />
         </div>
       )}
-      <NavBarHamburgerMenu logout={logout} show={show} setShow={setShow} />
+      <NavBarHamburgerMenu isLogin={isLogin} user={user} logout={logout} show={show} setShow={setShow} />
     </div>
   );
 }

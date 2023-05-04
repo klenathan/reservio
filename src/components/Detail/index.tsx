@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import dynamic from "next/dynamic";
 import {geocoderFunction} from "@/Helper/Geocoder";
 import DetailSubtitle from "components/Detail/DetailSubtitle";
-import ImageGallery from "components/Detail/ImageGallery";
+import ImageGallery from "components/Detail/ImageGallery/ImageGallery";
 import DetailPageInfo from "components/Detail/DetailPageInfo";
 import Picture from "components/Picture";
 import {FaStar} from "react-icons/fa";
@@ -23,6 +23,7 @@ const DetailPage = (props: { service: Product }) => {
         return await geocoderFunction(props.service.address);
     };
 
+
     if (props.service.address) {
         genGeocoder().then((d) => {
             setLat(parseFloat(d[0].lat));
@@ -40,17 +41,19 @@ const DetailPage = (props: { service: Product }) => {
                 {/*Subtitle*/}
                 <DetailSubtitle
                     rating={props.service.avgRating}
-                    reviewCount={props.service._count?.reservation}
+                    reviewCount={props.service._count?.Reservation}
                     location={props.service.address}
                     isCertified={props.service.vendor.certified}
                 />
 
-                {/*Display image*/}
-                <ImageGallery images={props.service.images}/>
 
-                {/*Detail information*/}
                 <div className={"flex flex-col lg:flex-row w-full h-max mt-4"}>
-                    <div className={"lg:w-2/3 lg:pr-24"}>
+                    <div className={"lg:w-3/4 lg:pr-4 space-y-4"}>
+                        {/*Display image*/}
+
+                        <ImageGallery images={props.service.images}/>
+                        {/*Detail information*/}
+
                         <DetailPageInfo
                             name={props.service.name}
                             description={props.service.desc}
@@ -61,7 +64,7 @@ const DetailPage = (props: { service: Product }) => {
                     </div>
                     <div
                         className={
-                            "hidden w-full lg:w-1/3 lg:block  border-2 border-neutral-10000 shadow-lg rounded-2xl h-fit"
+                            "hidden w-full border-2 border-neutral-10000 shadow-lg rounded-2xl h-fit lg:w-1/3 lg:block lg:sticky  lg:top-0 lg:z-10"
                         }
                     >
                         {/*Pricing*/}
@@ -70,6 +73,11 @@ const DetailPage = (props: { service: Product }) => {
                             avgRating={props.service.avgRating}
                             countRating={props.service._count?.reviews}
                             productName={props.service.name}
+                            type={props.service.type}
+                            countReservation={props.service._count?.Reservation as number}
+                            maxQuantity={props.service.quantity}
+                            id={props.service.id}
+
                         />
                     </div>
 
@@ -81,13 +89,14 @@ const DetailPage = (props: { service: Product }) => {
                             countReviews={props.service._count?.reviews}
                             userName={user?.username}
                             productName={props.service.name}
+                            countReservation={props.service._count?.Reservation as number}
+                            maxQuantity={props.service.quantity}
+                            id={props.service.id}
                         />
                     </div>
                 </div>
-
-                {/*Map*/}
-
             </div>
+
             {/*Map*/}
             <div className={"border-b-2 border-gray-300 w-full pb-2 space-y-7 mt-7"}>
                 <div className={"text-gray-700 font-bold text-2xl mb-3"}>

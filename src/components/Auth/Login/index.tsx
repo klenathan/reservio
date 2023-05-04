@@ -4,9 +4,9 @@ import {redirect, useRouter} from "next/navigation";
 import Input from "@/components/Form/Input";
 import Form from "../../Form";
 import FormHeader from "../../Form/FormHeader";
-import apiClient from "@/config/axios.config";
 import {useAuth} from "components/Auth/Context/AuthContext";
 import {useEffect} from "react";
+import usePost from "@/Helper/ClientFetch/usePost";
 
 interface IFromInput {
     username: String;
@@ -25,11 +25,24 @@ const LoginForm = () => {
 
     const {isLogin, setUser, login, isLoading} = useAuth()
 
+    const {response, isPosting, post} = usePost(`auth/login`)
+
     useEffect(() => {
         if (isLogin) {
             redirect('/')
         }
     })
+
+    useEffect(() => {
+        if (response != undefined) {
+            sessionStorage.setItem("accessToken", response.accessToken);
+            sessionStorage.setItem('userData', JSON.stringify(response.user));
+            localStorage.setItem("refreshToken", response.refreshToken);
+            setUser(response.user)
+            login()
+            push("/");
+        }
+    }, [login, push, response, setUser])
 
     if (isLoading) {
         return <div><p>Loading Auth Contexts</p></div>
@@ -41,46 +54,34 @@ const LoginForm = () => {
         formData.append("username", data.username as string);
         formData.append("password", data.password as string);
 
-        apiClient
-            .post(
-                `auth/login`,
-                formData
-            )
-            .then((res) => {
-                sessionStorage.setItem("accessToken", res.data.accessToken);
-                sessionStorage.setItem('userData', JSON.stringify(res.data.user));
-                localStorage.setItem("refreshToken", res.data.refreshToken);
-                setUser(res.data.user)
-                login()
-                push("/");
-            })
-            .catch((e) => {
-                console.log(e)
-                const errorsInfo = e.response.data;
-                let message: string;
+        try {
+            await post(formData)
+        } catch (errors: any) {
+            const errorsInfo = errors.message.response.data;
+            let message: string;
 
-                console.log(errorsInfo.error);
 
-                if (errorsInfo.error == "NotFoundError") {
-                    message = "User not found";
-                } else if (errorsInfo.error == "WRONG_CREDENTIAL") {
-                    message = "Wrong password";
-                } else {
-                    message = errorsInfo.error;
-                }
+            if (errorsInfo.error == "NoFoundError" || errorsInfo.message == "No User found" ) {
+                message = "User not found";
+            } else if (errorsInfo.error == "WRONG_CREDENTIAL") {
+                message = "Wrong password";
+            } else {
+                message = errorsInfo.error;
+            }
 
-                setError("root.serverError", {
-                    type: errorsInfo.errors,
-                    message: message,
-                });
+            setError("root.serverError", {
+                type: errorsInfo.errors,
+                message: message,
             });
+        }
     };
+
 
     return (
         <div className="bg-white shadow rounded lg:w-1/3 md:w-1/2 w-full p-10 mt-8">
             <FormHeader name="Login to Reservio"/>
 
-            <Form onSubmit={handleSubmit(onSubmit)} button="Login">
+            <Form onSubmit={handleSubmit(onSubmit)} isPosting={isPosting} button="Login">
                 <div>
                     <Input
                         name={"username"}

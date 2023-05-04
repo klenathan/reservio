@@ -34,13 +34,11 @@ export const options = {
   },
 };
 
-const labels = ["March", "April", "May", "June"];
-
 const data = {
-  labels,
+  labels: ["March", "April", "May", "June"],
   datasets: [
     {
-      label: "App Rating",
+      label: "# Reservation",
       data: [1, 2, 3, 4],
       borderColor: "rgb(255, 99, 132)",
       backgroundColor: "rgba(255, 99, 132, 0.5)",
@@ -48,14 +46,14 @@ const data = {
   ],
 };
 
-export function HorizontalBar() {
+export function HorizontalBar(props: { data: any }) {
   return (
-    <div className="h-fit md:m-10 p-4">
-      <h1 className="w-full text-xl text-oliveGreen font-bold uppercase">
+    <div className="h-80 flex flex-col items-center justify-center rounded-xl bg-zinc-50">
+      <h1 className="w-full text-center text-xl text-oliveGreen font-bold uppercase">
         ratings and feedbacks
       </h1>
-      <div>
-        <Bar options={options} data={data} />
+      <div className="grid place-items-center h-[80%] w-full">
+        <Bar options={options} data={props.data || data} />
       </div>
     </div>
   );

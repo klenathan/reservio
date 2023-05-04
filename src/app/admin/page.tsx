@@ -1,12 +1,29 @@
 "use client";
+import SideBar from "@/components/Admin/sideBar";
+import { useAuth } from "@/components/Auth/Context/AuthContext";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import AdminChart from "components/Admin";
+import Head from "next/head";
+import { redirect, useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const Admin = () => {
-    return (
-        <div>
-            <AdminChart/>
-        </div>
-    );
+  const { user, isLogin, isLoading } = useAuth();
+  const { push } = useRouter();
+  useEffect(() => {
+    if (!isLoading) {
+      if (!user) push("/login");
+      if (user && user?.admin == null) push("/");
+    }
+  });
+
+  return !isLogin || (isLogin && user?.admin == null) ? (
+    <div className="relative flex flex-row h-screen">
+      <LoadingSpinner />
+    </div>
+  ) : (
+      <AdminChart />
+  );
 };
 
 export default Admin;

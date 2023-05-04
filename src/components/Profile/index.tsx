@@ -1,8 +1,9 @@
 import Image from "next/image";
+
 interface IUserProfileProps {
   userName: string;
   email: string;
-  phone: number;
+  phone: string;
 }
 const UserProfile = (props: IUserProfileProps) => {
   const size = 100;

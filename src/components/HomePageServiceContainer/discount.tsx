@@ -35,7 +35,7 @@ const Discount = () => {
       {queryDiscount.length == 0 ? (
         <LoadingSpinner />
       ) : (
-        <div className="flex flex-row items-center my-8 ">
+        <div className="flex flex-row items-center my-8 p-2">
           <MdChevronLeft
             id="left"
             onClick={SlideLeft}
@@ -68,7 +68,7 @@ const Discount = () => {
 
 const DiscountCard = (props: { discount: Discount }) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col shadow">
       <div className="h-[15rem] relative w-[20rem] ">
         <div
           className="w-full bg-gray-200 h-full rounded-md

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import ReviewCard from "components/Review/ReviewCard";
 import Modal from "components/Modal";
-import { Review } from "../../../Types";
+import {Review} from "../../../Types";
 
 const Review = (props: { review: Review[] }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -52,7 +52,7 @@ const Review = (props: { review: Review[] }) => {
           onClose={handleCloseModal}
           nameModal={"Reviews"}
         >
-          <div className={"overflow-auto scroll-auto h-full max-h-96"}>
+          <div className={"overflow-auto scroll-auto h-full max-h-96 px-6 py-6"}>
             {props.review.map((review, index) => {
               return (
                 <div key={index} className="flex space-x-6 mt-6">

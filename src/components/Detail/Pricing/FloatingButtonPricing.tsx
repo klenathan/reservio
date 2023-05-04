@@ -9,6 +9,9 @@ interface FloatingButtonPricingProps {
     countReviews: number | undefined;
     productName: string
     userName?: string
+    maxQuantity: number
+    id: string
+    countReservation: number
 }
 
 const FloatingButtonPricing: React.FC<FloatingButtonPricingProps> = (
@@ -45,12 +48,16 @@ const FloatingButtonPricing: React.FC<FloatingButtonPricingProps> = (
                     onClose={handleCloseModal}
                     nameModal={"Buy me ☕"}
                 >
-                    <div className={'overflow-auto scroll-auto h-96'}>
+                    <div className={'overflow-auto scroll-auto h-96 px-6 py-6'}>
                         <Pricing
                             price={props.price}
                             avgRating={props.avgRating}
                             countRating={props.countReviews}
                             productName={props.productName}
+                            countReservation={props.countReservation}
+                            maxQuantity={props.maxQuantity}
+                            id={props.id}
+
                         />
                     </div>
 

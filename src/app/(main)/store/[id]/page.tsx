@@ -58,7 +58,9 @@ const Page = (slugs: any) => {
             onClose={handleCloseModal}
             nameModal={"Add New Product"}
           >
-            <AddProduct />
+            <div className={"px-6 py-6"}>
+              <AddProduct />
+            </div>
           </Modal>
         )}
       </div>

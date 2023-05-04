@@ -14,6 +14,7 @@ const TimeReservation: React.FC<TimeReservationProps> = (props: TimeReservationP
         props.parentCallBack(childDate)
     }
 
+
     return (
         <div
             className={'flex flex-col space-y-4 outline outline-2 rounded-xl outline-neutral-200 hover:outline-black mt-4 py-2 px-4 mb-4'}>
@@ -33,13 +34,20 @@ const TimeReservation: React.FC<TimeReservationProps> = (props: TimeReservationP
                     />
                 </div>
             </div>
-            <div className={'w-11/12 m-auto border-2 border-neutral-300 rounded-full bg-gray-200 text-white'}>
-                <div
-                    className={'bg-oliveGreen text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full'}
-                    style={{width: `${(props.countReservation / props.maxQuantity) * 100}%`}}>
+            <div>
+                <div className={'flex justify-center'}>
                     {props.countReservation} / {props.maxQuantity}
                 </div>
+                <div
+                    className={'w-11/12 m-auto border-2 border-neutral-300 rounded-full bg-gray-200 text-white truncate'}>
+                    <div
+                        className={'bg-oliveGreen text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full'}
+                        style={{width: `${(props.countReservation / props.maxQuantity) * 100}%`}}>
+                        {props.countReservation} / {props.maxQuantity}
+                    </div>
+                </div>
             </div>
+
         </div>
     )
 }

@@ -3,28 +3,48 @@ import React, {useState} from "react";
 import TotalPrice from "components/Detail/Pricing/TotalPrice";
 import {useAuth} from "components/Auth/Context/AuthContext";
 import PricingFlexible from "components/Detail/Pricing/FlexiblePricing/PricingFlexible";
+import {ProductPricingType} from "../../../../Types";
+import PricingFixing from "components/Detail/Pricing/FixingPricing/PricingFixing";
 
 interface PricingChoiceProps {
-    startDateString: string;
-    endDateString: string;
-    startDateNum?: number
-    endDateNum?: number
-    totalPrice?: number;
+    startTimeString?: string;
+    endTimeString?: string;
+    startDate?: Date
+    endDate?: Date
+    price?: number;
 }
 
 interface PricingProps {
     price: number;
+    id: string
     avgRating: number;
     countRating: number | undefined;
     productName: string;
+    maxQuantity: number
+    countReservation: number
+    type?: ProductPricingType
 }
 
 export default function Pricing(props: PricingProps) {
-    const [choice, setChoice] = useState<PricingChoiceProps>();
+    const [choice, setChoice] = useState<PricingChoiceProps>({
+        price: props.price,
+        startDate: new Date(),
+        endDate: new Date()
+    });
+    // const [price, setPrice] = useState<number>(props.price);
+    const [isConfirm, setIsConfirm] = useState<boolean>(false)
     const {isLogin, user} = useAuth()
     const handleChoice = (childData: any) => {
         setChoice(childData);
     };
+
+    const handleIsConfirm = () => {
+        setIsConfirm(true)
+    }
+
+    const handleIsNotConfirm = () => {
+        setIsConfirm(false)
+    }
 
     const dot = <span className="mx-1">&#8226;</span>;
 
@@ -44,32 +64,45 @@ export default function Pricing(props: PricingProps) {
             </div>
 
             {/*Information display*/}
+            {props.type == 'FIXING' ?
+                <PricingFixing
+                    start={"10:30"}
+                    end={"11:00"}
+                    maxQuantity={props.maxQuantity}
+                    countReservation={props.countReservation}
+                    parentCallBack={handleChoice}
 
-            {/*<PricingFixing*/}
-            {/*    start={"10:30"}*/}
-            {/*    end={"11:00"}*/}
-            {/*    maxQuantity={300}*/}
-            {/*    countReservation={100}*/}
-            {/*    parentCallBack={handleChoice}*/}
-            {/*/>*/}
-            <PricingFlexible
-                parentCallBack={handleChoice}
-            />
+                /> :
+                <PricingFlexible
+                    parentCallBack={handleChoice}
+                    price={props.price}
+                    confirm={handleIsConfirm}
+                    countReservation={props.countReservation}
+                    maxQuantity={props.maxQuantity}
+                />
+            }
+
 
             {/*Total price*/}
-            <TotalPrice
-                end={choice?.endDateString}
-                start={choice?.startDateString}
-                price={props.price}
-                userName={user?.username}
-                productName={props.productName}
-                parentCallBack={handleChoice}
-                startDate={'Mar 30 2023'}
-                endDate={'Mar 30 2023'}
-                maxQuantity={300}
-                countReservation={100}
-                isLogin={isLogin}
-            />
+            {isConfirm ?
+                <TotalPrice
+                    endTime={choice?.endTimeString}
+                    startTime={choice?.startTimeString}
+                    price={choice.price as number}
+                    userName={user?.username}
+                    productName={props.productName}
+                    parentCallBack={handleChoice}
+                    startDate={choice?.startDate}
+                    endDate={choice?.endDate}
+                    maxQuantity={props.maxQuantity}
+                    countReservation={props.countReservation}
+                    isLogin={isLogin}
+                    notConfirm={handleIsNotConfirm}
+                    productId={props.id}
+                /> :
+                null
+            }
+
         </div>
     );
 }

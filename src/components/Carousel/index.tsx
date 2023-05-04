@@ -117,11 +117,11 @@ const Carousel: React.FC<CarouselProps> = (props: CarouselProps) => {
                         ) => {
                             return (
                                 <div key={index as number} className={
-                                    `${index === currentSlide
-                                        ? "border-4 border-midGreen cursor-pointer"
-                                        : "opacity-60"} `
+                                    `border-2  ${index === currentSlide
+                                        ? " border-midGreen cursor-pointer"
+                                        : "border-transparent opacity-60 "} `
                                 }>
-                                    <div key={service} className={'relative h-20 w-20'}>
+                                    <div key={service} className={'relative h-14 w-20'}>
                                         <Image
                                             src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + service}
                                             alt={`Image ${service.alt}`}
@@ -130,7 +130,7 @@ const Carousel: React.FC<CarouselProps> = (props: CarouselProps) => {
                                             onClick={() => {
                                                 setCurrentSlide(index as number);
                                             }}
-                                            className="object-center cursor-pointer w-full h-auto"
+                                            className="object-cover cursor-pointer w-full h-auto"
                                             loading={'lazy'}
                                         />
                                     </div>

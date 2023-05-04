@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import TotalPrice from "components/Detail/Pricing/TotalPrice";
 import {useAuth} from "components/Auth/Context/AuthContext";
 import PricingFlexible from "components/Detail/Pricing/FlexiblePricing/PricingFlexible";
-import {ProductPricingType} from "../../../../Types";
+import {ProductFixedTimeSlot, ProductPricingType} from "../../../../Types";
 import PricingFixing from "components/Detail/Pricing/FixingPricing/PricingFixing";
 
 interface PricingChoiceProps {
@@ -22,6 +22,7 @@ interface PricingProps {
     productName: string;
     maxQuantity: number
     countReservation: number
+    productFixedTimeSlot: ProductFixedTimeSlot[]
     type?: ProductPricingType
 }
 

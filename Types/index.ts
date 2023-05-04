@@ -43,6 +43,7 @@ export enum ProductPricingType {
     fixed = "FIXED"
 }
 
+
 export type Product = {
     id: string;
     vendorId: string;
@@ -55,6 +56,7 @@ export type Product = {
     quantity: number
     desc: string;
     type: ProductPricingType,
+    ProductFixedTimeSlot?: ProductFixedTimeSlot[]
     avgRating: number;
     reviews: Review[];
     createdAt: string;

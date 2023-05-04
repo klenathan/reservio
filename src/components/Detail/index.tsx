@@ -31,6 +31,8 @@ const DetailPage = (props: { service: Product }) => {
         });
     }
 
+    console.log(props.service)
+
     return (
         <div>
             <div>
@@ -77,7 +79,7 @@ const DetailPage = (props: { service: Product }) => {
                             countReservation={props.service._count?.Reservation as number}
                             maxQuantity={props.service.quantity}
                             id={props.service.id}
-
+                            productFixedTimeSlot={props.service.ProductFixedTimeSlot as any}
                         />
                     </div>
 

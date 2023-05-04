@@ -23,7 +23,6 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({images}) => {
 
     const modal = isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={handleCloseModal} nameModal={"Image Gallery"}>
-
                 <Carousel slice={images} auto={false} preview={true}>
                     <ImageModalCarousel/>
                 </Carousel>

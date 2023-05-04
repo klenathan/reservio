@@ -129,7 +129,7 @@ const TotalPrice = (props: TotalPriceProps) => {
             reservationData.append('endAt', endAt as any)
         }
         discount.id && reservationData.append('discountId', discount.id)
-        
+
         try {
             await post(reservationData)
         } catch (e: any) {
@@ -256,11 +256,11 @@ const TotalPrice = (props: TotalPriceProps) => {
                         {isLoading && <LoadingSpinner text={"Waiting for discount"}/>}
                         {isError && <div>Something when wrong</div>}
                         <div
-                            className={'overflow-auto h-full max-h-96 space-y-4 py-6 px-1.5 md:px-6 lg:px-10 snap-both scroll-smooth'}>
+                            className={'overflow-auto h-full max-h-96 space-y-4 py-6 px-1.5 md:px-6 lg:px-10 snap-both snap-mandatory scroll-smooth'}>
                             {data &&
                                 data.map((discount) => (
-                                    <div key={discount.id}>
                                         <DiscountCard
+                                            key={discount.id}
                                             id={discount.id as string}
                                             name={discount.name}
                                             desc={discount.desc}
@@ -270,7 +270,6 @@ const TotalPrice = (props: TotalPriceProps) => {
                                             parentCallBack={handleDiscount}
                                             onClose={handleModalClose}
                                         />
-                                    </div>
                                 ))
 
                             }

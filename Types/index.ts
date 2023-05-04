@@ -89,6 +89,9 @@ export type ProductFixedTimeSlot = {
     from: string
     to: string
     quantity: number
+    _count: {
+        ProuctReservation: number
+    }
 }
 
 export type Review = {

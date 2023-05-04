@@ -4,74 +4,74 @@ import Modal from "components/Modal";
 import {Review} from "../../../Types";
 
 const Review = (props: { review: Review[] }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
 
-  return (
-    <div className={"flex flex-col justify-center"}>
-      <div className={"lg:grid grid-cols-2 gap-4"}>
-        {props.review.map((review, index) => {
-          if (index < 4) {
-            return (
-              <div key={index} className="flex space-x-2 mb-2 line-clamp-5">
-                <ReviewCard
-                  username={review.user.username}
-                  avatar={review.user.avatar}
-                  rating={review.rating}
-                  feedback={review.feedback}
-                  createAt={review.createAt}
-                  onClick={handleOpenModal}
-                />
-              </div>
-            );
-          }
-        })}
-      </div>
-      {props.review.length > 4 ? (
-        <button
-          key={"seeMore"}
-          className={
-            "bg-transparent m-auto hover:bg-oliveGreen text-gray-700 font-semibold hover:text-white py-2 px-4 border border-black hover:border-transparent rounded"
-          }
-          onClick={handleOpenModal}
-        >
-          See more feedback
-        </button>
-      ) : null}
-
-      {isModalOpen && (
-        <Modal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          nameModal={"Reviews"}
-        >
-          <div className={"overflow-auto scroll-auto h-full max-h-96 px-6 py-6"}>
-            {props.review.map((review, index) => {
-              return (
-                <div key={index} className="flex space-x-6 mt-6">
-                  <ReviewCard
-                    username={review.user.username}
-                    avatar={review.user.avatar}
-                    rating={review.rating}
-                    feedback={review.feedback}
-                    createAt={review.createAt}
+    return (
+        <div className={"flex flex-col justify-center"}>
+            <div className={"lg:grid grid-cols-2 gap-4"}>
+                {props.review.map((review, index) => {
+                    if (index < 4) {
+                        return (
+                            <div key={index} className="flex space-x-2 mb-2 line-clamp-5">
+                                <ReviewCard
+                                    username={review.user.username}
+                                    avatar={review.user.avatar}
+                                    rating={review.rating}
+                                    feedback={review.feedback}
+                                    createAt={review.createAt}
+                                    onClick={handleOpenModal}
+                                />
+                            </div>
+                        );
+                    }
+                })}
+            </div>
+            {props.review.length > 4 ? (
+                <button
+                    key={"seeMore"}
+                    className={
+                        "bg-transparent m-auto hover:bg-oliveGreen text-gray-700 font-semibold hover:text-white py-2 px-4 border border-black hover:border-transparent rounded"
+                    }
                     onClick={handleOpenModal}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </Modal>
-      )}
-    </div>
-  );
+                >
+                    See more feedback
+                </button>
+            ) : null}
+
+            {isModalOpen && (
+                <Modal
+                    isOpen={isModalOpen}
+                    onClose={handleCloseModal}
+                    nameModal={"Reviews"}
+                >
+                    <div className={'overflow-auto scroll-auto w-screen  max-w-prose px-6 py-6'}>
+                        {props.review.map((review, index) => {
+                            return (
+                                <div key={index} className="flex space-x-6 mt-6">
+                                    <ReviewCard
+                                        username={review.user.username}
+                                        avatar={review.user.avatar}
+                                        rating={review.rating}
+                                        feedback={review.feedback}
+                                        createAt={review.createAt}
+                                        onClick={handleOpenModal}
+                                    />
+                                </div>
+                            );
+                        })}
+                    </div>
+                </Modal>
+            )}
+        </div>
+    );
 };
 
 export default Review;

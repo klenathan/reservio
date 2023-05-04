@@ -50,7 +50,7 @@ const DiscountCard = (props: DiscountCardProps) => {
     })
 
     return (
-        <div className={'w-full h-fit border-4 border-neutral-300 rounded-lg space-y-4 p-2 snap-center'}>
+        <div className={'w-full h-fit border-4 border-neutral-300 rounded-lg space-y-4 p-2 snap-center snap-always'}>
             {/*Discount amount*/}
             <div className={'flex flex-row space-x-10 items-center justify-center lg:space-x-40'}>
                 <div className={'flex flex-col items-center'}>

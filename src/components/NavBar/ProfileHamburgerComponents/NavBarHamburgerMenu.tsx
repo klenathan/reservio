@@ -1,7 +1,6 @@
 import Link from "next/link";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useAuth } from "components/Auth/Context/AuthContext";
-import { User } from "../../../../Types";
+import React, {Dispatch, SetStateAction, useEffect} from "react";
+import {User} from "../../../../Types";
 
 interface IHamburgerMenuChildProps {
   children: JSX.Element | JSX.Element[] | string;
@@ -56,6 +55,7 @@ const NavBarHamburgerMenu: React.FC<IHamburgerMenuProps> = (
     const handleClick = (e: any) => {
       props.setShow(false);
     };
+
     document.addEventListener("click", handleClick);
     return () => {
       document.removeEventListener("click", handleClick);
@@ -74,7 +74,7 @@ const NavBarHamburgerMenu: React.FC<IHamburgerMenuProps> = (
       {props.isLogin ? (
         <>
           <HamburgerMenuChild
-            href={`/userprofile/${encodeURIComponent(props.user.username)}`}
+            href={`/userprofile/${encodeURIComponent(props.user?.username as string)}`}
           >
             My Profile
           </HamburgerMenuChild>

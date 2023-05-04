@@ -87,14 +87,14 @@ const ReservationInfo = (props: any) => {
           />
         </div>
         <div className="w-full flex flex-row justify-between">
-          <div className="flex flex-col justify-between ml-2">
+          <div className="flex flex-col justify-between ml-2 md:mr-0">
             <div>
-              <h1 className="font-bold">DALAT HOMESTAY with beautiful view</h1>
+              <h1 className="font-bold text-sm md:text-base ">DALAT HOMESTAY with beautiful view</h1>
               <div className="font-light text-xs">Category: Travel</div>
             </div>
-            <div className="font-semibold">x5 nights</div>
+            <div className="font-semibold text-sm md:text-base ">x5 nights</div>
           </div>
-          <div className="text-midGreen font-bold">5.000.000 $</div>
+          <div className="text-midGreen font-bold text-xs md:text-base  ">$5.000.000</div>
         </div>
       </div>
       <div className="border-t-2 mt-7 border-t-gray-500 border-b-2 border-b-gray-500 flex flex-col font-semibold">

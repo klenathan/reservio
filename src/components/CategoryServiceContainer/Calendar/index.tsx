@@ -57,7 +57,7 @@ const Calendar: React.FC<CalendarProps> = (props: CalendarProps) => {
         showFooter={true}
         containerClassName={"relative w-full max-h"}
         inputClassName={
-          "relative transition-all duration-300  w-full  text-xs placeholder-neutral-400 " +
+          "relative transition-all duration-300  w-full text-xs placeholder-neutral-400 " +
           "focus:ring disabled:opacity-40 disabled:cursor-not-allowed focus:border-lime-500 focus:ring-lime-500/20"
         }
         value={dateRange}

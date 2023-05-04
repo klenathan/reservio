@@ -71,8 +71,8 @@ export default function Category(slugs: any) {
     <div className="overflow-hidden">
       <CategoryList />
 
-      <div className="min-h-3/4 flex w-full">
-        <aside className="flex-none h-3/4 p-4 mt-1 border border-black w-1/5">
+      <div className="min-h-3/4 flex w-full flex-col md:flex-row">
+        <aside className="md:self-auto self-center mb-2 md:mb-0 flex-none md:h-3/4 p-4 mt-1 border border-black md:w-1/5 mx-5 md:ml-0 md:flex h-full w-3/5">
           <Form onSubmit={handleSubmit(onSubmit)} button="Submit">
             <div className="my-3">
               <h1 className="text-xl text-oliveGreen font-bold mb-2">
@@ -128,10 +128,10 @@ export default function Category(slugs: any) {
 
           {queryService.length > 0 ? (
             <div className="flex-1 w-full">
-              <h1 className="text-xl text-oliveGreen font-bold mb-2">
+              <h1 className="text-2xl text-oliveGreen font-bold mb-1 md:text-xl text-center md:text-left  ">
                 Service:
               </h1>
-              <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 md:grid-cols-2 place-items-center max-w-7xl mx-6 ">
+              <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 md:grid-cols-2 place-items-center max-w-7xl md:mr-6 md:ml-0 mx-6">
                 {queryService.map((service) => {
                   return <Card key={service.id} service={service} />;
                 })}

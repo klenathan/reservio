@@ -13,7 +13,7 @@ interface DetailParams {
 }
 
 export default function Detail(slugs: DetailParams) {
-    const {data, isError, isLoading} = useFetch<Product>(`service/${slugs.params.id}`)
+    const {data, errors, isLoading} = useFetch<Product>(`service/${slugs.params.id}`)
     const items = [
         {label: "Home", href: "/"},
         {label: data?.category, href: `/category?id=${data?.category}`},
@@ -30,7 +30,7 @@ export default function Detail(slugs: DetailParams) {
         );
     }
 
-    if (isError && !data) {
+    if (errors && !data) {
         return <NotFound/>;
     }
 

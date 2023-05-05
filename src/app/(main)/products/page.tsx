@@ -17,8 +17,8 @@ interface IFromInput {
     minPrice?: string;
     maxPrice?: string;
     category?: string;
-    fromDate?: number;
-    toDate?: number;
+    fromDate?: number | string;
+    toDate?: number | string;
 }
 
 export default function Category(slugs: any) {
@@ -26,9 +26,12 @@ export default function Category(slugs: any) {
     const [url, setUrl] = useState<string>('service')
     const [queryService, setServices] = useState<Product[]>([]);
     const [queryVendor, setVendors] = useState<Vendor[]>([]);
+    const [sortBy, setSortBy] = useState<any>()
+    const [aside, setAside] = useState<boolean>(false)
+
     const [date, setDate] = useState<any>({
-        startDate: new Date(),
-        endDate: new Date()
+        startDate: undefined,
+        endDate: ""
     })
 
     const {data, error, isLoading} = useFetch<any>(url)
@@ -38,13 +41,13 @@ export default function Category(slugs: any) {
         handleSubmit,
         control,
         formState: {errors},
-        setValue
+        setValue, getValues
     } = useForm<IFromInput>();
 
 
     useEffect(() => {
         if (slugs.searchParams.category) {
-            setUrl(`service/category/${slugs.searchParams.category}`)
+            setUrl(`service?category=${slugs.searchParams.category}`)
         }
 
         if (slugs.searchParams.keyword) {
@@ -75,8 +78,14 @@ export default function Category(slugs: any) {
     ];
 
     const handleSort = (childData: any) => {
-        setUrl(`/service?${childData.sortBy}=${childData.order}`)
+        setSortBy({
+            sortBy: childData.sortBy,
+            order: childData.order
+        })
+        setUrl(`/service?category=${slugs.searchParams.category}&minPrice=${getValues("minPrice") || ""}&maxPrice=${getValues('maxPrice') || ""}&fromDate=${getValues('fromDate') || ""}&toDate=${getValues('toDate') || ""}&${childData.sortBy}=${childData.order}`)
+
     }
+
 
     const handleDate = (date: any) => {
         setDate({
@@ -84,9 +93,20 @@ export default function Category(slugs: any) {
             endDate: date.endDate
         })
 
-        setValue('fromDate', getUnixTime(date.startDate))
-        setValue('toDate', getUnixTime(date.endDate))
+        if (date.startDate) {
+            setValue('fromDate', getUnixTime(date.startDate))
+        }
+
+        if (date.endDate) {
+            setValue('toDate', getUnixTime(date.endDate))
+        } else {
+            setValue('toDate', "")
+        }
     }
+
+    const toggleOpenAside = () => {
+        setAside(!aside);
+    };
 
     const onSubmit: SubmitHandler<IFromInput> = async (data) => {
         let minPrice = data.minPrice ? data.minPrice : "";
@@ -95,43 +115,46 @@ export default function Category(slugs: any) {
         let fromDate = data.fromDate ? data.fromDate : "";
         let toDate = data.toDate ? data.toDate : "";
 
-        setUrl(`/service?minPrice=${minPrice}&maxPrice=${maxPrice}&fromDate=${fromDate}&toDate=${toDate}`)
+        setUrl(`/service?category=${slugs.searchParams.category}&minPrice=${minPrice}&maxPrice=${maxPrice}&fromDate=${fromDate}&toDate=${toDate}&${sortBy.sortBy}=${sortBy.order}`)
     };
 
 
     return (
         <div className="overflow-hidden">
             <CategoryList/>
-            <div className="min-h-3/4 flex w-full flex-col md:flex-row">
-                <aside
-                    className="md:self-auto self-center mb-2 md:mb-0 flex-none md:h-3/4 p-4 mt-1 border border-black md:w-1/5 mx-5 md:ml-0 md:flex h-full w-3/5">
-                    <Form onSubmit={handleSubmit(onSubmit)} button="Submit">
-                        <div className="my-3">
-                            <h1 className="text-xl text-oliveGreen font-bold mb-2">
-                                By Date:
-                            </h1>
-                            <DatePicker parentCallBack={handleDate} userEndDate={date.endDate}/>
-                        </div>
+            <div className="flex w-full flex-col md:flex-row">
+                {aside &&
+                    <aside
+                        className="md:self-auto self-center mb-2 md:mb-0 flex-none md:h-3/4 p-4 mt-1 border border-black md:w-1/5 mx-5 md:ml-0 md:flex h-full w-3/5"
+                    >
+                        <Form onSubmit={handleSubmit(onSubmit)} button="Submit">
+                            <div className="my-3">
+                                <h1 className="text-xl text-oliveGreen font-bold mb-2">
+                                    By Date:
+                                </h1>
+                                <DatePicker parentCallBack={handleDate} userEndDate={date.endDate}/>
+                            </div>
 
-                        <div className="my-3">
-                            <h1 className="text-xl text-oliveGreen font-bold mb-2">
-                                By Price:
-                            </h1>
-                            <Price
-                                control={control}
-                                minPrice={errors.minPrice}
-                                maxPrice={errors.maxPrice}
-                            />
-                        </div>
-                    </Form>
-                </aside>
+                            <div className="my-3">
+                                <h1 className="text-xl text-oliveGreen font-bold mb-2">
+                                    By Price:
+                                </h1>
+                                <Price
+                                    control={control}
+                                    minPrice={errors.minPrice}
+                                    maxPrice={errors.maxPrice}
+                                />
+                            </div>
+                        </Form>
+                    </aside>
+                }
                 {isLoading && <LoadingSpinner text={"Loading product"}/>}
                 {data &&
                     <div className="flex-1 min-w-0 overflow-auto">
-                        {/*{queryVendor.length == 0 && queryService.length == 0 ? (*/}
                         {queryVendor.length == 0 && queryService.length == 0 ? (
-                            <div className={'flex justify-center text-3xl font-bold m-auto font-mono animate-ping'}>📢
-                                Warning!!!!! 📢</div>
+                            <div className={'flex justify-center text-3xl font-bold m-auto font-mono animate-ping'}>
+                                📢 Warning!!!!! 📢
+                            </div>
                         ) : (
                             ""
                         )}
@@ -151,17 +174,21 @@ export default function Category(slugs: any) {
                         )}
 
                         {queryService.length > 0 ? (
-                            <div className="flex-1 w-full flex flex-col items-center">
+                            <div className="flex-1 w-full flex flex-col items-center space-y-5">
                                 <h1 className="text-2xl text-oliveGreen font-bold mb-1 md:text-3xl text-center">
                                     Service:
                                 </h1>
-                                <Sort sortOptions={sortOptions} parentCallBack={handleSort}/>
-                                <div
-                                    className="grid grid-cols-1 gap-10 lg:grid-cols-3 md:grid-cols-2 place-items-center max-w-7xl md:mr-6 md:ml-0 mx-6">
-                                    {queryService.map((service) => {
-                                        return <Card key={service.id} service={service}/>;
-                                    })}
+                                <div className={'md:mr-6 md:ml-0 mx-6 space-y-4'}>
+                                    <Sort sortOptions={sortOptions} parentCallBack={handleSort}
+                                          toggleFilter={toggleOpenAside}/>
+                                    <div
+                                        className="grid grid-cols-1 gap-10 lg:grid-cols-3 md:grid-cols-2 place-items-center max-w-7xl">
+                                        {queryService.map((service) => {
+                                            return <Card key={service.id} service={service}/>;
+                                        })}
+                                    </div>
                                 </div>
+
                             </div>
                         ) : (
                             ""

@@ -1,20 +1,18 @@
 import React, {useEffect, useState} from "react";
 import {FaSort} from "react-icons/fa";
 import Select from "react-select";
+import {AiOutlineControl} from "react-icons/ai";
 
 
 interface SortProps {
-    sortOptions: SortOptionsProps[]
+    sortOptions: any
+    toggleFilter?: any
     parentCallBack?: any
 }
 
-export interface SortOptionsProps {
-    value: string
-    label: string
-}
 
 const Sort = (props: SortProps) => {
-    const [sortKey, setSortKey] = useState("");
+    const [sortKey, setSortKey] = useState("sortName");
     const [sortOrder, setSortOrder] = useState("asc");
 
     const toggleSortOrder = () => {
@@ -35,20 +33,33 @@ const Sort = (props: SortProps) => {
 
 
     return (
-        <div>
-            <div>
-        <span>
-          Sort By:
-          <Select
-              options={props.sortOptions}
-              onChange={handleSortChange}
-              placeholder="Select a field"
-          />
-        </span>
-                <span onClick={(toggleSortOrder)}>
-          <FaSort/>
+        <div className={'w-full flex flex-row justify-between'}>
+            <div className={'inline-flex items-center space-x-4'}>
+                <div className={'font-bold'}>
+                    Sort By:
+                </div>
+                <Select
+                    options={props.sortOptions}
+                    onChange={handleSortChange}
+                    defaultValue={props.sortOptions[0].value}
+                    placeholder="Select a field"
+                />
+            </div>
+            <div
+                className={'inline-flex items-center float-right space-x-6'}
+            >
+                <div className={'inline-flex items-center cursor-pointer space-x-1'}  onClick={props.toggleFilter}>
+                    <div>
+                        Hide filter
+                    </div>
+                    <AiOutlineControl className={'hover:scale-110'}/>
+                </div>
+                <div onClick={(toggleSortOrder)} className={'inline-flex items-center cursor-pointer space-x-1'}>
                     {sortOrder == "asc" ? "Ascending" : "Descending"}
-        </span>
+                    <FaSort className={'hover:scale-110'}/>
+                </div>
+
+
             </div>
         </div>
     );

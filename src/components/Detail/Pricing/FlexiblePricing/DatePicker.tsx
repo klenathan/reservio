@@ -40,11 +40,11 @@ const DatePicker: React.FC<DatePickerProps> = (props: DatePickerProps) => {
         endDate: props.userEndDate as Date,
       });
     }
-  }, [props.userEndDate, prevUserEndDate]);
+  }, [props.userEndDate, prevUserEndDate, dateRange.startDate]);
 
   useEffect(() => {
     props.parentCallBack(dateRange);
-  }, [dateRange]);
+  }, [dateRange, props]);
 
   return (
     <div className={" cursor-pointer outline outline-2 rounded-xl outline-neutral-200 py-2 px-4 space-y-4 "}>

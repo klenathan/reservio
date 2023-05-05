@@ -12,7 +12,7 @@ import useFetch from "@/Helper/ClientFetch/useFetch";
 
 const Page = (slugs: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data, isError, isLoading } = useFetch<Vendor>(
+  const { data, error, isLoading } = useFetch<Vendor>(
     `vendor/${slugs.params.id}`
   );
 
@@ -30,7 +30,7 @@ const Page = (slugs: any) => {
       </div>
     );
   }
-  if (isError || !data) {
+  if (error || !data) {
     return <NotFound />;
   }
   return (

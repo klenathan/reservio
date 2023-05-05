@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Reservation } from "../../../Types";
+import { Reservation, Status } from "../../../Types";
 import HistoryCard from "../HistoryCard";
 
 const HistoryPage = (props: { reservation: Reservation[] }) => {
-  const [selectedStatus, setSelectedStatus] = useState<string>("PENDING");
+  const [selectedStatus, setSelectedStatus] = useState<string>(Status.pending);
   const filteredUserCards = props.reservation.filter(
     (card) => card.status == selectedStatus
   );
@@ -11,13 +11,13 @@ const HistoryPage = (props: { reservation: Reservation[] }) => {
 
   const changeColor = (selectedStatus: string) => {
     switch (selectedStatus) {
-      case "PENDING":
+      case Status.pending:
         return "pendingYellow";
-      case "ACCEPTED":
+      case Status.accepted:
         return "acceptedBlue";
-      case "REJECTED":
+      case Status.rejected:
         return "rejectedRed";
-      case "FINISHED":
+      case Status.finished:
         return "completedGreen";
       default:
         return "";

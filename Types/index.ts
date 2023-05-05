@@ -37,6 +37,7 @@ export type Vendor = {
     _avg: string;
     _count: string;
   };
+  reservations: Reservation[];
 };
 
 export enum ProductPricingType {
@@ -126,3 +127,12 @@ export type Discount = {
   start: string;
   end: string;
 };
+
+export enum Status {
+  pending = "PENDING",
+  accepted = "ACCEPTED",
+  rejected = "REJECTED",
+  finished = "FINISHED",
+  ongoing = "ONGOING",
+}
+

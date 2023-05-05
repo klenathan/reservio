@@ -1,19 +1,13 @@
 import Image from "next/image";
+import { User } from "../../../Types";
 
-interface IUserProfileProps {
-  userName: string;
-  email: string;
-  phone: string;
-}
-const UserProfile = (props: IUserProfileProps) => {
-  const size = 100;
-
+const UserProfile = (props: { user: User }) => {
   return (
     <div className="flex flex-row md:flex-col  items-center md:border-2 p-4  md:bg-white md:drop-shadow-md">
       <div className="relative self-center ">
         <div className="relative w-[5rem] h-[5rem] ">
           <Image
-            src="/assets/profile.svg"
+            src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + props.user.avatar}
             fill
             sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
@@ -26,16 +20,16 @@ const UserProfile = (props: IUserProfileProps) => {
 
       <div className="">
         <div className="font-semibold text-midGreen">
-          <span className="font-bold text-black"> Username: </span>Habui{" "}
-          {props.userName}
+          <span className="font-bold text-black"> Username: </span>
+          {props.user.username}
         </div>
         <div className="font-semibold text-midGreen">
-          <span className="font-bold text-black">Email: </span> @@@@@@@@@@
-          {props.email}
+          <span className="font-bold text-black">Email: </span>
+          {props.user.email}
         </div>
         <div className="font-semibold text-midGreen">
-          <span className="font-bold text-black">Phone: </span> 0708417087{" "}
-          {props.phone}
+          <span className="font-bold text-black">Phone: </span>
+          {props.user.phoneNo}
         </div>
       </div>
     </div>

@@ -5,26 +5,16 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import AddProduct from "@/components/Store/AddProduct";
 import { Vendor } from "../../../../../Types";
-import apiClient from "@/config/axios.config";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { NotFound } from "next/dist/client/components/error";
 import Card from "@/components/Card";
+import useFetch from "@/Helper/ClientFetch/useFetch";
 
 const Page = (slugs: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [store, setStore] = useState<Vendor>();
-  const [isError, setIsError] = useState(false);
-
-  useEffect(() => {
-    apiClient
-      .get(`vendor/${slugs.params.id}`)
-      .then((res) => {
-        setStore(res.data);
-      })
-      .catch((e) => {
-        setIsError(true);
-      });
-  }, [slugs.params.id]);
+  const { data, isError, isLoading } = useFetch<Vendor>(
+    `vendor/${slugs.params.id}`
+  );
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -33,19 +23,19 @@ const Page = (slugs: any) => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-  if (!store && !isError) {
+  if (isLoading) {
     return (
       <div className="relative h-[calc(100vh_-_10rem)] -top-[5rem] w-full flex flex-col justify-center items-center overflow-hidden -z-10">
         <LoadingSpinner text="Loading store, please wait..." />
       </div>
     );
   }
-  if (isError || !store) {
+  if (isError || !data) {
     return <NotFound />;
   }
   return (
     <div className="flex items-center flex-col max-w-7xl mx-auto">
-      <Store store={store} />
+      <Store store={data} />
 
       <div className="flex justify-between w-full">
         <h1 className="text-3xl text-oliveGreen font-bold ">Services</h1>
@@ -66,9 +56,9 @@ const Page = (slugs: any) => {
       </div>
 
       <div>
-        {store.products.length > 0 ? (
+        {data.products.length > 0 ? (
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-4 md:grid-cols-2 place-items-center max-w-7xl">
-            {store.products.map((service) => {
+            {data.products.map((service) => {
               return <Card key={service.id} service={service} />;
             })}
           </div>

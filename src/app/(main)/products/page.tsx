@@ -1,16 +1,16 @@
 "use client";
 import CategoryList from "@/components/CategoryServiceContainer/CategoryList";
-import {useEffect, useState} from "react";
-import {cities} from "@/data/city";
+import { useEffect, useState } from "react";
+import { cities } from "@/data/city";
 import Price from "components/CategoryServiceContainer/Price";
 import Calendar from "components/CategoryServiceContainer/Calendar";
 import apiClient from "@/config/axios.config";
 import Card from "@/components/Card";
-import {City, Product, Vendor} from "../../../../Types";
+import { City, Product, Vendor } from "../../../../Types";
 import SearchableDropdown from "@/components/SearchableDropdown";
 import VendorCard from "@/components/Vendor/VendorCard";
 import Form from "@/components/Form";
-import {SubmitHandler, useForm} from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 interface IFromInput {
   minPrice?: string;
@@ -114,7 +114,7 @@ export default function Category(slugs: any) {
           )}
           {queryVendor.length > 0 ? (
             <div className="flex-1 w-full flex flex-col items-center">
-            <h1 className="text-2xl text-oliveGreen font-bold mb-1 md:text-3xl text-center">
+              <h1 className="text-2xl text-oliveGreen font-bold mb-1 md:text-3xl text-center">
                 Vendor:
               </h1>
               <div className="max-w-7xl mx-6 w-[80%]">

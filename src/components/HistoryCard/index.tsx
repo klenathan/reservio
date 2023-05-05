@@ -1,20 +1,16 @@
 import Image from "next/image";
 import { useState } from "react";
 
-
 interface IHistoryCardProps {
-  vendorName: string;
+  vendorName?: string;
   status: string;
-  productName: string;
-  price: number;
+  productName?: string;
+  price?: number;
   totalPrice: number;
   statusColor: string;
 }
 
-
 const HistoryCard: React.FC<IHistoryCardProps> = (props: IHistoryCardProps) => {
-  const formattedPrice = props.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-  const size = 55;
   return (
     <div className="flex flex-col mt-3 w-full shadow-lg p-5 ">
       <div className="flex flex-row items-center justify-between mb-3">
@@ -23,7 +19,7 @@ const HistoryCard: React.FC<IHistoryCardProps> = (props: IHistoryCardProps) => {
             <Image
               src="/assets/profile.svg"
               fill
-            sizes="(max-width: 768px) 100vw,
+              sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
               alt="Profile Hamburger"
@@ -37,7 +33,12 @@ const HistoryCard: React.FC<IHistoryCardProps> = (props: IHistoryCardProps) => {
           </div>
         </div>
         <div>
-          <h1 className={`pr-3 text-sm md:text-base font-bold uppercase text-${props.statusColor}`}> {props.status} </h1>
+          <h1
+            className={`pr-3 text-sm md:text-base font-bold uppercase text-${props.statusColor}`}
+          >
+            {" "}
+            {props.status}{" "}
+          </h1>
         </div>
       </div>
 
@@ -64,14 +65,14 @@ const HistoryCard: React.FC<IHistoryCardProps> = (props: IHistoryCardProps) => {
                 Price:{" "}
                 <span className="text-xs md:text-xl font-medium text-midGreen">
                   {" "}
-                  {formattedPrice}
+                  {props.price?.toLocaleString()}
                 </span>{" "}
               </h1>
             </div>
             <div className="font-extrabold text-gray-600 md:text-xl">
               Total:
               <span className="text-xl md:text-3xl font-extrabold text-midGreen ml-3">
-                {formattedPrice}
+                {props.totalPrice?.toLocaleString()}
               </span>
             </div>
           </div>

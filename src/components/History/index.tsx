@@ -1,74 +1,23 @@
 import { useState } from "react";
+import { Reservation } from "../../../Types";
 import HistoryCard from "../HistoryCard";
-import VendorHistoryCard from "../Vendor/VendorHistoryCard";
 
-const HistoryPage = (props: any) => {
-  const [selectedStatus, setSelectedStatus] = useState("pending");
-  
-  //testing data for common user, sorry for inconvenience! ~>.<~
-  const userCardArr = [
-    {
-      status: "pending",
-      userName: "ha1",
-      vendorName: "RMIT House",
-      productName: "DA LAT HOUSE",
-      price: 5000000,
-      totalPrice: 5000000,
-    },
-    {
-      status: "pending",
-      userName: "ha1",
-      vendorName: "RMIT House",
-      productName: "DA LAT HOUSE",
-      price: 5000000,
-      totalPrice: 5000000,
-    },
-    {
-      status: "pending",
-      userName: "ha1",
-      vendorName: "RMIT House",
-      productName: "DA LAT HOUSE",
-      price: 5000000,
-      totalPrice: 5000000,
-    },
-    {
-      status: "accepted",
-      userName: "ha2",
-      vendorName: "RMIT House",
-      productName: "DA LAT HOUSE",
-      price: 5000000,
-      totalPrice: 5000000,
-    },
-    {
-      status: "rejected",
-      userName: "ha3",
-      vendorName: "RMIT House",
-      productName: "DA LAT HOUSE",
-      price: 5000000,
-      totalPrice: 5000000,
-    },
-    {
-      status: "completed",
-      userName: "ha4",
-      vendorName: "RMIT House",
-      productName: "DA LAT HOUSE",
-      price: 5000000,
-      totalPrice: 5000000,
-    },
-  ];
-
-  const filteredUserCards = userCardArr.filter(
-    (card) => card.status === selectedStatus
+const HistoryPage = (props: { reservation: Reservation[] }) => {
+  const [selectedStatus, setSelectedStatus] = useState<string>("PENDING");
+  const filteredUserCards = props.reservation.filter(
+    (card) => card.status == selectedStatus
   );
+  console.log(filteredUserCards);
+
   const changeColor = (selectedStatus: string) => {
     switch (selectedStatus) {
-      case "pending":
+      case "PENDING":
         return "pendingYellow";
-      case "accepted":
+      case "ACCEPTED":
         return "acceptedBlue";
-      case "rejected":
+      case "REJECTED":
         return "rejectedRed";
-      case "completed":
+      case "FINISHED":
         return "completedGreen";
       default:
         return "";
@@ -87,9 +36,9 @@ const HistoryPage = (props: any) => {
       >
         <button
           className={`hover:text-pendingYellow duration-200 ${
-            selectedStatus === "pending" && "text-pendingYellow"
+            selectedStatus === "PENDING" && "text-pendingYellow"
           }`}
-          onClick={() => setSelectedStatus("pending")}
+          onClick={() => setSelectedStatus("PENDING")}
         >
           PENDING
         </button>
@@ -119,18 +68,17 @@ const HistoryPage = (props: any) => {
         </button>
       </div>
       <div>
-        {filteredUserCards.map((card) => (
+        {filteredUserCards.map((reservation) => (
           <HistoryCard
-            key={card.productName}
-            vendorName={card.vendorName}
-            status ={card.status}
-            productName={card.productName}
-            price={card.price}
-            totalPrice={card.totalPrice}
+            key={reservation.id}
+            vendorName={reservation.Product?.name}
+            status={reservation.status}
+            productName={reservation.Product?.name}
+            price={reservation.Product?.price}
+            totalPrice={reservation.total}
             statusColor={changeColor(selectedStatus)}
           />
         ))}
-
       </div>
     </div>
   );

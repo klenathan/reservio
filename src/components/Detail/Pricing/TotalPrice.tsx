@@ -64,7 +64,7 @@ const TotalPrice = (props: TotalPriceProps) => {
         mode: "onChange"
     });
 
-    const {data, isError, isLoading} = useFetch<Discount[]>('service/discount')
+    const {data, error, isLoading} = useFetch<Discount[]>('service/discount')
     const {response, isPosting, post} = usePost(`/reservation`)
 
     const [isPriceValid, setIsPriceValid] = useState<boolean>()
@@ -254,7 +254,7 @@ const TotalPrice = (props: TotalPriceProps) => {
 
                     <Modal nameModal={'🈹 Choose your discount 🈹'} isOpen={isModalOpen} onClose={handleModalClose}>
                         {isLoading && <LoadingSpinner text={"Waiting for discount"}/>}
-                        {isError && <div>Something when wrong</div>}
+                        {error && <div>Something when wrong</div>}
                         <div
                             className={'overflow-auto h-full max-h-96 space-y-4 py-6 px-1.5 md:px-6 lg:px-10 snap-both snap-mandatory scroll-smooth'}>
                             {data &&

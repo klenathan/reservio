@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "../../../Types";
+import {Product} from "../../../Types";
 
 const Card = (props: { service: Product }) => {
   const img_endpoint = process.env.NEXT_PUBLIC_IMG_ENDPOINT;

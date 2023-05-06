@@ -1,21 +1,26 @@
-import { useEffect, useState } from "react";
 import LoadingSpinner from "../LoadingSpinner";
-import apiClient from "@/config/axios.config";
 import { Product } from "../../../Types";
 import Card from "../Card/index";
+import useFetch from "@/Helper/ClientFetch/useFetch";
+import { NotFound } from "next/dist/client/components/error";
 const HomePageServiceContainer = () => {
-  const [queryService, setServices] = useState<Product[]>([]);
-  useEffect(() => {
-    apiClient.get("service/highlight").then((r) => {
-      setServices(r.data);
-    });
-  }, []);
+  const { data, error, isLoading } = useFetch<Product[]>(`service/highlight`);
+  if (isLoading) {
+    return (
+      <div className="relative h-[calc(100vh_-_10rem)] -top-[5rem] w-full flex flex-col justify-center items-center overflow-hidden -z-10">
+        <LoadingSpinner text="Loading product data, please wait..." />
+      </div>
+    );
+  }
+  if (error && !data) {
+    return <NotFound />;
+  }
 
   return (
     <div>
-      {queryService.length != 0 ? (
+      {data?.length != 0 ? (
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 md:grid-cols-2 place-items-center max-w-7xl">
-          {queryService.map((service) => {
+          {data?.map((service) => {
             return <Card key={service.id} service={service} />;
           })}
         </div>

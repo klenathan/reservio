@@ -136,3 +136,4 @@ export enum Status {
   ongoing = "ONGOING",
 }
 
+export type AdminReport = {};

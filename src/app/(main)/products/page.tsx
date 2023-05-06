@@ -121,7 +121,7 @@ export default function Category(slugs: any) {
 
     return (
         <div className="overflow-hidden ">
-            <CategoryList/>
+            <CategoryList categoryActive={slugs.searchParams.category}/>
             <div className={'flex w-full justify-center'}>
                 <div className="flex w-full flex-col md:flex-row 2k:w-[calc(100vw_-_20rem)] h-full ">
                     {aside &&

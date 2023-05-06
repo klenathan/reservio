@@ -1,11 +1,9 @@
 "use client";
-import { Inter } from "next/font/google";
 import CategoryList from "@/components/CategoryServiceContainer/CategoryList";
 import HomePageServiceContainer from "components/HomePageServiceContainer/homepageServiceContainer";
 import TopDealContainer from "@/components/HomePageServiceContainer/discount";
 import CarouselHomePage from "components/HomePageServiceContainer/CarouselHomePage";
 
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (

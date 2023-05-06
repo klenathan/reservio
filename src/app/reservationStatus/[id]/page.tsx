@@ -7,7 +7,7 @@ import NavBar from "@/components/NavBar";
 import Head from "next/head";
 import ReservationStatus from "@/components/ReservationStatus";
 import ReservationInfo from "@/components/ReservationInfo";
-import ReservationTime from "@/components/ReservationTime";
+
 
 // interface ReservationStatusParams {
 //   params: {
@@ -43,10 +43,8 @@ export default function ReservStatus() {
           <title>Reservation status</title>
         </Head>
         <NavBar />
-        <div className="md:mx-24 mx-5">
-            
-          <ReservationStatus status={"End"} pendingTime={"1"} acceptedTime={"2"} startTime={"3"} endTime={"4"} ratingTime={"5"}/>
-           
+        <div className="md:mx-24 mx-5 ">
+          <ReservationStatus status={"Start"} pendingTime={"10:10 23-03-2003"} acceptedTime={"10:10 23-03-2003"} startTime={"10:10 23-03-2003"} endTime={"10:10 23-03-2003"} ratingTime={"10:10 23-03-2003"}/>
           <div className="mt-5">
             <ReservationInfo
               status={""}
@@ -54,8 +52,8 @@ export default function ReservStatus() {
               price={5000000}
               totalPrice={4000000}
               category={"Hotel"}
-              quantity={5}
-            />
+              quantity={5} 
+              shopId={""}            />
           </div>
         </div>
       </div>

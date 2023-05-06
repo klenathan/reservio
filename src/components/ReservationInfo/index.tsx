@@ -1,9 +1,7 @@
 import Image from "next/image";
-import HistoryPage from "../History";
-import HistoryCard from "../HistoryCard";
 import Button from "../Button";
-import { useEffect } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface IReservationInfo {
   category: string;
@@ -12,16 +10,25 @@ interface IReservationInfo {
   price: number;
   totalPrice: number;
   quantity: number;
+  shopId: string;
 }
 const ReservationInfo = (props: IReservationInfo) => {
-  const formattedPrice = props.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-  const formattedTotalPrice = props.totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+  const formattedPrice = props.price.toLocaleString("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
+  const formattedTotalPrice = props.totalPrice.toLocaleString("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
+
   return (
     <div className="w-full">
-      <Button
+      <Link
         className=" shadow
-          bg-gray-50 text-slate-900 px-1 py-1 border-2 border-gray-400 rounded-none flex flex-row text-left"
-        btnStyle="bomaytulam"
+          bg-gray-50 text-slate-900 px-1 py-1 border-2 border-gray-400 rounded-none flex flex-row text-left  w-[7rem] "
+        href={`/store/${props.shopId}`}
+        passHref
       >
         <div className="relative w-[1rem] h-[1rem] ">
           <Image
@@ -34,10 +41,10 @@ const ReservationInfo = (props: IReservationInfo) => {
             className="px-0 object-cover"
           />
         </div>
-        <div className="text-xs "> Shop viewing</div>
-      </Button>
+        <div className="text-xs  font-bold text-gray-500"> Shop viewing</div>
+      </Link>
 
-      <div className="mt-7 flex flex-row  px-3 py-3 border border-gray-300 rounded-md">
+      <div className="mt-7 flex flex-row  px-3 py-3 border-2 border-midGreen rounded-md">
         <div className="relative md:w-[6rem] h-[5rem] rounded-t-md w-1/5">
           <Image
             src="/assets/background_authenticate.svg"
@@ -70,7 +77,7 @@ const ReservationInfo = (props: IReservationInfo) => {
       </div>
       <div className="border-t-2 mt-7 border-t-gray-500 border-b-2 border-b-gray-500 flex flex-col font-semibold">
         <div className="flex flex-row text-right divide-x-2 py-2  ">
-          <h1 className="w-3/5 text-slate-500 pr-2"> Total paying</h1>
+          <h1 className="w-3/5 text-slate-500 pr-2 font-bold"> Total paying</h1>
           <div className="w-2/5 text-2xl ">{formattedTotalPrice}</div>
         </div>
       </div>

@@ -20,6 +20,8 @@ const CarouselHomePage = () => {
       .catch((e) => {
         setIsLoading(false);
       });
+      
+      
   }, []);
 
   return isLoading ? (
@@ -27,6 +29,12 @@ const CarouselHomePage = () => {
       <LoadingSpinner />
     </div>
   ) : (
+    // <div className="flex flex-col items-center w-full m-0">
+    //   <CarouselHomePageContent service={queryService[0]}/>
+    //   <CarouselHomePageContent service={queryService[1]}/>
+    //   <CarouselHomePageContent service={queryService[2]}/>
+    // </div>
+    
     <Carousel slice={queryService} auto={true}>
       <CarouselHomePageContent />
     </Carousel>

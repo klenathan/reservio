@@ -4,7 +4,6 @@ import HomePageServiceContainer from "components/HomePageServiceContainer/homepa
 import TopDealContainer from "@/components/HomePageServiceContainer/discount";
 import CarouselHomePage from "components/HomePageServiceContainer/CarouselHomePage";
 
-
 export default function Home() {
   return (
     <div className="overflow-hidden">
@@ -21,7 +20,7 @@ export default function Home() {
         <TopDealContainer />
       </div>
 
-      <div className="flex items-center flex-col max-w-7xl mx-auto">
+      <div className="flex items-center flex-col max-w-7xl mx-auto mb-8">
         <h1 className="w-full my-6 text-xl md:text-left text-center md:text-3xl text-oliveGreen font-bold ">
           Highlight Services
         </h1>

@@ -8,8 +8,8 @@ interface CarouselHomePageContentProps {
 
 const CarouselHomePageContent = (props: CarouselHomePageContentProps) => {
   return (
-    <div className="lg:flex max-w-7xl w-full">
-      <div className="flex justify-center relative lg:flex-[2]">
+    <div className="lg:flex max-w-7xl w-full p-2">
+      <div className="flex justify-center relative lg:flex-[2] h-48 md:h-full">
         <Image
           src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + props.service.images[0]}
           className="animate-fadeIn rounded md:rounded-none object-cover"
@@ -25,7 +25,7 @@ const CarouselHomePageContent = (props: CarouselHomePageContentProps) => {
         <div className="font-medium h-6 line-clamp-1">
           {props.service.address}
         </div>
-        <p className="my-3 hidden lg:block h-16 line-clamp-2">
+        <p className="my-3 hidden lg:block h-16 md:line-clamp-2">
           {props.service.desc}
         </p>
         <div className="text-midGreen font-bold my-3 text-2xl">
@@ -33,7 +33,7 @@ const CarouselHomePageContent = (props: CarouselHomePageContentProps) => {
         </div>
         <Link
           href={`/detail/${encodeURIComponent(props.service.id)}`}
-          className="flex flex-col w-1/3 shadow-xl rounded-md md:my-8 "
+          className="flex flex-col w-2/3 lg:w-1/3 shadow-xl rounded-md md:my-8 "
         >
           <Button btnStyle="filled">Reserve Now</Button>
         </Link>

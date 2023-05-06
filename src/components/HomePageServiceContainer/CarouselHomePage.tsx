@@ -10,7 +10,7 @@ const CarouselHomePage = () => {
   if (isLoading) {
     return (
       <div className="flex items-center h-40">
-        <LoadingSpinner text="Loading product data, please wait..." />
+        <LoadingSpinner text="Loading carousel, please wait..." />
       </div>
     );
   }

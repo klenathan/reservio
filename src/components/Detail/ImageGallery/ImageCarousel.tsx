@@ -14,7 +14,6 @@ const CarouselImage = (props: ServiceCardProps) => {
                 alt={`Image ${props.service.alt}`}
                 fill={true}
                 quality={100}
-                // priority={true}
                 onClick={props.onClick}
                 className="cursor-pointer w-full h-auto rounded-lg object-cover"
                 loading={'lazy'}

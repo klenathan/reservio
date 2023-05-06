@@ -25,9 +25,7 @@ const SlideRight = () => {
 const Discount = () => {
   const { data, error, isLoading } = useFetch<Discount[]>(`service/discount`);
   if (isLoading) {
-    return (
-        <LoadingSpinner text="Loading product data, please wait..." />
-    );
+    return <LoadingSpinner text="Loading discount, please wait..." />;
   }
   if (error && !data) {
     return <NotFound />;
@@ -40,12 +38,12 @@ const Discount = () => {
           id="left"
           onClick={SlideLeft}
           size={150}
-          className="cursor-pointer opacity-50 hover:opacity-100"
+          className="cursor-pointer opacity-50 hover:opacity-100 hidden md:inline-block"
         />
 
         <div
           id="slider"
-          className="flex items-center overflow-x-auto scroll-smooth whitespace-no-wrap scrollbar-hide "
+          className="flex items-center overflow-x-auto scroll-smooth whitespace-no-wrap md:scrollbar-hide "
         >
           <div className="inline-flex gap-8 items-center">
             {data?.map((discount) => {
@@ -57,7 +55,7 @@ const Discount = () => {
           id="right"
           size={150}
           onClick={SlideRight}
-          className="cursor-pointer opacity-50 hover:opacity-100"
+          className="cursor-pointer opacity-50 hover:opacity-100 hidden md:inline-block"
         />
       </div>
     </div>

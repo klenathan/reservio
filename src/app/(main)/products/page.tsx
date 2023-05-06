@@ -82,7 +82,7 @@ export default function Category(slugs: any) {
             sortBy: childData.sortBy,
             order: childData.order
         })
-        setUrl(`/service?category=${slugs.searchParams.category}&minPrice=${getValues("minPrice") || ""}&maxPrice=${getValues('maxPrice') || ""}&fromDate=${getValues('fromDate') || ""}&toDate=${getValues('toDate') || ""}&${childData.sortBy}=${childData.order}`)
+        setUrl(`/service?category=${slugs.searchParams.category || ""}&minPrice=${getValues("minPrice") || ""}&maxPrice=${getValues('maxPrice') || ""}&fromDate=${getValues('fromDate') || ""}&toDate=${getValues('toDate') || ""}&${childData.sortBy}=${childData.order}`)
 
     }
 
@@ -115,87 +115,90 @@ export default function Category(slugs: any) {
         let fromDate = data.fromDate ? data.fromDate : "";
         let toDate = data.toDate ? data.toDate : "";
 
-        setUrl(`/service?category=${slugs.searchParams.category}&minPrice=${minPrice}&maxPrice=${maxPrice}&fromDate=${fromDate}&toDate=${toDate}&${sortBy.sortBy}=${sortBy.order}`)
+        setUrl(`/service?category=${slugs.searchParams.category || ""}&minPrice=${minPrice}&maxPrice=${maxPrice}&fromDate=${fromDate}&toDate=${toDate}&${sortBy.sortBy}=${sortBy.order}`)
     };
 
 
     return (
-        <div className="overflow-hidden">
+        <div className="overflow-hidden ">
             <CategoryList/>
-            <div className="flex w-full flex-col md:flex-row">
-                {aside &&
-                    <aside
-                        className="md:self-auto self-center mb-2 md:mb-0 flex-none md:h-3/4 p-4 mt-1 border border-black md:w-1/5 mx-5 md:ml-0 md:flex h-full w-3/5"
-                    >
-                        <Form onSubmit={handleSubmit(onSubmit)} button="Submit">
-                            <div className="my-3">
-                                <h1 className="text-xl text-oliveGreen font-bold mb-2">
-                                    By Date:
-                                </h1>
-                                <DatePicker parentCallBack={handleDate} userEndDate={date.endDate}/>
-                            </div>
-
-                            <div className="my-3">
-                                <h1 className="text-xl text-oliveGreen font-bold mb-2">
-                                    By Price:
-                                </h1>
-                                <Price
-                                    control={control}
-                                    minPrice={errors.minPrice}
-                                    maxPrice={errors.maxPrice}
-                                />
-                            </div>
-                        </Form>
-                    </aside>
-                }
-                {isLoading && <LoadingSpinner text={"Loading product"}/>}
-                {data &&
-                    <div className="flex-1 min-w-0 overflow-auto">
-                        {queryVendor.length == 0 && queryService.length == 0 ? (
-                            <div className={'flex justify-center text-3xl font-bold m-auto font-mono animate-ping'}>
-                                📢 Warning!!!!! 📢
-                            </div>
-                        ) : (
-                            ""
-                        )}
-                        {queryVendor.length > 0 ? (
-                            <div className="flex-1 w-full flex flex-col items-center">
-                                <h1 className="text-2xl text-oliveGreen font-bold mb-1 md:text-3xl text-center">
-                                    Vendor:
-                                </h1>
-                                <div className="max-w-7xl mx-6 w-[80%]">
-                                    {queryVendor.map((vendor) => {
-                                        return <VendorCard key={vendor.id} vendor={vendor}/>;
-                                    })}
+            <div className={'flex w-full justify-center'}>
+                <div className="flex w-full flex-col md:flex-row 2k:w-[calc(100vw_-_20rem)] h-full ">
+                    {aside &&
+                        <aside
+                            className="md:self-auto h-fit self-center mb-2 md:mb-0 p-4 mt-1 border border-black md:w-1/5 mx-5 md:ml-0 md:flex"
+                        >
+                            <Form onSubmit={handleSubmit(onSubmit)} button="Submit">
+                                <div className="my-3">
+                                    <h1 className="text-xl text-oliveGreen font-bold mb-2">
+                                        By Date:
+                                    </h1>
+                                    <DatePicker parentCallBack={handleDate} userEndDate={date.endDate}/>
                                 </div>
-                            </div>
-                        ) : (
-                            ""
-                        )}
 
-                        {queryService.length > 0 ? (
-                            <div className="flex-1 w-full flex flex-col items-center space-y-5">
-                                <h1 className="text-2xl text-oliveGreen font-bold mb-1 md:text-3xl text-center">
-                                    Service:
-                                </h1>
-                                <div className={'md:mr-6 md:ml-0 mx-6 space-y-4'}>
-                                    <Sort sortOptions={sortOptions} parentCallBack={handleSort}
-                                          toggleFilter={toggleOpenAside}/>
-                                    <div
-                                        className="grid grid-cols-1 gap-10 lg:grid-cols-3 md:grid-cols-2 place-items-center max-w-7xl">
-                                        {queryService.map((service) => {
-                                            return <Card key={service.id} service={service}/>;
+                                <div className="my-3">
+                                    <h1 className="text-xl text-oliveGreen font-bold mb-2">
+                                        By Price:
+                                    </h1>
+                                    <Price
+                                        control={control}
+                                        minPrice={errors.minPrice}
+                                        maxPrice={errors.maxPrice}
+                                    />
+                                </div>
+                            </Form>
+                        </aside>
+                    }
+                    {isLoading && <LoadingSpinner text={"Loading product"}/>}
+                    {data &&
+                        <div className="flex-1 min-w-0 overflow-auto">
+                            {queryVendor.length == 0 && queryService.length == 0 ? (
+                                <div className={'flex justify-center text-3xl font-bold m-auto font-mono'}>
+                                    📢 Warning!!!!! 📢
+                                </div>
+                            ) : (
+                                ""
+                            )}
+                            {queryVendor.length > 0 ? (
+                                <div className="flex-1 w-full flex flex-col items-center">
+                                    <h1 className="text-2xl text-oliveGreen font-bold mb-1 md:text-3xl text-center">
+                                        Vendor:
+                                    </h1>
+                                    <div className="max-w-7xl mx-6 w-[80%]">
+                                        {queryVendor.map((vendor) => {
+                                            return <VendorCard key={vendor.id} vendor={vendor}/>;
                                         })}
                                     </div>
                                 </div>
+                            ) : (
+                                ""
+                            )}
 
-                            </div>
-                        ) : (
-                            ""
-                        )}
-                    </div>
-                }
+                            {queryService.length > 0 ? (
+                                <div className="flex-1 w-full flex flex-col items-center space-y-5">
+                                    <h1 className="text-2xl text-oliveGreen font-bold mb-1 md:text-3xl text-center">
+                                        Service:
+                                    </h1>
+                                    <div className={'md:mr-6 md:ml-0 mx-6 space-y-4'}>
+                                        <Sort sortOptions={sortOptions} parentCallBack={handleSort}
+                                              toggleFilter={toggleOpenAside}/>
+                                        <div
+                                            className="grid grid-cols-1 gap-10 lg:grid-cols-3 md:grid-cols-2 place-items-center max-w-7xl">
+                                            {queryService.map((service) => {
+                                                return <Card key={service.id} service={service}/>;
+                                            })}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            ) : (
+                                ""
+                            )}
+                        </div>
+                    }
+                </div>
             </div>
         </div>
+
     );
 }

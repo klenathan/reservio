@@ -34,7 +34,7 @@ const Sort = (props: SortProps) => {
 
     return (
         <div className={'w-full flex flex-row justify-between'}>
-            <div className={'inline-flex items-center space-x-4'}>
+            <div className={'flex flex-col md:flex-row items-center space-x-1 md:space-x-4'}>
                 <div className={'font-bold'}>
                     Sort By:
                 </div>
@@ -50,7 +50,7 @@ const Sort = (props: SortProps) => {
             >
                 <div className={'inline-flex items-center cursor-pointer space-x-1'}  onClick={props.toggleFilter}>
                     <div>
-                        Hide filter
+                        Filter
                     </div>
                     <AiOutlineControl className={'hover:scale-110'}/>
                 </div>

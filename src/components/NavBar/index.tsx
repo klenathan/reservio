@@ -24,15 +24,23 @@ const NavBar: React.FC<INavBarProps> = (props: INavBarProps) => {
   const { push } = useRouter();
 
   return (
-    <div
-      className="top-0 sticky md:static min-w-full grid grid-cols-4 place-items-center h-[5rem] border-b z-50 bg-white"
-    >
-      <Logo logoStyle="green" />
-      <SearchBar />
+    <div className="top-0 sticky md:static min-w-full grid grid-cols-4 place-items-center h-[5rem] border-b z-50 bg-white">
+      <div className="hidden md:block">
+        <Logo logoStyle="green" />
+      </div>
+
+      <div className="col-span-3 md:col-span-2 w-full flex justify-center">
+        <SearchBar />
+      </div>
       <div className="flex w-full justify-evenly">
         {isLogin && !user?.vendor ? (
-          <>
-            <button className="font-semibold hover:underline hover:text-midGreen" onClick={handleOpenModal}>Request New Vendor</button>
+          <div className="flex w-full justify-around">
+            <button
+              className="hidden md:block font-semibold hover:underline hover:text-midGreen"
+              onClick={handleOpenModal}
+            >
+              Request New Vendor
+            </button>
             {isModalOpen && (
               <Modal
                 isOpen={isModalOpen}
@@ -44,12 +52,11 @@ const NavBar: React.FC<INavBarProps> = (props: INavBarProps) => {
                 </div>
               </Modal>
             )}
-          </>
+            <ProfileHamBurger />
+          </div>
         ) : (
-          ""
+          <ProfileHamBurger />
         )}
-
-        <ProfileHamBurger />
       </div>
     </div>
   );

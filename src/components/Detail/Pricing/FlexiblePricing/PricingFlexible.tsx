@@ -68,8 +68,14 @@ const PricingFlexible = (props: PriceFlexibleProps) => {
         const end = set(date.endDate, {hours: endTime.hour, minutes: endTime.minutes})
         const quantityOfHour = differenceInMinutes(end, start)
 
-        const totalPrice = props.price as number * (quantityOfHour / 60)
+        let totalPrice
 
+        if (quantityOfHour > 0) {
+            totalPrice = props.price as number * (quantityOfHour / 60)
+        } else {
+            totalPrice = props.price as number * (0 / 60)
+
+        }
 
         return {
             startTimeString: startTime.hour + ':' + startTime.minutes,
@@ -100,7 +106,7 @@ const PricingFlexible = (props: PriceFlexibleProps) => {
     return (
         <div>
             <DatePicker parentCallBack={handleDateCallBack} userEndDate={date.endDate}/>
-            <TimeReservation countReservation={props.countReservation} maxQuantity={props.maxQuantity} parentCallBack={handleTimeCallBack}/>
+            <TimeReservation parentCallBack={handleTimeCallBack}/>
             <div className={'flex w-full justify-center '}>
                 <Button
                     btnStyle={"filled"}

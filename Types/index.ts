@@ -40,8 +40,9 @@ export type Vendor = {
 
 export enum ProductPricingType {
     flexible = "FLEXIBLE",
-    fixing = "FIXING"
+    fixed = "FIXED"
 }
+
 
 export type Product = {
     id: string;
@@ -55,6 +56,7 @@ export type Product = {
     quantity: number
     desc: string;
     type: ProductPricingType,
+    ProductFixedTimeSlot?: ProductFixedTimeSlot[]
     avgRating: number;
     reviews: Review[];
     createdAt: string;
@@ -87,6 +89,9 @@ export type ProductFixedTimeSlot = {
     from: string
     to: string
     quantity: number
+    _count: {
+        ProuctReservation: number
+    }
 }
 
 export type Review = {

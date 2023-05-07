@@ -2,8 +2,6 @@ import React from "react";
 import TimePicker from "components/Detail/Pricing/FlexiblePricing/TimePicker";
 
 interface TimeReservationProps {
-    countReservation: number
-    maxQuantity: number
     parentCallBack?: any
 }
 
@@ -34,20 +32,6 @@ const TimeReservation: React.FC<TimeReservationProps> = (props: TimeReservationP
                     />
                 </div>
             </div>
-            <div>
-                <div className={'flex justify-center'}>
-                    {props.countReservation} / {props.maxQuantity}
-                </div>
-                <div
-                    className={'w-11/12 m-auto border-2 border-neutral-300 rounded-full bg-gray-200 text-white truncate'}>
-                    <div
-                        className={'bg-oliveGreen text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full'}
-                        style={{width: `${(props.countReservation / props.maxQuantity) * 100}%`}}>
-                        {props.countReservation} / {props.maxQuantity}
-                    </div>
-                </div>
-            </div>
-
         </div>
     )
 }

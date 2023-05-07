@@ -55,7 +55,7 @@ const Carousel: React.FC<CarouselProps> = (props: CarouselProps) => {
             <div className="w-full flex justify-center overflow-hidden relative md:m-auto ">
                 <button
                     onClick={handlePrevSlide}
-                    className=" left-5 text-5xl inset-y-1/2 text-gray-400 z-20 md:mr-7"
+                    className=" left-5 text-5xl inset-y-1/2 text-gray-400 z-10 md:mr-7"
                 >
           <span className="hidden lg:inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30 ">
             <MdChevronLeft size={50} className="cursor-pointer text-white"/>
@@ -74,7 +74,7 @@ const Carousel: React.FC<CarouselProps> = (props: CarouselProps) => {
                 <button
                     ref={timerRef}
                     onClick={handleNextSlide}
-                    className="right-5 text-5xl inset-y-1/2 text-gray-400 z-20  md:ml-7"
+                    className="right-5 text-5xl inset-y-1/2 text-gray-400 z-10  md:ml-7"
                 >
           <span className="hidden lg:inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/30">
             <MdChevronRight size={50} className="cursor-pointer text-white"/>
@@ -117,11 +117,11 @@ const Carousel: React.FC<CarouselProps> = (props: CarouselProps) => {
                         ) => {
                             return (
                                 <div key={index as number} className={
-                                    `${index === currentSlide
-                                        ? "border-4 border-midGreen cursor-pointer"
-                                        : "opacity-60"} `
+                                    `border-2  ${index === currentSlide
+                                        ? " border-midGreen cursor-pointer"
+                                        : "border-transparent opacity-60 "} `
                                 }>
-                                    <div key={service} className={'relative h-20 w-20'}>
+                                    <div key={service} className={'relative h-14 w-20'}>
                                         <Image
                                             src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + service}
                                             alt={`Image ${service.alt}`}
@@ -130,7 +130,7 @@ const Carousel: React.FC<CarouselProps> = (props: CarouselProps) => {
                                             onClick={() => {
                                                 setCurrentSlide(index as number);
                                             }}
-                                            className="object-center cursor-pointer w-full h-auto"
+                                            className="object-cover cursor-pointer w-full h-auto"
                                             loading={'lazy'}
                                         />
                                     </div>

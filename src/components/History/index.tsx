@@ -1,10 +1,11 @@
+import ReservationInfo from "../ReservationInfo";
 import { useState } from "react";
 import HistoryCard from "../HistoryCard";
-import VendorHistoryCard from "../Vendor/VendorHistoryCard";
+import Link from "next/link";
 
 const HistoryPage = (props: any) => {
   const [selectedStatus, setSelectedStatus] = useState("pending");
-  
+
   //testing data for common user, sorry for inconvenience! ~>.<~
   const userCardArr = [
     {
@@ -120,17 +121,18 @@ const HistoryPage = (props: any) => {
       </div>
       <div>
         {filteredUserCards.map((card) => (
-          <HistoryCard
-            key={card.productName}
-            vendorName={card.vendorName}
-            status ={card.status}
-            productName={card.productName}
-            price={card.price}
-            totalPrice={card.totalPrice}
-            statusColor={changeColor(selectedStatus)}
-          />
+        
+            <HistoryCard
+              key={card.productName}
+              vendorName={card.vendorName}
+              status={card.status}
+              productName={card.productName}
+              price={card.price}
+              totalPrice={card.totalPrice}
+              statusColor={changeColor(selectedStatus)}
+            />
+      
         ))}
-
       </div>
     </div>
   );

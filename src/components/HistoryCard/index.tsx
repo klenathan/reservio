@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 
@@ -16,7 +17,7 @@ const HistoryCard: React.FC<IHistoryCardProps> = (props: IHistoryCardProps) => {
   const formattedPrice = props.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
   const size = 55;
   return (
-    <div className="flex flex-col mt-3 w-full shadow-lg p-5 ">
+    <div className="flex flex-col mt-3 w-full shadow-lg p-5 cursor-pointer">
       <div className="flex flex-row items-center justify-between mb-3">
         <div className="flex flex-row items-center w-3/5">
           <div className="relative w-[2rem] h-[2rem]">

@@ -40,7 +40,7 @@ const DatePicker: React.FC<DatePickerProps> = (props: DatePickerProps) => {
         endDate: props.userEndDate as Date,
       });
     }
-  }, [props.userEndDate, prevUserEndDate]);
+  }, [props.userEndDate, prevUserEndDate, dateRange.startDate]);
 
   useEffect(() => {
     props.parentCallBack(dateRange);

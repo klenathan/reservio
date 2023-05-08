@@ -1,33 +1,24 @@
-import { useEffect, useState } from "react";
-import { IService } from "components/HomePageServiceContainer/serviceInterface";
-import apiClient from "@/config/axios.config";
 import CarouselHomePageContent from "components/HomePageServiceContainer/CarouselHomePageContentProps";
 import Carousel from "components/Carousel";
 import LoadingSpinner from "../LoadingSpinner";
+import useFetch from "@/Helper/ClientFetch/useFetch";
+import { Product } from "../../../Types";
+import { NotFound } from "next/dist/client/components/error";
 
 const CarouselHomePage = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  
-  const [queryService, setServices] = useState<IService[]>([]);
-
-  useEffect(() => {
-    apiClient
-      .get("service/highlight")
-      .then((r) => {
-        setIsLoading(false);
-        setServices(r.data);
-      })
-      .catch((e) => {
-        setIsLoading(false);
-      });
-  }, []);
-
-  return isLoading ? (
-    <div className="flex items-center h-40">
-      <LoadingSpinner />
-    </div>
-  ) : (
-    <Carousel slice={queryService} auto={true}>
+  const { data, error, isLoading } = useFetch<Product>(`service/highlight`);
+  if (isLoading) {
+    return (
+      <div className="flex items-center h-40">
+        <LoadingSpinner text="Loading carousel, please wait..." />
+      </div>
+    );
+  }
+  if (error && !data) {
+    return <NotFound />;
+  }
+  return (
+    <Carousel slice={data} auto={true}>
       <CarouselHomePageContent />
     </Carousel>
   );

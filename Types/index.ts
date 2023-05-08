@@ -8,9 +8,7 @@ export type User = {
   email: string;
   phoneNo: string;
   avatar: string;
-  vendor: {
-    id: string;
-  } | null;
+  vendor: Vendor;
   admin: {
     id: string;
   } | null;
@@ -80,7 +78,7 @@ export type Reservation = {
   startAt?: string;
   endAt?: string;
   customer?: User;
-  Product?: Product;
+  Product: Product;
   ProductFixedTimeSlot?: ProductFixedTimeSlot;
   createAt?: string;
 };

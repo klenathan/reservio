@@ -20,7 +20,7 @@ export default function Profile(slugs: any) {
   }
   return (
     <div className="flex flex-col md:flex-row  md:pt-12 justify-center">
-      <div className="md:pr-12">
+      <div className="lg:pr-12">
         <UserProfile user={data} />
       </div>
       <div className="flex flex-col">

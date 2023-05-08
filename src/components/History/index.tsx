@@ -1,3 +1,4 @@
+import ReservationInfo from "../ReservationInfo";
 import { useState } from "react";
 import { Reservation, Status } from "../../../Types";
 import HistoryCard from "../HistoryCard";

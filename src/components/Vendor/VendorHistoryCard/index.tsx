@@ -4,16 +4,20 @@ import Button from "../../Button";
 import { useState } from "react";
 
 interface IVendorCardProps {
-  userName: string;
+  userName?: string;
   status: string;
-  productName: string;
-  price: number;
+  productName?: string;
+  price?: number;
   totalPrice: number;
   statusColor: string;
+  avatar?: string;
 }
 
 const VendorVerifyCard = (props: IVendorCardProps) => {
-  const formattedPrice = props.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+  const formattedPrice = props.price!.toLocaleString("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
   const [status, setStatus] = useState(props.status);
 
   const handleAccept = () => {
@@ -55,7 +59,7 @@ const VendorVerifyCard = (props: IVendorCardProps) => {
             <div className="flex flex-row items-center">
               <div className="relative w-[1rem] h-[1rem] ">
                 <Image
-                  src="/assets/profile.svg"
+                  src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + props.avatar!}
                   fill
                   sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
@@ -77,7 +81,7 @@ const VendorVerifyCard = (props: IVendorCardProps) => {
               </span>
             </h1>
           </div>
-          <div className="grid grid-rows-2 gap-2 mt-2 ml-2" >
+          <div className="grid grid-rows-2 gap-2 mt-2 ml-2">
             {props.status === "pending" ? (
               <>
                 <Button

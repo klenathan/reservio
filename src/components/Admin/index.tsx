@@ -41,7 +41,6 @@ export default function AdminChart(props: { className?: string }) {
   const [categoryCount, setCategoryCount] = useState();
   const [vendorReservationData, setVendorReservationData] = useState();
   const [traffic, setTraffic] = useState<any>();
-
   useEffect(() => {
     apiClient
       .get(`/admin`)

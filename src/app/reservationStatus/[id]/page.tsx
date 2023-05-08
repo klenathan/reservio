@@ -44,7 +44,7 @@ export default function ReservStatus() {
         </Head>
         <NavBar />
         <div className="md:mx-24 mx-5 ">
-          <ReservationStatus status={"Start"} pendingTime={"10:10 23-03-2003"} acceptedTime={"10:10 23-03-2003"} startTime={"10:10 23-03-2003"} endTime={"10:10 23-03-2003"} ratingTime={"10:10 23-03-2003"}/>
+          <ReservationStatus status={"End"} pendingTime={"10:10 23-03-2003"} acceptedTime={"10:10 23-03-2003"} startTime={"10:10 23-03-2003"} endTime={"10:10 23-03-2003"} ratingTime={"10:10 23-03-2003"}/>
           <div className="mt-5">
             <ReservationInfo
               status={""}

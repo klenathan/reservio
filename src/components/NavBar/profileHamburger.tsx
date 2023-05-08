@@ -25,7 +25,7 @@ export default function ProfileHamBurger() {
       className="transition relative
      flex flex-row items-center border-2 border-solid 
     border-gray-300 rounded-3xl px-2 py-1 gap-3
-    shadow-sm bg-white
+    shadow-sm bg-white z-[100]
     hover:shadow hover:border-oliveGreen col-span-1"
     >
       <GiHamburgerMenu className="h-8" />

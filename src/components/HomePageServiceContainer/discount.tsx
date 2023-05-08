@@ -71,6 +71,7 @@ const DiscountCard = (props: { discount: Discount }) => {
             src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + props.discount.image}
             alt={props.discount.name}
             fill
+            className="object-cover"
             sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"

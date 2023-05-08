@@ -238,7 +238,8 @@ const SignUpForm = () => {
                             render={({field: {onChange}}) => (
                                 <DropZone
                                     multiple={false}
-                                    onChange={(files) => onChange(files[0])}
+                                    onChange={(files: any) => onChange(files[0])}
+                                    avatar={true}
                                 />
                             )}
                         />

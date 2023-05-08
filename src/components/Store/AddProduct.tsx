@@ -1,179 +1,251 @@
-import apiClient from "@/config/axios.config";
-import { categories } from "@/const/Categories";
-import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { Category } from "../../../Types";
+import {categories} from "@/const/Categories";
+import {useEffect, useState} from "react";
+import {Controller, SubmitHandler, useForm} from "react-hook-form";
+import {Category} from "../../../Types";
 import Form from "../Form";
 import Input from "../Form/Input";
 import SearchableDropdown from "../SearchableDropdown";
 import AddDateTime from "./AddDateTime";
+import usePost from "@/Helper/ClientFetch/usePost";
+import DropZone from "components/DropZone";
+import {AiOutlineCloudUpload} from "react-icons/ai";
 
 interface IFromInput {
-  name: string;
-  price: string;
-  category: string;
-  quantity: string;
-  from: string;
-  to: string;
+    name: string;
+    price: string;
+    category: string;
+    quantity: string;
+    from: string;
+    to: string;
+    timeSlot: any
 }
 
 const AddProduct = () => {
-  const [value, setValue] = useState<string>("");
-  const [fixTime, setFixTime] = useState({
-    backgroundColor: "bg-white",
-    isFieldVisible: true,
-  });
-  const [flexTime, setFlexTime] = useState({
-    backgroundColor: "bg-slate-200",
-    isFieldVisible: false,
-  });
-  const [moreDate, setMoreDate] = useState(0);
+    const [fixTime, setFixTime] = useState({
+        backgroundColor: "bg-white",
+        isFieldVisible: true,
+    });
+    const [flexTime, setFlexTime] = useState({
+        backgroundColor: "bg-slate-200",
+        isFieldVisible: false,
+    });
+    const [moreDate, setMoreDate] = useState(0);
+    const [category, setCategory] = useState<string>("");
+    const {response, isPosting, post} = usePost(`service`)
 
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<IFromInput>();
 
-  const validatePrice = (value: string) => {
-    if (parseInt(value) < 1000) {
-      return "Price must be greater than or equal to 1000VND";
+    const {
+        handleSubmit,
+        control,
+        formState: {errors},
+        setValue,
+        getValues
+    } = useForm<IFromInput | any>();
+
+    const validatePrice = (value: string) => {
+        if (parseInt(value) < 1000) {
+            return "Price must be greater than or equal to 1000VND";
+        }
+        return true;
+    };
+
+    const handleStartDate = (value: any, index: any) => {
+        setValue(`from${index}`, value)
     }
-    return true;
-  };
-  const onSubmit: SubmitHandler<IFromInput> = async (data) => {
-    const formData = new FormData();
-    console.log(data);
-    console.log(value);
-    formData.append("name", data.name as string);
-    formData.append("price", data.price as string);
-    formData.append("category", data.category as string);
-    formData.append("quantity", value as string);
-    console.log(formData);
+    const handleEndDate = (value: any, index: any) => {
+        setValue(`to${index}`, value)
+    }
 
-    // apiClient
-    //   .post("service", formData)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((e) => {
-    //     const errorsInfo = e.response.data;
-    //     console.log(errorsInfo.error);
-    //   });
-  };
+    useEffect(() => {
+        if (fixTime.isFieldVisible) {
+            setValue('type', 'FIXED')
+        }
 
-  const fixTimeHandle = () => {
-    setFixTime((prevFixTime) => {
-      if (prevFixTime.backgroundColor === "bg-white") {
-        return { backgroundColor: "bg-slate-200", isFieldVisible: false };
-      } else {
-        return { backgroundColor: "bg-white", isFieldVisible: true };
-      }
-    });
+        if (flexTime.isFieldVisible) {
+            setValue('type', 'FLEXIBLE')
+        }
+    }, [flexTime, fixTime])
 
-    setFlexTime((prevFlexTime) => {
-      if (prevFlexTime.backgroundColor === "bg-slate-200") {
-        return { backgroundColor: "bg-white", isFieldVisible: true };
-      } else {
-        return { backgroundColor: "bg-slate-200", isFieldVisible: false };
-      }
-    });
-  };
+    const onSubmit: SubmitHandler<IFromInput | any> = async (data) => {
+        const formData = new FormData();
 
-  const addMoreDate = () => {
-    setMoreDate((prevState) => prevState + 1);
-  };
+        formData.append("name", data.name as string);
+        formData.append("price", data.price as string);
+        formData.append("category", data.category as string);
+        formData.append('type', data.type as string)
+        formData.append('timeSlot', JSON.stringify(({
+            from: data.fromstart as any,
+            to: data.tostart as any,
+            quantity: data.quantitystart as any
+        })))
 
-  const fields = Array.from({ length: moreDate }, (_, i) => (
-    <div key={i}>
-      <AddDateTime
-        control={control}
-        from={errors.from}
-        to={errors.to}
-        quantity={errors.quantity}
-      />
-      <div className="borde w-fit p-2 rounded-md border-solid border-oliveGreen font-semibold text-oliveGreen shadow hover:bg-limeGreen hover:bg-opacity-10 hover:shadow-md">
-        <input type="button" onClick={addMoreDate} value="Add More Date" />
-      </div>
-    </div>
-  ));
+        for (let i = 0; i < moreDate; i++) {
+            formData.append('timeSlot', JSON.stringify(({
+                from: data[`from${i}`] as any,
+                to: data[`to${i}`] as any,
+                quantity: data[`quantity${i}`] as any
+            })))
+        }
 
-  return (
-    <div className="col-span-1 overflow-auto scroll-auto h-full max-h-96">
-      <Form onSubmit={handleSubmit(onSubmit)} button="Submit">
-        <Input
-          name={"name"}
-          label={"Name"}
-          type={"text"}
-          control={control}
-          rules={{ required: "Name is required" }}
-          errors={errors.name}
-          placeholder={"e.g. Awesome Metal Chip"}
-        />
-        <Input
-          name={"price"}
-          label={"Price"}
-          type={"number"}
-          control={control}
-          rules={{
-            required: "Price is required",
-            validate: validatePrice,
-          }}
-          errors={errors.price}
-          placeholder={"e.g. 100,000"}
-        />
-        <label className="block my-2 font-medium text-gray-900">Time</label>
-        <div className="bg-slate-200 w-full flex rounded-md">
-          <input
-            type="button"
-            value="Fixed Time"
-            onClick={fixTimeHandle}
-            className={`w-1/2 py-1 m-[0.2rem] ease-in-out ${fixTime.backgroundColor} rounded-md`}
-          />
+        for (let i = 0; i < data.images.length; i++) {
+            formData.append('images', data.images[i])
+        }
 
-          <input
-            type="button"
-            value="Flex Time"
-            onClick={fixTimeHandle}
-            className={`w-1/2 py-1 m-[0.2rem] rounded-md ${flexTime.backgroundColor}`}
-          />
-        </div>
-        <AddDateTime
-          control={control}
-          from={errors.from}
-          to={errors.to}
-          quantity={errors.quantity}
-        />
+        try {
+            await post(formData)
+        } catch (errors: any) {
+            console.log(errors)
+        }
 
-        {fixTime.isFieldVisible ? (
-          <div>
-            <div className="borde w-fit p-2 rounded-md border-solid border-oliveGreen font-semibold text-oliveGreen shadow hover:bg-limeGreen hover:bg-opacity-10 hover:shadow-md">
-              <input
-                type="button"
-                onClick={addMoreDate}
-                value="Add More Date"
-              />
+    };
+
+    const fixTimeHandle = () => {
+        setFixTime((prevFixTime) => {
+            if (prevFixTime.backgroundColor === "bg-white") {
+                return {backgroundColor: "bg-slate-200", isFieldVisible: false};
+            } else {
+                return {backgroundColor: "bg-white", isFieldVisible: true};
+            }
+        });
+
+        setFlexTime((prevFlexTime) => {
+            if (prevFlexTime.backgroundColor === "bg-slate-200") {
+                return {backgroundColor: "bg-white", isFieldVisible: true};
+            } else {
+                return {backgroundColor: "bg-slate-200", isFieldVisible: false};
+            }
+        });
+    };
+
+    const addMoreDate = () => {
+        setMoreDate((prevState) => prevState + 1);
+    };
+
+    const fields = Array.from({length: moreDate}, (_, i) => (
+        <div key={i}>
+            <AddDateTime
+                control={control}
+                startDate={handleStartDate}
+                endDate={handleEndDate}
+                quantity={errors.quantity}
+                index={i}
+            />
+            <div
+                className="borde w-fit p-2 rounded-md border-solid border-oliveGreen font-semibold text-oliveGreen shadow hover:bg-limeGreen hover:bg-opacity-10 hover:shadow-md">
+                <input type="button" onClick={addMoreDate} value="Add More Date"/>
             </div>
-            <div>{fields}</div>
-          </div>
-        ) : (
-          ""
-        )}
-
-        <div>
-          <label className={"block my-2 font-medium text-gray-900"}>
-            Category
-          </label>
-          <SearchableDropdown
-            options={categories as unknown as Category}
-            label="category"
-            selectedVal={value}
-            handleChange={(val: string) => setValue(val)}
-          />
         </div>
-      </Form>
-    </div>
-  );
+    ));
+
+    return (
+        <div className="col-span-1 h-full max-h-96">
+            <Form onSubmit={handleSubmit(onSubmit)} button="Submit">
+                {/*Name*/}
+                <Input
+                    name={"name"}
+                    label={"Name"}
+                    type={"text"}
+                    control={control}
+                    rules={{required: "Name is required"}}
+                    errors={errors.name}
+                    placeholder={"e.g. Awesome Metal Chip"}
+                />
+                {/*Price*/}
+                <Input
+                    name={"price"}
+                    label={"Price"}
+                    type={"number"}
+                    control={control}
+                    rules={{
+                        required: "Price is required",
+                        validate: validatePrice,
+                    }}
+                    errors={errors.price}
+                    placeholder={"e.g. 100,000"}
+                />
+                {/*Category*/}
+                <div>
+                    <label className={"block my-2 font-bold text-gray-900"}>
+                        Category
+                    </label>
+                    <SearchableDropdown
+                        options={categories as unknown as Category}
+                        label="category"
+                        selectedVal={category}
+                        handleChange={(val: string) => {
+                            setCategory(val)
+                            setValue('category', val)
+                        }}
+                    />
+                </div>
+
+                <div className={'space-y-2'}>
+                    <label className="block  font-medium text-gray-900">Time</label>
+                    <div className="bg-slate-200 w-full flex rounded-md">
+                        <input
+                            type="button"
+                            name={'FIXED'}
+                            value="Fixed Time"
+                            onClick={fixTimeHandle}
+                            className={`w-1/2 py-1 m-[0.2rem] ease-in-out ${fixTime.backgroundColor} rounded-md`}
+                        />
+
+                        <input
+                            type="button"
+                            name={'FLEXIBLE'}
+                            value="Flex Time"
+                            onClick={fixTimeHandle}
+                            className={`w-1/2 py-1 m-[0.2rem] rounded-md ${flexTime.backgroundColor}`}
+                        />
+                    </div>
+                    <AddDateTime
+                        control={control}
+                        startDate={handleStartDate}
+                        endDate={handleEndDate}
+                        quantity={errors.quantity}
+                        index={'start'}
+                    />
+                    {fixTime.isFieldVisible ? (
+                        <div>
+                            <div
+                                className="borde w-fit p-2 rounded-md border-solid border-oliveGreen font-semibold text-oliveGreen shadow hover:bg-limeGreen hover:bg-opacity-10 hover:shadow-md">
+                                <input
+                                    type="button"
+                                    onClick={addMoreDate}
+                                    value="Add More Date"
+                                />
+                            </div>
+                            <div>{fields}</div>
+                        </div>
+                    ) : (
+                        ""
+                    )}
+                </div>
+                <Controller
+                    name={"images"}
+                    control={control}
+                    defaultValue={[]}
+                    render={({field: {onChange}}) => (
+                        <DropZone
+                            multiple={true}
+                            onChange={(files: any) => onChange(files)}
+                            avatar={false}
+                        >
+                            <label
+                                className="flex flex-col items-center justify-center w-full h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
+                                <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <AiOutlineCloudUpload className={'text-xl'}/>
+                                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                        className="font-semibold">Click to upload</span> or drag and drop</p>
+                                </div>
+                            </label>
+                        </DropZone>
+                    )}
+                />
+
+            </Form>
+        </div>
+    );
 };
 
 export default AddProduct;

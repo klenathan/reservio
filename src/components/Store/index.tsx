@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { AiFillStar } from "react-icons/ai";
-import { RxDotFilled } from "react-icons/rx";
-import { Vendor } from "../../../Types";
+import {AiFillStar} from "react-icons/ai";
+import {RxDotFilled} from "react-icons/rx";
+import {Vendor} from "../../../Types";
 
 const Store = (props: { store: Vendor }) => {
   return (
-    <div className="w-full grid grid-cols-1 lg:grid-cols-4 lg:border lg:border-black lg:m-8 lg:rounded-md">
+    <div className="w-full grid grid-cols-1 md:grid-cols-4 md:border md:border-black md:m-8 md:rounded-md">
       <div className="col-span-1 flex flex-col items-center justify-center p-2">
         <div className="relative h-32 w-32">
           <Image
@@ -16,19 +16,19 @@ const Store = (props: { store: Vendor }) => {
           />
         </div>
 
-        <div>{props.store.name}</div>
-        <div>@{props.store.username}</div>
+        <div className={'font-bold'}>{props.store.name}</div>
+        <div className={'font-bold'}>@{props.store.username}</div>
       </div>
-      <div className="col-span-3 p-1 flex flex-col-reverse lg:grid lg:grid-cols-3">
-        <div className="lg:p-8 lg:col-span-2 ">
+      <div className="col-span-3 p-1 flex flex-col-reverse md:grid md:grid-cols-3">
+        <div className="md:p-8 md:col-span-2 space-y-6 ">
           <div>
             <span className="font-bold">About:</span> {props.store.desc}
           </div>
           <div>
-            <span className="font-bold">Phone:</span> {props.store.phone}
+            <span className="font-bold">Phone:</span> {props.store.user.phoneNo}
           </div>
         </div>
-        <div className="lg:p-10 lg:col-span-1">
+        <div className="md:py-8 lg:p-8  space-y-6">
           <div className="flex justify-center md:justify-start">
             <div className="flex items-center font-bold">
               <AiFillStar /> {""}{" "}
@@ -41,7 +41,7 @@ const Store = (props: { store: Vendor }) => {
             </div>
           </div>
           <div>
-            <span className="font-bold">Service provides: </span>{" "}
+            <span className="font-bold">Service provides: </span>
             {props.store._count?.products} services
           </div>
         </div>

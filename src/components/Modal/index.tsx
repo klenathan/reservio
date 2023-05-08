@@ -41,7 +41,7 @@ const Modal: React.FC<ModalProps> = (props: ModalProps) => {
     return (
         <div className="flex fixed inset-0 z-50 justify-center items-center bg-neutral-700 bg-opacity-50">
             <div className="flex items-end justify-center lg:w-max z-50">
-                <div ref={modal} className="bg-white rounded-lg  w-screen  max-w-prose mx-auto md:max-w-screen-md lg:max-w-screen-lg 2k:max-w-screen-2xl ">
+                <div ref={modal} className="bg-white rounded-lg w-fit mx-auto md:max-w-screen-md lg:max-w-screen-lg 2k:max-w-screen-2xl ">
                     <div className="flex shadow-xl sticky top-0 bg-white z-50 px-6 py-6 rounded-t-lg items-center justify-between w-full ">
                         <FormHeader name={props.nameModal}/>
                         <button className="ml-4" onClick={props.onClose}>

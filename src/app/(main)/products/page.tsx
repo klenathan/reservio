@@ -83,7 +83,6 @@ export default function Category(slugs: any) {
             order: childData.order
         })
         setUrl(`/service?category=${slugs.searchParams.category || ""}&minPrice=${getValues("minPrice") || ""}&maxPrice=${getValues('maxPrice') || ""}&fromDate=${getValues('fromDate') || ""}&toDate=${getValues('toDate') || ""}&${childData.sortBy}=${childData.order}`)
-
     }
 
 

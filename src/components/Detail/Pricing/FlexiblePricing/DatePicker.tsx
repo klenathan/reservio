@@ -44,7 +44,7 @@ const DatePicker: React.FC<DatePickerProps> = (props: DatePickerProps) => {
 
   useEffect(() => {
     props.parentCallBack(dateRange);
-  }, [dateRange, props]);
+  }, [dateRange]);
 
   return (
     <div className={" cursor-pointer outline outline-2 rounded-xl outline-neutral-200 py-2 px-4 space-y-4 "}>

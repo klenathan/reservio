@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import { useRouter, redirect } from "next/navigation";
 import { useState } from "react";
 import { IoSearchCircleSharp } from "react-icons/io5";
 
@@ -8,8 +8,8 @@ export default function SearchBar() {
 
   const handleSearch = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    router.push(`/products?keyword=${keyword}`);
     setKeyword("");
+    router.push(`/products?keyword=${keyword}`);
   };
 
   return (

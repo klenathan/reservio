@@ -14,7 +14,7 @@ interface IFromInput {
     name: string;
     price: string;
     category: string;
-    quantity: string;
+    quantity: number;
     from: string;
     to: string;
     timeSlot: any
@@ -73,17 +73,17 @@ const AddProduct = () => {
         formData.append("price", data.price as string);
         formData.append("category", data.category as string);
         formData.append('type', data.type as string)
-        formData.append('timeSlot', JSON.stringify(({
+        formData.append('timeSlot[]', JSON.stringify(({
             from: data.fromstart as any,
             to: data.tostart as any,
-            quantity: data.quantitystart as any
+            quantity: parseFloat(data.quantitystart) as number
         })))
 
         for (let i = 0; i < moreDate; i++) {
             formData.append('timeSlot', JSON.stringify(({
                 from: data[`from${i}`] as any,
                 to: data[`to${i}`] as any,
-                quantity: data[`quantity${i}`] as any
+                quantity: parseFloat(data[`quantity${i}`]) as number
             })))
         }
 

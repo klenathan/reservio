@@ -1,6 +1,7 @@
 'use client'
 import NavBar from "components/NavBar";
 import React from "react";
+import Footer from "components/Footer";
 
 
 export default function MainLayout({
@@ -8,15 +9,12 @@ export default function MainLayout({
                                    }: {
     children: React.ReactNode;
 }) {
-    // className="flex h-screen flex-col"
     return (
         <div className="relative">
             <NavBar/>
-            {/*<Suspense fallback={<Loading/>}>*/}
             {children}
 
-            {/*</Suspense>*/}
-            {/*<Footer/>*/}
+            <Footer/>
         </div>
 
     )

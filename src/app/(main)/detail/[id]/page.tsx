@@ -12,6 +12,8 @@ interface DetailParams {
     };
 }
 
+
+
 export default function Detail(slugs: DetailParams) {
     const {data, error, isLoading} = useFetch<Product>(`service/${slugs.params.id}`)
     const items = [
@@ -35,6 +37,7 @@ export default function Detail(slugs: DetailParams) {
     }
 
     if (data) {
+        
         return (
             // md:px-8 lg:px-56
             <div className="h-full w-full flex justify-center px-4 md:px-0">

@@ -73,6 +73,10 @@ const HistoryPage = (props: { reservation: Reservation[] }) => {
             vendorName={reservation.Product?.name}
             status={reservation.status}
             productName={reservation.Product?.name}
+            productImage={
+              process.env.NEXT_PUBLIC_IMG_ENDPOINT +
+              reservation.Product?.images[0]
+            }
             price={reservation.Product?.price}
             totalPrice={reservation.total}
             statusColor={changeColor(selectedStatus)}

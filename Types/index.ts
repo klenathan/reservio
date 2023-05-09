@@ -67,7 +67,7 @@ export type Product = {
 };
 
 export type Reservation = {
-  id?: string;
+  id: string;
   userId?: string;
   quantity: number;
   status: string;

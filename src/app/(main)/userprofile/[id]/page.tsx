@@ -19,7 +19,7 @@ export default function Profile(slugs: any) {
     return <NotFound />;
   }
   return (
-    <div className="flex flex-col md:flex-row  md:pt-12 justify-center">
+    <div className="flex flex-col md:flex-row  md:pt-12 m-2 justify-center">
       <div className="lg:pr-12">
         <UserProfile user={data} />
       </div>

@@ -6,6 +6,7 @@ interface IHistoryCardProps {
   vendorName: string;
   status: string;
   productName: string;
+  productImage: string;
   price: number;
   totalPrice: number;
   statusColor: string;
@@ -51,9 +52,9 @@ const HistoryCard: React.FC<IHistoryCardProps> = (props: IHistoryCardProps) => {
         <div className="flex md:flex-row flex-col">
           <div className="relative md:w-[20rem] h-[15rem] rounded-t-md">
             <Image
-              src="/assets/background_authenticate.svg"
+              src={props.productImage}
               className="animate-fadeIn object-cover"
-              alt="..."
+              alt={props.id}
               fill
               sizes="(max-width: 768px) 100vw,
                 (max-width: 1200px) 50vw,
@@ -65,16 +66,16 @@ const HistoryCard: React.FC<IHistoryCardProps> = (props: IHistoryCardProps) => {
               <div className="text-base md:text-xl font-bold">
                 {props.productName}
               </div>
-              <h1 className="font-medium text-xs">
+              <h1 className="font-light text-xs">
                 Price:
-                <span className="text-xs md:text-xl font-medium text-midGreen">
+                <span className="text-xs md:text-xl font-medium text-midGreen mx-2">
                   {props.price?.toLocaleString()}
                 </span>
               </h1>
             </div>
-            <div className="font-extrabold text-gray-600 md:text-xl">
+            <div className="font-extrabold text-gray-600 md:text-xl mb-2">
               Total:
-              <span className="text-xl md:text-3xl font-extrabold text-midGreen ml-3">
+              <span className="text-xl md:text-3xl font-extrabold text-midGreen mx-2">
                 {props.totalPrice?.toLocaleString()}
               </span>
             </div>

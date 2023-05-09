@@ -8,7 +8,7 @@ import Input from "components/Form/Input";
 import UsernameBubble from "components/Auth/SignUp/Bubble/usernameBubble";
 import PasswordBubbleWrap from "components/Auth/SignUp/Bubble/passwordBubble";
 import Button from "components/Button";
-import apiClient from "@/config/axios.config";
+import usePost from "@/Helper/ClientFetch/usePost";
 
 interface SignUpForm {
     username: String;
@@ -45,6 +45,8 @@ const SignUpForm = () => {
         username: false,
         password: false,
     });
+
+    const {response, isPosting, post} = usePost(`auth/signup`)
 
     const {push} = useRouter();
 
@@ -90,31 +92,26 @@ const SignUpForm = () => {
             formData.append("avatar", data.avatar as any);
         }
 
-        apiClient
-            .post(
-                `auth/signup`,
-                formData
-            )
-            .then((res) => {
-                push("/");
-            })
-            .catch((e) => {
-                const errorInfo = e.response.data
+        try {
+            await post(formData)
+        } catch (errors: any) {
+            console.log(errors)
+            const errorInfo = errors.message.response.data;
 
-                if (errorInfo.error == "UNIQUE_CONSTRAIN_VIOLATED" && errorInfo.message.includes("username")) {
-                    setError("username", {
-                        type: errorInfo.error,
-                        message: "Username is used",
-                    });
-                }
+            if (errorInfo.error == "UNIQUE_CONSTRAIN_VIOLATED" && errorInfo.message.includes("username")) {
+                setError("username", {
+                    type: errorInfo.error,
+                    message: "Username is used",
+                });
+            }
 
-                if (errorInfo.error == "UNIQUE_CONSTRAIN_VIOLATED" && errorInfo.message.includes("email")) {
-                    setError("email", {
-                        type: errorInfo.error,
-                        message: "Email is used",
-                    });
-                }
-            })
+            if (errorInfo.error == "UNIQUE_CONSTRAIN_VIOLATED" && errorInfo.message.includes("email")) {
+                setError("email", {
+                    type: errorInfo.error,
+                    message: "Email is used",
+                });
+            }
+        }
     }
 
     return (
@@ -241,7 +238,8 @@ const SignUpForm = () => {
                             render={({field: {onChange}}) => (
                                 <DropZone
                                     multiple={false}
-                                    onChange={(files) => onChange(files[0])}
+                                    onChange={(files: any) => onChange(files[0])}
+                                    avatar={true}
                                 />
                             )}
                         />

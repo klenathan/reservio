@@ -52,7 +52,7 @@ const Review = (props: { review: Review[] }) => {
                     onClose={handleCloseModal}
                     nameModal={"Reviews"}
                 >
-                    <div className={'overflow-auto scroll-auto h-full max-h-96'}>
+                    <div className={'overflow-auto scroll-auto w-screen  max-w-prose px-6 py-6'}>
                         {props.review.map((review, index) => {
                             return (
                                 <div key={index} className="flex space-x-6 mt-6">

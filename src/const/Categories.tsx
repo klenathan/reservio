@@ -1,13 +1,9 @@
-import { AiFillCar, AiOutlinePlusCircle } from "react-icons/ai";
-import { FaHotel } from "react-icons/fa";
-import { GiMoneyStack } from "react-icons/gi";
-import { GrHostMaintenance } from "react-icons/gr";
-import { IoFastFoodOutline, IoStorefrontOutline } from "react-icons/io5";
-import {
-  MdCastForEducation,
-  MdOutlineBalance,
-  MdOutlineHealthAndSafety,
-} from "react-icons/md";
+import {AiFillCar, AiOutlinePlusCircle} from "react-icons/ai";
+import {GiMoneyStack} from "react-icons/gi";
+import {GrHostMaintenance} from "react-icons/gr";
+import {IoFastFoodOutline, IoStorefrontOutline} from "react-icons/io5";
+import {MdCastForEducation, MdOutlineBalance, MdOutlineHealthAndSafety,} from "react-icons/md";
+import {BsHospital} from "react-icons/bs";
 
 export const categories = [
   {
@@ -53,7 +49,7 @@ export const categories = [
   {
     id: "Hospitality",
     category: "Hospitality",
-    icon: <FaHotel />,
+    icon: <BsHospital />,
   },
   {
     id: "Others",

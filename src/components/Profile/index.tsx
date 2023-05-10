@@ -16,17 +16,17 @@ const UserProfile = (props: { user: User }) => {
           className="px-0 object-cover rounded-full"
         />
       </div>
-      <div className="m-2">
+      <div className="m-2 ">
         <div className="font-semibold text-midGreen">
           <span className="font-bold text-black"> Username: </span>
           {props.user.username}
         </div>
         <div className="font-semibold text-midGreen">
-          <span className="font-bold text-black">Email: </span>
+          <span className="font-bold text-black ">Email: </span>
           {props.user.email}
         </div>
         <div className="font-semibold text-midGreen">
-          <span className="font-bold text-black">Phone: </span>
+          <span className="font-bold text-black ">Phone: </span>
           {props.user.phoneNo}
         </div>
       </div>

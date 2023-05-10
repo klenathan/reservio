@@ -7,56 +7,104 @@ import NavBar from "@/components/NavBar";
 import Head from "next/head";
 import ReservationStatus from "@/components/ReservationStatus";
 import ReservationInfo from "@/components/ReservationInfo";
+import RatingModal from "@/components/RatingModal";
+import { format } from "date-fns";
 
+interface ReservationStatusParams {
+  params: {
+    id: string;
+  };
+}
 
-// interface ReservationStatusParams {
-//   params: {
-//     id: string;
-//   };
-// }
+export default function ReservStatus(slugs: ReservationStatusParams) {
+  const { data, error, isLoading } = useFetch<Reservation>(
+    `reservation/${slugs.params.id}`
+  );
 
-export default function ReservStatus() {
-  // const {data, isError, isLoading} = useFetch<Reservation>(`reservation/${slugs.params.id}`)
+  //A function to change the status to "RATED"
+  const changeStatus = () => {};
+
+  console.log(data);
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  const formattedPendingDate = format(
+    new Date(data?.createdAt as string),
+    "MMM-dd-yyyy"
+  );
+  let formattedAcceptedDate = ""; // Set initial value as an empty string
+  if (data?.acceptedAt) {
+    formattedAcceptedDate = format(
+      new Date(data.acceptedAt as string),
+      "MMM-dd-yyyy"
+    );
+  }
+
+  let formattedStartDate = ""; // Set initial value as an empty string
+  if (data?.startAt) {
+    formattedStartDate = format(
+      new Date(data.startAt as string),
+      "MMM-dd-yyyy"
+    );
+  }
+
+  let formattedEndDate = ""; // Set initial value as an empty string
+  if (data?.endAt) {
+    formattedEndDate = format(new Date(data.endAt as string), "MMM-dd-yyyy");
+  }
+
+  // console.log(formattedPendingDate);
+
   // const items = [
   //     {label: "Home", href: "/"},
   //     {label: data?., href: `/category?id=${data?.category}`},
   //     {label: data?.name, href: "/"},
   // ];
+  // if (isLoading) {
+  //   return (
+  //     <div className="relative h-[calc(100vh_-_10rem)] -top-[5rem] w-full flex flex-col justify-center items-center overflow-hidden -z-10">
+  //       <LoadingSpinner text="Loading product data, please wait..." />
+  //     </div>
+  //   );
+  // }
 
-//   if (isLoading) {
-//     return (
-//       <div className="relative h-[calc(100vh_-_10rem)] -top-[5rem] w-full flex flex-col justify-center items-center overflow-hidden -z-10">
-//         <LoadingSpinner text="Loading product data, please wait..." />
-//       </div>
-//     );
-//   }
+  // if (isError && !data) {
+  //   return <NotFound />;
+  // }
 
-//   if (isError && !data) {
-//     return <NotFound />;
-//   }
-
-//   if (data) {
+  if (data) {
     return (
-      // md:px-8 lg:px-56
       <div>
         <Head>
           <title>Reservation status</title>
         </Head>
         <NavBar />
-        <div className="md:mx-24 mx-5 ">
-          <ReservationStatus status={"End"} pendingTime={"10:10 23-03-2003"} acceptedTime={"10:10 23-03-2003"} startTime={"10:10 23-03-2003"} endTime={"10:10 23-03-2003"} ratingTime={"10:10 23-03-2003"}/>
+        <div className="md:mx-24 mx-5 flex flex-col">
+          <ReservationStatus
+            status={data.status}
+            pendingTime={formattedPendingDate}
+            acceptedTime={formattedAcceptedDate}
+            startTime={formattedStartDate}
+            endTime={formattedEndDate}
+          />
           <div className="mt-5">
             <ReservationInfo
-              status={""}
-              productName={"DA LAT HOUSE"}
-              price={5000000}
-              totalPrice={4000000}
-              category={"Hotel"}
-              quantity={5} 
-              shopId={""}            />
+              productName={data.Product.name}
+              price={data.Product.price}
+              totalPrice={data.Product.price}
+              category={data.Product.category}
+              quantity={data.Product.quantity}
+              shopId={data.Product.vendor.username}
+              
+            />
+          
+          </div>
+          <div className="self-end mt-3">
+            <RatingModal status={"END"} star={3} ratingComment={"Very nice"} />
           </div>
         </div>
       </div>
     );
   }
-// }
+}

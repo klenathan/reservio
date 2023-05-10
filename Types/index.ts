@@ -80,7 +80,8 @@ export type Reservation = {
   customer?: User;
   Product: Product;
   ProductFixedTimeSlot?: ProductFixedTimeSlot;
-  createAt?: string;
+  createdAt?: string;
+  acceptedAt?: string;
 };
 
 export type ProductFixedTimeSlot = {

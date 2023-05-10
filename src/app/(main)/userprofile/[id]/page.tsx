@@ -23,7 +23,7 @@ export default function Profile(slugs: any) {
       <div className="lg:pr-12">
         <UserProfile user={data} />
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full md:w-3/5">
         <HistoryPage reservation={data.reservations} />
       </div>
     </div>

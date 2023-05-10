@@ -35,7 +35,7 @@ const CarouselHomePageContent = (props: CarouselHomePageContentProps) => {
           href={`/detail/${encodeURIComponent(props.service.id)}`}
           className="flex flex-col w-2/3 lg:w-1/3 shadow-xl rounded-md md:my-8 "
         >
-          <Button btnStyle="filled">Reserve Now</Button>
+          <Button btnStyle="filled" >Reserve Now</Button>
         </Link>
       </div>
     </div>

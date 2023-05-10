@@ -95,8 +95,10 @@ export default function ReservStatus(slugs: ReservationStatusParams) {
               totalPrice={data.Product.price}
               category={data.Product.category}
               quantity={data.Product.quantity}
-              shopId={data.Product.vendor.name}
+              shopId={data.Product.vendor.username}
+              
             />
+          
           </div>
           <div className="self-end mt-3">
             <RatingModal status={"END"} star={3} ratingComment={"Very nice"} />

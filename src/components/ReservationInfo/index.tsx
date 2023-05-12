@@ -1,11 +1,11 @@
 import Image from "next/image";
-import Button from "../Button";
-import { useRouter } from "next/router";
 import Link from "next/link";
+import Button from "../Button";
+import Modal from "../Modal";
+import { useState } from "react";
 
 interface IReservationInfo {
   category: string;
-  status: string;
   productName: string;
   price: number;
   totalPrice: number;
@@ -21,12 +21,13 @@ const ReservationInfo = (props: IReservationInfo) => {
     style: "currency",
     currency: "VND",
   });
+  
 
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col">
       <Link
         className=" shadow mb-3
-          bg-gray-50 text-slate-900 px-1 py-1 border-2 border-gray-400 rounded-none flex-row items-center inline-flex "
+          bg-gray-50 text-slate-900 px-1 py-1 border-2 border-gray-400 rounded-none items-center inline-flex w-fit "
         href={`/store/${props.shopId}`}
         passHref
       >
@@ -41,7 +42,10 @@ const ReservationInfo = (props: IReservationInfo) => {
             className="px-0 object-cover"
           />
         </div>
-        <div className="text-xs ml-1 font-bold text-gray-500"> Shop viewing</div>
+        <div className="text-xs ml-1 font-bold text-gray-500">
+          {" "}
+          Shop viewing
+        </div>
       </Link>
 
       <div className="flex flex-row  px-3 py-3 border-2 border-midGreen rounded-md">
@@ -77,8 +81,13 @@ const ReservationInfo = (props: IReservationInfo) => {
       </div>
       <div className="border-t-2 mt-7 border-t-gray-500 border-b-2 border-b-gray-500 flex flex-col font-semibold">
         <div className="flex flex-row text-right divide-x-2 py-2  ">
-          <h1 className="w-3/5 text-slate-500 pr-2 font-bold text-md"> Total paying</h1>
-          <div className="w-2/5 text-lg md:text-2xl ">{formattedTotalPrice}</div>
+          <h1 className="w-3/5 text-slate-500 pr-2 font-bold md:text-xl text-sm align-middle">
+            {" "}
+            Total paying
+          </h1>
+          <div className="w-2/5 text-lg md:text-2xl  ">
+            {formattedTotalPrice}
+          </div>
         </div>
       </div>
     </div>

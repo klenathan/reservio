@@ -1,13 +1,16 @@
 import Image from "next/image";
-import Link from "next/link";
 import Button from "../../Button";
 import { useState } from "react";
+import axios from "axios";
+import Link from "next/link";
 
 interface IVendorCardProps {
+  id: string;
   userName?: string;
   status: string;
-  productName?: string;
-  price?: number;
+  productName: string;
+  productImage: string;
+  price: number;
   totalPrice: number;
   statusColor: string;
   avatar?: string;
@@ -20,14 +23,21 @@ const VendorVerifyCard = (props: IVendorCardProps) => {
   });
   const [status, setStatus] = useState(props.status);
 
-  const handleAccept = () => {
+  const handleAccept = async () => {
+    await axios.put(
+      `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/reservation/reject/${props.id}`,
+      {}
+    );
     setStatus("accepted");
   };
 
-  const handleReject = () => {
+  const handleReject = async () => {
+    await axios.put(
+      `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/reservation/reject/${props.id}`,
+      {}
+    );
     setStatus("rejected");
   };
-  const newLocal = this;
   return (
     <div
       className="w-full md:w-full shadow-lg mb-3 mt-3 rounded-md
@@ -35,8 +45,8 @@ const VendorVerifyCard = (props: IVendorCardProps) => {
     >
       <div className="relative w-full h-[15rem] rounded-t-md ">
         <Image
-          src="/assets/background_authenticate.svg"
-          alt=""
+          src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + props.productImage}
+          alt={props.id}
           fill
           sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
@@ -65,16 +75,23 @@ const VendorVerifyCard = (props: IVendorCardProps) => {
               (max-width: 1200px) 50vw,
               33vw"
                   alt="Profile Hamburger"
-                  className="px-0 object-cover"
+                  className="px-0 object-cover rounded-full"
                 />
               </div>
-              <a href="#" className="text-base md:text-xl font-bold ">
+              <Link
+                href={`/store/${encodeURIComponent(props.userName!)}`}
+                className="font-[900] text-base md:text-xl m-2"
+              >
                 Username: {props.userName}
-              </a>
+              </Link>
+              <Link
+                href={`/detail/${encodeURIComponent(props.id)}`}
+                className="text-base md:text-xl font-bold"
+              >
+                {props.productName}
+              </Link>
             </div>
-            <a href="#" className="text-base md:text-xl font-bold">
-              {props.productName}
-            </a>
+
             <h1 className="font-medium text-xs">
               <span className="text-xs md:text-xl font-medium text-midGreen">
                 {formattedPrice}
@@ -82,7 +99,7 @@ const VendorVerifyCard = (props: IVendorCardProps) => {
             </h1>
           </div>
           <div className="grid grid-rows-2 gap-2 mt-2 ml-2">
-            {props.status === "pending" ? (
+            {props.status === "PENDING" ? (
               <>
                 <Button
                   className="  shadow

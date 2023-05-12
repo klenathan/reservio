@@ -25,16 +25,16 @@ const HistoryPage = (props: { reservation: Reservation[] }) => {
   };
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col md:w-full mx-3">
       <h1 className="text-center text-2xl md:text-4xl text-midGreen font-bold mb-4">
         BOOKING HISTORY
       </h1>
       <div
         className="grid grid-cols-4 place-items-center content-center h-[3rem] 
-    shadow-md font-medium bg-slate-100 text-black text-sm md:text-base"
+    shadow-md font-medium bg-slate-100 text-black text-xs md:text-base"
       >
         <button
-          className={`hover:text-pendingYellow duration-200 ${
+          className={`hover:text-pendingYellow text-xs md:text-base duration-200 ${
             selectedStatus === "PENDING" && "text-pendingYellow"
           }`}
           onClick={() => setSelectedStatus("PENDING")}
@@ -73,6 +73,10 @@ const HistoryPage = (props: { reservation: Reservation[] }) => {
             vendorName={reservation.Product?.name}
             status={reservation.status}
             productName={reservation.Product?.name}
+            productImage={
+              process.env.NEXT_PUBLIC_IMG_ENDPOINT +
+              reservation.Product?.images[0]
+            }
             price={reservation.Product?.price}
             totalPrice={reservation.total}
             statusColor={changeColor(selectedStatus)}

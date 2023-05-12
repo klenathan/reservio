@@ -1,5 +1,4 @@
 import axios, {AxiosResponse} from 'axios';
-import {AppConfig} from "@/config/app.config";
 import {redirect} from "next/navigation";
 
 
@@ -9,7 +8,7 @@ interface RefreshTokenResponse {
 }
 
 const apiClient = axios.create({
-    baseURL: AppConfig.apiBase,
+    baseURL: process.env.NEXT_PUBLIC_BACKEND_ENDPOINT,
 });
 
 apiClient.interceptors.request.use(

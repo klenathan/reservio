@@ -6,6 +6,7 @@ interface IHistoryCardProps {
   vendorName: string;
   status: string;
   productName: string;
+  productImage: string;
   price: number;
   totalPrice: number;
   statusColor: string;
@@ -14,10 +15,10 @@ interface IHistoryCardProps {
 
 const HistoryCard: React.FC<IHistoryCardProps> = (props: IHistoryCardProps) => {
   return (
-    <div className="flex flex-col mt-3 w-full shadow-lg cursor-pointer">
+    <div className={`flex mt-4 border-2 flex-col  w-full shadow-lg cursor-pointer py-4 px-4 rounded-md  border-${props.statusColor}`}>
       <div className="flex flex-row items-center justify-between mb-3">
         <div className="flex flex-row items-center w-4/5">
-          <div className="relative w-[2rem] h-[2rem] ml-1">
+          <div className="relative min-w-[2rem] min-h-[2rem] mr-2">
             <Image
               src={props.vendorAva}
               fill
@@ -31,7 +32,7 @@ const HistoryCard: React.FC<IHistoryCardProps> = (props: IHistoryCardProps) => {
 
           <Link
             href={`/store/${encodeURIComponent(props.vendorName)}`}
-            className="font-[900] text-base md:text-xl m-2"
+            className="font-[900] text-base md:text-xl truncate  mr-3"
           >
             {props.vendorName}
           </Link>
@@ -49,11 +50,11 @@ const HistoryCard: React.FC<IHistoryCardProps> = (props: IHistoryCardProps) => {
         className="text-base md:text-xl font-bold"
       >
         <div className="flex md:flex-row flex-col">
-          <div className="relative md:w-[20rem] h-[15rem] rounded-t-md">
+          <div className="relative md:w-[20rem]  h-[10rem] md:h-[15rem]   rounded-t-md">
             <Image
-              src="/assets/background_authenticate.svg"
+              src={props.productImage}
               className="animate-fadeIn object-cover"
-              alt="..."
+              alt={props.id}
               fill
               sizes="(max-width: 768px) 100vw,
                 (max-width: 1200px) 50vw,
@@ -65,16 +66,16 @@ const HistoryCard: React.FC<IHistoryCardProps> = (props: IHistoryCardProps) => {
               <div className="text-base md:text-xl font-bold">
                 {props.productName}
               </div>
-              <h1 className="font-medium text-xs">
+              <h1 className="font-light text-xs">
                 Price:
-                <span className="text-xs md:text-xl font-medium text-midGreen">
+                <span className="text-xs md:text-xl font-medium text-midGreen mx-2">
                   {props.price?.toLocaleString()}
                 </span>
               </h1>
             </div>
-            <div className="font-extrabold text-gray-600 md:text-xl">
+            <div className="font-extrabold text-gray-600 md:text-xl mb-2">
               Total:
-              <span className="text-xl md:text-3xl font-extrabold text-midGreen ml-3">
+              <span className="text-xl md:text-3xl font-extrabold text-midGreen mx-2">
                 {props.totalPrice?.toLocaleString()}
               </span>
             </div>

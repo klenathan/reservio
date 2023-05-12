@@ -23,7 +23,7 @@ interface IFromInput {
 
 export default function Category(slugs: any) {
     // const [value, setValue] = useState<string>("");
-    const [url, setUrl] = useState<string>('service')
+    const [url, setUrl] = useState<string>()
     const [queryService, setServices] = useState<Product[]>([]);
     const [queryVendor, setVendors] = useState<Vendor[]>([]);
     const [sortBy, setSortBy] = useState<any>()
@@ -34,7 +34,7 @@ export default function Category(slugs: any) {
         endDate: ""
     })
 
-    const {data, error, isLoading} = useFetch<any>(url)
+    const {data, error, isLoading} = useFetch<any>(url as string)
 
 
     const {
@@ -48,11 +48,12 @@ export default function Category(slugs: any) {
     useEffect(() => {
         if (slugs.searchParams.category) {
             setUrl(`service?category=${slugs.searchParams.category}`)
+        }else if (slugs.searchParams.keyword) {
+            setUrl(`search?query=${slugs.searchParams.keyword}`)
+        }else{
+            setUrl('service')
         }
 
-        if (slugs.searchParams.keyword) {
-            setUrl(`search?query=${slugs.searchParams.keyword}`)
-        }
     }, [slugs.searchParams.category, slugs.searchParams.keyword])
 
 
@@ -82,7 +83,12 @@ export default function Category(slugs: any) {
             sortBy: childData.sortBy,
             order: childData.order
         })
-        setUrl(`/service?category=${slugs.searchParams.category || ""}&minPrice=${getValues("minPrice") || ""}&maxPrice=${getValues('maxPrice') || ""}&fromDate=${getValues('fromDate') || ""}&toDate=${getValues('toDate') || ""}&${childData.sortBy}=${childData.order}`)
+        if (slugs.searchParams.category) {
+            setUrl(`/service?category=${slugs.searchParams.category || ""}&minPrice=${getValues("minPrice") || ""}&maxPrice=${getValues('maxPrice') || ""}&fromDate=${getValues('fromDate') || ""}&toDate=${getValues('toDate') || ""}&${childData.sortBy}=${childData.order}`)
+        }
+        else if (slugs.searchParams.keyword) {
+            setUrl(`search?query=${slugs.searchParams.keyword}&${childData.sortBy}=${childData.order}`)
+        }
     }
 
 

@@ -15,6 +15,8 @@ const Carousel: React.FC<CarouselProps> = (props: CarouselProps) => {
     const [queryService, setServices] = useState(props.slice);
 
     const timerRef = useRef<HTMLButtonElement | null>(null);
+    const containerRef = useRef<any>(null);
+    
 
 
     useEffect(() => {
@@ -47,6 +49,19 @@ const Carousel: React.FC<CarouselProps> = (props: CarouselProps) => {
 
         return () => clearTimeout(timer);
     }, [auto, currentSlide, queryService.length]);
+
+    useEffect(() => {
+        if (containerRef.current && currentSlide !== null) {
+            containerRef.current.children[currentSlide].scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'center',
+            });
+        }
+    }, [currentSlide]);
+    // Check if there is an overflow before rendering the slider
+    const hasOverflow = containerRef.current && containerRef.current.scrollWidth > containerRef.current.clientWidth;
+
 
     return (
         //🔔 For optimize you must have the container when use 🐱
@@ -108,35 +123,33 @@ const Carousel: React.FC<CarouselProps> = (props: CarouselProps) => {
                 </div>
                 :
                 /*Preview*/ // ⚠️ only use for image
-                <div className="relative flex justify-center space-x-10  md:mt-5 mt-5">
-                    {queryService.map(
-                        (
-                            service: any,
-                            index: string | number | ((prevState: number) => number)
-                        ) => {
-                            return (
-                                <div key={index as number} className={
-                                    `border-2  ${index === currentSlide
-                                        ? " border-midGreen cursor-pointer"
-                                        : "border-transparent opacity-60 "} `
-                                }>
-                                    <div key={service} className={'relative h-14 w-20'}>
-                                        <Image
-                                            src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + service}
-                                            alt={`Image ${service.alt}`}
-                                            fill={true}
-                                            quality={100}
-                                            onClick={() => {
-                                                setCurrentSlide(index as number);
-                                            }}
-                                            className="object-cover cursor-pointer w-full h-auto"
-                                            loading={'lazy'}
-                                        />
-                                    </div>
-                                </div>
-                            );
-                        }
-                    )}
+                <div
+                    className={`relative flex ${hasOverflow ? `justify-items-start` : `justify-center`} space-x-10 md:mt-5 mt-5 overflow-auto`}
+                    style={{width: '100%'}}
+                    ref={containerRef}
+                >
+                    {queryService.map((service: any, index: number) => (
+                        <div
+                            key={index}
+                            className={`border-2 ${
+                                index === currentSlide ? 'border-midGreen cursor-pointer' : 'border-transparent opacity-60'
+                            }`}
+                        >
+                            <div key={service} className="relative h-14 w-20" style={{width: '100px'}}>
+                                <Image
+                                    src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + service}
+                                    alt={`Image ${service.alt}`}
+                                    fill={true}
+                                    quality={100}
+                                    onClick={() => {
+                                        setCurrentSlide(index);
+                                    }}
+                                    className="object-cover cursor-pointer w-full h-auto"
+                                    loading={'lazy'}
+                                />
+                            </div>
+                        </div>
+                    ))}
                 </div>
             }
         </div>

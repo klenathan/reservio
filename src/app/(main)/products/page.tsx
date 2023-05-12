@@ -21,6 +21,7 @@ interface IFromInput {
     toDate?: number | string;
 }
 
+
 export default function Category(slugs: any) {
     // const [value, setValue] = useState<string>("");
     const [url, setUrl] = useState<string>()

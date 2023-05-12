@@ -25,7 +25,9 @@ const SlideRight = () => {
 const Discount = () => {
   const { data, error, isLoading } = useFetch<Discount[]>(`service/discount`);
   if (isLoading) {
-    return <LoadingSpinner text="Loading discount, please wait..." />;
+    return <div className="h-40 flex place-items-center">
+      <LoadingSpinner text="Loading discount, please wait..." />
+    </div>;
   }
   if (error && !data) {
     return <NotFound />;

@@ -41,7 +41,7 @@ const Modal: React.FC<ModalProps> = (props: ModalProps) => {
   if (!props.isOpen) return null;
 
   return (
-    <div className="flex fixed inset-0 z-50 justify-center items-center bg-neutral-700 bg-opacity-50">
+    <div className="flex fixed inset-0 z-[9999] justify-center items-center bg-neutral-700 bg-opacity-50">
       <div className="flex items-end justify-center lg:w-max z-50">
         <div
           ref={modal}

@@ -6,7 +6,7 @@ import CarouselHomePage from "components/HomePageServiceContainer/CarouselHomePa
 
 export default function Home() {
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden min-h-screen">
       <CategoryList />
 
       <div className="w-screen">

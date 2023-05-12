@@ -9,7 +9,7 @@ const CarouselHomePage = () => {
   const { data, error, isLoading } = useFetch<Product>(`service/highlight`);
   if (isLoading) {
     return (
-      <div className="flex items-center h-40">
+      <div className="flex items-center h-72">
         <LoadingSpinner text="Loading carousel, please wait..." />
       </div>
     );

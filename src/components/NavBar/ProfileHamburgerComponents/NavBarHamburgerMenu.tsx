@@ -19,7 +19,7 @@ const HamburgerMenuChild: React.FC<IHamburgerMenuChildProps> = (
         href={"/"}
         className={`${props.className} hover:bg-limeGreen hover:bg-opacity-20 
       first:rounded-t-xl last:rounded-b-xl
-    py-2 px-2`}
+    py-3 px-2`}
         onClick={props.onClick}
       >
         {props.children}
@@ -31,7 +31,7 @@ const HamburgerMenuChild: React.FC<IHamburgerMenuChildProps> = (
         href={{ pathname: props.href }}
         className={`${props.className} hover:bg-limeGreen hover:bg-opacity-20 
       first:rounded-t-xl last:rounded-b-xl
-    py-2 px-2`}
+    py-3 px-2`}
         onClick={props.onClick}
       >
         {props.children}
@@ -66,7 +66,7 @@ const NavBarHamburgerMenu: React.FC<IHamburgerMenuProps> = (
     <div
       className={`absolute ${props.show ? "flex" : "hidden"} flex-col top-12 
           rounded-xl shadow-[0_0px_20px_0px_rgba(0,0,0,0.2)]
-          w-40 gap-3 
+          w-40
           left-1/2 transform -translate-x-1/2
           bg-white z-10
       `}

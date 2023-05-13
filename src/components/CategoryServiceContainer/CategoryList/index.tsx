@@ -13,7 +13,7 @@ interface categoryProps extends Category{
 const CategoryList = (props: categoryListProps) => {
     return (
         <div
-            className="place-items-center snap-x overflow-auto flex gap-4 md:overflow-hideden  w-full md:gap md:w-full md:justify-around md:m-0 m-auto border-b">
+            className="bg-white place-items-center snap-x overflow-auto flex gap-4 md:overflow-hideden  w-full md:gap md:w-full md:justify-around md:m-0 m-auto border-b">
             {categories.map((category) => {
                 return (
                     <CategoryCard

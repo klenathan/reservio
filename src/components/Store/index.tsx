@@ -5,19 +5,19 @@ import {Vendor} from "../../../Types";
 
 const Store = (props: { store: Vendor }) => {
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-4 md:border md:border-black md:m-8 md:rounded-md">
+    <div className="w-full grid grid-cols-1 md:grid-cols-4 md:border md:border-black md:m-8 md:rounded-md bg-white">
       <div className="col-span-1 flex flex-col items-center justify-center p-2">
         <div className="relative h-32 w-32">
           <Image
             src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + props.store.user.avatar}
             alt={props.store.name}
             fill
-            className="rounded-full"
+            className="rounded-full object-cover"
           />
         </div>
 
         <div className={'font-bold'}>{props.store.name}</div>
-        <div className={'font-bold'}>@{props.store.username}</div>
+        <div className={''}>@{props.store.username}</div>
       </div>
       <div className="col-span-3 p-1 flex flex-col-reverse md:grid md:grid-cols-3">
         <div className="md:p-8 md:col-span-2 space-y-6 ">

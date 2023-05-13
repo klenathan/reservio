@@ -35,7 +35,7 @@ const Discount = () => {
 
   return (
     <div>
-      <div className="flex flex-row items-center my-8 p-2">
+      <div className="flex flex-row items-center my-8 p-2 bg-white rounded-lg shadow-lg">
         <MdChevronLeft
           id="left"
           onClick={SlideLeft}
@@ -66,7 +66,7 @@ const Discount = () => {
 
 const DiscountCard = (props: { discount: Discount }) => {
   return (
-    <div className="h-[10rem] w-[20rem] shadow-xl rounded-md p-2 m-2">
+    <div className="h-[10rem] w-[20rem] border-2 rounded-md p-2 m-2 border-oliveGreen">
       <div className="w-full h-full rounded-md flex">
         <div className="relative h-full w-full rounded-md">
           <Image
@@ -83,7 +83,7 @@ const DiscountCard = (props: { discount: Discount }) => {
           <p className="text-xl font-bold line-clamp-1">
             {props.discount.name as string}
           </p>
-          <p>Discount rate: {props.discount.amount as number}</p>
+          <p>Discount rate: {props.discount.amount as number}%</p>
           <p>
             Time Available: {new Date(props.discount.start).toDateString()} -{" "}
             {new Date(props.discount.end).toDateString()}

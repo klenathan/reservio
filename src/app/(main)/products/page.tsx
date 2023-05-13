@@ -138,9 +138,9 @@ export default function Category(slugs: any) {
 
 
     return (
-        <div className="overflow-hidden ">
+        <div className="overflow-hidden">
             <CategoryList categoryActive={slugs.searchParams.category}/>
-            <div className={'flex w-full justify-center'}>
+            <div className={'flex w-full justify-center pt-4 min-h-screen'}>
                 <div className="flex w-full flex-col md:flex-row 2k:w-[calc(100vw_-_20rem)] h-full ">
                     {aside &&
                         <aside
@@ -184,7 +184,7 @@ export default function Category(slugs: any) {
                                     <h1 className="text-2xl text-oliveGreen font-bold mb-1 md:text-3xl text-center">
                                         Vendor:
                                     </h1>
-                                    <div className="max-w-7xl mx-6 w-[80%]">
+                                    <div className="max-w-7xl w-full flex place-content-center">
                                         {queryVendor.map((vendor) => {
                                             return <VendorCard key={vendor.id} vendor={vendor}/>;
                                         })}

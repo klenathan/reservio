@@ -62,7 +62,7 @@ const Page = (slugs: any) => {
 
                 <div>
                     <div
-                        className="grid grid-cols-1 gap-10 lg:grid-cols-4 md:grid-cols-2 place-items-center max-w-7xl">
+                        className="grid grid-cols-1 gap-10 lg:grid-cols-4 md:grid-cols-2 place-items-center max-w-7xl pb-4">
                         {data.products.map((service) => {
                             return (
                                 <Suspense key={service.id} fallback={

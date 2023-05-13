@@ -9,10 +9,9 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative">
+    <div className="relative bg-[#FAF9F6]">
       <NavBar />
-      {children}
-
+      <div className="min-h-screen pb-4">{children}</div>
       <Footer />
     </div>
   );

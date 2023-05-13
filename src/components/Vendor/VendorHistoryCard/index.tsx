@@ -58,9 +58,9 @@ const VendorVerifyCard = (props: IVendorCardProps) => {
         />
 
         <div
-          className={`absolute top-3 right-3 p-1 rounded-md backdrop-blu status-border status-${props.statusColor}`}
+          className={`absolute top-3 right-3 p-1 rounded-md backdrop-blu bg-[rgba(0,0,0,0.8)] status-border status-${props.statusColor}`}
         >
-          <p className={`font-bold uppercase text-${props.statusColor}`}>
+          <p className={`font-bold uppercase text-${props.statusColor} `}>
             {props.status}
           </p>
         </div>

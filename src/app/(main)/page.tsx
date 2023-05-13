@@ -3,17 +3,18 @@ import CategoryList from "@/components/CategoryServiceContainer/CategoryList";
 import HomePageServiceContainer from "components/HomePageServiceContainer/homepageServiceContainer";
 import TopDealContainer from "@/components/HomePageServiceContainer/discount";
 import CarouselHomePage from "components/HomePageServiceContainer/CarouselHomePage";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden min-h-screen">
       <CategoryList />
 
       <div className="w-screen">
         <CarouselHomePage />
       </div>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto mt-4">
         <h1 className=" w-full text-xl text-center md:text-left md:text-3xl text-oliveGreen font-bold">
           Discounts
         </h1>

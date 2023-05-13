@@ -32,6 +32,7 @@ const VerifyPage = (props: { reservation: Reservation[] }) => {
       <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-10">
         {filteredUserCards.map((card) => (
           <VendorVerifyCard
+            id={card.id}
             key={card.id}
             userName={card.customer?.username}
             status={card.status}
@@ -40,6 +41,7 @@ const VerifyPage = (props: { reservation: Reservation[] }) => {
             totalPrice={card.total}
             statusColor={changeColor(selectedStatus)}
             avatar={card.customer?.avatar}
+            productImage={card.Product?.images[0]}
           />
         ))}
       </div>

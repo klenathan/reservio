@@ -9,7 +9,7 @@ const CarouselHomePage = () => {
   const { data, error, isLoading } = useFetch<Product>(`service/highlight`);
   if (isLoading) {
     return (
-      <div className="flex items-center h-40">
+      <div className="flex items-center h-72 ">
         <LoadingSpinner text="Loading carousel, please wait..." />
       </div>
     );
@@ -18,7 +18,7 @@ const CarouselHomePage = () => {
     return <NotFound />;
   }
   return (
-    <Carousel slice={data} auto={true}>
+    <Carousel className="border-b py-4 border-gray-300 bg-white" slice={data} auto={true}>
       <CarouselHomePageContent />
     </Carousel>
   );

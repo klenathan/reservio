@@ -67,7 +67,7 @@ export type Product = {
 };
 
 export type Reservation = {
-  id?: string;
+  id: string;
   userId?: string;
   quantity: number;
   status: string;
@@ -80,7 +80,8 @@ export type Reservation = {
   customer?: User;
   Product: Product;
   ProductFixedTimeSlot?: ProductFixedTimeSlot;
-  createAt?: string;
+  createdAt?: string;
+  acceptedAt?: string;
 };
 
 export type ProductFixedTimeSlot = {

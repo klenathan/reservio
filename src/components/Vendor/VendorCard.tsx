@@ -5,14 +5,14 @@ import { categories } from "@/const/Categories";
 import { GrServices } from "react-icons/gr";
 
 const VendorCard = (props: { vendor: Vendor }) => {
-  
   const img_endpoint = process.env.NEXT_PUBLIC_IMG_ENDPOINT;
   return (
     <Link
-      href="/"
-      className="relative flex justify-between w-full shadow-xl rounded-md my-8  "
+      href={`/store/${props.vendor.username}`}
+      className="relative flex flex-col md:justify-around
+       justify-between shadow-xl rounded-lg my-8 text-center bg-white w-[50%] py-4"
     >
-      <div className="flex items-center">
+      <div className="m-4 flex items-center justify-center p-2 flex-col md:flex-row md:text-left">
         <div className="relative h-32 w-32">
           <Image
             src={`${img_endpoint}${props.vendor.user.avatar}`}
@@ -21,31 +21,33 @@ const VendorCard = (props: { vendor: Vendor }) => {
             sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
-            className="rounded-full"
+            className="rounded-full object-cover"
           />
         </div>
-        <div className="m-2">
+        
+      </div>
+      <div className="m-2">
           <h1 className="text-l text-oliveGreen font-bold">
             {props.vendor.name}
           </h1>
-          <div>{props.vendor.username}</div>
+          <p>@{props.vendor.username}</p>
+          <p>{props.vendor.desc}</p>
         </div>
-      </div>
-      <div className="flex items-center">
+      <div className="flex justify-center items-center">
         {props.vendor.category.length > 0
           ? props.vendor.category.map((cate) => {
               let cateObj = categories.find((obj) => {
                 return obj.id == cate;
               });
               return (
-                <div key={cateObj?.id} className="text-center m-1 shadow-md">
+                <div key={cateObj?.id} className="text-center m-1 p-2 border rounded">
                   <div className="flex justify-center">{cateObj?.icon}</div>
                   <div>{cateObj?.category}</div>
                 </div>
               );
             })
           : ""}
-        <div className="text-center m-1 shadow-md">
+        <div className="text-center m-1 p-2 border rounded">
           <div className="flex justify-center">
             <GrServices />
           </div>

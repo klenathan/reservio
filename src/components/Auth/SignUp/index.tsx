@@ -63,8 +63,8 @@ const SignUpForm = () => {
         if (typeof value === "string") {
             setUsernameValidation({
                 length: /^(?=[a-zA-Z0-9._]{8,20}$)/.test(value),
-                noConsecutiveSpecialChars: /^(?!.*[_.]{2})/.test(value),
-                noStartEndSpecialChars: /^[^_.].*[^_.]$/.test(value),
+                noConsecutiveSpecialChars: /^[a-zA-Z0-9]+$/.test(value),
+                noStartEndSpecialChars: /^[^\W_].*[^\W_]$/.test(value),
             });
         }
     };
@@ -171,6 +171,7 @@ const SignUpForm = () => {
                                 name={"password"}
                                 label={"Password"}
                                 type={"password"}
+                                placeholder={"Password is required"}
                                 control={control}
                                 rules={{
                                     required: "Password is required",
@@ -198,6 +199,7 @@ const SignUpForm = () => {
                             name={"re_password"}
                             type={"password"}
                             label={"Retype password"}
+                            placeholder={'Password is required'}
                             control={control}
                             rules={{
                                 validate: (value: String) =>

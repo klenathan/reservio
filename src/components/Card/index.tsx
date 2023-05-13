@@ -19,7 +19,7 @@ const Card = (props: { service: Product }) => {
   return (
     <div
       className="flex flex-col w-full h-full shadow-xl rounded-xl my-4 transition-all border
-        hover:bg-zinc-100"
+        hover:bg-white"
       ref={cardRef}
     >
       {cardReady ? (
@@ -44,7 +44,7 @@ const Card = (props: { service: Product }) => {
             </h1>
             <p>{props.service.category}</p>
             <div>
-              <p className="line-clamp-3">{props.service.address}</p>
+              <p className="line-clamp-2 h-12">{props.service.address}</p>
             </div>
           </div>
           <div className="flex flex-row flex-[1] m-5 items-center border-t">

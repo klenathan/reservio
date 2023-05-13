@@ -13,10 +13,9 @@ interface IReservationStatus {
   acceptedTime: string;
   startTime: string;
   endTime: string;
-  ratingTime: string;
 }
 
-const statusOrder = ["Pending", "Accepted", "Start", "End", "Rating"];
+const statusOrder = ["PENDING", "ACCEPTED", "START", "END", "RATED"];
 
 const ReservationStatus = ({
   status,
@@ -24,7 +23,6 @@ const ReservationStatus = ({
   acceptedTime,
   startTime,
   endTime,
-  ratingTime,
 }: IReservationStatus) => {
   const [selectedStatus, setSelectedStatus] = useState("");
 
@@ -44,8 +42,8 @@ const ReservationStatus = ({
           <React.Fragment key={s}>
             {i !== 0 && (
               <div
-                className={` w-1/4 md:w-1/6 h-1 mx-auto my-4 border-0 rounded md:my-10 bg-${
-                  i <= statusIndex ? "midGreen" : "gray-400"
+                className={` w-1/4 md:w-1/12 h-1 mx-auto my-4 border-0 rounded md:my-10  ${
+                  i <= statusIndex ? "bg-midGreen" : "bg-gray-400"
                 }  `}
               ></div>
             )}
@@ -58,25 +56,25 @@ const ReservationStatus = ({
                 }`}
               >
                 <IconContext.Provider value={{ size: "auto" }}>
-                  {s === "Pending" && (
+                  {s === "PENDING" && (
                     <AiOutlineFieldTime
                       color={i <= statusIndex ? "#59981A" : "#DFDFDF"}
                     />
                   )}
-                  {s === "Accepted" && (
+                  {s === "ACCEPTED" && (
                     <AiOutlineLike
                       color={i <= statusIndex ? "#59981A" : "#DFDFDF"}
                     />
                   )}
-                  {s === "Start" && (
+                  {s === "START" && (
                     <MdStart color={i <= statusIndex ? "#59981A" : "#DFDFDF"} />
                   )}
-                  {s === "End" && (
+                  {s === "END" && (
                     <TiTickOutline
                       color={i <= statusIndex ? "#59981A" : "#DFDFDF"}
                     />
                   )}
-                  {s === "Rating" && (
+                  {s === "RATED" && (
                     <AiOutlineStar
                       color={i <= statusIndex ? "#59981A" : "#DFDFDF"}
                     />
@@ -84,26 +82,25 @@ const ReservationStatus = ({
                 </IconContext.Provider>
               </div>
               <div className="font-semibold text-center text-xxs md:text-sm">
-                <div className="font-semibold text-center">
-                  {s === "Pending" && (
-                    <div className="whitespace-nowrap">Placed reservation</div>
+                <div className="font-semibold text-center line-clamp-2">
+                  {s === "PENDING" && (
+                    <div className="">Pending</div>
                   )}
-                  {s === "Accepted" && <div>Accepted</div>}
-                  {s === "Start" && <div>Start</div>}
-                  {s === "End" && <div>End</div>}
-                  {s === "Rating" && <div>Rating</div>}
+                  {s === "ACCEPTED" && <div>Accepted</div>}
+                  {s === "START" && <div>Start</div>}
+                  {s === "END" && <div>End</div>}
+                  {s === "RATED" && <div>Rating</div>}
                 </div>
                 <div className="text-gray-400 whitespace-nowrap text-center">
-                  {s === "Pending" && <div>{pendingTime}</div>}
-                  {!pendingTime && s === "Pending" && <div>&nbsp;</div>}
-                  {s === "Accepted" && <div>{acceptedTime}</div>}
-                  {!acceptedTime && s === "Accepted" && <div>&nbsp;</div>}
-                  {s === "Start" && <div>{startTime}</div>}
-                  {!startTime && s === "Start" && <div>&nbsp;</div>}
-                  {s === "End" && <div>{endTime}</div>}
-                  {!endTime && s === "End" && <div>&nbsp;</div>}
-                  {s === "Rating" && <div>{ratingTime}</div>}
-                  {!ratingTime && s === "Rating" && <div>&nbsp;</div>}
+                  {s === "PENDING" && <div>{pendingTime}</div>}
+                  {!pendingTime && s === "PENDING" && <div>&nbsp;</div>}
+                  {s === "ACCEPTED" && <div>{acceptedTime}</div>}
+                  {!acceptedTime && s === "ACCEPTED" && <div>&nbsp;</div>}
+                  {s === "START" && <div>{startTime}</div>}
+                  {!startTime && s === "START" && <div>&nbsp;</div>}
+                  {s === "END" && <div>{endTime}</div>}
+                  {!endTime && s === "END" && <div>&nbsp;</div>}
+                  {s === "RATED" && <div>&nbsp;</div>}
                 </div>
               </div>
             </div>

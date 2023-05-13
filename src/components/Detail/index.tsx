@@ -104,7 +104,7 @@ const DetailPage = (props: { service: Product }) => {
             {/*Map*/}
             <div className={"border-b-2 border-gray-300 w-full pb-2 space-y-7 mt-7"}>
                 <div className={"text-gray-700 font-bold text-2xl mb-3"}>
-                    Where you will be here
+                    Direction
                 </div>
                 <div className={"relative w-full h-80 lg:w-3/4 lg:h-96 m-auto z-0"}>
                     {lat !== null && lng !== null ? (
@@ -130,7 +130,7 @@ const DetailPage = (props: { service: Product }) => {
                     </div>
                     <div className={"flex flex-col "}>
                         <div className={"text-lg font-bold"}>
-                            Service by {props.service.vendor.username}
+                            Service by @{props.service.vendor.username}
                         </div>
                         <div>
                             Joined since{" "}

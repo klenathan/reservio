@@ -18,8 +18,8 @@ export default function Detail(slugs: DetailParams) {
     const {data, error, isLoading} = useFetch<Product>(`service/${slugs.params.id}`)
     const items = [
         {label: "Home", href: "/"},
-        {label: data?.category, href: `/category?id=${data?.category}`},
-        {label: data?.name, href: "/"},
+        {label: data?.category, href: `/products?category=${data?.category}`},
+        {label: data?.name, href: `/detail/${data?.id}`},
     ];
 
 

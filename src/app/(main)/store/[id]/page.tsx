@@ -22,14 +22,7 @@ const Page = (slugs: any) => {
     const handleCloseModal = () => {
         setIsModalOpen(false);
     };
-    // if (!store && !isError) {
-    //     return (
-    //         <div
-    //             className="relative h-[calc(100vh_-_10rem)] -top-[5rem] w-full flex flex-col justify-center items-center overflow-hidden -z-10">
-    //             <LoadingSpinner text="Loading store, please wait..."/>
-    //         </div>
-    //     );
-    // }
+
 
     if (isLoading) {
         return (
@@ -69,7 +62,7 @@ const Page = (slugs: any) => {
 
                 <div>
                     <div
-                        className="grid grid-cols-1 gap-10 lg:grid-cols-4 md:grid-cols-2 place-items-center max-w-7xl">
+                        className="grid grid-cols-1 gap-10 lg:grid-cols-4 md:grid-cols-2 place-items-center max-w-7xl pb-4">
                         {data.products.map((service) => {
                             return (
                                 <Suspense key={service.id} fallback={

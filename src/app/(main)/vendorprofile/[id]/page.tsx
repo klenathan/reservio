@@ -24,7 +24,7 @@ export default function Profile(slugs: any) {
   return (
     <div>
       <div className="flex flex-col md:flex-row  md:pt-12 justify-center">
-        <div className="md:pr-12">
+        <div>
           <UserProfile user={data.user} />
         </div>
         <div className="flex flex-col ">

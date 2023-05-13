@@ -1,6 +1,6 @@
 import Link from "next/link";
-import React, {Dispatch, SetStateAction, useEffect} from "react";
-import {User} from "../../../../Types";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
+import { User } from "../../../../Types";
 
 interface IHamburgerMenuChildProps {
   children: JSX.Element | JSX.Element[] | string;
@@ -74,7 +74,9 @@ const NavBarHamburgerMenu: React.FC<IHamburgerMenuProps> = (
       {props.isLogin ? (
         <>
           <HamburgerMenuChild
-            href={`/userprofile/${encodeURIComponent(props.user?.username as string)}`}
+            href={`/userprofile/${encodeURIComponent(
+              props.user?.username as string
+            )}`}
           >
             My Profile
           </HamburgerMenuChild>
@@ -82,14 +84,16 @@ const NavBarHamburgerMenu: React.FC<IHamburgerMenuProps> = (
             <>
               <HamburgerMenuChild
                 href={`/vendorprofile/${encodeURIComponent(
-                  props.user.username
+                  props.user?.username as string
                 )}`}
               >
                 Vendor Profile
               </HamburgerMenuChild>
               <HamburgerMenuChild
                 className="border-b-2"
-                href={`/store/${encodeURIComponent(props.user.username)}`}
+                href={`/store/${encodeURIComponent(
+                  props.user?.username as string
+                )}`}
               >
                 My Store
               </HamburgerMenuChild>

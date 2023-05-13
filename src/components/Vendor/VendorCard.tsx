@@ -5,14 +5,13 @@ import { categories } from "@/const/Categories";
 import { GrServices } from "react-icons/gr";
 
 const VendorCard = (props: { vendor: Vendor }) => {
-  
   const img_endpoint = process.env.NEXT_PUBLIC_IMG_ENDPOINT;
   return (
     <Link
       href="/"
-      className="relative flex justify-between w-full shadow-xl rounded-md my-8  "
+      className="relative flex flex-col md:flex-row justify-between w-full shadow-xl rounded-md my-8 text-center"
     >
-      <div className="flex items-center">
+      <div className="flex items-center p-2 flex-col md:flex-row md:text-left">
         <div className="relative h-32 w-32">
           <Image
             src={`${img_endpoint}${props.vendor.user.avatar}`}
@@ -31,7 +30,7 @@ const VendorCard = (props: { vendor: Vendor }) => {
           <div>{props.vendor.username}</div>
         </div>
       </div>
-      <div className="flex items-center">
+      <div className="flex justify-center items-center">
         {props.vendor.category.length > 0
           ? props.vendor.category.map((cate) => {
               let cateObj = categories.find((obj) => {

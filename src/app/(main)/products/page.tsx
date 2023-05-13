@@ -1,6 +1,6 @@
 "use client";
 import CategoryList from "@/components/CategoryServiceContainer/CategoryList";
-import {useEffect, useState} from "react";
+import {Suspense, useEffect, useRef, useState} from "react";
 import Price from "components/CategoryServiceContainer/Price";
 import Card from "@/components/Card";
 import {Product, Vendor} from "../../../../Types";
@@ -31,7 +31,7 @@ export default function Category(slugs: any) {
     const [aside, setAside] = useState<boolean>(false)
 
     const [date, setDate] = useState<any>({
-        startDate: undefined,
+        startDate: "",
         endDate: ""
     })
 
@@ -49,9 +49,9 @@ export default function Category(slugs: any) {
     useEffect(() => {
         if (slugs.searchParams.category) {
             setUrl(`service?category=${slugs.searchParams.category}`)
-        }else if (slugs.searchParams.keyword) {
+        } else if (slugs.searchParams.keyword) {
             setUrl(`search?query=${slugs.searchParams.keyword}`)
-        }else{
+        } else {
             setUrl('service')
         }
 
@@ -86,27 +86,32 @@ export default function Category(slugs: any) {
         })
         if (slugs.searchParams.category) {
             setUrl(`/service?category=${slugs.searchParams.category || ""}&minPrice=${getValues("minPrice") || ""}&maxPrice=${getValues('maxPrice') || ""}&fromDate=${getValues('fromDate') || ""}&toDate=${getValues('toDate') || ""}&${childData.sortBy}=${childData.order}`)
-        }
-        else if (slugs.searchParams.keyword) {
+        } else if (slugs.searchParams.keyword) {
             setUrl(`search?query=${slugs.searchParams.keyword}&${childData.sortBy}=${childData.order}`)
         }
     }
 
+    const isFirstOpenRef: any = useRef(true);
 
     const handleDate = (date: any) => {
-        setDate({
-            startDate: date.startDate,
-            endDate: date.endDate
-        })
+        // Only update state if DatePicker has been focused before
+        if (!isFirstOpenRef.current) {
+            setDate({
+                startDate: date.startDate,
+                endDate: date.endDate
+            })
 
-        if (date.startDate) {
-            setValue('fromDate', getUnixTime(date.startDate))
-        }
+            if (date.startDate) {
+                setValue('fromDate', getUnixTime(date.startDate))
+            }
 
-        if (date.endDate) {
-            setValue('toDate', getUnixTime(date.endDate))
+            if (date.endDate) {
+                setValue('toDate', getUnixTime(date.endDate))
+            } else {
+                setValue('toDate', "")
+            }
         } else {
-            setValue('toDate', "")
+            isFirstOpenRef.current = false;
         }
     }
 
@@ -124,6 +129,13 @@ export default function Category(slugs: any) {
         setUrl(`/service?category=${slugs.searchParams.category || ""}&minPrice=${minPrice}&maxPrice=${maxPrice}&fromDate=${fromDate}&toDate=${toDate}&${sortBy.sortBy}=${sortBy.order}`)
     };
 
+    const onCancel = () => {
+        setValue('fromDate', "")
+        setValue('toDate', "")
+        setValue('minPrice', "")
+        setValue('maxPrice', "")
+    }
+
 
     return (
         <div className="overflow-hidden ">
@@ -132,9 +144,10 @@ export default function Category(slugs: any) {
                 <div className="flex w-full flex-col md:flex-row 2k:w-[calc(100vw_-_20rem)] h-full ">
                     {aside &&
                         <aside
+                            ref={isFirstOpenRef}
                             className="md:self-auto h-fit self-center mb-2 md:mb-0 p-4 mt-1 border border-black md:w-1/5 mx-5 md:ml-0 md:flex"
                         >
-                            <Form onSubmit={handleSubmit(onSubmit)} button="Submit">
+                            <Form onSubmit={handleSubmit(onSubmit)} button="Submit" onCancel={onCancel}>
                                 <div className="my-3">
                                     <h1 className="text-xl text-oliveGreen font-bold mb-2">
                                         By Date:
@@ -153,6 +166,7 @@ export default function Category(slugs: any) {
                                     />
                                 </div>
                             </Form>
+
                         </aside>
                     }
                     {isLoading && <LoadingSpinner text={"Loading product"}/>}
@@ -181,25 +195,33 @@ export default function Category(slugs: any) {
                             )}
 
                             {queryService.length > 0 ? (
-                                <div className="flex-1 w-full flex flex-col items-center space-y-5">
-                                    <h1 className="text-2xl text-oliveGreen font-bold mb-1 md:text-3xl text-center">
-                                        Service:
-                                    </h1>
-                                    <div className={'md:mr-6 md:ml-0 mx-6 space-y-4'}>
-                                        <Sort sortOptions={sortOptions} parentCallBack={handleSort}
-                                              toggleFilter={toggleOpenAside}/>
-                                        <div
-                                            className="grid grid-cols-1 gap-10 lg:grid-cols-3 md:grid-cols-2 place-items-center max-w-7xl">
-                                            {queryService.map((service) => {
-                                                return <Card key={service.id} service={service}/>;
-                                            })}
+                                    <div className="flex-1 w-full flex flex-col items-center space-y-5">
+                                        <h1 className="text-2xl text-oliveGreen font-bold mb-1 md:text-3xl text-center">
+                                            Service:
+                                        </h1>
+                                        <div className={'md:mr-6 md:ml-0 mx-6 space-y-4'}>
+                                            <Sort sortOptions={sortOptions} parentCallBack={handleSort}
+                                                  toggleFilter={toggleOpenAside}/>
+                                            <div
+                                                className="grid grid-cols-1 gap-10 lg:grid-cols-3 md:grid-cols-2 place-items-center max-w-7xl">
+                                                {queryService.map((service) => {
+                                                    return (
+                                                        <Suspense key={service.id} fallback={
+                                                            <LoadingSpinner/>
+                                                        }>
+                                                            <Card key={service.id} service={service}/>
+                                                        </Suspense>
+                                                    )
+                                                })}
+                                            </div>
                                         </div>
-                                    </div>
 
-                                </div>
-                            ) : (
-                                ""
-                            )}
+                                    </div>
+                                ) :
+                                (
+                                    ""
+                                )
+                            }
                         </div>
                     }
                 </div>

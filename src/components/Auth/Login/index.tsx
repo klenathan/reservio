@@ -1,11 +1,11 @@
 "use client";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { redirect, useRouter } from "next/navigation";
+import {SubmitHandler, useForm} from "react-hook-form";
+import {redirect, useRouter} from "next/navigation";
 import Input from "@/components/Form/Input";
 import Form from "../../Form";
 import FormHeader from "../../Form/FormHeader";
-import { useAuth } from "components/Auth/Context/AuthContext";
-import { useEffect } from "react";
+import {useAuth} from "components/Auth/Context/AuthContext";
+import {useEffect} from "react";
 import usePost from "@/Helper/ClientFetch/usePost";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
@@ -105,6 +105,7 @@ const LoginForm = () => {
             name={"password"}
             label={"Password"}
             type={"password"}
+            placeholder={'Password is required'}
             control={control}
             errors={errors.root?.serverError}
           />

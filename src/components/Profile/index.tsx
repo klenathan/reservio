@@ -4,7 +4,7 @@ import { User } from "../../../Types";
 
 const UserProfile = (props: { user: User }) => {
   return (
-    <div className="flex flex-row md:flex-col justify-center items-center md:border-2 p-1 m-2 md:shadow-md">
+    <div className="flex flex-row md:flex-col justify-center items-center md:border-2 p-2 pt-3 m-2 md:shadow-md">
       <div className="relative w-[5rem] h-[5rem] ">
         <Image
           src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + props.user.avatar}

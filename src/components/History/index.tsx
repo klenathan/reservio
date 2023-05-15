@@ -70,6 +70,7 @@ const HistoryPage = (props: { reservation: Reservation[] }) => {
         {filteredUserCards.map((reservation) => (
           <HistoryCard
             key={reservation.id}
+            rid={reservation.id}
             vendorName={reservation.Product?.name}
             status={reservation.status}
             productName={reservation.Product?.name}

@@ -32,7 +32,7 @@ const ReservationStatus = ({
 
   const statusIndex = statusOrder.indexOf(status);
 
-  return (
+  return (  
     <div className="flex flex-col md:mt-10 mt-2 border-b-4 border-dashed pb-3 border-gray-400">
       <h1 className="text-midGreen font-bold text-3xl self-center whitespace-nowrap">
         RESERVATION STATUS

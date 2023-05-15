@@ -2,7 +2,7 @@
 import { NotFound } from "next/dist/client/components/error";
 import LoadingSpinner from "components/LoadingSpinner";
 import useFetch from "@/Helper/ClientFetch/useFetch";
-import { Reservation } from "../../../../Types";
+import { Reservation } from "../../../../../Types";
 import NavBar from "@/components/NavBar";
 import Head from "next/head";
 import ReservationStatus from "@/components/ReservationStatus";
@@ -21,8 +21,7 @@ export default function ReservStatus(slugs: ReservationStatusParams) {
     `reservation/${slugs.params.id}`
   );
 
-  //A function to change the status to "RATED"
-  const changeStatus = () => {};
+  console.log(slugs);
 
   console.log(data);
   if (isLoading) {
@@ -75,32 +74,26 @@ export default function ReservStatus(slugs: ReservationStatusParams) {
 
   if (data) {
     return (
-      <div>
-        <Head>
-          <title>Reservation status</title>
-        </Head>
-        <NavBar />
-        <div className="md:mx-24 mx-5 flex flex-col">
-          <ReservationStatus
-            status={data.status}
-            pendingTime={formattedPendingDate}
-            acceptedTime={formattedAcceptedDate}
-            startTime={formattedStartDate}
-            endTime={formattedEndDate}
+      <div className="md:mx-24 mx-5 flex flex-col">
+        <ReservationStatus
+          status={data.status}
+          pendingTime={formattedPendingDate}
+          acceptedTime={formattedAcceptedDate}
+          startTime={formattedStartDate}
+          endTime={formattedEndDate}
+        />
+        <div className="mt-5">
+          <ReservationInfo
+            productName={data.Product.name}
+            price={data.Product.price}
+            totalPrice={data.Product.price}
+            category={data.Product.category}
+            quantity={data.Product.quantity}
+            shopId={data.Product.vendor.username}
           />
-          <div className="mt-5">
-            <ReservationInfo
-              productName={data.Product.name}
-              price={data.Product.price}
-              totalPrice={data.Product.price}
-              category={data.Product.category}
-              quantity={data.Product.quantity}
-              shopId={data.Product.vendor.username}
-            />
-          </div>
-          <div className="self-end mt-3">
-            <RatingModal status={"END"} star={3} ratingComment={"Very nice"} />
-          </div>
+        </div>
+        <div className="self-end mt-3">
+          <RatingModal status={"RATED"} star={3} ratingComment={""} />
         </div>
       </div>
     );

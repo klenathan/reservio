@@ -1,22 +1,30 @@
 import { useState } from "react";
 import Modal from "../Modal";
 import Button from "../Button";
-import Input from "../Form/Input";
+import LoadingSpinner from "components/LoadingSpinner";
+import useFetch from "@/Helper/ClientFetch/useFetch";
 import ReactStars from "react-stars";
 import TextareaAutosize from "react-textarea-autosize";
 import { BiCommentDetail } from "react-icons/bi";
 import { StringLiteral } from "typescript";
+import { Review } from "../../../Types";
+import apiClient from "@/config/axios.config";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 interface IRatingModal {
+  id: string;
   status: string;
   star: number;
   ratingComment: string;
 }
 
 const RatingModal = (props: IRatingModal) => {
+  // const { data, error, isLoading } = useFetch<Review>(`reservation/${slugs.params.id}`);
+  // if (isLoading) {
+  //   return <LoadingSpinner />;
+  // }
   const [starValue, setStarValue] = useState<number>(props.star);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [ratingValue, setRatingValue] = useState<number>(0);
   const [commentValue, setCommentValue] = useState<string>(props.ratingComment);
   const [isRatingSubmitted, setIsRatingSubmitted] = useState<boolean>(false);
 
@@ -29,19 +37,19 @@ const RatingModal = (props: IRatingModal) => {
   };
 
   const handleRatingChange = (newRating: number) => {
-    if (newRating === ratingValue) {
+    if (newRating === starValue) {
       // If the selected rating is the same as the current rating value, set it to zero
-      setRatingValue(0);
+      setStarValue(0);
     } else {
       // Otherwise, update the rating value with the new selected rating
-      setRatingValue(newRating);
+      setStarValue(newRating);
     }
   };
 
   const handleRatingSubmit = () => {
     setIsModalOpen(false);
     setIsRatingSubmitted(true);
-    setStarValue(ratingValue);
+    setStarValue(starValue);
   };
 
   const handleCommentChange = (
@@ -50,14 +58,14 @@ const RatingModal = (props: IRatingModal) => {
     setCommentValue(event.target.value);
   };
   const isDisabled = props.status === "RATED";
-  const isSubmitDisabled = ratingValue === 0; // Check if ratingValue is zero
+  const isSubmitDisabled = starValue === 0; // Check if ratingValue is zero
 
   return (
     <>
       {(props.status === "END" || props.status === "RATED") && (
         <div className="flex w-full shadow-xl rounded-md text-xs md:text-lg">
           <Button btnStyle="filled" onClick={handleModalOpen}>
-          {isDisabled ? ("RATED"):("Rate & Feedback")}
+            {isDisabled ? "RATED" : "Rate & Feedback"}
           </Button>
           <Modal
             nameModal={"Rating & Feedback"}
@@ -72,7 +80,7 @@ const RatingModal = (props: IRatingModal) => {
                   color2={"#ffd700"}
                   value={starValue}
                   onChange={handleRatingChange}
-                  edit={isDisabled? false: true}
+                  edit={isDisabled ? false : true}
                 />
               </div>
               <form className="w-4/5 md:w-4/5 relative mt-3 mb-7">

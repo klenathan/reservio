@@ -1,13 +1,6 @@
 import Input from "@/components/Form/Input";
 
 const Price = (props: { control: any; minPrice: any; maxPrice: any }) => {
-  const validatePrice = (value: string) => {
-    if (parseInt(value) < 1000) {
-      return "Price must be greater than or equal to 1000VND";
-    }
-    return true;
-  };
-
   return (
     <div className="flex">
       <div className="flex">
@@ -22,9 +15,7 @@ const Price = (props: { control: any; minPrice: any; maxPrice: any }) => {
           name="minPrice"
           type="number"
           control={props.control}
-          rules={{
-            validate: validatePrice,
-          }}
+          min={1000}
           errors={props.minPrice}
           label=""
         />
@@ -41,9 +32,7 @@ const Price = (props: { control: any; minPrice: any; maxPrice: any }) => {
           name="maxPrice"
           type="number"
           control={props.control}
-          rules={{
-            validate: validatePrice,
-          }}
+          min={1000}
           errors={props.maxPrice}
           label=""
         />

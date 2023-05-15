@@ -28,8 +28,7 @@ const MailVerification = () => {
       .post("auth/confirmation", formData)
       .then((res) => {
         localStorage.removeItem("username");
-        console.log(res);
-        push("/");
+        push("/login");
       })
       .catch((e) => {
         const errorsInfo = e.response.data;

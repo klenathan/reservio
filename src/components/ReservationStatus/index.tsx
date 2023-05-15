@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { AiOutlineFieldTime } from "react-icons/ai";
 import { TiTickOutline } from "react-icons/ti";
 import { AiOutlineLike } from "react-icons/ai";
@@ -32,9 +31,9 @@ const ReservationStatus = ({
 
   const statusIndex = statusOrder.indexOf(status);
 
-  return (  
+  return (
     <div className="flex flex-col md:mt-10 mt-2 border-b-4 border-dashed pb-3 border-gray-400">
-      <h1 className="text-midGreen font-bold text-3xl self-center whitespace-nowrap">
+      <h1 className="text-midGreen font-bold text-xl lg:text-3xl self-center whitespace-nowrap">
         RESERVATION STATUS
       </h1>
       <div className="flex flex-row md:mt-12 mt-5 w-full">
@@ -83,9 +82,7 @@ const ReservationStatus = ({
               </div>
               <div className="font-semibold text-center text-xxs md:text-sm">
                 <div className="font-semibold text-center line-clamp-2">
-                  {s === "PENDING" && (
-                    <div className="">Pending</div>
-                  )}
+                  {s === "PENDING" && <div className="">Pending</div>}
                   {s === "ACCEPTED" && <div>Accepted</div>}
                   {s === "START" && <div>Start</div>}
                   {s === "END" && <div>End</div>}

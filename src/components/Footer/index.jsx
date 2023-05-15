@@ -1,4 +1,3 @@
-import Logo from "../NavBar/logo";
 import { AiOutlineInstagram } from "react-icons/ai";
 import { AiFillFacebook } from "react-icons/ai";
 import { AiOutlineTwitter } from "react-icons/ai";
@@ -22,23 +21,23 @@ const Footer = () => {
             </Link>
           </div>
           <div className="w-full md:w-full lg:w-1/3 text-center whitespace-nowrap">
-            <ul className="text-gray-200 font-bold">
-              <li className="inline-block mr-8 mb-5 lg:mb-0">
+            <ul className="text-gray-200 font-bold md:flex text-base justify-center items-center">
+              <li className="mr-2">
                 <a href="#" className="block">
                   Contact
                 </a>
               </li>
-              <li className="inline-block mr-8">
+              <li className="mr-2">
                 <a href="/information/" className="block">
                   About us
                 </a>
               </li>
-              <li className="inline-block mr-8">
+              <li className="mr-2">
                 <a href="" className="block">
                   Blog
                 </a>
               </li>
-              <li className="inline-block">
+              <li className="">
                 <a href="" className="block">
                   Licenses
                 </a>

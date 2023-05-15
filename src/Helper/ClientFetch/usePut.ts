@@ -4,31 +4,31 @@ import { AxiosError, AxiosResponse } from "axios";
 
 interface PutResult {
   response?: any;
-  isPutting: boolean;
+  isPosting: boolean;
   errors: any;
-  put: (payload: FormData) => Promise<void>;
+  put: (payload?: FormData) => Promise<void>;
 }
 
 export default function usePut(url: string): PutResult {
   const [response, setResponse] = useState<any>();
   const [errors, setErrors] = useState<any>();
-  const [isPutting, setIsPutting] = useState(false);
+  const [isPosting, setIsPosting] = useState(false);
 
   const put = useCallback(
-    async (payload: FormData) => {
+    async (payload?: FormData) => {
       try {
-        setIsPutting(true);
+        setIsPosting(true);
         const res: AxiosResponse = await apiClient.put(url, payload);
         setResponse(res.data);
       } catch (error: any) {
         setErrors(error);
         throw new AxiosError(error);
       } finally {
-        setIsPutting(false);
+        setIsPosting(false);
       }
     },
     [url]
   );
 
-  return { response, errors, isPutting, put };
+  return { response, errors, isPosting, put };
 }

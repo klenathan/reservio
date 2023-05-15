@@ -3,8 +3,6 @@ import { NotFound } from "next/dist/client/components/error";
 import LoadingSpinner from "components/LoadingSpinner";
 import useFetch from "@/Helper/ClientFetch/useFetch";
 import { Reservation } from "../../../../../Types";
-import NavBar from "@/components/NavBar";
-import Head from "next/head";
 import ReservationStatus from "@/components/ReservationStatus";
 import ReservationInfo from "@/components/ReservationInfo";
 import RatingModal from "@/components/RatingModal";

@@ -10,7 +10,6 @@ export default function Profile(slugs: any) {
   const { data, error, isLoading } = useFetch<Vendor>(
     `vendor/${slugs.params.id}`
   );
-  console.log("ehe", data);
   if (isLoading) {
     return (
       <div className="relative h-[calc(100vh_-_10rem)] -top-[5rem] w-full flex flex-col justify-center items-center overflow-hidden -z-10">

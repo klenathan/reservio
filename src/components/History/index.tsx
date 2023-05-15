@@ -8,7 +8,7 @@ const HistoryPage = (props: { reservation: Reservation[] }) => {
   const filteredUserCards = props.reservation.filter(
     (card) => card.status == selectedStatus
   );
-
+  console.log(props.reservation);
   const changeColor = (selectedStatus: string) => {
     switch (selectedStatus) {
       case Status.pending:
@@ -37,7 +37,7 @@ const HistoryPage = (props: { reservation: Reservation[] }) => {
           className={`hover:text-pendingYellow text-xs md:text-base duration-200 ${
             selectedStatus === "PENDING" && "text-pendingYellow"
           }`}
-          onClick={() => setSelectedStatus("PENDING")}
+          onClick={() => setSelectedStatus(Status.pending)}
         >
           PENDING
         </button>
@@ -45,7 +45,7 @@ const HistoryPage = (props: { reservation: Reservation[] }) => {
           className={`hover:text-acceptedBlue duration-200 ${
             selectedStatus === "accepted" && "text-acceptedBlue"
           }`}
-          onClick={() => setSelectedStatus("accepted")}
+          onClick={() => setSelectedStatus(Status.accepted)}
         >
           ACCEPTED
         </button>
@@ -53,7 +53,7 @@ const HistoryPage = (props: { reservation: Reservation[] }) => {
           className={`hover:text-rejectedRed duration-200 ${
             selectedStatus === "rejected" && "text-rejectedRed"
           }`}
-          onClick={() => setSelectedStatus("rejected")}
+          onClick={() => setSelectedStatus(Status.rejected)}
         >
           REJECTED
         </button>
@@ -61,7 +61,7 @@ const HistoryPage = (props: { reservation: Reservation[] }) => {
           className={`hover:text-completedGreen duration-200 ${
             selectedStatus === "completed" && "text-completedGreen"
           }`}
-          onClick={() => setSelectedStatus("completed")}
+          onClick={() => setSelectedStatus(Status.finished)}
         >
           COMPLETED
         </button>

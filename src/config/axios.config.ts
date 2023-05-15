@@ -52,8 +52,6 @@ apiClient.interceptors.response.use(
                 return apiClient(originalRequest);
             } catch
                 (error) {
-                // const {push} = useRouter();
-                // push("/")
                 redirect('/')
             }
         }

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface IHistoryCardProps {
+  rid: string;
   id: string;
   vendorName: string;
   status: string;
@@ -15,7 +16,9 @@ interface IHistoryCardProps {
 
 const HistoryCard: React.FC<IHistoryCardProps> = (props: IHistoryCardProps) => {
   return (
-    <div className={`flex mt-4 border-2 flex-col  w-full shadow-lg cursor-pointer py-4 px-4 rounded-md  border-${props.statusColor}`}>
+    <div
+      className={`flex mt-4 border-2 flex-col  w-full shadow-lg cursor-pointer py-4 px-4 rounded-md  border-${props.statusColor}`}
+    >
       <div className="flex flex-row items-center justify-between mb-3">
         <div className="flex flex-row items-center w-4/5">
           <div className="relative min-w-[2rem] min-h-[2rem] mr-2">
@@ -46,7 +49,7 @@ const HistoryCard: React.FC<IHistoryCardProps> = (props: IHistoryCardProps) => {
         </div>
       </div>
       <Link
-        href={`/detail/${encodeURIComponent(props.id)}`}
+        href={`/reservationStatus/${encodeURIComponent(props.rid)}`}
         className="text-base md:text-xl font-bold"
       >
         <div className="flex md:flex-row flex-col">

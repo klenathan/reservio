@@ -20,7 +20,6 @@ ChartJS.register(
 );
 
 export const options = {
-  indexAxis: 'y' as const,
   elements: {
     bar: {
       borderWidth: 1,
@@ -46,13 +45,13 @@ const data = {
   ],
 };
 
-export function HorizontalBar(props: { data: any }) {
+export function VerticlaBar(props: { data: any }) {
   return (
-    <div className='h-80 flex flex-col items-center justify-center rounded-xl bg-zinc-50'>
+    <div className='w-full flex flex-col items-center justify-center rounded-xl bg-zinc-50'>
       <h1 className='w-full text-center text-xl text-oliveGreen font-bold uppercase'>
-        ratings and feedbacks
+        {props.data.name}
       </h1>
-      <div className='grid place-items-center h-[80%] w-full'>
+      <div className='grid place-items-center w-full'>
         <Bar options={options} data={props.data || data} />
       </div>
     </div>

@@ -1,12 +1,12 @@
-"use client";
-import { NotFound } from "next/dist/client/components/error";
-import LoadingSpinner from "components/LoadingSpinner";
-import useFetch from "@/Helper/ClientFetch/useFetch";
-import { Reservation } from "../../../../../Types";
-import ReservationStatus from "@/components/ReservationStatus";
-import ReservationInfo from "@/components/ReservationInfo";
-import RatingModal from "@/components/RatingModal";
-import { format } from "date-fns";
+'use client';
+import { NotFound } from 'next/dist/client/components/error';
+import LoadingSpinner from 'components/LoadingSpinner';
+import useFetch from '@/Helper/ClientFetch/useFetch';
+import { Reservation } from '../../../../../Types';
+import ReservationStatus from '@/components/ReservationStatus';
+import ReservationInfo from '@/components/ReservationInfo';
+import RatingModal from '@/components/RatingModal';
+import { format } from 'date-fns';
 
 interface ReservationStatusParams {
   params: {
@@ -18,46 +18,35 @@ export default function ReservStatus(slugs: ReservationStatusParams) {
   const { data, error, isLoading } = useFetch<Reservation>(
     `reservation/${slugs.params.id}`
   );
-
-  console.log(slugs);
-
-  console.log(data);
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
   const formattedPendingDate = format(
     new Date(data?.createdAt as string),
-    "MMM-dd-yyyy"
+    'MMM-dd-yyyy'
   );
-  let formattedAcceptedDate = ""; // Set initial value as an empty string
+  let formattedAcceptedDate = ''; // Set initial value as an empty string
   if (data?.acceptedAt) {
     formattedAcceptedDate = format(
       new Date(data.acceptedAt as string),
-      "MMM-dd-yyyy"
+      'MMM-dd-yyyy'
     );
   }
 
-  let formattedStartDate = ""; // Set initial value as an empty string
+  let formattedStartDate = ''; // Set initial value as an empty string
   if (data?.startAt) {
     formattedStartDate = format(
       new Date(data.startAt as string),
-      "MMM-dd-yyyy"
+      'MMM-dd-yyyy'
     );
   }
 
-  let formattedEndDate = ""; // Set initial value as an empty string
+  let formattedEndDate = ''; // Set initial value as an empty string
   if (data?.endAt) {
-    formattedEndDate = format(new Date(data.endAt as string), "MMM-dd-yyyy");
+    formattedEndDate = format(new Date(data.endAt as string), 'MMM-dd-yyyy');
   }
 
-  // console.log(formattedPendingDate);
-
-  // const items = [
-  //     {label: "Home", href: "/"},
-  //     {label: data?., href: `/category?id=${data?.category}`},
-  //     {label: data?.name, href: "/"},
-  // ];
   // if (isLoading) {
   //   return (
   //     <div className="relative h-[calc(100vh_-_10rem)] -top-[5rem] w-full flex flex-col justify-center items-center overflow-hidden -z-10">
@@ -72,7 +61,7 @@ export default function ReservStatus(slugs: ReservationStatusParams) {
 
   if (data) {
     return (
-      <div className="md:mx-24 mx-5 flex flex-col">
+      <div className='md:mx-24 mx-5 flex flex-col'>
         <ReservationStatus
           status={data.status}
           pendingTime={formattedPendingDate}
@@ -80,7 +69,7 @@ export default function ReservStatus(slugs: ReservationStatusParams) {
           startTime={formattedStartDate}
           endTime={formattedEndDate}
         />
-        <div className="mt-5">
+        <div className='mt-5'>
           <ReservationInfo
             productName={data.Product.name}
             price={data.Product.price}
@@ -90,8 +79,14 @@ export default function ReservStatus(slugs: ReservationStatusParams) {
             shopId={data.Product.vendor.username}
           />
         </div>
-        <div className="self-end mt-3">
-          <RatingModal status={"RATED"} star={3} ratingComment={""} />
+        <div className='self-end mt-3'>
+          <RatingModal
+            status={'END'}
+            rating={0}
+            feedback={''}
+            resevationId={data.id}
+            productId={data.Product.id}
+          />
         </div>
       </div>
     );

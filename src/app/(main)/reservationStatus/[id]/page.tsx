@@ -47,18 +47,6 @@ export default function ReservStatus(slugs: ReservationStatusParams) {
     formattedEndDate = format(new Date(data.endAt as string), 'MMM-dd-yyyy');
   }
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="relative h-[calc(100vh_-_10rem)] -top-[5rem] w-full flex flex-col justify-center items-center overflow-hidden -z-10">
-  //       <LoadingSpinner text="Loading product data, please wait..." />
-  //     </div>
-  //   );
-  // }
-
-  // if (isError && !data) {
-  //   return <NotFound />;
-  // }
-
   if (data) {
     return (
       <div className='md:mx-24 mx-5 flex flex-col'>

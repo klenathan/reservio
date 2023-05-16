@@ -11,6 +11,7 @@ const handleCatgoryCountData = (data: any) => {
     labels: [],
     datasets: [{ data: [], backgroundColor: [] }],
   };
+  result.name = 'All time sale by categories';
   data.forEach((category: any, i: number) => {
     result.labels.push(category.category);
     result.datasets[0].data.push(category.count);

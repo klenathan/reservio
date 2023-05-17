@@ -247,6 +247,7 @@ const SignUpForm = () => {
                   multiple={false}
                   onChange={(files: any) => onChange(files[0])}
                   avatar={true}
+                  classname="md:grid-cols-3"
                 />
               )}
             />

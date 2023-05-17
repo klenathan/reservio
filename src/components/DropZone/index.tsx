@@ -9,6 +9,7 @@ interface IDropZone {
   onChange: any;
   avatar?: boolean;
   children?: ReactNode;
+  classname?: string;
 }
 
 function DropZone(props: IDropZone, { ...rest }) {
@@ -152,9 +153,7 @@ function DropZone(props: IDropZone, { ...rest }) {
         {props.children}
       </div>
       <div
-        className={
-          "w-full grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-3 justify-items-center"
-        }
+        className={`w-full grid grid-cols-1 ${props.classname} gap-2 mt-4 md:gap-3 justify-items-center`}
       >
         {thumbs}
       </div>

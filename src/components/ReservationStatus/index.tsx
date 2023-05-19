@@ -14,7 +14,7 @@ interface IReservationStatus {
   endTime: string;
 }
 
-const statusOrder = ["PENDING", "ACCEPTED", "START", "END", "RATED"];
+const statusOrder = ["PENDING", "ACCEPTED", "ONGOING", "FINISHED", "RATED"];
 
 const ReservationStatus = ({
   status,
@@ -65,10 +65,10 @@ const ReservationStatus = ({
                       color={i <= statusIndex ? "#59981A" : "#DFDFDF"}
                     />
                   )}
-                  {s === "START" && (
+                  {s === "ONGOING" && (
                     <MdStart color={i <= statusIndex ? "#59981A" : "#DFDFDF"} />
                   )}
-                  {s === "END" && (
+                  {s === "FINISHED" && (
                     <TiTickOutline
                       color={i <= statusIndex ? "#59981A" : "#DFDFDF"}
                     />
@@ -84,8 +84,8 @@ const ReservationStatus = ({
                 <div className="font-semibold text-center line-clamp-2">
                   {s === "PENDING" && <div className="">Pending</div>}
                   {s === "ACCEPTED" && <div>Accepted</div>}
-                  {s === "START" && <div>Start</div>}
-                  {s === "END" && <div>End</div>}
+                  {s === "ONGOING" && <div>Start</div>}
+                  {s === "FINISHED" && <div>End</div>}
                   {s === "RATED" && <div>Rating</div>}
                 </div>
                 <div className="text-gray-400 whitespace-nowrap text-center">
@@ -93,10 +93,10 @@ const ReservationStatus = ({
                   {!pendingTime && s === "PENDING" && <div>&nbsp;</div>}
                   {s === "ACCEPTED" && <div>{acceptedTime}</div>}
                   {!acceptedTime && s === "ACCEPTED" && <div>&nbsp;</div>}
-                  {s === "START" && <div>{startTime}</div>}
-                  {!startTime && s === "START" && <div>&nbsp;</div>}
-                  {s === "END" && <div>{endTime}</div>}
-                  {!endTime && s === "END" && <div>&nbsp;</div>}
+                  {s === "ONGOING" && <div>{startTime}</div>}
+                  {!startTime && s === "ONGOING" && <div>&nbsp;</div>}
+                  {s === "FINISHED" && <div>{endTime}</div>}
+                  {!endTime && s === "FINISHED" && <div>&nbsp;</div>}
                   {s === "RATED" && <div>&nbsp;</div>}
                 </div>
               </div>

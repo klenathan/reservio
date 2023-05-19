@@ -6,17 +6,10 @@ import Link from "next/link";
 const AboutUs = () => {
   return (
     <div className="container mx-auto md:px-4 md:py-8 ">
-      <h1 className="text-3xl md:text-4xl font-bold mb-6 md:ml-7 text-midGreen">
+      <h1 className="text-3xl md:text-4xl font-bold mb-6 ml-7 text-center md:text-left text-midGreen">
         About Us
       </h1>
-      <div className="md:w-1/2 mb-4 md:mb-0 block">
-        <Image
-          src="/about-us-image.jpg"
-          alt="About Us"
-          width={500}
-          height={300}
-        />
-      </div>
+
       <div className="flex flex-col items-center justify-center py-7 ">
         <div className="md:w-4/5 text-center w-full">
           <p className="text-2xl md:text-3xl font-bold mb-5">

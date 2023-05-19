@@ -24,7 +24,12 @@ const Footer = () => {
             <ul className="text-gray-200 font-bold md:flex text-base justify-center items-center">
               <li className="mr-2">
                 <a href="#" className="block">
-                  Contact
+                  <span
+                    className="block cursor-not-allowed"
+                    title="Not yet available, sorry for the inconvenience!"
+                  >
+                    Contact
+                  </span>
                 </a>
               </li>
               <li className="mr-2">
@@ -33,14 +38,20 @@ const Footer = () => {
                 </a>
               </li>
               <li className="mr-2">
-                <a href="" className="block">
+                <span
+                  className="block cursor-not-allowed"
+                  title="Not yet available, sorry for the inconvenience!"
+                >
                   Blog
-                </a>
+                </span>
               </li>
               <li className="">
-                <a href="" className="block">
-                  Licenses
-                </a>
+                <span
+                  className="block cursor-not-allowed"
+                  title="Not yet available, sorry for the inconvenience!"
+                >
+                  License
+                </span>
               </li>
             </ul>
           </div>
@@ -48,23 +59,43 @@ const Footer = () => {
             <IconContext.Provider value={{ size: "2rem", color: "white" }}>
               <ul className="flex md:justify-center lg:justify-end">
                 <li className="mr-3">
-                  <a href="">
-                    <AiOutlineInstagram> </AiOutlineInstagram>
+                  <a href="#">
+                    <span
+                      className="block cursor-not-allowed"
+                      title="Not yet available, sorry for the inconvenience!"
+                    >
+                      <AiOutlineInstagram> </AiOutlineInstagram>
+                    </span>
                   </a>
                 </li>
                 <li className="mr-3 ">
-                  <a href="">
-                    <AiFillFacebook> </AiFillFacebook>
+                  <a href="#">
+                    <span
+                      className="block cursor-not-allowed"
+                      title="Not yet available, sorry for the inconvenience!"
+                    >
+                      <AiFillFacebook> </AiFillFacebook>
+                    </span>
                   </a>
                 </li>
                 <li className="mr-3">
-                  <a href="">
-                    <AiOutlineTwitter> </AiOutlineTwitter>
+                  <a href="#">
+                    <span
+                      className="block cursor-not-allowed"
+                      title="Not yet available, sorry for the inconvenience!"
+                    >
+                      <AiOutlineTwitter> </AiOutlineTwitter>
+                    </span>
                   </a>
                 </li>
                 <li className="">
-                  <a href="">
-                    <ImGooglePlus></ImGooglePlus>
+                  <a href="#">
+                    <span
+                      className="block cursor-not-allowed"
+                      title="Not yet available, sorry for the inconvenience!"
+                    >
+                      <ImGooglePlus></ImGooglePlus>
+                    </span>
                   </a>
                 </li>
               </ul>

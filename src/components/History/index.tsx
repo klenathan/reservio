@@ -1,4 +1,3 @@
-import ReservationInfo from "../ReservationInfo";
 import { useState } from "react";
 import { Reservation, Status } from "../../../Types";
 import HistoryCard from "../HistoryCard";
@@ -8,7 +7,6 @@ const HistoryPage = (props: { reservation: Reservation[] }) => {
   const filteredUserCards = props.reservation.filter(
     (card) => card.status == selectedStatus
   );
-
   const changeColor = (selectedStatus: string) => {
     switch (selectedStatus) {
       case Status.pending:
@@ -37,31 +35,31 @@ const HistoryPage = (props: { reservation: Reservation[] }) => {
           className={`hover:text-pendingYellow text-xs md:text-base duration-200 ${
             selectedStatus === "PENDING" && "text-pendingYellow"
           }`}
-          onClick={() => setSelectedStatus("PENDING")}
+          onClick={() => setSelectedStatus(Status.pending)}
         >
           PENDING
         </button>
         <button
           className={`hover:text-acceptedBlue duration-200 ${
-            selectedStatus === "accepted" && "text-acceptedBlue"
+            selectedStatus === "ACCEPTED" && "text-acceptedBlue"
           }`}
-          onClick={() => setSelectedStatus("accepted")}
+          onClick={() => setSelectedStatus(Status.accepted)}
         >
           ACCEPTED
         </button>
         <button
           className={`hover:text-rejectedRed duration-200 ${
-            selectedStatus === "rejected" && "text-rejectedRed"
+            selectedStatus === "REJECTED" && "text-rejectedRed"
           }`}
-          onClick={() => setSelectedStatus("rejected")}
+          onClick={() => setSelectedStatus(Status.rejected)}
         >
           REJECTED
         </button>
         <button
           className={`hover:text-completedGreen duration-200 ${
-            selectedStatus === "completed" && "text-completedGreen"
+            selectedStatus === "FINISHED" && "text-completedGreen"
           }`}
-          onClick={() => setSelectedStatus("completed")}
+          onClick={() => setSelectedStatus(Status.finished)}
         >
           COMPLETED
         </button>
@@ -70,6 +68,7 @@ const HistoryPage = (props: { reservation: Reservation[] }) => {
         {filteredUserCards.map((reservation) => (
           <HistoryCard
             key={reservation.id}
+            rid={reservation.id}
             vendorName={reservation.Product?.name}
             status={reservation.status}
             productName={reservation.Product?.name}

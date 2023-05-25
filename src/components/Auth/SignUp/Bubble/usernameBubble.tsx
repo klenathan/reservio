@@ -2,8 +2,7 @@ import React from "react";
 
 interface usernameBubbleProps {
   length: boolean;
-  noConsecutiveSpecialChars: boolean;
-  noStartEndSpecialChars: boolean;
+  noSpecialChars: boolean;
 }
 
 const UsernameBubble: React.FC<usernameBubbleProps> = (
@@ -24,19 +23,10 @@ const UsernameBubble: React.FC<usernameBubbleProps> = (
         </li>
         <li
           className={`${
-            props.noConsecutiveSpecialChars ? "text-green-500" : "text-red-500"
+            props.noSpecialChars ? "text-green-500" : "text-red-500"
           } text-sm md:text-base`}
         >
-          No consecutive special characters:{" "}
-          {props.noConsecutiveSpecialChars ? "✅" : "❌"}
-        </li>
-        <li
-          className={`${
-            props.noStartEndSpecialChars ? "text-green-500" : "text-red-500"
-          } text-sm md:text-base`}
-        >
-          No special characters at start or end:{" "}
-          {props.noStartEndSpecialChars ? "✅" : "❌"}
+          No special characters: {props.noSpecialChars ? "✅" : "❌"}
         </li>
       </ul>
     </div>

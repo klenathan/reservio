@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
-import FormHeader from "components/Form/FormHeader";
-import { AiOutlineClose } from "react-icons/ai";
+import React, { useEffect, useRef } from 'react';
+import FormHeader from 'components/Form/FormHeader';
+import { AiOutlineClose } from 'react-icons/ai';
 
 interface ModalProps {
   children?: React.ReactNode;
@@ -14,7 +14,7 @@ const Modal: React.FC<ModalProps> = (props: ModalProps) => {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
+      if (event.key === 'Escape') {
         props.onClose();
       }
     };
@@ -27,29 +27,29 @@ const Modal: React.FC<ModalProps> = (props: ModalProps) => {
       }
     };
     if (props.isOpen) {
-      document.body.style.overflow = "hidden";
-      document.addEventListener("keydown", handleKeyDown);
-      document.addEventListener("mousedown", handleClickOutside);
+      document.body.style.overflow = 'hidden';
+      document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener('mousedown', handleClickOutside);
     }
     return () => {
-      document.body.style.overflow = "auto";
-      document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.body.style.overflow = 'auto';
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [props, props.isOpen, props.onClose]);
 
   if (!props.isOpen) return null;
 
   return (
-    <div className="flex fixed inset-0 z-[9999] justify-center items-center bg-neutral-700 bg-opacity-50">
-      <div className="flex items-end justify-center lg:w-max z-50">
+    <div className='flex fixed inset-0 z-[9999] justify-center items-center bg-neutral-700 bg-opacity-50'>
+      <div className='flex items-end justify-center lg:w-max z-50'>
         <div
           ref={modal}
-          className="bg-white rounded-lg  w-fit mx-auto md:max-w-screen-md lg:max-w-screen-lg 2k:max-w-screen-2xl "
+          className='bg-white rounded-lg w-fit mx-auto md:max-w-screen-md lg:max-w-screen-lg 2k:max-w-screen-2xl '
         >
-          <div className="flex shadow-xl sticky top-0 bg-white z-50 px-6 py-6 rounded-t-lg items-center justify-between w-full ">
+          <div className='flex shadow-xl sticky top-0 bg-white z-50 px-6 py-6 rounded-t-lg items-center justify-between w-full '>
             <FormHeader name={props.nameModal} />
-            <button className="ml-4" onClick={props.onClose}>
+            <button className='ml-4' onClick={props.onClose}>
               <AiOutlineClose size={30} />
             </button>
           </div>

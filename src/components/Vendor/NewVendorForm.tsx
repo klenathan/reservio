@@ -19,7 +19,7 @@ const NewVendorForm = () => {
   } = useForm<IFromInput>();
 
   const onSubmit: SubmitHandler<IFromInput> = async (data) => {
-    const formData = new FormData();
+    const formData = new FormData(); 
     formData.append("description", data.description as string);
     formData.append("name", data.name as string);
     formData.append("address", data.address as string);

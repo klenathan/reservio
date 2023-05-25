@@ -1,11 +1,11 @@
-import TableComponent from "@/app/admin/components/TableComponent";
-import apiClient from "@/config/axios.config";
-import axios from "axios";
-import React from "react";
-import { useEffect, useState } from "react";
-import { Column, useTable } from "react-table";
-import { User } from "../../../Types";
-import LoadingSpinner from "../LoadingSpinner";
+import TableComponent from '@/app/admin/components/TableComponent';
+import apiClient from '@/config/axios.config';
+import axios from 'axios';
+import React from 'react';
+import { useEffect, useState } from 'react';
+import { Column, useTable } from 'react-table';
+import { User } from '../../../Types';
+import LoadingSpinner from '../LoadingSpinner';
 
 interface Vendor {
   id: string;
@@ -32,61 +32,47 @@ const Table = () => {
     () =>
       [
         {
-          Header: "id",
-          accessor: "id",
+          Header: 'id',
+          accessor: 'id',
         },
         {
-          Header: "Username",
-          accessor: "username",
+          Header: 'Username',
+          accessor: 'username',
         },
         {
-          Header: "Email",
-          accessor: "email",
+          Header: 'Email',
+          accessor: 'email',
         },
         {
-          Header: "name",
-          accessor: "firstName",
+          Header: 'name',
+          accessor: 'firstName',
         },
         {
-          Header: "Phone",
-          accessor: "phoneNo",
+          Header: 'Phone',
+          accessor: 'phoneNo',
         },
         {
-          Header: "Status",
-          accessor: "status",
+          Header: 'Status',
+          accessor: 'status',
         },
         {
-          Header: "Create date",
-          accessor: "createdAt",
+          Header: 'Create date',
+          accessor: 'createdAt',
         },
         {
-          Header: "Updated date",
-          accessor: "updatedAt",
+          Header: 'Updated date',
+          accessor: 'updatedAt',
         },
         {
-          Header: "Vendor",
-          accessor: "vendor",
+          Header: 'Vendor',
+          accessor: 'vendor',
           Cell: ({ cell: { value } }) => {
             return value != null ? (
-              <p className="font-semibold text-green-400">True</p>
+              <p className='font-semibold text-green-400'>True</p>
             ) : (
-              <p className="font-semibold text-red-400">False</p>
+              <p className='font-semibold text-red-400'>False</p>
             );
           },
-        },
-        {
-          width: 300,
-          Header: "Action",
-          Cell: (cell: any) => (
-            <button
-              className="underline font-semibold hover:text-red-400"
-              onClick={() => {
-                console.log("clicked", cell.row.values.id);
-              }}
-            >
-              Deactivate
-            </button>
-          ),
         },
       ] as Column<IUser>[],
     []
@@ -105,8 +91,8 @@ const Table = () => {
   }, []);
 
   return (
-    <div className="w-full border-t">
-      <h1 className="w-full text-center text-xl text-oliveGreen font-bold uppercase p-4">
+    <div className='w-full border-t'>
+      <h1 className='w-full text-center text-xl text-oliveGreen font-bold uppercase p-4'>
         All Accounts:
       </h1>
       {users.length > 0 ? (

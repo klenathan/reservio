@@ -30,6 +30,7 @@ export default function SideBar(props: { className?: string }) {
         <SideNavBtn href="/admin">Home</SideNavBtn>
         <SideNavBtn href="/admin/users">Users management</SideNavBtn>
         <SideNavBtn href="/admin/vendors">Vendor management</SideNavBtn>
+        <SideNavBtn href="/admin/voucher">Voucher management</SideNavBtn>
       </div>
     </div>
   );

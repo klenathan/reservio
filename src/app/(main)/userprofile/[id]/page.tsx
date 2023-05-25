@@ -8,6 +8,7 @@ import { User } from "../../../../../Types";
 
 export default function Profile(slugs: any) {
   const { data, error, isLoading } = useFetch<User>(`user/${slugs.params.id}`);
+
   if (isLoading) {
     return (
       <div className="relative h-[calc(100vh_-_10rem)] -top-[5rem] w-full flex flex-col justify-center items-center overflow-hidden -z-10">
@@ -15,6 +16,7 @@ export default function Profile(slugs: any) {
       </div>
     );
   }
+
   if (error || !data) {
     return <NotFound />;
   }

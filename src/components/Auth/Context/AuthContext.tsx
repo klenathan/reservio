@@ -1,14 +1,9 @@
 "use client";
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { User } from "../../../../Types";
+import {createContext, ReactNode, useContext, useEffect, useState,} from "react";
+import {User} from "../../../../Types";
 import axios from "axios";
 import apiClient from "@/config/axios.config";
+import {useRouter} from "next/navigation";
 
 type AuthContextType = {
   user: User | null;
@@ -88,12 +83,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setIsLogin(true);
   };
 
+  const router = useRouter()
+
   const logout = () => {
     sessionStorage.removeItem("accessToken");
     sessionStorage.removeItem("userData");
     localStorage.removeItem("refreshToken");
     setUser(null);
     setIsLogin(false);
+    router.refresh();
   };
 
   const value = {

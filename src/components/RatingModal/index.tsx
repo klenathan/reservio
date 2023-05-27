@@ -44,7 +44,7 @@ const RatingModal = (props: IRatingModal) => {
     setCommentValue(event.target.value);
   };
 
-  const isDisabled = props.status;
+  const isDisabled = props.status == "RATED" ? true : false;
   const isSubmitDisabled = starValue === 0; // Check if ratingValue is zero
   const { response, isPosting, post } = usePost(`review`);
 
@@ -55,6 +55,7 @@ const RatingModal = (props: IRatingModal) => {
 
   const onSubmit: SubmitHandler<IRatingModal> = async (data) => {
     const formData = new FormData();
+    console.log(starValue, commentValue, productId, reservationId)
 
     formData.append("rating", starValue as unknown as string);
     formData.append("feedback", commentValue);
@@ -76,7 +77,7 @@ const RatingModal = (props: IRatingModal) => {
       {(props.status === "FINISHED" || props.status === "RATED") && (
         <div className="flex w-full shadow-xl rounded-md text-xs md:text-lg">
           <Button btnStyle="filled" onClick={handleModalOpen}>
-            {isDisabled == "RATED" ? "RATED" : "Rate & Feedback"}
+            {isDisabled ? "RATED" : "Rate & Feedback"}
           </Button>
           <Modal
             nameModal={"Rating & Feedback"}
@@ -95,7 +96,7 @@ const RatingModal = (props: IRatingModal) => {
                     color2={"#ffd700"}
                     value={starValue}
                     onChange={handleRatingChange}
-                    edit={isDisabled == "RATED" ? false : true}
+                    edit={isDisabled ? false : true}
                   />
                 </div>
                 <div className="flex justify-center items-center">
@@ -131,7 +132,7 @@ const RatingModal = (props: IRatingModal) => {
                       : "bg-gradient-to-tr from-midGreen to-limeGreen"
                   }`}
                   btnStyle="custom"
-                  disabled={isSubmitDisabled || isRatingSubmitted || isDisabled == "RATED"}
+                  disabled={isSubmitDisabled || isRatingSubmitted || isDisabled}
                 >
                   Submit Rating
                 </Button>

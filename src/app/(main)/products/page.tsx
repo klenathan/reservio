@@ -232,7 +232,11 @@ export default function Category(slugs: any) {
                             key={service.id}
                             fallback={<LoadingSpinner />}
                           >
-                            <Card key={service.id} service={service} />
+                            <Card
+                              key={service.id}
+                              service={service}
+                              display={false}
+                            />
                           </Suspense>
                         );
                       })}

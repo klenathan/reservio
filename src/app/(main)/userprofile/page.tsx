@@ -45,6 +45,7 @@ export default function Profile(slugs: any) {
   }
 
   return (
+<<<<<<< HEAD:src/app/(main)/userprofile/page.tsx
     <div>
       {sessionStorageErr == 0 ? (
         <div className="flex flex-col md:flex-row  md:pt-12 m-2 justify-center">
@@ -74,6 +75,15 @@ export default function Profile(slugs: any) {
           <p className="text-2xl">Unknown Error, please contact support</p>
         </div>
       )}
+=======
+    <div className="flex flex-col lg:flex-row  lg:pt-12 m-2 justify-center">
+      <div className="lg:pr-12">
+        <UserProfile user={data} />
+      </div>
+      <div className="flex flex-col w-full lg:w-3/5">
+        <HistoryPage reservation={data.reservations} />
+      </div>
+>>>>>>> habui:src/app/(main)/userprofile/[id]/page.tsx
     </div>
   );
 }

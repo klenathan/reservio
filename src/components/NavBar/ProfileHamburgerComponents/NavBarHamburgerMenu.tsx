@@ -74,9 +74,7 @@ const NavBarHamburgerMenu: React.FC<IHamburgerMenuProps> = (
       {props.isLogin ? (
         <>
           <HamburgerMenuChild
-            href={`/userprofile/${encodeURIComponent(
-              props.user?.username as string
-            )}`}
+            href={`/userprofile`}
           >
             My Profile
           </HamburgerMenuChild>

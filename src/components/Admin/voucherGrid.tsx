@@ -45,7 +45,7 @@ const VoucherGrid = (props: {}) => {
   ) : (
     <div className="grid grid-cols-4 pb-10 place-items-center">
       {data.map((discount) => {
-        return <DiscountCard discount={discount} />;
+        return <DiscountCard key={discount.id} discount={discount} />;
       })}
     </div>
   );

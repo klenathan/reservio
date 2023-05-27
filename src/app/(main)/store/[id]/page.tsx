@@ -1,14 +1,14 @@
 'use client';
 import Store from 'components/Store';
 import Modal from '@/components/Modal';
-import { AiOutlinePlusCircle } from 'react-icons/ai';
-import { lazy, Suspense, useState } from 'react';
+import {AiOutlinePlusCircle} from 'react-icons/ai';
+import {lazy, Suspense, useState} from 'react';
 import AddProduct from '@/components/Store/AddProduct';
-import { Vendor } from '../../../../../Types';
+import {Vendor} from '../../../../../Types';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import { NotFound } from 'next/dist/client/components/error';
+import {NotFound} from 'next/dist/client/components/error';
 import useFetch from '@/Helper/ClientFetch/useFetch';
-import { useAuth } from '@/components/Auth/Context/AuthContext';
+import {useAuth} from '@/components/Auth/Context/AuthContext';
 
 const Card = lazy(() => import('@/components/Card'));
 
@@ -60,7 +60,7 @@ const Page = (slugs: any) => {
                 >
                   <div
                     className={
-                      'overflow-auto h-[calc(100vh_-_10rem)] space-y-4 py-6 px-1.5 md:px-6 lg:px-10 snap-both snap-mandatory scroll-smooth'
+                      'overflow-auto h-[calc(100vh_-_10rem)] space-y-4 py-6 px-1.5 md:px-6 lg:px-10 snap-both snap-mandatory scroll-smooth '
                     }
                   >
                     <AddProduct />

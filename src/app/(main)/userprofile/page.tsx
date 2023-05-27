@@ -11,7 +11,7 @@ import Link from "next/link";
 export default function Profile(slugs: any) {
   // const { data, error, isLoading } = useFetch<User>(`user/${slugs.params.id}`);
 
-  const [url, setUrl] = useState("/");
+  const [url, setUrl] = useState<string | null>(null);
   const { data, error, isLoading } = useFetch<User>(url);
   const [sessionStorageErr, setSessionStorageErr] = useState(0);
 
@@ -29,6 +29,7 @@ export default function Profile(slugs: any) {
       setSessionStorageErr(1);
       return;
     }
+    setUrl(`/user/${userData.username}`);
   }, []);
 
   if (isLoading) {
@@ -51,7 +52,9 @@ export default function Profile(slugs: any) {
             <UserProfile user={data} />
           </div>
           <div className="flex flex-col w-full md:w-3/5">
-            <HistoryPage reservation={data.reservations} />
+            {data.reservations && (
+              <HistoryPage reservation={data.reservations} />
+            )}
           </div>
         </div>
       ) : sessionStorageErr == 1 ? (

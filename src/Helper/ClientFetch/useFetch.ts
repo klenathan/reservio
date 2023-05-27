@@ -8,13 +8,17 @@ interface FetchResult<T> {
   isLoading: boolean;
 }
 
-export default function useFetch<T>(url: string): FetchResult<T> {
+export default function useFetch<T>(url: string | null): FetchResult<T> {
   const [data, setData] = useState<T>();
   const [error, setError] = useState<any>();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
+
+    if (!url) {
+      return;
+    }
     apiClient
       .get<T>(url)
       .then((res) => {

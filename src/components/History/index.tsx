@@ -23,7 +23,7 @@ const HistoryPage = (props: { reservation: Reservation[] }) => {
   };
 
   return (
-    <div className="flex flex-col md:w-full mx-3">
+    <div className="flex flex-col md:w-full">
       <h1 className="text-center text-2xl md:text-4xl text-midGreen font-bold mb-4">
         BOOKING HISTORY
       </h1>

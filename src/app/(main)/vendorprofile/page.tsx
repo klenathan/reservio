@@ -6,7 +6,6 @@ import useFetch from "@/Helper/ClientFetch/useFetch";
 import VerifyPage from "@/components/ReservationVerifying";
 import { User, Vendor } from "../../../../Types";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Modal from "@/components/Modal";
 import NewVendorForm from "@/components/Vendor/NewVendorForm";
@@ -43,7 +42,6 @@ export default function Profile() {
       setSessionStorageErr(2);
     }
   }, []);
-
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };

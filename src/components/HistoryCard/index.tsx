@@ -18,7 +18,7 @@ const HistoryCard: React.FC<IHistoryCardProps> = (props: IHistoryCardProps) => {
   const isRejected = props.status === "REJECTED";
   return (
     <div
-      className={`flex mt-4 border-2 flex-col  w-full shadow-lg cursor-pointer py-4 px-4 rounded-md  border-${props.statusColor}`}
+      className={`flex mt-4 border-2 flex-col  w-full shadow-lg cursor-pointer py-4 px-4 rounded-md border-${props.statusColor}`}
     >
       <div className="flex flex-row items-center justify-between mb-3">
         <div className="flex flex-row items-center w-4/5">

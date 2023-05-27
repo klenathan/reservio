@@ -66,13 +66,23 @@ export default function ReservStatus(slugs: ReservationStatusParams) {
           />
         </div>
         <div className="self-end mt-3">
-          <RatingModal
-            status={data.status}
-            rating={0}
-            feedback={""}
-            resevationId={data.id}
-            productId={data.Product.id}
-          />
+          {data.status === "RATED" && data.Review ? (
+            <RatingModal
+              status={data.status}
+              rating={data?.Review[0].rating}
+              feedback={data?.Review[0].feedback}
+              resevationId={data.id}
+              productId={data.Product.id}
+            />
+          ) : data.status === "FINISHED" ? (
+            <RatingModal
+              status={data.status}
+              rating={0}
+              feedback=""
+              resevationId={data.id}
+              productId={data.Product.id}
+            />
+          ) : null}
         </div>
       </div>
     );

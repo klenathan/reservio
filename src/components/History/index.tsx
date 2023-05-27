@@ -17,6 +17,8 @@ const HistoryPage = (props: { reservation: Reservation[] }) => {
         return "rejectedRed";
       case Status.finished:
         return "completedGreen";
+      case Status.rated:
+        return "ratedOrange";
       default:
         return "";
     }
@@ -28,7 +30,7 @@ const HistoryPage = (props: { reservation: Reservation[] }) => {
         BOOKING HISTORY
       </h1>
       <div
-        className="grid grid-cols-4 place-items-center content-center h-[3rem] 
+        className="grid grid-cols-5 place-items-center content-center h-[3rem] 
     shadow-md font-medium bg-slate-100 text-black text-xs md:text-base"
       >
         <button
@@ -62,6 +64,14 @@ const HistoryPage = (props: { reservation: Reservation[] }) => {
           onClick={() => setSelectedStatus(Status.finished)}
         >
           COMPLETED
+        </button>
+        <button
+          className={`hover:text-ratedOrange duration-200 ${
+            selectedStatus === "RATED" && "text-ratedOrange"
+          }`}
+          onClick={() => setSelectedStatus(Status.rated)}
+        >
+          RATED
         </button>
       </div>
       <div>

@@ -82,6 +82,7 @@ export type Reservation = {
   ProductFixedTimeSlot?: ProductFixedTimeSlot;
   createdAt?: string;
   acceptedAt?: string;
+  Review: Review[];
 };
 
 export type ProductFixedTimeSlot = {
@@ -133,6 +134,7 @@ export enum Status {
   rejected = "REJECTED",
   finished = "FINISHED",
   ongoing = "ONGOING",
+  rated = "RATED",
 }
 
 export type AdminReport = {};

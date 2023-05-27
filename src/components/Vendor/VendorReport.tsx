@@ -74,7 +74,8 @@ export default function VendorReport() {
     return <NotFound />;
   }
   return (
-    <div className={`flex flex-col items-center gap-8 h-screen overflow-auto`}>
+    <div className={`flex flex-col items-center gap-8 my-6
+    lg:grid lg:grid-cols-2`}>
       {data.revenueByCategory && (
         <LineChart data={handleRevenueByDay(data.revenueByDay)} />
       )}

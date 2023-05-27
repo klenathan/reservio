@@ -60,9 +60,9 @@ const Footer = () => {
             <IconContext.Provider value={{ size: "2rem", color: "white" }}>
               <ul className="flex md:justify-center lg:justify-end">
                 <li className="mr-3">
-                  <a href="#">
+                  <a href="https://github.com/klenathan/reservio" target={"_blank"}>
                     <span
-                      className="block cursor-not-allowed"
+                      className="block"
                       title="Not yet available, sorry for the inconvenience!"
                     >
                       <AiOutlineInstagram> </AiOutlineInstagram>
@@ -70,9 +70,9 @@ const Footer = () => {
                   </a>
                 </li>
                 <li className="mr-3 ">
-                  <a href="#">
+                  <a href="https://github.com/klenathan/reservio" target={"_blank"}>
                     <span
-                      className="block cursor-not-allowed"
+                      className="block"
                       title="Not yet available, sorry for the inconvenience!"
                     >
                       <AiFillFacebook> </AiFillFacebook>
@@ -80,22 +80,12 @@ const Footer = () => {
                   </a>
                 </li>
                 <li className="mr-3">
-                  <a href="#">
+                  <a href="https://github.com/klenathan/reservio" target={"_blank"}>
                     <span
-                      className="block cursor-not-allowed"
+                      className="block"
                       title="Not yet available, sorry for the inconvenience!"
                     >
                       <AiOutlineTwitter> </AiOutlineTwitter>
-                    </span>
-                  </a>
-                </li>
-                <li className="">
-                  <a href="#">
-                    <span
-                      className="block cursor-not-allowed"
-                      title="Not yet available, sorry for the inconvenience!"
-                    >
-                      <ImGooglePlus></ImGooglePlus>
                     </span>
                   </a>
                 </li>

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { Discount, Product } from "../../../Types";
 import { useEffect, useRef, useState } from "react";
 import LoadingSpinner from "components/LoadingSpinner";
@@ -33,12 +32,10 @@ const DiscountCard = (props: { discount: Discount }) => {
 };
 
 const VoucherGrid = (props: {}) => {
-  const img_endpoint = process.env.NEXT_PUBLIC_IMG_ENDPOINT;
-
   const { data, error, isLoading } = useFetch<Discount[]>(`service/discount`);
 
   if (!data) {
-    return <>no data</>;
+    return <>no discount</>;
   }
 
   return isLoading ? (

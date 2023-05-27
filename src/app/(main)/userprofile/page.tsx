@@ -8,8 +8,10 @@ import { User } from "../../../../Types";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-export default function Profile() {
-  const [url, setUrl] = useState("/");
+export default function Profile(slugs: any) {
+  // const { data, error, isLoading } = useFetch<User>(`user/${slugs.params.id}`);
+
+  const [url, setUrl] = useState<string | null>(null);
   const { data, error, isLoading } = useFetch<User>(url);
   const [sessionStorageErr, setSessionStorageErr] = useState(0);
 
@@ -23,12 +25,11 @@ export default function Profile() {
 
     const userData = JSON.parse(user);
 
-    if (userData) {
-      setUrl(`user/${userData.username}`);
-    } else {
+    if (!userData) {
       setSessionStorageErr(1);
       return;
     }
+    setUrl(`/user/${userData.username}`);
   }, []);
 
   if (isLoading) {
@@ -45,35 +46,33 @@ export default function Profile() {
 
   return (
     <div>
-      {sessionStorageErr !== 0 ? (
-        sessionStorageErr === 1 ? (
-          <div className="h-[calc(100vh - 10rem)] w-screen flex items-center justify-center">
-            <p className="text-2xl">
-              You are not currently logged in, please{" "}
-              <Link
-                href="/login"
-                className="text-midGreen text-2xl cursor-pointer hover:underline"
-              >
-                login
-              </Link>
-            </p>
-          </div>
-        ) : (
-          <div className="h-[calc(100vh_-_10rem)] w-screen flex items-center justify-center">
-            <p className="text-2xl">Unknown Error, please contact support</p>
-          </div>
-        )
-      ) : data.username ? (
-        <div className="flex flex-col md:flex-row md:pt-12 m-2 justify-center">
+      {sessionStorageErr == 0 ? (
+        <div className="flex flex-col md:flex-row  md:pt-12 m-2 justify-center">
           <div className="lg:pr-12">
             <UserProfile user={data} />
           </div>
           <div className="flex flex-col w-full md:w-3/5">
-            <HistoryPage reservation={data.reservations} />
+            {data.reservations && (
+              <HistoryPage reservation={data.reservations} />
+            )}
           </div>
         </div>
+      ) : sessionStorageErr == 1 ? (
+        <div className="h-[calc(100vh_-_10rem)] w-screen flex items-center justify-center">
+          <p className="text-2xl">
+            You are not currently login, please{" "}
+            <Link
+              href="/login"
+              className="text-midGreen text-2xl cursor-pointer hover:underline"
+            >
+              login
+            </Link>
+          </p>
+        </div>
       ) : (
-        <LoadingSpinner />
+        <div className="h-[calc(100vh_-_10rem)] w-screen flex items-center justify-center">
+          <p className="text-2xl">Unknown Error, please contact support</p>
+        </div>
       )}
     </div>
   );

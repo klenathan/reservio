@@ -1,4 +1,3 @@
-"use client";
 import Logo from "@/components/NavBar/logo";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,7 +10,10 @@ export default function NotFound() {
         <Image className="object-contain" fill alt="NOT FOUND" src="/404.png" />
       </div>
       <Logo logoStyle={"green"} />
-      <Link className="text-2xl hover:underline hover:text-midGreen" href="/">
+      <Link
+        className="text-2xl hover:underline hover:text-midGreen"
+        href="/"
+      >
         Go to homepage
       </Link>
     </div>

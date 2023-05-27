@@ -23,11 +23,11 @@ export default function Profile(slugs: any) {
 
   return (
     <div>
-      <div className="flex flex-col md:flex-row  md:pt-12 m-2 justify-center">
+      <div className="flex flex-col md:flex-col lg:flex-row  lg:pt-12 m-2 justify-center">
         <div className="lg:pr-12">
           <UserProfile user={data.user} />
         </div>
-        <div className="flex flex-col w-full md:w-1/2 ">
+        <div className="flex flex-col w-full lg:w-1/2 ">
           <VerifyPage reservation={data.reservations} />
         </div>
       </div>

@@ -47,8 +47,8 @@ const data = {
 
 export function VerticlaBar(props: { data: any }) {
   return (
-    <div className='w-full flex flex-col items-center justify-center rounded-xl bg-zinc-50'>
-      <h1 className='w-full text-center text-xl text-oliveGreen font-bold uppercase'>
+    <div className='w-full flex flex-col items-center justify-center rounded-xl bg-zinc-50 border-2'>
+      <h1 className='w-full text-center text-xl text-oliveGreen font-bold uppercase pt-2'>
         {props.data.name}
       </h1>
       <div className='grid place-items-center w-full'>

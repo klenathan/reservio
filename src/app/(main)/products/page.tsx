@@ -194,7 +194,7 @@ export default function Category(slugs: any) {
                     "flex justify-center text-3xl font-bold m-auto font-mono"
                   }
                 >
-                  📢 Warning!!!!! 📢
+                  This service category is currently empty
                 </div>
               ) : (
                 ""

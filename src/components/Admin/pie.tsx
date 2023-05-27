@@ -44,7 +44,7 @@ const data = {
 
 export default function PieChart(props: { data?: any }) {
   return (
-    <div className='h-80 flex flex-col items-center justify-center rounded-xl bg-zinc-50'>
+    <div className='h-80 flex flex-col items-center justify-center rounded-xl bg-zinc-50 shadow-lg'>
       <h1 className='w-full text-center text-xl text-oliveGreen font-bold uppercase'>
         {props.data.name}
       </h1>

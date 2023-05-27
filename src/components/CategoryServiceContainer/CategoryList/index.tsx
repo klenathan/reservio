@@ -32,8 +32,8 @@ const CategoryList = (props: categoryListProps) => {
 const CategoryCard = (props: categoryProps) => {
     return (
         <Link
-            className={`snap-center flex lg:flex-col items-center gap-3 my-3 text-center text-lg hover:text-midGreen hover:underline transition-all 
-            ${props.active ? "font-bold underline" : "font-semibold" }`}
+            className={`snap-center flex lg:flex-col font-semibold items-center gap-3 my-3 text-center text-lg hover:text-midGreen hover:underline transition-all 
+            ${props.active ?? "underline text-midGreen"}`}
             href={`/products?category=${encodeURIComponent(props.id)}`}
         >
             <div className="flex justify-center">{props.icon}</div>

@@ -133,9 +133,21 @@ const TotalPrice = (props: TotalPriceProps) => {
         try {
             await post(reservationData)
         } catch (e: any) {
+            const errorInfo = e.message.response.data;
+
+            if (
+                errorInfo.error == "QUANTITY_EXCEEDED" &&
+                errorInfo.message.includes("quantity")
+            ) {
+                setError("quantity", {
+                    type: errorInfo.error,
+                    message: "Not enough quantity left",
+                });
+            }
             console.log(e)
         }
     }
+
 
     return (
         <div
@@ -259,17 +271,17 @@ const TotalPrice = (props: TotalPriceProps) => {
                             className={'overflow-auto h-full max-h-96 space-y-4 py-6 px-1.5 md:px-6 lg:px-10 snap-both snap-mandatory scroll-smooth'}>
                             {data &&
                                 data.map((discount) => (
-                                        <DiscountCard
-                                            key={discount.id}
-                                            id={discount.id as string}
-                                            name={discount.name}
-                                            desc={discount.desc}
-                                            amount={discount.amount}
-                                            startDate={discount.start}
-                                            endDate={discount.end}
-                                            parentCallBack={handleDiscount}
-                                            onClose={handleModalClose}
-                                        />
+                                    <DiscountCard
+                                        key={discount.id}
+                                        id={discount.id as string}
+                                        name={discount.name}
+                                        desc={discount.desc}
+                                        amount={discount.amount}
+                                        startDate={discount.start}
+                                        endDate={discount.end}
+                                        parentCallBack={handleDiscount}
+                                        onClose={handleModalClose}
+                                    />
                                 ))
 
                             }
@@ -300,7 +312,7 @@ const TotalPrice = (props: TotalPriceProps) => {
                             disabled={!isPriceValid}
                             onClick={makeReservation}
                     >
-                        Confirm
+                        {isPosting ? "Loading..." : "Confirm"}
                     </Button>
                     <Button
                         btnStyle={"filled"}

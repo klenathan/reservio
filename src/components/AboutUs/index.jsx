@@ -6,7 +6,7 @@ import Link from "next/link";
 const AboutUs = () => {
   return (
     <div className="container mx-auto md:px-4 md:py-8 ">
-      <h1 className="text-3xl md:text-4xl font-bold mb-6 ml-7 text-center md:text-left text-midGreen">
+      <h1 className="text-3xl md:text-4xl font-bold mb-6 ml-7 text-center text-midGreen">
         About Us
       </h1>
 
@@ -14,7 +14,7 @@ const AboutUs = () => {
         <div className="md:w-4/5 text-center w-full">
           <p className="text-2xl md:text-3xl font-bold mb-5">
             Reservio is a leading platform for booking and making reservations
-            in Southeast Asia and Taiwan.
+            in Southeast Asia and Vietnam.
           </p>
           <p className="text-md md:text-lg text-gray-500">
             Our platform is designed to provide users with a simple, convenient,

@@ -17,7 +17,7 @@ export const geocoderFunction = async (address: string) => {
 
         return data
     } catch (error) {
-        // console.error(error);
+        console.error(error);
 
     }
 

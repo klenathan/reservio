@@ -249,7 +249,11 @@ const AddProduct = () => {
             />
           </div>
           {flexTime.isFieldVisible && (
-            <div className="space-y-2 md:w-96">
+            <div>
+              <div>
+                The flexible type requires total slots can be provided by the
+                service. System will check for time range!
+              </div>
               <Input
                 className="mr-1"
                 name={`quantity`}
@@ -267,6 +271,10 @@ const AddProduct = () => {
           )}
           {fixTime.isFieldVisible ? (
             <div>
+              <div>
+                The fixed type requires the total slots in the specific time
+                range that can be provided by the service!
+              </div>
               <AddDateTime
                 control={control}
                 startDate={handleStartDate}

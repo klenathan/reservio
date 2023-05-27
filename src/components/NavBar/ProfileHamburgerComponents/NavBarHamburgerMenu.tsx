@@ -83,9 +83,7 @@ const NavBarHamburgerMenu: React.FC<IHamburgerMenuProps> = (
           {props.user?.vendor && (
             <>
               <HamburgerMenuChild
-                href={`/vendorprofile/${encodeURIComponent(
-                  props.user?.username as string
-                )}`}
+                href={`/vendorprofile`}
               >
                 Vendor Profile
               </HamburgerMenuChild>

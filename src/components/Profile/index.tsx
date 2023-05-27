@@ -44,7 +44,7 @@ const UserProfile = (props: { user: User }) => {
           {props.user.phoneNo}
         </div>
       </div>
-      <div className="my-2">
+      <div className="my-2 ml-2">
       <UpdateProfileForm />
       </div>
     </div>

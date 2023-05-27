@@ -124,9 +124,13 @@ const UpdateProfileForm = () => {
 
   return (
     <div className="flex w-full shadow-xl rounded-md text-xs md:text-lg">
-      <Button btnStyle="filled" onClick={handleModalOpen}>
-        Update profile
-      </Button>
+        <Button
+          btnStyle="custom"
+          className="py-3 px-3 transition bg-gradient-to-tr from-midGreen to-limeGreen rounded-lg font-semibold text-white shadow hover:shadow-xl"
+          onClick={handleModalOpen}
+        >
+          Update profile
+        </Button>
       <Modal
         nameModal={"Rating & Feedback"}
         isOpen={isModalOpen}

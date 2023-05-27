@@ -11,7 +11,7 @@
 // }
 
 export const metadata = {
-    title: 'Reservio Service',
+    title: 'Services',
   };
    
 export default function Layout({children}: any) {

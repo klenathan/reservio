@@ -37,7 +37,7 @@ const VerifyPage = (props: { reservation: Reservation[] }) => {
   };
 
   return (
-    <div className="flex flex-col md:w-full mx-3  ">
+    <div className="flex flex-col lg:w-full mx-3 ">
       {field === "reservation" && (
         <div>
           <h1 className="text-center text-2xl md:text-4xl text-midGreen font-bold mb-4 whitespace-nowrap">
@@ -76,7 +76,7 @@ const VerifyPage = (props: { reservation: Reservation[] }) => {
       </div>
       {field === "reservation" && (
         <div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1  md:grid-cols-2 gap-12 grid-flow-row-dense my-4 ">
             {filteredUserCards.map((card) => (
               <VendorVerifyCard
                 id={card.id}

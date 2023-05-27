@@ -1,22 +1,23 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import dynamic from 'next/dynamic';
-import { geocoderFunction } from '@/Helper/Geocoder';
+import {geocoderFunction} from '@/Helper/Geocoder';
 import DetailSubtitle from 'components/Detail/DetailSubtitle';
 import ImageGallery from 'components/Detail/ImageGallery/ImageGallery';
 import DetailPageInfo from 'components/Detail/DetailPageInfo';
 import Picture from 'components/Picture';
-import { FaStar } from 'react-icons/fa';
+import {FaStar} from 'react-icons/fa';
 import Loading from '@/app/(main)/detail/loading';
-import { Product } from '../../../Types';
+import {Product} from '../../../Types';
 import Pricing from 'components/Detail/Pricing/Pricing';
 import FloatingButtonPricing from 'components/Detail/Pricing/FloatingButtonPricing';
-import { useAuth } from 'components/Auth/Context/AuthContext';
+import {useAuth} from 'components/Auth/Context/AuthContext';
 
 const Map = dynamic(() => import('components/Map/Map'), { ssr: false });
 
 const DetailPage = (props: { service: Product }) => {
   const [lat, setLat] = useState<number | null>(null);
   const [lng, setLng] = useState<number | null>(null);
+  const [isError, setError] = useState<boolean>(false)
   const { user } = useAuth();
 
   const genGeocoder = async () => {
@@ -27,7 +28,7 @@ const DetailPage = (props: { service: Product }) => {
     genGeocoder().then((d) => {
       setLat(parseFloat(d[0].lat));
       setLng(parseFloat(d[0].lon));
-    });
+    }).catch((e) => setError(true));
   }
 
   return (
@@ -100,7 +101,7 @@ const DetailPage = (props: { service: Product }) => {
       <div className={'border-b-2 border-gray-300 w-full pb-2 space-y-7 mt-7'}>
         <div className={'text-gray-700 font-bold text-2xl mb-3'}>Direction</div>
         <div className={'relative w-full h-80 lg:w-3/4 lg:h-96 m-auto z-0'}>
-          {lat !== null && lng !== null ? (
+          {lat !== null && lng !== null && isError ? (
             <Map latitude={lat} longitude={lng} scrollWheelZoom={false} />
           ) : (
             <div className={'text-2xl text-center font-bold'}>

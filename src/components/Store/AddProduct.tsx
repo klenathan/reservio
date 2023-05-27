@@ -9,6 +9,7 @@ import AddDateTime from "./AddDateTime";
 import usePost from "@/Helper/ClientFetch/usePost";
 import DropZone from "components/DropZone";
 import {AiOutlineCloudUpload} from "react-icons/ai";
+import {useRouter} from "next/navigation";
 
 interface IFromInput {
     name: string;
@@ -31,15 +32,21 @@ const AddProduct = () => {
         isFieldVisible: false,
     });
     const [moreDate, setMoreDate] = useState(0);
-    const [category, setCategory] = useState<string>("");
+    const [category, setCategory] = useState<string>('Others');
     const {response, isPosting, post} = usePost(`service`);
 
+    console.log('category', category)
     const {
         handleSubmit,
         control,
         formState: {errors},
         setValue,
-    } = useForm<IFromInput | any>();
+    } = useForm<IFromInput | any>({
+        defaultValues: {
+            address: "Ho Chi Minh",
+
+        }
+    });
 
     const validatePrice = (value: string) => {
         if (parseInt(value) < 1000) {
@@ -71,6 +78,10 @@ const AddProduct = () => {
         }
     }, [flexTime, fixTime, setValue]);
 
+    useEffect(() => {
+        setValue("category", category);
+    }, [category])
+
     const onSubmit: SubmitHandler<IFromInput | any> = async (data) => {
         console.log(data)
         const formData = new FormData();
@@ -79,6 +90,7 @@ const AddProduct = () => {
         formData.append("price", data.price as string);
         formData.append("category", data.category as string);
         formData.append("type", data.type as string);
+        formData.append('address', data.address as string)
         if (data.fromstart && data.tostart && data.quantitystart) {
             formData.append(
                 "timeSlot[]",
@@ -107,21 +119,24 @@ const AddProduct = () => {
             );
         }
 
-
         for (let i = 0; i < data.images.length; i++) {
             formData.append("images", data.images[i]);
         }
 
+
         try {
-          await post(formData);
+            await post(formData);
         } catch (errors: any) {
-          console.log(errors);
+            console.log(errors);
         }
     };
 
-    if(response) {
-
-    }
+    const router = useRouter()
+    useEffect(() => {
+        if (response != undefined) {
+            router.push('/')
+        }
+    }, [response])
 
     const fixTimeHandle = () => {
         setFixTime((prevFixTime) => {
@@ -174,6 +189,14 @@ const AddProduct = () => {
                     errors={errors.name}
                     placeholder={"e.g. Awesome Metal Chip"}
                 />
+                {/*Address*/}
+                <Input
+                    name={"address"}
+                    label={"Address"}
+                    type={"text"}
+                    control={control}
+                    errors={errors.address}
+                />
                 {/*Price*/}
                 <Input
                     name={"price"}
@@ -198,7 +221,6 @@ const AddProduct = () => {
                         selectedVal={category}
                         handleChange={(val: string) => {
                             setCategory(val);
-                            setValue("category", val);
                         }}
                     />
                 </div>

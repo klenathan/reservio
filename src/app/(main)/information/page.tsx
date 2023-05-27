@@ -16,7 +16,7 @@ export default function Information() {
           className="px-0 object-cover"
         />
       </div>
-      <AboutUs></AboutUs>
+      <AboutUs/>
     </div>
   );
 }

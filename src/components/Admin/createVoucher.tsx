@@ -8,6 +8,7 @@ import { AiOutlineCloudUpload } from "react-icons/ai";
 import AddDateTime from "../Store/AddDateTime";
 import TopDealContainer from "../HomePageServiceContainer/discount";
 import FormHeader from "../Form/FormHeader";
+import VoucherGrid from "./voucherGrid";
 interface IFromInput {
   name: string;
   desc: string;
@@ -119,7 +120,10 @@ const CreateVoucher = () => {
           )}
         />
       </Form>
-      <TopDealContainer />
+
+      <VoucherGrid />
+
+      {/* <TopDealContainer /> */}
     </div>
   );
 };

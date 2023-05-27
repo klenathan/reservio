@@ -5,9 +5,10 @@ import { IconContext } from "react-icons";
 import { ImGooglePlus } from "react-icons/im";
 import Link from "next/link";
 
+// [#002e24]
 const Footer = () => {
   return (
-    <div className="bg-[#002e24] mt-20">
+    <div className="bg-midGreen mt-20">
       <div className="container mx-auto md:px-24 md:py-7">
         <div className="flex flex-col lg:flex-row flex-wrap items-center md:justify-evenly border-b-2 py-4">
           <div className="w-full md:w-1/3">

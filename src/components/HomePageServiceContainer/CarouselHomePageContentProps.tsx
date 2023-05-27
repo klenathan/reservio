@@ -10,19 +10,27 @@ const CarouselHomePageContent = (props: CarouselHomePageContentProps) => {
   // relative w-full flex-[1] flex justify-center h-[25vh] lg:flex-[2]
   return (
     <div className="lg:flex max-w-7xl w-full p-2">
-      <div className="flex justify-center relative lg:flex-[2] h-48 md:h-full">
+      <Link
+        href={`/detail/${encodeURIComponent(props.service.id)}`}
+        className="flex justify-center relative lg:flex-[2] h-48 md:h-full"
+      >
         <Image
           src={process.env.NEXT_PUBLIC_IMG_ENDPOINT + props.service.images[0]}
           className="animate-fadeIn rounded md:rounded-none object-cover"
           alt={props.service.name}
           fill
         />
-      </div>
+      </Link>
 
       <div className="lg:m-10 flex flex-col items-center lg:flex-[3] lg:items-start">
-        <h1 className="lg:text-3xl lg:text-left text-xl italic text-oliveGreen font-bold text-center line-clamp-1">
+        <Link
+          href={`/detail/${encodeURIComponent(props.service.id)}`}
+          className="lg:text-3xl lg:text-left text-xl italic 
+        text-oliveGreen font-bold text-center line-clamp-1
+        hover:underline"
+        >
           {props.service.name}
-        </h1>
+        </Link>
         <div className="font-medium h-6 line-clamp-1">
           {props.service.address}
         </div>
@@ -36,7 +44,7 @@ const CarouselHomePageContent = (props: CarouselHomePageContentProps) => {
           href={`/detail/${encodeURIComponent(props.service.id)}`}
           className="flex flex-col w-2/3 lg:w-1/3 shadow-xl rounded-md md:my-8 "
         >
-          <Button btnStyle="filled" >Reserve Now</Button>
+          <Button btnStyle="filled">Reserve Now</Button>
         </Link>
       </div>
     </div>

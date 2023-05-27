@@ -1,10 +1,10 @@
 import Input from '../Form/Input';
 import TimePicker from 'components/Detail/Pricing/FlexiblePricing/TimePicker';
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Datepicker from 'react-tailwindcss-datepicker';
-import { getUnixTime, set, subDays } from 'date-fns';
-import { PopoverDirectionType } from 'react-tailwindcss-datepicker/dist/types';
-import { BsCalendar3 } from 'react-icons/bs';
+import {getUnixTime, set, subDays} from 'date-fns';
+import {PopoverDirectionType} from 'react-tailwindcss-datepicker/dist/types';
+import {BsCalendar3} from 'react-icons/bs';
 
 interface addingDateProps {
   handleDateChange: any;
@@ -39,8 +39,8 @@ const AddingDate = (props: addingDateProps) => {
             'relative w-full md:w-96 border border-limeGreen rounded-lg max-h'
           }
           inputClassName={
-            'relative transition-all duration-300 py-2.5 pl-2 pr-10 w-full rounded-lg text-sm placeholder-neutral-400 ' +
-            'focus:ring disabled:opacity-40 disabled:cursor-not-allowed focus:border-lime-500 focus:ring-lime-500/20'
+            'relative transition-all duration-300 py-2.5 pl-2 pr-10 w-full h-full rounded-lg text-sm placeholder-neutral-400 outline-none focus:ring disabled:opacity-40 disabled:cursor-not-allowed focus:border-lime-800 focus:ring-lime-500/20'
+
           }
           value={props.dateRange}
           primaryColor={'lime'}

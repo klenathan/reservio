@@ -1,11 +1,11 @@
 "use client";
 import UserProfile from "@/components/Profile";
 import HistoryPage from "@/components/History";
-import { NotFound } from "next/dist/client/components/error";
+import {NotFound} from "next/dist/client/components/error";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import useFetch from "@/Helper/ClientFetch/useFetch";
-import { User } from "../../../../Types";
-import { useEffect, useState } from "react";
+import {User} from "../../../../Types";
+import {useEffect, useState} from "react";
 import Link from "next/link";
 
 export default function Profile(slugs: any) {
@@ -45,7 +45,6 @@ export default function Profile(slugs: any) {
   }
 
   return (
-<<<<<<< HEAD:src/app/(main)/userprofile/page.tsx
     <div>
       {sessionStorageErr == 0 ? (
         <div className="flex flex-col md:flex-row  md:pt-12 m-2 justify-center">
@@ -75,15 +74,6 @@ export default function Profile(slugs: any) {
           <p className="text-2xl">Unknown Error, please contact support</p>
         </div>
       )}
-=======
-    <div className="flex flex-col lg:flex-row  lg:pt-12 m-2 justify-center">
-      <div className="lg:pr-12">
-        <UserProfile user={data} />
-      </div>
-      <div className="flex flex-col w-full lg:w-3/5">
-        <HistoryPage reservation={data.reservations} />
-      </div>
->>>>>>> habui:src/app/(main)/userprofile/[id]/page.tsx
     </div>
   );
 }

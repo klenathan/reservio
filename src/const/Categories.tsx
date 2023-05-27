@@ -1,8 +1,7 @@
 import {AiFillCar, AiOutlinePlusCircle} from "react-icons/ai";
 import {GiMoneyStack} from "react-icons/gi";
-import {GrHostMaintenance} from "react-icons/gr";
 import {IoFastFoodOutline, IoStorefrontOutline} from "react-icons/io5";
-import {MdCastForEducation, MdOutlineBalance, MdOutlineHealthAndSafety,} from "react-icons/md";
+import {MdCastForEducation, MdHomeRepairService, MdOutlineBalance, MdOutlineHealthAndSafety,} from "react-icons/md";
 import {BsHospital} from "react-icons/bs";
 
 export const categories = [
@@ -34,7 +33,7 @@ export const categories = [
   {
     id: "Maintenance_N_repair",
     category: "Maintenance and Repair",
-    icon: <GrHostMaintenance />,
+    icon: <MdHomeRepairService />,
   },
   {
     id: "F_N_B",

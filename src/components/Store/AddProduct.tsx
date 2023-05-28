@@ -1,15 +1,15 @@
-import { categories } from "@/const/Categories";
-import { useEffect, useState } from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { Category } from "../../../Types";
+import {categories} from "@/const/Categories";
+import {useEffect, useState} from "react";
+import {Controller, SubmitHandler, useForm} from "react-hook-form";
+import {Category} from "../../../Types";
 import Form from "../Form";
 import Input from "../Form/Input";
 import SearchableDropdown from "../SearchableDropdown";
 import AddDateTime from "./AddDateTime";
 import usePost from "@/Helper/ClientFetch/usePost";
 import DropZone from "components/DropZone";
-import { AiOutlineCloudUpload } from "react-icons/ai";
-import { useRouter } from "next/navigation";
+import {AiOutlineCloudUpload} from "react-icons/ai";
+import {useRouter} from "next/navigation";
 
 interface IFromInput {
   name: string;
@@ -163,6 +163,7 @@ const AddProduct = () => {
         endDate={handleEndDate}
         quantity={errors.quantity}
         index={i}
+        isQuantity={true}
       />
       <div className="borde w-fit p-2 rounded-md border-solid border-oliveGreen font-semibold text-oliveGreen shadow hover:bg-limeGreen hover:bg-opacity-10 hover:shadow-md">
         <input type="button" onClick={addMoreDate} value="Add More Date" />
@@ -281,6 +282,7 @@ const AddProduct = () => {
                 endDate={handleEndDate}
                 quantity={errors.quantity}
                 index={"start"}
+                isQuantity={true}
               />
               <div className="borde w-fit p-2 rounded-md border-solid border-oliveGreen font-semibold text-oliveGreen shadow hover:bg-limeGreen hover:bg-opacity-10 hover:shadow-md">
                 <input

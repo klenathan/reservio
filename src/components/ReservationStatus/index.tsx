@@ -25,10 +25,6 @@ const ReservationStatus = ({
 }: IReservationStatus) => {
   const [selectedStatus, setSelectedStatus] = useState("");
 
-  // const handleStatusClick = (status: string) => {
-  //   setSelectedStatus(status === selectedStatus ? "" : status);
-  // };
-
   const statusIndex = statusOrder.indexOf(status);
 
   return (

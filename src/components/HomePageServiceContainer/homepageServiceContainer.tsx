@@ -15,7 +15,7 @@ const HomePageServiceContainer = () => {
   return (
     <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 md:grid-cols-2 place-items-center max-w-7xl">
       {data?.map((service) => {
-        return <Card key={service.id} service={service} />;
+        return <Card key={service.id} service={service} display={false} />;
       })}
     </div>
   );

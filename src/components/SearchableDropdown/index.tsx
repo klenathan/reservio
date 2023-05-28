@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
-import { Category, City } from "../../../Types";
+import {useEffect, useRef, useState} from "react";
+import {MdArrowDropDown, MdArrowDropUp} from "react-icons/md";
+import {Category, City} from "../../../Types";
+
 interface ISearchableDropdown {
   options?: City | Category;
   label: string;
@@ -10,7 +11,7 @@ interface ISearchableDropdown {
 }
 
 const SearchableDropdown: React.FC<ISearchableDropdown> = (props) => {
-  const [query, setQuery] = useState<string>("");
+  const [query, setQuery] = useState<string>("Others");
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const inputRef = useRef(null);
@@ -34,7 +35,7 @@ const SearchableDropdown: React.FC<ISearchableDropdown> = (props) => {
     if (query) return query;
     if (props.selectedVal) return props.selectedVal;
 
-    return "";
+    return 'Others';
   };
 
   const filter = (options: any) => {

@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import Form from "../Form";
 import Input from "../Form/Input";
 import usePost from "@/Helper/ClientFetch/usePost";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import {Controller, SubmitHandler, useForm} from "react-hook-form";
 import DropZone from "../DropZone";
-import { AiOutlineCloudUpload } from "react-icons/ai";
+import {AiOutlineCloudUpload} from "react-icons/ai";
 import AddDateTime from "../Store/AddDateTime";
-import TopDealContainer from "../HomePageServiceContainer/discount";
 import FormHeader from "../Form/FormHeader";
 import VoucherGrid from "./voucherGrid";
 import { useRouter } from "next/navigation";
@@ -96,6 +95,7 @@ const CreateVoucher = () => {
           endDate={handleEndDate}
           quantity={errors.quantity}
           index={"start"}
+          isQuantity={false}
         />
 
         <label className="block my-2 font-medium text-gray-900" htmlFor="image">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "../Form";
 import Input from "../Form/Input";
 import usePost from "@/Helper/ClientFetch/usePost";
@@ -9,6 +9,8 @@ import AddDateTime from "../Store/AddDateTime";
 import TopDealContainer from "../HomePageServiceContainer/discount";
 import FormHeader from "../Form/FormHeader";
 import VoucherGrid from "./voucherGrid";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../Auth/Context/AuthContext";
 interface IFromInput {
   name: string;
   desc: string;
@@ -21,6 +23,16 @@ interface IFromInput {
 const CreateVoucher = () => {
   const { response, isPosting, post } = usePost(`service/discount`);
   const [update, isUpdate] = useState<boolean>(false);
+
+  const { user, isLogin, isLoading } = useAuth();
+  const { push } = useRouter();
+  
+  useEffect(() => {
+    if (!isLoading) {
+      if (!isLogin) push("/login");
+      if (user && user?.admin == null) push("/");
+    }
+  }, [isLoading]);
 
   const {
     handleSubmit,

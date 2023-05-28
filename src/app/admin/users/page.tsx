@@ -1,10 +1,12 @@
-'use client';
-import LoadingSpinner from '@/components/LoadingSpinner';
-import apiClient from '@/config/axios.config';
-import React from 'react';
-import { useEffect, useState } from 'react';
-import { Column } from 'react-table';
-import TableComponent from '../components/TableComponent';
+"use client";
+import { useAuth } from "@/components/Auth/Context/AuthContext";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import apiClient from "@/config/axios.config";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { useEffect, useState } from "react";
+import { Column } from "react-table";
+import TableComponent from "../components/TableComponent";
 
 interface Vendor {
   id: string;
@@ -31,58 +33,58 @@ export default function AdminUserView() {
     () =>
       [
         {
-          Header: 'id',
-          accessor: 'id',
+          Header: "id",
+          accessor: "id",
         },
         {
-          Header: 'Username',
-          accessor: 'username',
+          Header: "Username",
+          accessor: "username",
         },
         {
-          Header: 'Email',
-          accessor: 'email',
+          Header: "Email",
+          accessor: "email",
         },
         {
-          Header: 'name',
-          accessor: 'firstName',
+          Header: "name",
+          accessor: "firstName",
         },
         {
-          Header: 'Phone',
-          accessor: 'phoneNo',
+          Header: "Phone",
+          accessor: "phoneNo",
         },
         {
-          Header: 'Status',
+          Header: "Status",
           accessor: (row) => {
             const color =
-              row.status == 'PENDING'
-                ? 'text-yellow-600'
-                : row.status == 'ACTIVATE'
-                ? 'text-green-600'
-                : row.status == 'DEACTIVATE'
-                ? 'text-gray-600 '
-                : 'text-red-400';
+              row.status == "PENDING"
+                ? "text-yellow-600"
+                : row.status == "ACTIVATE"
+                ? "text-green-600"
+                : row.status == "DEACTIVATE"
+                ? "text-gray-600 "
+                : "text-red-400";
             return <p className={`${color} font-semibold`}>{row.status}</p>;
           },
         },
         {
-          Header: 'Create date',
-          accessor: 'createdAt',
+          Header: "Create date",
+          accessor: "createdAt",
         },
         {
-          Header: 'Updated date',
-          accessor: 'updatedAt',
+          Header: "Updated date",
+          accessor: "updatedAt",
         },
         {
-          Header: 'Vendor',
-          id: 'vendor',
+          Header: "Vendor",
+          id: "vendor",
           accessor: (row) => {
-            return row.vendor != null ? 'True' : 'False';
+            return row.vendor != null ? "True" : "False";
           },
           Cell: (cell: any) => {
-            return cell.value == 'True' ? (
-              <p className='font-semibold text-green-600'>True</p>
+            return cell.value == "True" ? (
+              <p className="font-semibold text-green-600">True</p>
             ) : (
-              <p className='font-semibold text-red-600'>False</p>
+              <p className="font-semibold text-red-600">False</p>
             );
           },
         },
@@ -90,29 +92,44 @@ export default function AdminUserView() {
     []
   );
 
+  const { user, isLogin, isLoading } = useAuth();
+
+  const { push } = useRouter();
   useEffect(() => {
-    apiClient
-      .get(`/user`)
-      .then((response) => {
-        setUsers(response.data);
-      })
-      .catch((e) => {
-        console.log(e.response.data);
-      });
-    //
+    if (isLogin && user?.admin != null) {
+      apiClient
+        .get(`/user`)
+        .then((response) => {
+          setUsers(response.data);
+        })
+        .catch((e) => {
+          console.log(e.response.data);
+        });
+    }
   }, []);
 
+  useEffect(() => {
+    if (!isLogin) push("/login");
+    else if (user && user?.admin == null) push("/");
+  }, [isLoading]);
+
   return (
-    <div className='flex flex-col items-center gap-6 pt-6'>
-      <h1 className=' text-xl text-oliveGreen font-bold uppercase pl-4'>
-        All Accounts:
-      </h1>
-      {users.length > 0 ? (
-        <TableComponent columns={columns} data={users} />
+    <div className="flex flex-col items-center gap-6 pt-6">
+      {isLoading ? (
+        <LoadingSpinner />
       ) : (
-        <div className='h-full w-full'>
-          {' '}
-          <LoadingSpinner />
+        <div>
+          <h1 className=" text-xl text-oliveGreen font-bold uppercase pl-4">
+            All Accounts:
+          </h1>
+          {users.length > 0 ? (
+            <TableComponent columns={columns} data={users} />
+          ) : (
+            <div className="h-full w-full">
+              {" "}
+              <LoadingSpinner />
+            </div>
+          )}
         </div>
       )}
     </div>

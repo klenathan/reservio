@@ -9,6 +9,7 @@ const Admin = () => {
   const { user, isLogin, isLoading } = useAuth();
   const { push } = useRouter();
   useEffect(() => {
+    console.log(user);
     if (!isLoading) {
       if (!user) push('/login');
       if (user && user?.admin == null) push('/');

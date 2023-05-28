@@ -72,7 +72,7 @@ const UpdateProductForm = (props: { product: Product; display: boolean }) => {
   return (
     <>
       {props.product.vendorId === user?.id && props.display == true && (
-        <div className="flex w-full pl-5 rounded-md text-xs md:text-lg">
+        <div className="flex w-full pl-5 rounded-md">
           <Button
             btnStyle="custom"
             className="py-3 px-3 transition bg-gradient-to-tr from-midGreen to-limeGreen rounded-lg font-semibold text-white shadow hover:shadow-xl"
@@ -81,7 +81,7 @@ const UpdateProductForm = (props: { product: Product; display: boolean }) => {
             Update service
           </Button>
           <Modal
-            nameModal={"Rating & Feedback"}
+            nameModal={"Update Existing Service"}
             isOpen={isModalOpen}
             onClose={handleModalClose}
           >

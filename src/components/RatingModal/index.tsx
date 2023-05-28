@@ -85,7 +85,7 @@ const RatingModal = (props: IRatingModal) => {
           onSubmit={handleSubmit(onSubmit)}
           className="w-full relative my-4 text-center"
         >
-          <div className="w-full flex flex-col items-center">
+          <div className="w-full flex flex-col items-center p-4">
             <div className="leading-10 mb-3">
               <ReactStars
                 count={5}
@@ -99,7 +99,7 @@ const RatingModal = (props: IRatingModal) => {
             <div className="flex justify-center items-center">
               {isRatingSubmitted ? (
                 <TextareaAutosize
-                  className="w-full p-2 ml-1 lg:ml-4 rounded-2xl border-2 border-solid border-gray-500 text-xs md:text-xs py-1"
+                  className="w-full p-2 ml-1 rounded-2xl border-2 border-solid border-gray-500 text-xs md:text-xs py-1"
                   name="Search"
                   placeholder="Share your experience with other customers!"
                   value={commentValue}
@@ -109,7 +109,7 @@ const RatingModal = (props: IRatingModal) => {
                 />
               ) : (
                 <TextareaAutosize
-                  className="w-full p-2 ml-1 lg:ml-4 rounded-2xl border-2 border-solid border-gray-500 text-xs md:text-xs py-1"
+                  className="w-full p-2 ml-1 rounded-2xl border-2 border-solid border-gray-500 text-xs md:text-xs py-1"
                   name="Search"
                   placeholder="Share your experience with other customers!"
                   value={commentValue}

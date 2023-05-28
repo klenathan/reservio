@@ -56,7 +56,7 @@ const Page = (slugs: any) => {
                 <Modal
                   isOpen={isModalOpen}
                   onClose={handleCloseModal}
-                  nameModal={"Add New Product"}
+                  nameModal={"Add New Service"}
                 >
                   <div
                     className={

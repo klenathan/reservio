@@ -147,6 +147,12 @@ const TotalPrice = (props: TotalPriceProps) => {
         }
     }
 
+    useEffect(() => {
+        if(response != undefined){
+            push("/userprofile")
+        }
+    })
+
 
     return (
         <div

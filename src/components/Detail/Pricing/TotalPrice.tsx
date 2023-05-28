@@ -134,17 +134,16 @@ const TotalPrice = (props: TotalPriceProps) => {
             await post(reservationData)
         } catch (e: any) {
             const errorInfo = e.message.response.data;
+            console.log(errorInfo.error)
 
             if (
-                errorInfo.error == "QUANTITY_EXCEEDED" &&
-                errorInfo.message.includes("quantity")
+                errorInfo.error == "QUANTITY_EXCEEDED"
             ) {
                 setError("quantity", {
                     type: errorInfo.error,
-                    message: "Not enough quantity left",
+                    message: `Only ${errorInfo.slotLeft} slot left`,
                 });
             }
-            console.log(e)
         }
     }
 
@@ -231,6 +230,7 @@ const TotalPrice = (props: TotalPriceProps) => {
                                 min={0}
                                 control={control}
                                 placeholder={"1"}
+                                errors={errors.quantity}
                                 customStyle={"w-full h-fit"}
                             />
                         ) : (

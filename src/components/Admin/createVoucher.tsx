@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import Form from "../Form";
 import Input from "../Form/Input";
 import usePost from "@/Helper/ClientFetch/usePost";
-import {Controller, SubmitHandler, useForm} from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import DropZone from "../DropZone";
-import {AiOutlineCloudUpload} from "react-icons/ai";
+import { AiOutlineCloudUpload } from "react-icons/ai";
 import AddDateTime from "../Store/AddDateTime";
 import FormHeader from "../Form/FormHeader";
 import VoucherGrid from "./voucherGrid";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../Auth/Context/AuthContext";
+import { log } from "console";
 interface IFromInput {
   name: string;
   desc: string;
@@ -25,7 +26,7 @@ const CreateVoucher = () => {
 
   const { user, isLogin, isLoading } = useAuth();
   const { push } = useRouter();
-  
+
   useEffect(() => {
     if (!isLoading) {
       if (!isLogin) push("/login");
@@ -51,10 +52,10 @@ const CreateVoucher = () => {
     const formData = new FormData();
     formData.append("name", data.name as string);
     formData.append("desc", data.desc as string);
-    formData.append("amount", data.quantitystart as string);
     formData.append("image", data.image[0] as string);
     formData.append("start", data.fromstart as string);
     formData.append("end", data.tostart as string);
+    formData.append("amount", data.amount as string);
     try {
       await post(formData);
       isUpdate(true);
@@ -96,6 +97,16 @@ const CreateVoucher = () => {
           quantity={errors.quantity}
           index={"start"}
           isQuantity={false}
+        />
+        <Input
+          name={"amount"}
+          label={"Discount percentage"}
+          type={"number"}
+          control={control}
+          rules={{
+            required: "Discount is required",
+          }}
+          errors={errors.amount}
         />
 
         <label className="block my-2 font-medium text-gray-900" htmlFor="image">
